@@ -9,9 +9,16 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@apollo/client": "^4.1.6",
+    "axios": "^1.13.6",
+    "graphql": "^16.13.1",
+    "js-cookie": "^3.0.5",
+    "lucide-react": "^0.577.0",
     "next": "16.2.0",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "rxjs": "^7.8.2",
+    "zustand": "^5.0.12"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.5.0",
