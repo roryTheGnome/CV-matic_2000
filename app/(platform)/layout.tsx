@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "../globals.css"
-import Dashboard from "@/app/(platform)/(dashboard)/page";
+import Nav from "@/components/Nav";
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -15,11 +15,11 @@ export default function PlatformLayout({children,}: Readonly<{
     return (
         <html lang="en" className={`${inter.className} h-full antialiased`}>
         <body className="min-h-screen flex">
-        <nav className="w-1/6">
-            <Dashboard />
+        <nav className="w-1/6 fixed left-0 top-0 h-screen">
+            <Nav />
         </nav>
 
-        <main className="w-5/6">
+        <main className="ml-[16%] w-5/6">
             {children}
         </main>
 
