@@ -1,4 +1,5 @@
 import { getAccessToken, refreshTokens } from "@/actions/auth"
+import { isAuthPage } from "@/config/routes"
 import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client"
 import { SetContextLink } from "@apollo/client/link/context"
 
@@ -13,6 +14,14 @@ let refreshTokenPromise: Promise<{
 }> | null = null
 
 const authLink = new SetContextLink(async (prevContext, operation) => {
+  if (typeof window !== "undefined") {
+    const pathname = window.location.pathname
+
+    if (isAuthPage(pathname)) {
+      return { headers: prevContext.headers }
+    }
+  }
+
   let token = await getAccessToken()
 
   if (!token) {

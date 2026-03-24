@@ -16,7 +16,9 @@ export const PRIVATE_ROUTES = {
 } as const
 
 export const isAuthPage = (pathname: string) => {
-  return [PUBLIC_ROUTES.LOGIN, PUBLIC_ROUTES.REGISTER].some(route =>
-    pathname.startsWith(route),
-  )
+  return [
+    PUBLIC_ROUTES.LOGIN,
+    PUBLIC_ROUTES.REGISTER,
+    PUBLIC_ROUTES.FORGOT_PASSWORD,
+  ].some(route => pathname.startsWith(route))
 }

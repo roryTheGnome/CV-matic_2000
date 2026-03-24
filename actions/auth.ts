@@ -1,11 +1,14 @@
 "use server"
 
-import { UpdateTokenResonse } from "@/api/graphql/mutations/auth.types"
+import { RefreshTokenResult, UpdateTokenResonse } from "@/types/auth"
 import { cookies } from "next/headers"
 const ACCESS_TOKEN = "accessToken"
 const REFRESH_TOKEN = "refreshToken"
 
-export async function setAuthTokens(accessToken: string, refreshToken: string) {
+export async function setAuthTokens(
+  accessToken: string,
+  refreshToken: string,
+): Promise<void> {
   const cookieStore = await cookies()
 
   const cookieOptions = {
@@ -26,20 +29,20 @@ export async function setAuthTokens(accessToken: string, refreshToken: string) {
   })
 }
 
-export async function removeAuthTokens() {
+export async function removeAuthTokens(): Promise<void> {
   const cookieStore = await cookies()
   cookieStore.delete(ACCESS_TOKEN)
   cookieStore.delete(REFRESH_TOKEN)
 }
 
-export async function getAccessToken() {
+export async function getAccessToken(): Promise<string | undefined> {
   const cookieStore = await cookies()
   const token = cookieStore.get(ACCESS_TOKEN)?.value
 
-  return token || null
+  return token
 }
 
-export async function refreshTokens() {
+export async function refreshTokens(): Promise<RefreshTokenResult> {
   const cookiesStore = await cookies()
   const refresh = cookiesStore.get(REFRESH_TOKEN)?.value
 
@@ -88,6 +91,10 @@ export async function refreshTokens() {
     return { success: true, accessToken: access_token }
   } catch (error) {
     console.error("Refresh token error:", error)
-    return { success: false, message: "Network error during refresh" }
+    return {
+      success: false,
+      message:
+        error instanceof Error ? error.message : "Network error during refresh",
+    }
   }
 }

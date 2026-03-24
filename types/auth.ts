@@ -35,3 +35,20 @@ export interface SignupResponse {
     }
   }
 }
+
+export interface UpdateTokenResonse {
+  access_token: string
+  refresh_token: string
+}
+
+export interface ForgotPasswordInput {
+  email: string
+}
+
+export interface ForgotPasswordVariables {
+  auth: ForgotPasswordInput
+}
+
+export type RefreshTokenResult =
+  | { success: true; accessToken: string }
+  | { success: false; message: string }

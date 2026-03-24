@@ -15,6 +15,7 @@ export function AuthForm() {
       className="flex flex-col gap-4 items-center mb-4"
     >
       <InputField
+        required
         inputId="email"
         label="Email"
         name="email"
@@ -23,6 +24,8 @@ export function AuthForm() {
         autoComplete="email"
       />
       <InputField
+        required
+        minLength={5}
         inputId="password"
         label="Password"
         name="password"

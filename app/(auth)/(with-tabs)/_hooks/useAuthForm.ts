@@ -1,12 +1,8 @@
 import { setAuthTokens } from "@/actions/auth"
 import { SIGNUP_MUTATION } from "@/api/graphql/mutations/auth"
 import { LOGIN_QUERY } from "@/api/graphql/queries/auth"
-import {
-  LoginResponse,
-  LoginVariables,
-  SignupResponse,
-} from "@/api/graphql/types/auth"
 import { PRIVATE_ROUTES, PUBLIC_ROUTES } from "@/config/routes"
+import { LoginResponse, LoginVariables, SignupResponse } from "@/types/auth"
 import { ErrorLike } from "@apollo/client"
 import { useLazyQuery, useMutation } from "@apollo/client/react"
 

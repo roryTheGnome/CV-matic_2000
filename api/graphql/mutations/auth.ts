@@ -27,3 +27,9 @@ export const UPDATE_TOKEN_MUTATION = gql`
     }
   }
 `
+
+export const FORGOT_PASSWORD_MUTATION = gql`
+  mutation ForgotPassword($auth: ForgotPasswordInput!) {
+    forgotPassword(auth: $auth)
+  }
+`
