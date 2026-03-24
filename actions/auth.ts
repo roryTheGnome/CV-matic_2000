@@ -17,7 +17,7 @@ export async function setAuthTokens(accessToken: string, refreshToken: string) {
 
   cookieStore.set(ACCESS_TOKEN, accessToken, {
     ...cookieOptions,
-    maxAge: 60 * 1,
+    maxAge: 60 * 15,
   })
 
   cookieStore.set(REFRESH_TOKEN, refreshToken, {
@@ -55,6 +55,7 @@ export async function refreshTokens() {
         "Content-Type": "application/json",
         Authorization: `Bearer ${refresh}`,
       },
+      credentials: "include",
       body: JSON.stringify({
         query: `
           mutation UpdateToken {
@@ -72,9 +73,9 @@ export async function refreshTokens() {
       await removeAuthTokens()
       return { success: false, message: result.errors[0].message }
     }
-    console.log(result.data)
 
-    const { access_token, refresh_token }: UpdateTokenResonse = result.data
+    const { access_token, refresh_token }: UpdateTokenResonse =
+      result.data?.updateToken
 
     if (!access_token || !refresh_token) {
       await removeAuthTokens()
@@ -84,7 +85,7 @@ export async function refreshTokens() {
     await setAuthTokens(access_token, refresh_token)
     console.log("Tokens successfully updated!")
 
-    return { success: true }
+    return { success: true, accessToken: access_token }
   } catch (error) {
     console.error("Refresh token error:", error)
     return { success: false, message: "Network error during refresh" }

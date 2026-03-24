@@ -1,4 +1,4 @@
-import { getAccessToken } from "@/actions/auth"
+import { getAccessToken, refreshTokens } from "@/actions/auth"
 import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client"
 import { SetContextLink } from "@apollo/client/link/context"
 
@@ -6,9 +6,28 @@ const httpLink = new HttpLink({
   uri: process.env.NEXT_PUBLIC_GRAPHQL_URL,
 })
 
-const authLink = new SetContextLink(async (prevContext, operation) => {
-  const token = await getAccessToken()
+let refreshTokenPromise: Promise<{
+  success: boolean
+  accessToken?: string
+  message?: string
+}> | null = null
 
+const authLink = new SetContextLink(async (prevContext, operation) => {
+  let token = await getAccessToken()
+
+  if (!token) {
+    if (!refreshTokenPromise) {
+      refreshTokenPromise = refreshTokens().finally(() => {
+        refreshTokenPromise = null
+      })
+    }
+
+    const newToken = await refreshTokenPromise
+
+    if (newToken?.accessToken) {
+      token = newToken.accessToken
+    }
+  }
   return {
     headers: {
       ...prevContext.headers,
