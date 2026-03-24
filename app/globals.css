@@ -1,66 +1,97 @@
 @import "tailwindcss";
 
 :root {
-    --color-bg: #f7f7f7;
-    --color-surface: #ffffff;
-    --color-surface-active: #eaeaea;
-    --color-surface-disabled: #dcdcdc;
+  --color-bg: #f7f7f7;
+  --color-surface: #ffffff;
+  --color-surface-active: #eaeaea;
+  --color-surface-disabled: #dcdcdc;
 
-    --color-text-primary: #1a1a1a;
-    --color-text-secondary: #6b6b6b;
+  --color-input-border: #646464;
 
-    --color-primary: #c63031;
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #6b6b6b;
 
-    /* skill levels */
-    --level-novice: #d9d9d9;
-    --level-advanced: #bfe3f6;
-    --level-competent: #c8e6c9;
-    --level-proficient: #ffe9a8;
-    --level-expert: #f2b8b5;
+  --color-primary: #c63031;
+
+  /* skill levels */
+  --level-novice: #d9d9d9;
+  --level-advanced: #bfe3f6;
+  --level-competent: #c8e6c9;
+  --level-proficient: #ffe9a8;
+  --level-expert: #f2b8b5;
 }
 
 
 @media (prefers-color-scheme: dark) {
-    :root {
-        --color-bg: #353535;
-        --color-surface: #3f3f3f;
-        --color-surface-active: #4a4a4a;
-        --color-surface-disabled: #555555;
+  :root {
+    --color-bg: #353535;
+    --color-surface: #3f3f3f;
+    --color-surface-active: #4a4a4a;
+    --color-surface-disabled: #555555;
 
-        --color-text-primary: #ffffff;
-        --color-text-secondary: #b3b3b3;
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #646464;
 
-        --color-primary: #c63031;
+    --color-primary: #c63031;
 
-        --level-novice: #cacaca;
-        --level-advanced: #9ed1ed;
-        --level-competent: #afcdb1;
-        --level-proficient: #ffe49e;
-        --level-expert: #e9b0b0;
-    }
+    --level-novice: #cacaca;
+    --level-advanced: #9ed1ed;
+    --level-competent: #afcdb1;
+    --level-proficient: #ffe49e;
+    --level-expert: #e9b0b0;
+  }
 }
 
 
 @theme inline {
-    --color-background: var(--color-bg);
-    --color-surface: var(--color-surface);
-    --color-surface-active: var(--color-surface-active);
-    --color-surface-disabled: var(--color-surface-disabled);
+  --color-background: var(--color-bg);
+  --color-surface: var(--color-surface);
+  --color-surface-active: var(--color-surface-active);
+  --color-surface-disabled: var(--color-surface-disabled);
 
-    --color-text-primary: var(--color-text-primary);
-    --color-text-secondary: var(--color-text-secondary);
+  --color-input-border: var(--color-input-border);
 
-    --color-primary: var(--color-primary);
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
 
-    --color-level-novice: var(--level-novice);
-    --color-level-advanced: var(--level-advanced);
-    --color-level-competent: var(--level-competent);
-    --color-level-proficient: var(--level-proficient);
-    --color-level-expert: var(--level-expert);
+  --color-primary: var(--color-primary);
+
+  --color-level-novice: var(--level-novice);
+  --color-level-advanced: var(--level-advanced);
+  --color-level-competent: var(--level-competent);
+  --color-level-proficient: var(--level-proficient);
+  --color-level-expert: var(--level-expert);
+}
+
+@layer base {
+  h1 {
+    @apply text-4xl font-bold mb-6; /* ~36px */
+  }
+  
+  h2 {
+    @apply text-3xl font-bold mb-5; /* ~30px */
+  }
+  
+  h3 {
+    @apply text-2xl font-bold mb-4; /* ~24px */
+  }
+  
+  h4 {
+    @apply text-xl font-bold mb-3;  /* ~20px */
+  }
+  
+  h5 {
+    @apply text-lg font-bold mb-2;  /* ~18px */
+  }
+  
+  h6 {
+    @apply text-base font-bold mb-2; /* 16px */
+  }
 }
 
 body {
-    background: var(--color-bg);
-    color: var(--color-text-primary);
-    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
+

@@ -1,0 +1,22 @@
+export const PUBLIC_ROUTES = {
+  LOGIN: "/login",
+  REGISTER: "/register",
+  FORGOT_PASSWORD: "/forgot-password",
+} as const
+
+export const PRIVATE_ROUTES = {
+  HOME: "/",
+
+  USERS: "/users",
+  CVS: "/cvs",
+  LANGUAGES: "/languages",
+  PROFILE: "/profile",
+  SETTINGS: "/settings",
+  SKILLS: "/skills",
+} as const
+
+export const isAuthPage = (pathname: string) => {
+  return [PUBLIC_ROUTES.LOGIN, PUBLIC_ROUTES.REGISTER].some(route =>
+    pathname.startsWith(route),
+  )
+}
