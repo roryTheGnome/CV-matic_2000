@@ -1,3 +1,6 @@
+import {Skill} from "@/types/skills";
+import {Language} from "@/types/lang";
+
 export type User = {
     id: string;
     email: string;
@@ -8,5 +11,7 @@ export type User = {
         first_name: string;
         last_name: string;
         avatar?: string | null;
+        skills: Skill[];
+        languages: Language[];
     };
 };

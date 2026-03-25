@@ -14,4 +14,12 @@ export function useUser() {
     );
 
     return { user, id };
+
+    /* when api:
+    return {
+        user,
+        isLoading: false,   // will be true with real API
+        error: null,
+    };
+    */
 }

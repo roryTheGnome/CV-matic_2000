@@ -25,7 +25,6 @@ export default function Employees(){
         }
     }
 
-    //i couldnt find a decent name for this one, its both sorted and searched
     const checkedUsers= useMemo(()=>{
         return users
             .filter((u)=>{

@@ -7,6 +7,14 @@ export default function Employee(){
     const{user}=useUser();
     if(!user)return<div>user not found!!</div> //TODO add not found & loading
 
+    /* when api added :
+    if (isLoading) return <Loading />
+    if (error) return <ErrorState />
+    if (!user) return <NotFound />
+
+    return <UserContent />
+     */
+
     const fullName =`${user.profile.first_name} ${user.profile.last_name}`;
 
     return(

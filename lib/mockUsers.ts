@@ -2,14 +2,33 @@ import {User} from "@/types/user";
 export const mockUsers: User[] = [
     {
         id: "1",
-        email: "rory@example.com",
+        email: "test@example.com",
         department: "Engineering",
         position: "Frontend Developer",
         profile: {
-            first_name: "Rory",
-            last_name: "Test",
+            first_name: "Testmatic",
+            last_name: "Testson",
             avatar: "https://placehold.co/40",
-            created_at: "December 1, 2002"
+            created_at: "February 3, 2022",
+            skills: [
+                { name: "JavaScript", categoryId: "1", mastery: "Expert" },
+                { name: "TypeScript", categoryId: "1", mastery: "Proficient" },
+                { name: "React", categoryId: "2", mastery: "Novice" },
+                { name: "Next.js", categoryId: "2", mastery: "Proficient" },
+                { name: "CSS", categoryId: "2", mastery: "Expert" },
+                { name: "HTML", categoryId: "2", mastery: "Advanced" },
+                { name: "Jest", categoryId: "4", mastery: "Competent" },
+                { name: "Git", categoryId: "6", mastery: "Proficient" }
+            ],
+            languages: [
+                { id: 1, name: "English", proficiency: "Native" },
+                { id: 2, name: "Polish", proficiency: "B2" },
+                { id: 3, name: "German", proficiency: "A2" },
+                { id: 4, name: "Polish", proficiency: "Native" },
+                { id: 5, name: "Russian", proficiency: "C1" },
+                { id: 6, name: "Belarusian", proficiency: "B1" },
+                { id: 7, name: "Italian", proficiency: "C2" },
+            ],
         },
     },
     {
@@ -21,7 +40,20 @@ export const mockUsers: User[] = [
             first_name: "Test",
             last_name: "Matic",
             avatar: "https://placehold.co/40",
-            created_at: "October 12, 2013"
+            created_at: "October 12, 2013",
+            skills: [
+                { name: "JavaScript", categoryId: "1", mastery: "Competent" },
+                { name: "HTML", categoryId: "2", mastery: "Proficient" },
+                { name: "CSS", categoryId: "2", mastery: "Proficient" },
+                { name: "Google Analytics", mastery: "Expert" },
+                { name: "SEO", mastery: "Expert" },
+                { name: "Ahrefs", mastery: "Advanced" },
+                { name: "Git", categoryId: "6", mastery: "Novice" }
+            ],
+            languages: [
+                { id: 4, name: "English", proficiency: "C1" },
+                { id: 5, name: "Spanish", proficiency: "B2" }
+            ],
         },
     },
     {
@@ -33,7 +65,18 @@ export const mockUsers: User[] = [
             first_name: "Anna",
             last_name: "Nowak",
             avatar: "https://placehold.co/40",
-            created_at: "July 04, 2024"
+            created_at: "July 04, 2024",
+            skills: [
+                { name: "Communication", mastery: "Expert" },
+                { name: "LinkedIn Recruiting", mastery: "Expert" },
+                { name: "ATS Systems", mastery: "Advanced" },
+                { name: "Interviewing", mastery: "Expert" },
+                { name: "Negotiation", mastery: "Advanced" }
+            ],
+            languages: [
+                { id: 6, name: "Polish", proficiency: "Native" },
+                { id: 7, name: "English", proficiency: "C1" }
+            ],
         },
     },
     {
@@ -45,43 +88,20 @@ export const mockUsers: User[] = [
             first_name: "John",
             last_name: "Doe",
             avatar: "https://placehold.co/40",
-            created_at: "January 15, 2020"
-        },
-    },
-    {
-        id: "5",
-        email: "jane.smith@example.com",
-        department: "Design",
-        position: "UI Designer",
-        profile: {
-            first_name: "Jane",
-            last_name: "Smith",
-            avatar: "https://placehold.co/40",
-            created_at: "March 22, 2019"
-        },
-    },
-    {
-        id: "6",
-        email: "michael.brown@example.com",
-        department: "Sales",
-        position: "Sales Manager",
-        profile: {
-            first_name: "Michael",
-            last_name: "Brown",
-            avatar: "https://placehold.co/40",
-            created_at: "June 10, 2018"
-        },
-    },
-    {
-        id: "7",
-        email: "emily.jones@example.com",
-        department: "Marketing",
-        position: "Content Strategist",
-        profile: {
-            first_name: "Emily",
-            last_name: "Jones",
-            avatar: "https://placehold.co/40",
-            created_at: "August 5, 2021"
+            created_at: "January 15, 2020",
+            skills: [
+                { name: "Node.js", categoryId: "3", mastery: "Expert" },
+                { name: "NestJS", categoryId: "3", mastery: "Proficient" },
+                { name: "PostgreSQL", categoryId: "3", mastery: "Proficient" },
+                { name: "Docker", categoryId: "5", mastery: "Competent" },
+                { name: "Kubernetes", categoryId: "5", mastery: "Advanced" },
+                { name: "Jest", categoryId: "4", mastery: "Proficient" },
+                { name: "Git", categoryId: "6", mastery: "Expert" }
+            ],
+            languages: [
+                { id: 8, name: "English", proficiency: "Native" },
+                { id: 9, name: "German", proficiency: "B1" }
+            ],
         },
     },
     {
@@ -93,547 +113,468 @@ export const mockUsers: User[] = [
             first_name: "Daniel",
             last_name: "Wilson",
             avatar: "https://placehold.co/40",
-            created_at: "February 11, 2022"
+            created_at: "February 11, 2022",
+            skills: [
+                { name: "Docker", categoryId: "5", mastery: "Expert" },
+                { name: "Kubernetes", categoryId: "5", mastery: "Expert" },
+                { name: "AWS", categoryId: "5", mastery: "Proficient" },
+                { name: "Terraform", categoryId: "5", mastery: "Advanced" },
+                { name: "CI/CD", categoryId: "5", mastery: "Expert" },
+                { name: "Linux", mastery: "Expert" },
+                { name: "GitHub Actions", categoryId: "6", mastery: "Proficient" }
+            ],
+            languages: [
+                { id: 60, name: "English", proficiency: "Native" },
+                { id: 61, name: "Italian", proficiency: "B1" }
+            ],
+        },
+    },
+
+    {
+        id: "5",
+        email: "emma.smith@example.com",
+        department: "Engineering",
+        position: "Fullstack Developer",
+        profile: {
+            first_name: "Emma",
+            last_name: "Smith",
+            avatar: "https://placehold.co/40",
+            created_at: "March 12, 2021",
+            skills: [
+                { name: "JavaScript", categoryId: "1", mastery: "Expert" },
+                { name: "TypeScript", categoryId: "1", mastery: "Proficient" },
+                { name: "React", categoryId: "2", mastery: "Expert" },
+                { name: "Node.js", categoryId: "3", mastery: "Proficient" },
+                { name: "GraphQL", categoryId: "3", mastery: "Advanced" },
+                { name: "Docker", categoryId: "5", mastery: "Competent" }
+            ],
+            languages: [
+                { id: 10, name: "English", proficiency: "Native" },
+                { id: 11, name: "French", proficiency: "B2" }
+            ],
+        },
+    },
+    {
+        id: "6",
+        email: "liam.brown@example.com",
+        department: "Engineering",
+        position: "Backend Developer",
+        profile: {
+            first_name: "Liam",
+            last_name: "Brown",
+            avatar: "https://placehold.co/40",
+            created_at: "June 18, 2019",
+            skills: [
+                { name: "Java", categoryId: "1", mastery: "Expert" },
+                { name: "Spring Boot", categoryId: "3", mastery: "Expert" },
+                { name: "PostgreSQL", categoryId: "3", mastery: "Proficient" },
+                { name: "Redis", categoryId: "3", mastery: "Advanced" },
+                { name: "Docker", categoryId: "5", mastery: "Proficient" },
+                { name: "Git", categoryId: "6", mastery: "Expert" }
+            ],
+            languages: [
+                { id: 10, name: "English", proficiency: "Native" },
+                { id: 11, name: "French", proficiency: "B2" }
+            ],
+        },
+    },
+    {
+        id: "7",
+        email: "olivia.jones@example.com",
+        department: "Design",
+        position: "UI Designer",
+        profile: {
+            first_name: "Olivia",
+            last_name: "Jones",
+            avatar: "https://placehold.co/40",
+            created_at: "August 9, 2020",
+            skills: [
+                { name: "Figma", mastery: "Expert" },
+                { name: "Sketch", mastery: "Advanced" },
+                { name: "CSS", categoryId: "2", mastery: "Proficient" },
+                { name: "HTML", categoryId: "2", mastery: "Proficient" },
+                { name: "UX Research", mastery: "Advanced" }
+            ],
+            languages: [
+                { id: 10, name: "English", proficiency: "Native" },
+                { id: 11, name: "French", proficiency: "B2" }
+            ],
         },
     },
     {
         id: "9",
-        email: "olivia.taylor@example.com",
-        department: "HR",
-        position: "HR Manager",
+        email: "noah.taylor@example.com",
+        department: "Engineering",
+        position: "QA Engineer",
         profile: {
-            first_name: "Olivia",
+            first_name: "Noah",
             last_name: "Taylor",
             avatar: "https://placehold.co/40",
-            created_at: "November 30, 2017"
+            created_at: "November 2, 2021",
+            skills: [
+                { name: "Jest", categoryId: "4", mastery: "Expert" },
+                { name: "Cypress", categoryId: "4", mastery: "Expert" },
+                { name: "Selenium", categoryId: "4", mastery: "Advanced" },
+                { name: "JavaScript", categoryId: "1", mastery: "Proficient" },
+                { name: "Git", categoryId: "6", mastery: "Proficient" }
+            ],
+            languages: [
+                { id: 10, name: "English", proficiency: "Native" },
+                { id: 11, name: "French", proficiency: "B2" }
+            ],
         },
     },
     {
         id: "10",
-        email: "liam.anderson@example.com",
-        department: "Engineering",
-        position: "Full Stack Developer",
+        email: "ava.martinez@example.com",
+        department: "Marketing",
+        position: "Content Strategist",
         profile: {
-            first_name: "Liam",
-            last_name: "Anderson",
+            first_name: "Ava",
+            last_name: "Martinez",
             avatar: "https://placehold.co/40",
-            created_at: "April 18, 2023"
+            created_at: "May 5, 2018",
+            skills: [
+                { name: "SEO", mastery: "Expert" },
+                { name: "Content Writing", mastery: "Expert" },
+                { name: "Google Analytics", mastery: "Proficient" },
+                { name: "Copywriting", mastery: "Expert" },
+                { name: "Ahrefs", mastery: "Advanced" }
+            ],
+            languages: [
+                { id: 60, name: "English", proficiency: "Native" },
+                { id: 61, name: "Italian", proficiency: "B1" }
+            ],
         },
     },
     {
         id: "11",
-        email: "sophia.thomas@example.com",
-        department: "Design",
-        position: "UX Researcher",
+        email: "william.anderson@example.com",
+        department: "Engineering",
+        position: "DevOps Engineer",
         profile: {
-            first_name: "Sophia",
-            last_name: "Thomas",
+            first_name: "William",
+            last_name: "Anderson",
             avatar: "https://placehold.co/40",
-            created_at: "September 9, 2020"
+            created_at: "April 22, 2020",
+            skills: [
+                { name: "AWS", categoryId: "5", mastery: "Expert" },
+                { name: "Terraform", categoryId: "5", mastery: "Expert" },
+                { name: "Kubernetes", categoryId: "5", mastery: "Proficient" },
+                { name: "Docker", categoryId: "5", mastery: "Expert" },
+                { name: "CI/CD", categoryId: "5", mastery: "Expert" },
+                { name: "Linux", mastery: "Expert" }
+            ],
+            languages: [
+                { id: 60, name: "English", proficiency: "Native" },
+                { id: 61, name: "Italian", proficiency: "B1" }
+            ],
         },
     },
     {
         id: "12",
-        email: "noah.jackson@example.com",
-        department: "Finance",
-        position: "Accountant",
+        email: "sophia.thomas@example.com",
+        department: "HR",
+        position: "HR Manager",
         profile: {
-            first_name: "Noah",
-            last_name: "Jackson",
+            first_name: "Sophia",
+            last_name: "Thomas",
             avatar: "https://placehold.co/40",
-            created_at: "May 14, 2016"
+            created_at: "January 30, 2017",
+            skills: [
+                { name: "Leadership", mastery: "Expert" },
+                { name: "Recruitment", mastery: "Expert" },
+                { name: "Conflict Resolution", mastery: "Advanced" },
+                { name: "Communication", mastery: "Expert" },
+                { name: "Negotiation", mastery: "Advanced" }
+            ],
+            languages: [
+                { id: 8, name: "English", proficiency: "Native" },
+                { id: 9, name: "German", proficiency: "B1" }
+            ],
         },
     },
     {
         id: "13",
-        email: "ava.white@example.com",
-        department: "Marketing",
-        position: "Social Media Manager",
-        profile: {
-            first_name: "Ava",
-            last_name: "White",
-            avatar: "https://placehold.co/40",
-            created_at: "December 3, 2021"
-        },
-    },
-    {
-        id: "14",
-        email: "william.harris@example.com",
-        department: "Engineering",
-        position: "QA Engineer",
-        profile: {
-            first_name: "William",
-            last_name: "Harris",
-            avatar: "https://placehold.co/40",
-            created_at: "July 19, 2019"
-        },
-    },
-    {
-        id: "15",
-        email: "mia.martin@example.com",
-        department: "Support",
-        position: "Customer Support",
-        profile: {
-            first_name: "Mia",
-            last_name: "Martin",
-            avatar: "https://placehold.co/40",
-            created_at: "October 1, 2022"
-        },
-    },
-    {
-        id: "16",
-        email: "james.thompson@example.com",
+        email: "james.jackson@example.com",
         department: "Engineering",
         position: "Mobile Developer",
         profile: {
             first_name: "James",
-            last_name: "Thompson",
+            last_name: "Jackson",
             avatar: "https://placehold.co/40",
-            created_at: "March 27, 2018"
+            created_at: "September 14, 2021",
+            skills: [
+                { name: "React Native", categoryId: "2", mastery: "Expert" },
+                { name: "Swift", categoryId: "1", mastery: "Advanced" },
+                { name: "Kotlin", categoryId: "1", mastery: "Advanced" },
+                { name: "TypeScript", categoryId: "1", mastery: "Proficient" },
+                { name: "Git", categoryId: "6", mastery: "Proficient" }
+            ],
+            languages: [
+                { id: 8, name: "English", proficiency: "Native" },
+                { id: 9, name: "German", proficiency: "B1" }
+            ],
+        },
+    },
+    {
+        id: "14",
+        email: "mia.white@example.com",
+        department: "Finance",
+        position: "Financial Analyst",
+        profile: {
+            first_name: "Mia",
+            last_name: "White",
+            avatar: "https://placehold.co/40",
+            created_at: "July 7, 2019",
+            skills: [
+                { name: "Excel", mastery: "Expert" },
+                { name: "Financial Modeling", mastery: "Expert" },
+                { name: "Data Analysis", mastery: "Advanced" },
+                { name: "SQL", categoryId: "3", mastery: "Proficient" },
+                { name: "Power BI", mastery: "Advanced" }
+            ],
+            languages: [
+                { id: 6, name: "Polish", proficiency: "Native" },
+                { id: 7, name: "English", proficiency: "C1" }
+            ],
+        },
+    },
+    {
+        id: "15",
+        email: "benjamin.harris@example.com",
+        department: "Engineering",
+        position: "Backend Developer",
+        profile: {
+            first_name: "Benjamin",
+            last_name: "Harris",
+            avatar: "https://placehold.co/40",
+            created_at: "March 3, 2022",
+            skills: [
+                { name: "Python", categoryId: "1", mastery: "Expert" },
+                { name: "Django", categoryId: "3", mastery: "Expert" },
+                { name: "PostgreSQL", categoryId: "3", mastery: "Proficient" },
+                { name: "Docker", categoryId: "5", mastery: "Proficient" },
+                { name: "Git", categoryId: "6", mastery: "Expert" }
+            ],
+            languages: [
+                { id: 6, name: "Polish", proficiency: "Native" },
+                { id: 7, name: "English", proficiency: "C1" }
+            ],
+        },
+    },
+    {
+        id: "16",
+        email: "charlotte.clark@example.com",
+        department: "Design",
+        position: "UX Designer",
+        profile: {
+            first_name: "Charlotte",
+            last_name: "Clark",
+            avatar: "https://placehold.co/40",
+            created_at: "February 25, 2020",
+            skills: [
+                { name: "UX Research", mastery: "Expert" },
+                { name: "Figma", mastery: "Expert" },
+                { name: "Wireframing", mastery: "Expert" },
+                { name: "Prototyping", mastery: "Advanced" },
+                { name: "User Testing", mastery: "Advanced" }
+            ],
+            languages: [
+                { id: 6, name: "Polish", proficiency: "Native" },
+                { id: 7, name: "English", proficiency: "C1" }
+            ],
         },
     },
     {
         id: "17",
-        email: "isabella.garcia@example.com",
-        department: "Design",
-        position: "Graphic Designer",
+        email: "elijah.lewis@example.com",
+        department: "Engineering",
+        position: "Security Engineer",
         profile: {
-            first_name: "Isabella",
-            last_name: "Garcia",
+            first_name: "Elijah",
+            last_name: "Lewis",
             avatar: "https://placehold.co/40",
-            created_at: "January 8, 2020"
+            created_at: "June 1, 2021",
+            skills: [
+                { name: "Cybersecurity", mastery: "Expert" },
+                { name: "Penetration Testing", mastery: "Advanced" },
+                { name: "Linux", mastery: "Expert" },
+                { name: "Docker", categoryId: "5", mastery: "Competent" },
+                { name: "Networking", mastery: "Advanced" }
+            ],
+            languages: [
+                { id: 6, name: "Polish", proficiency: "Native" },
+                { id: 7, name: "English", proficiency: "C1" }
+            ],
         },
     },
     {
         id: "18",
-        email: "benjamin.martinez@example.com",
-        department: "Sales",
-        position: "Account Executive",
+        email: "amelia.walker@example.com",
+        department: "Support",
+        position: "Customer Support",
         profile: {
-            first_name: "Benjamin",
-            last_name: "Martinez",
+            first_name: "Amelia",
+            last_name: "Walker",
             avatar: "https://placehold.co/40",
-            created_at: "June 25, 2017"
+            created_at: "October 10, 2023",
+            skills: [
+                { name: "Communication", mastery: "Expert" },
+                { name: "Problem Solving", mastery: "Expert" },
+                { name: "CRM Tools", mastery: "Advanced" },
+                { name: "Zendesk", mastery: "Proficient" },
+                { name: "Customer Service", mastery: "Expert" }
+            ],
+            languages: [
+                { id: 4, name: "English", proficiency: "C1" },
+                { id: 5, name: "Spanish", proficiency: "B2" }
+            ],
+
         },
     },
     {
         id: "19",
-        email: "charlotte.robinson@example.com",
-        department: "HR",
-        position: "HR Specialist",
-        profile: {
-            first_name: "Charlotte",
-            last_name: "Robinson",
-            avatar: "https://placehold.co/40",
-            created_at: "April 2, 2023"
-        },
-    },
-    {
-        id: "20",
-        email: "lucas.clark@example.com",
+        email: "lucas.hall@example.com",
         department: "Engineering",
         position: "Data Engineer",
         profile: {
             first_name: "Lucas",
-            last_name: "Clark",
+            last_name: "Hall",
             avatar: "https://placehold.co/40",
-            created_at: "August 12, 2021"
+            created_at: "May 19, 2022",
+            skills: [
+                { name: "Python", categoryId: "1", mastery: "Expert" },
+                { name: "Spark", mastery: "Advanced" },
+                { name: "Kafka", mastery: "Advanced" },
+                { name: "SQL", categoryId: "3", mastery: "Expert" },
+                { name: "AWS", categoryId: "5", mastery: "Proficient" }
+            ],
+            languages: [
+                { id: 4, name: "English", proficiency: "C1" },
+                { id: 5, name: "Spanish", proficiency: "B2" }
+            ],
+        },
+    },
+    {
+        id: "20",
+        email: "harper.young@example.com",
+        department: "Marketing",
+        position: "Social Media Manager",
+        profile: {
+            first_name: "Harper",
+            last_name: "Young",
+            avatar: "https://placehold.co/40",
+            created_at: "January 8, 2021",
+            skills: [
+                { name: "Social Media Marketing", mastery: "Expert" },
+                { name: "Content Creation", mastery: "Expert" },
+                { name: "SEO", mastery: "Advanced" },
+                { name: "Analytics", mastery: "Proficient" },
+                { name: "Copywriting", mastery: "Advanced" }
+            ],
+            languages: [
+                { id: 4, name: "English", proficiency: "C1" },
+                { id: 5, name: "Spanish", proficiency: "B2" }
+            ],
         },
     },
     {
         id: "21",
-        email: "amelia.rodriguez@example.com",
-        department: "Marketing",
-        position: "Email Marketer",
+        email: "henry.king@example.com",
+        department: "Engineering",
+        position: "AI Engineer",
         profile: {
-            first_name: "Amelia",
-            last_name: "Rodriguez",
+            first_name: "Henry",
+            last_name: "King",
             avatar: "https://placehold.co/40",
-            created_at: "November 7, 2019"
+            created_at: "August 30, 2022",
+            skills: [
+                { name: "Python", categoryId: "1", mastery: "Expert" },
+                { name: "TensorFlow", mastery: "Expert" },
+                { name: "PyTorch", mastery: "Advanced" },
+                { name: "Machine Learning", mastery: "Expert" },
+                { name: "Data Science", mastery: "Advanced" }
+            ],
+            languages: [
+                { id: 1, name: "English", proficiency: "Native" },
+                { id: 2, name: "Polish", proficiency: "B2" },
+                { id: 3, name: "German", proficiency: "A2" }
+            ],
         },
     },
     {
         id: "22",
-        email: "henry.lewis@example.com",
-        department: "Finance",
-        position: "Financial Analyst",
+        email: "evelyn.scott@example.com",
+        department: "Legal",
+        position: "Legal Advisor",
         profile: {
-            first_name: "Henry",
-            last_name: "Lewis",
+            first_name: "Evelyn",
+            last_name: "Scott",
             avatar: "https://placehold.co/40",
-            created_at: "February 20, 2016"
+            created_at: "April 14, 2016",
+            skills: [
+                { name: "Contract Law", mastery: "Expert" },
+                { name: "Negotiation", mastery: "Expert" },
+                { name: "Compliance", mastery: "Advanced" },
+                { name: "Risk Assessment", mastery: "Advanced" },
+                { name: "Communication", mastery: "Expert" }
+            ],
+            languages: [
+                { id: 1, name: "English", proficiency: "Native" },
+                { id: 2, name: "Polish", proficiency: "B2" },
+                { id: 3, name: "German", proficiency: "A2" }
+            ],
         },
     },
     {
         id: "23",
-        email: "harper.lee@example.com",
-        department: "Support",
-        position: "Support Specialist",
-        profile: {
-            first_name: "Harper",
-            last_name: "Lee",
-            avatar: "https://placehold.co/40",
-            created_at: "July 30, 2022"
-        },
-    },
-    {
-        id: "24",
-        email: "alex.walker@example.com",
-        department: "Engineering",
-        position: "Security Engineer",
-        profile: {
-            first_name: "Alex",
-            last_name: "Walker",
-            avatar: "https://placehold.co/40",
-            created_at: "October 10, 2018"
-        },
-    },
-    {
-        id: "25",
-        email: "ella.hall@example.com",
-        department: "Design",
-        position: "Product Designer",
-        profile: {
-            first_name: "Ella",
-            last_name: "Hall",
-            avatar: "https://placehold.co/40",
-            created_at: "May 5, 2020"
-        },
-    },
-    {
-        id: "26",
-        email: "jack.allen@example.com",
-        department: "Sales",
-        position: "Sales Representative",
-        profile: {
-            first_name: "Jack",
-            last_name: "Allen",
-            avatar: "https://placehold.co/40",
-            created_at: "September 14, 2017"
-        },
-    },
-    {
-        id: "27",
-        email: "scarlett.young@example.com",
-        department: "Marketing",
-        position: "Brand Manager",
-        profile: {
-            first_name: "Scarlett",
-            last_name: "Young",
-            avatar: "https://placehold.co/40",
-            created_at: "December 18, 2021"
-        },
-    },
-    {
-        id: "28",
-        email: "logan.king@example.com",
-        department: "Engineering",
-        position: "Cloud Engineer",
-        profile: {
-            first_name: "Logan",
-            last_name: "King",
-            avatar: "https://placehold.co/40",
-            created_at: "March 6, 2019"
-        },
-    },
-    {
-        id: "29",
-        email: "victoria.scott@example.com",
-        department: "HR",
-        position: "Talent Acquisition",
-        profile: {
-            first_name: "Victoria",
-            last_name: "Scott",
-            avatar: "https://placehold.co/40",
-            created_at: "June 1, 2022"
-        },
-    },
-    {
-        id: "30",
-        email: "david.green@example.com",
-        department: "Finance",
-        position: "Controller",
-        profile: {
-            first_name: "David",
-            last_name: "Green",
-            avatar: "https://placehold.co/40",
-            created_at: "January 11, 2015"
-        },
-    },
-    {
-        id: "31",
-        email: "grace.adams@example.com",
-        department: "Support",
-        position: "Technical Support",
-        profile: {
-            first_name: "Grace",
-            last_name: "Adams",
-            avatar: "https://placehold.co/40",
-            created_at: "August 28, 2023"
-        },
-    },
-    {
-        id: "32",
-        email: "samuel.baker@example.com",
-        department: "Engineering",
-        position: "AI Engineer",
-        profile: {
-            first_name: "Samuel",
-            last_name: "Baker",
-            avatar: "https://placehold.co/40",
-            created_at: "April 9, 2021"
-        },
-    },
-    {
-        id: "33",
-        email: "chloe.nelson@example.com",
-        department: "Design",
-        position: "Illustrator",
-        profile: {
-            first_name: "Chloe",
-            last_name: "Nelson",
-            avatar: "https://placehold.co/40",
-            created_at: "November 2, 2018"
-        },
-    },
-    {
-        id: "34",
-        email: "owen.carter@example.com",
-        department: "Sales",
-        position: "Sales Analyst",
-        profile: {
-            first_name: "Owen",
-            last_name: "Carter",
-            avatar: "https://placehold.co/40",
-            created_at: "July 17, 2020"
-        },
-    },
-    {
-        id: "35",
-        email: "zoe.mitchell@example.com",
-        department: "Marketing",
-        position: "Copywriter",
-        profile: {
-            first_name: "Zoe",
-            last_name: "Mitchell",
-            avatar: "https://placehold.co/40",
-            created_at: "October 6, 2022"
-        },
-    },
-    {
-        id: "36",
-        email: "gabriel.perez@example.com",
+        email: "jack.green@example.com",
         department: "Engineering",
         position: "Game Developer",
         profile: {
-            first_name: "Gabriel",
-            last_name: "Perez",
+            first_name: "Jack",
+            last_name: "Green",
             avatar: "https://placehold.co/40",
-            created_at: "February 13, 2019"
+            created_at: "December 12, 2020",
+            skills: [
+                { name: "C++", categoryId: "1", mastery: "Expert" },
+                { name: "Unity", mastery: "Expert" },
+                { name: "Unreal Engine", mastery: "Advanced" },
+                { name: "3D Modeling", mastery: "Advanced" },
+                { name: "Git", categoryId: "6", mastery: "Proficient" }
+            ],
+            languages: [
+                { id: 1, name: "English", proficiency: "Native" },
+                { id: 2, name: "Polish", proficiency: "B2" },
+                { id: 3, name: "German", proficiency: "A2" }
+            ],
         },
+
     },
     {
-        id: "37",
-        email: "lily.roberts@example.com",
-        department: "HR",
-        position: "HR Coordinator",
-        profile: {
-            first_name: "Lily",
-            last_name: "Roberts",
-            avatar: "https://placehold.co/40",
-            created_at: "May 29, 2021"
-        },
-    },
-    {
-        id: "38",
-        email: "matthew.turner@example.com",
-        department: "Finance",
-        position: "Auditor",
-        profile: {
-            first_name: "Matthew",
-            last_name: "Turner",
-            avatar: "https://placehold.co/40",
-            created_at: "September 3, 2016"
-        },
-    },
-    {
-        id: "39",
-        email: "hannah.phillips@example.com",
-        department: "Support",
-        position: "Helpdesk",
-        profile: {
-            first_name: "Hannah",
-            last_name: "Phillips",
-            avatar: "https://placehold.co/40",
-            created_at: "January 25, 2023"
-        },
-    },
-    {
-        id: "40",
-        email: "sebastian.campbell@example.com",
+        id: "24",
+        email: "ella.adams@example.com",
         department: "Engineering",
-        position: "Systems Engineer",
+        position: "Frontend Developer",
         profile: {
-            first_name: "Sebastian",
-            last_name: "Campbell",
+            first_name: "Ella",
+            last_name: "Adams",
             avatar: "https://placehold.co/40",
-            created_at: "June 16, 2018"
+            created_at: "June 6, 2023",
+            skills: [
+                { name: "HTML", categoryId: "2", mastery: "Expert" },
+                { name: "CSS", categoryId: "2", mastery: "Expert" },
+                { name: "JavaScript", categoryId: "1", mastery: "Proficient" },
+                { name: "React", categoryId: "2", mastery: "Proficient" },
+                { name: "Next.js", categoryId: "2", mastery: "Advanced" }
+            ],
+            languages: [
+                { id: 4, name: "English", proficiency: "C1" },
+                { id: 5, name: "Spanish", proficiency: "B2" }
+            ],
         },
-    },
-    {
-        id: "41",
-        email: "aria.parker@example.com",
-        department: "Design",
-        position: "Motion Designer",
-        profile: {
-            first_name: "Aria",
-            last_name: "Parker",
-            avatar: "https://placehold.co/40",
-            created_at: "March 12, 2020"
-        },
-    },
-    {
-        id: "42",
-        email: "joseph.evans@example.com",
-        department: "Sales",
-        position: "Regional Manager",
-        profile: {
-            first_name: "Joseph",
-            last_name: "Evans",
-            avatar: "https://placehold.co/40",
-            created_at: "July 21, 2017"
-        },
-    },
-    {
-        id: "43",
-        email: "madison.edwards@example.com",
-        department: "Marketing",
-        position: "Growth Hacker",
-        profile: {
-            first_name: "Madison",
-            last_name: "Edwards",
-            avatar: "https://placehold.co/40",
-            created_at: "October 19, 2021"
-        },
-    },
-    {
-        id: "44",
-        email: "dylan.collins@example.com",
-        department: "Engineering",
-        position: "Embedded Engineer",
-        profile: {
-            first_name: "Dylan",
-            last_name: "Collins",
-            avatar: "https://placehold.co/40",
-            created_at: "February 7, 2019"
-        },
-    },
-    {
-        id: "45",
-        email: "penelope.stewart@example.com",
-        department: "HR",
-        position: "People Ops",
-        profile: {
-            first_name: "Penelope",
-            last_name: "Stewart",
-            avatar: "https://placehold.co/40",
-            created_at: "May 11, 2022"
-        },
-    },
-    {
-        id: "46",
-        email: "andrew.sanchez@example.com",
-        department: "Finance",
-        position: "Treasurer",
-        profile: {
-            first_name: "Andrew",
-            last_name: "Sanchez",
-            avatar: "https://placehold.co/40",
-            created_at: "December 9, 2015"
-        },
-    },
-    {
-        id: "47",
-        email: "natalie.morris@example.com",
-        department: "Support",
-        position: "Customer Success",
-        profile: {
-            first_name: "Natalie",
-            last_name: "Morris",
-            avatar: "https://placehold.co/40",
-            created_at: "August 4, 2023"
-        },
-    },
-    {
-        id: "48",
-        email: "caleb.rogers@example.com",
-        department: "Engineering",
-        position: "Blockchain Developer",
-        profile: {
-            first_name: "Caleb",
-            last_name: "Rogers",
-            avatar: "https://placehold.co/40",
-            created_at: "April 23, 2021"
-        },
-    },
-    {
-        id: "49",
-        email: "leah.reed@example.com",
-        department: "Design",
-        position: "Visual Designer",
-        profile: {
-            first_name: "Leah",
-            last_name: "Reed",
-            avatar: "https://placehold.co/40",
-            created_at: "November 13, 2019"
-        },
-    },
-    {
-        id: "50",
-        email: "julian.cook@example.com",
-        department: "Sales",
-        position: "Business Development",
-        profile: {
-            first_name: "Julian",
-            last_name: "Cook",
-            avatar: "https://placehold.co/40",
-            created_at: "June 30, 2018"
-        },
-    },
-    {
-        id: "51",
-        email: "audrey.morgan@example.com",
-        department: "Marketing",
-        position: "PR Specialist",
-        profile: {
-            first_name: "Audrey",
-            last_name: "Morgan",
-            avatar: "https://placehold.co/40",
-            created_at: "September 27, 2020"
-        },
-    },
-    {
-        id: "52",
-        email: "isaac.bell@example.com",
-        department: "Engineering",
-        position: "Platform Engineer",
-        profile: {
-            first_name: "Isaac",
-            last_name: "Bell",
-            avatar: "https://placehold.co/40",
-            created_at: "January 2, 2022"
-        },
-    },
-    {
-        id: "53",
-        email: "skylar.murphy@example.com",
-        department: "HR",
-        position: "HR Analyst",
-        profile: {
-            first_name: "Skylar",
-            last_name: "Murphy",
-            avatar: "https://placehold.co/40",
-            created_at: "March 8, 2021"
-        },
+
     }
+
 ];

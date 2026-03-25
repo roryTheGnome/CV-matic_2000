@@ -11,12 +11,23 @@
 
     --color-primary: #c63031;
 
-    /* skill levels */
-    --level-novice: #d9d9d9;
-    --level-advanced: #bfe3f6;
-    --level-competent: #c8e6c9;
-    --level-proficient: #ffe9a8;
-    --level-expert: #f2b8b5;
+    /* globals.css */
+
+
+    /* skill levels - LIGHT (fill) */
+    --level-novice: #707070;
+    --level-advanced: #2AA7E0;
+    --level-competent: #61AE65;
+    --level-proficient: #EBAB05;
+    --level-expert: #B83031;
+
+    /* skill levels - DARK (background) */
+    --level-novice-dark: #3A3A3A;
+    --level-advanced-dark: #175774;
+    --level-competent-dark: #335935;
+    --level-proficient-dark: #785805;
+    --level-expert-dark: #7A1F20;
+
 }
 
 
@@ -32,11 +43,18 @@
 
         --color-primary: #c63031;
 
-        --level-novice: #cacaca;
-        --level-advanced: #9ed1ed;
-        --level-competent: #afcdb1;
-        --level-proficient: #ffe49e;
-        --level-expert: #e9b0b0;
+        --level-novice: #707070;
+        --level-advanced: #2AA7E0;
+        --level-competent: #61AE65;
+        --level-proficient: #EBAB05;
+        --level-expert: #B83031;
+
+        /* skill levels - DARK (background) */
+        --level-novice-dark: #3A3A3A;
+        --level-advanced-dark: #175774;
+        --level-competent-dark: #335935;
+        --level-proficient-dark: #785805;
+        --level-expert-dark: #7A1F20;
     }
 }
 

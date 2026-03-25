@@ -1,6 +1,6 @@
 "use client";
 
-import UserNav from "@/components/UserNav";
+import UserNav from "@/components/navs/UserNav";
 
 export default function EmployeesLayout({
                                            children,

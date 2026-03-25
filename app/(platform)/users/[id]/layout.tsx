@@ -1,6 +1,6 @@
 "use client";
 
-import ProfileNav from "@/components/ProfileNav";
+import ProfileNav from "@/components/navs/ProfileNav";
 
 export default function EmployeeLayout({
                                            children,

@@ -12,7 +12,7 @@ export default function ProfileNav(){
     if(!user) return <div>user not found</div> //TODO create a not found page n loging page
 
     const tabs=[
-        {label:"Progile", path:`/users/${id}`},
+        {label:"Profile", path:`/users/${id}`},
         {label:"Skills", path:`/users/${id}/skills`},
         {label:"Languages", path:`/users/${id}/languages`},
     ];
