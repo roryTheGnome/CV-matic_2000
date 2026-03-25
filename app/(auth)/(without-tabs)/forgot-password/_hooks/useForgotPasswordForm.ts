@@ -1,12 +1,15 @@
 import { FORGOT_PASSWORD_MUTATION } from "@/api/graphql/mutations/auth"
+import { ForgotPasswordData, ForgotPasswordVariables } from "@/types/auth"
 import { useMutation } from "@apollo/client/react"
 
 import { SubmitEvent } from "react"
+import toast from "react-hot-toast"
 
 export const useForgotPasswordForm = () => {
-  const [forgotPasswordInput, { loading, error }] = useMutation<void>(
-    FORGOT_PASSWORD_MUTATION,
-  )
+  const [forgotPassword, { loading, error }] = useMutation<
+    ForgotPasswordData,
+    ForgotPasswordVariables
+  >(FORGOT_PASSWORD_MUTATION)
 
   const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -14,19 +17,21 @@ export const useForgotPasswordForm = () => {
     const formatData = new FormData(e.currentTarget)
     const email = formatData.get("email") as string
 
-    try {
-      await forgotPasswordInput({
+    toast.promise(
+      forgotPassword({
         variables: {
           auth: {
             email: email,
           },
         },
-      })
-
-      // router.push(PUBLIC_ROUTES.LOGIN)
-    } catch (error) {
-      console.error("Forgot password error:", error)
-    }
+      }),
+      {
+        loading: "Sending...",
+        success: "Check your inbox.",
+        error: error?.message || "Error occured.",
+      },
+      { id: "forgot-password" },
+    )
   }
 
   return {

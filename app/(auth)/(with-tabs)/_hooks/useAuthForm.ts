@@ -8,6 +8,7 @@ import { useLazyQuery, useMutation } from "@apollo/client/react"
 
 import { usePathname, useRouter } from "next/navigation"
 import { SubmitEvent } from "react"
+import toast from "react-hot-toast"
 
 export const useAuthForm = () => {
   const [loginFn, { loading: loginLoading, error: loginError }] = useLazyQuery<
@@ -40,6 +41,7 @@ export const useAuthForm = () => {
         })
 
         if (data?.login) {
+          toast.success("Logged in successfully.")
           await setAuthTokens(data.login.access_token, data.login.refresh_token)
 
           router.push(PRIVATE_ROUTES.HOME)
@@ -52,6 +54,7 @@ export const useAuthForm = () => {
         })
 
         if (data?.signup) {
+          toast.success("Registered successfully.")
           await setAuthTokens(
             data.signup.access_token,
             data.signup.refresh_token,
@@ -61,7 +64,8 @@ export const useAuthForm = () => {
         }
       }
     } catch (error) {
-      console.error("Ошибка авторизации:", error)
+      toast.error("Something went wrong.")
+      console.error("Error:", error)
     }
   }
 

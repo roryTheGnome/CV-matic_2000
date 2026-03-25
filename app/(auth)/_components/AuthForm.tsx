@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/Button"
 import { InputField } from "@/components/ui/inputField/InputField"
 
 import { PUBLIC_ROUTES } from "@/config/routes"
-import { useAuthForm } from "../_hooks/useAuthForm"
+import { useAuthForm } from "../(with-tabs)/_hooks/useAuthForm"
 
 export function AuthForm() {
   const { currentError, isLoading, pathname, handleSubmit } = useAuthForm()

@@ -3,18 +3,19 @@
 import { Button } from "@/components/ui/Button"
 import { InputField } from "@/components/ui/inputField/InputField"
 import { PUBLIC_ROUTES } from "@/config/routes"
-import { AuthLink } from "../(with-tabs)/_components/AuthLink"
+import { AuthHeading } from "../../_components/AuthHeading"
+import { AuthLink } from "../../_components/AuthLink"
 import { useForgotPasswordForm } from "./_hooks/useForgotPasswordForm"
 
 export default function ForgotPassword() {
   const { error, loading, handleSubmit } = useForgotPasswordForm()
 
   return (
-    <div className="w-full mt-14 text-center">
-      <div className="mb-10">
-        <h1 className="font-normal">Forgot password</h1>
-        <span>We will sent you an email with further instructions</span>
-      </div>
+    <>
+      <AuthHeading
+        title="Forgot password"
+        subtitle="We will sent you an email with further instructions"
+      />
       <form
         onSubmit={e => handleSubmit(e)}
         className="flex flex-col gap-4 items-center mb-4"
@@ -38,6 +39,6 @@ export default function ForgotPassword() {
       </form>
 
       <AuthLink text="Cancel" href={PUBLIC_ROUTES.LOGIN} />
-    </div>
+    </>
   )
 }

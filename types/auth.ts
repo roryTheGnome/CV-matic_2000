@@ -49,6 +49,22 @@ export interface ForgotPasswordVariables {
   auth: ForgotPasswordInput
 }
 
+export interface ForgotPasswordData {
+  forgotPassword: null
+}
+
 export type RefreshTokenResult =
   | { success: true; accessToken: string }
   | { success: false; message: string }
+
+export interface ResetPasswordInput {
+  newPassword: string
+}
+
+export interface ResetPasswordVariables {
+  auth: ResetPasswordInput
+}
+
+export interface ResetPasswordData {
+  resetPassword: null
+}

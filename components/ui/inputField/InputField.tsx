@@ -20,7 +20,7 @@ export function InputField({ inputId, label, name, type, ...props }: Props) {
 
       <input
         id={inputId}
-        className={`w-full bg-transparent border-2 border-input-border p-2.5 focus:outline-none focus:border-primary ${type === "password" && "pr-12"} ${props.className}`}
+        className={`w-full bg-transparent border border-input-border p-2.5 focus:outline-none focus:border-primary ${type === "password" && "pr-12"} ${props.className}`}
         type={currentType}
         name={name}
         {...props}
