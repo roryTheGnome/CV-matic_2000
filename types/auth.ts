@@ -1,3 +1,5 @@
+import { UserRole } from "./user"
+
 export interface LoginVariables {
   auth: {
     email: string
@@ -67,4 +69,9 @@ export interface ResetPasswordVariables {
 
 export interface ResetPasswordData {
   resetPassword: null
+}
+
+export interface TokenPayload {
+  email: string
+  role: UserRole
 }

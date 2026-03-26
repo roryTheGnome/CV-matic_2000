@@ -2,7 +2,7 @@
 
 import { DEPARTMENTS_QUERY } from "@/api/graphql/queries/auth"
 import { LogoutButton } from "@/components/LogoutButton"
-import { PUBLIC_ROUTES } from "@/config/routes"
+import { ADMIN_ROUTES, PUBLIC_ROUTES } from "@/config/routes"
 import { useQuery } from "@apollo/client/react"
 import Link from "next/link"
 
@@ -19,10 +19,18 @@ export default function Home() {
   return (
     <div>
       <h2>HOME PAGE</h2>
-      <Link className="text-blue-500 underline" href={PUBLIC_ROUTES.LOGIN}>
-        Login
-      </Link>
-      <LogoutButton />
+      <div className="space-x-4">
+        <Link className="text-blue-500 underline" href={PUBLIC_ROUTES.LOGIN}>
+          Login
+        </Link>
+        <Link
+          className="text-blue-500 underline"
+          href={ADMIN_ROUTES.DEPARTMENTS}
+        >
+          Admin
+        </Link>
+        <LogoutButton />
+      </div>
     </div>
   )
 }

@@ -4,7 +4,7 @@ import { ApolloProvider } from "@apollo/client/react"
 import React from "react"
 import { Toaster } from "react-hot-toast"
 
-export function Providers({ children }: { children: React.ReactNode }) {
+export function ClientProviders({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Toaster />
