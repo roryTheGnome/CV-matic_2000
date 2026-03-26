@@ -1,7 +1,7 @@
 import { Language } from "@/types/lang"
 import { Skill } from "@/types/skills"
 
-export type UserRole = "Admin" | "Emploee"
+export type UserRole = "Admin" | "Employee"
 
 export type User = {
   id: string

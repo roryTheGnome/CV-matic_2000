@@ -22,14 +22,6 @@ export const ADMIN_ROUTES = {
   POSITIONS: "/admin/positions",
 } as const
 
-export const isAdminPage = (pathname: string) => {
-  return [
-    ADMIN_ROUTES.PROJECTS,
-    ADMIN_ROUTES.DEPARTMENTS,
-    ADMIN_ROUTES.POSITIONS,
-  ].some(route => pathname.startsWith(route))
-}
-
 export const isAuthPage = (pathname: string) => {
   return [
     PUBLIC_ROUTES.LOGIN,

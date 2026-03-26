@@ -10,7 +10,7 @@ interface StoreInitializerProps {
 
 export default function StoreInitializer({ token }: StoreInitializerProps) {
   if (!initialized) {
-    useAuthStore.getState().setUserFromToken(token)
+    useAuthStore.getState().setIsAdminFromToken(token)
     initialized = true
   }
 

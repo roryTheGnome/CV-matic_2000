@@ -2,6 +2,7 @@
 
 import { removeAuthTokens } from "@/actions/auth"
 import { PUBLIC_ROUTES } from "@/config/routes"
+import { useAuthStore } from "@/store/authStore"
 import { useApolloClient } from "@apollo/client/react"
 import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
@@ -9,12 +10,14 @@ import toast from "react-hot-toast"
 export function LogoutButton() {
   const router = useRouter()
   const client = useApolloClient()
+  const { logout } = useAuthStore()
 
   const handleLogout = async () => {
     try {
       await removeAuthTokens()
 
       await client.clearStore()
+      logout()
 
       toast.success("Successfully logged out.", { duration: 2000 })
 

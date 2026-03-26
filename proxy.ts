@@ -1,9 +1,4 @@
-import {
-  isAdminPage,
-  isAuthPage,
-  PRIVATE_ROUTES,
-  PUBLIC_ROUTES,
-} from "@/config/routes"
+import { isAuthPage, PRIVATE_ROUTES, PUBLIC_ROUTES } from "@/config/routes"
 import type { NextRequest } from "next/server"
 import { NextResponse } from "next/server"
 import { protectAdmin } from "./actions/protectAdmin"
@@ -25,8 +20,9 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL(PRIVATE_ROUTES.HOME, request.url))
   }
 
-  if (isAdminPage(pathname) && accessToken) {
-    protectAdmin(request, accessToken)
+  if (pathname.startsWith("/admin") && accessToken) {
+    const adminCheck = await protectAdmin(request, accessToken)
+    if (adminCheck) return adminCheck
   }
 
   return NextResponse.next()

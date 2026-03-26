@@ -3,23 +3,25 @@ import { decodeJwt } from "jose"
 import { create } from "zustand"
 
 interface AuthStore {
-  user: TokenPayload | null
-  setUserFromToken: (token: string | undefined) => void
+  isAdmin: boolean
+  setIsAdminFromToken: (token: string | undefined) => void
+  logout: () => void
 }
 
 export const useAuthStore = create<AuthStore>()(set => ({
-  user: null,
-  setUserFromToken: (token: string | undefined) => {
+  isAdmin: false,
+  setIsAdminFromToken: (token: string | undefined) => {
     if (!token) {
-      set({ user: null })
+      set({ isAdmin: false })
       return
     }
     try {
       const decodedUser = decodeJwt(token) as TokenPayload
-      set({ user: decodedUser })
+      set({ isAdmin: decodedUser.role === "Admin" })
     } catch (error) {
       console.error("Error while token parsing", error)
-      set({ user: null })
+      set({ isAdmin: false })
     }
   },
+  logout: () => set({ isAdmin: false }),
 }))

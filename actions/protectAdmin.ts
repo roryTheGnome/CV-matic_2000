@@ -1,4 +1,4 @@
-import { PUBLIC_ROUTES } from "@/config/routes"
+import { PRIVATE_ROUTES, PUBLIC_ROUTES } from "@/config/routes"
 import { TokenPayload } from "@/types/auth"
 
 import { jwtVerify } from "jose"
@@ -16,11 +16,11 @@ export const protectAdmin = async (
       secret,
     )
 
-    if (payload.role === "Emploee") {
-      return NextResponse.redirect(new URL("/users", request.url))
+    if (payload.role !== "Admin") {
+      return NextResponse.redirect(new URL(PRIVATE_ROUTES.USERS, request.url))
     }
 
-    return NextResponse.next()
+    return null
   } catch (error) {
     return NextResponse.redirect(new URL(PUBLIC_ROUTES.LOGIN, request.url))
   }
