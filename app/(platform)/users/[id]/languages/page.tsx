@@ -1,6 +1,6 @@
 "use client";
 
-import {useUser} from "@/lib/hooks/useUsesr";
+import {useUser} from "@/lib/hooks/useUser";
 import {LanguageList} from "@/components/LanguageList";
 
 export default function EmployeeLanguage(){

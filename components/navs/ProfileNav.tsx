@@ -3,7 +3,7 @@
 import {usePathname} from "next/navigation";
 
 import Link from "next/link";
-import {useUser} from "@/lib/hooks/useUsesr";
+import {useUser} from "@/lib/hooks/useUser";
 
 export default function ProfileNav(){
     const pathname=usePathname();

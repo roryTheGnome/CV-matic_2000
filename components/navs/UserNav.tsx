@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import {useUser} from "@/lib/hooks/useUsesr";
+import {useUser} from "@/lib/hooks/useUser";
 import { ChevronRight } from "lucide-react";
 
 
