@@ -16,6 +16,13 @@ export const PRIVATE_ROUTES = {
   SKILLS: "/skills",
 } as const
 
+export const ADMIN_ROUTES = {
+  HOME: "/admin",
+  PROJECTS: "/admin/projects",
+  DEPARTMENTS: "/admin/departments",
+  POSITIONS: "/admin/positions",
+} as const
+
 export const isAuthPage = (pathname: string) => {
   return [
     PUBLIC_ROUTES.LOGIN,
