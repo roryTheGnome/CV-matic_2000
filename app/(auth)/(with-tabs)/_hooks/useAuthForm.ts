@@ -2,6 +2,7 @@ import { setAuthTokens } from "@/actions/auth"
 import { SIGNUP_MUTATION } from "@/api/graphql/mutations/auth"
 import { LOGIN_QUERY } from "@/api/graphql/queries/auth"
 import { PRIVATE_ROUTES, PUBLIC_ROUTES } from "@/config/routes"
+import { useAuthStore } from "@/store/authStore"
 import { LoginResponse, LoginVariables, SignupResponse } from "@/types/auth"
 import { ErrorLike } from "@apollo/client"
 import { useLazyQuery, useMutation } from "@apollo/client/react"
@@ -19,6 +20,7 @@ export const useAuthForm = () => {
   const [signupFn, { loading: signupLoading, error: signupError }] =
     useMutation<SignupResponse, LoginVariables>(SIGNUP_MUTATION)
 
+  const { setIsAdminFromToken } = useAuthStore()
   const pathname = usePathname()
   const router = useRouter()
   const isLogin = pathname === PUBLIC_ROUTES.LOGIN
@@ -43,6 +45,7 @@ export const useAuthForm = () => {
         if (data?.login) {
           toast.success("Logged in successfully.")
           await setAuthTokens(data.login.access_token, data.login.refresh_token)
+          setIsAdminFromToken(data.login.access_token)
 
           router.push(PRIVATE_ROUTES.HOME)
         }
@@ -59,6 +62,7 @@ export const useAuthForm = () => {
             data.signup.access_token,
             data.signup.refresh_token,
           )
+          setIsAdminFromToken(data.signup.access_token)
 
           router.push(PRIVATE_ROUTES.HOME)
         }
