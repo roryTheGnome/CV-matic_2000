@@ -39,7 +39,7 @@ export const LanguageList = ({ languages }: Props) => {
                     </span>
 
                     <span
-                        className="px-3 py-1 rounded-md text-sm font-bold text-2xl"
+                        className="px-3 py-1 rounded-md font-bold text-2xl"
                         style={{
                             color: getTextColor(lang.proficiency),
                         }}

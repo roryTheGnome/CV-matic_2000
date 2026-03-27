@@ -4,3 +4,7 @@ export type SortKey =
     | "email"
     | "department"
     | "position";
+
+export type Header={
+    label:string
+    key:SortKey}

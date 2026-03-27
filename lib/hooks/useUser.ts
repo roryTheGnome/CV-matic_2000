@@ -1,25 +1,24 @@
-"use client";
+import {GetUserResponse, User} from "@/types/user";
+import {useQuery} from "@apollo/client/react";
+import {GET_USER} from "@/lib/queries/user";
+import {useParams} from "next/navigation";
 
-import { useParams } from "next/navigation";
-import { useMemo } from "react";
-import { mockUsers } from "@/lib/mockUsers";
+
 
 export function useUser() {
     const params = useParams();
     const id = params.id as string;
 
-    const user = useMemo(
-        () => mockUsers.find((u) => u.id === id),
-        [id]
-    );
+    const { data, loading, error } = useQuery<GetUserResponse>(GET_USER, {
+        variables: { userId: id },
+        skip: !id,
+    });
 
-    return { user, id };
+    const user: User | undefined = data?.user
 
-    /* when api:
     return {
         user,
-        isLoading: false,   // will be true with real API
-        error: null,
+        isLoading: loading,
+        error,
     };
-    */
 }
