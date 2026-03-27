@@ -4,8 +4,11 @@ import {useUser} from "@/lib/hooks/useUser";
 import {Skills} from "@/components/skills/Skills";
 
 export default function EmployeeSkill(){
-    const{user}=useUser();
-    if(!user) return <div>no user</div> //TODO again loading n 404
+    const { user, isLoading, error } = useUser();
+
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>Error loading users</div>;
+    if (!user) return <div>No User selected</div>;
     return(
         <>
             <Skills skills={user.profile.skills} />

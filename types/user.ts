@@ -4,8 +4,8 @@ import {Language} from "@/types/lang";
 export type User = {
     id: string;
     email: string;
-    department: string;
-    position: string;
+    department_name: string;
+    position_name: string;
     profile: {
         created_at: string
         first_name: string;
@@ -14,4 +14,12 @@ export type User = {
         skills: Skill[];
         languages: Language[];
     };
+};
+
+export type GetUsersResponse = {
+    users: User[];
+};
+
+export type GetUserResponse = {
+    user: User;
 };

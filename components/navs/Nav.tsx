@@ -1,19 +1,49 @@
-import Link from "next/link";
+"use client"
 
-//TODO make it pretty
-export default function Nav(){
-    return(
-        <nav className="h-full flex flex-col justify-between p-4">
-            <div className="flex flex-col ">
-                <Link href="/users">Employees</Link>
-                <Link href="/skills">Skills</Link>
-                <Link href="/languages">Languages</Link>
-                <Link href="/cvs">CVs</Link>
-            </div>
-            <div className="flex flex-col justify-between">
-                <h1>Employee HERE</h1>
-            </div>
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import {navItems} from "@/constants/navLinks";
 
-        </nav>
+export default function Nav() {
+    const pathname = usePathname()
+
+    return (
+        <>
+            <nav className="hidden md:flex h-full flex-col justify-between p-4 bg-surface">
+
+                <div className="flex flex-col gap-2">
+                    {navItems.map((item) => {
+                        const isActive = pathname === item.href
+                        const Icon = item.icon
+
+                        return (
+                            <Link
+                                key={item.name}
+                                href={item.href}
+                                className={`flex items-center gap-3 px-4 py-3 rounded-full transition
+                                    ${isActive
+                                    ? `bg-surface-active`
+                                    : `hover:bg-surface-active`
+                                }`}
+                            >
+                                <Icon
+                                    size={20}
+                                    className= 'text-text-secondary'
+                                />
+                                <span>{item.name}</span>
+                            </Link>
+                        )
+                    })}
+                </div>
+
+                <div className="flex items-center gap-3 px-2">
+                    <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white">
+                        U
+                    </div>
+                    <span>USER HERE</span>
+                </div>
+            </nav>
+
+        </>
     )
 }
