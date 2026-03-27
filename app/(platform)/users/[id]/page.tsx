@@ -4,16 +4,11 @@ import { useUser } from "@/lib/hooks/useUser";
 
 export default function Employee(){
 
-    const{user}=useUser();
-    if(!user)return<div>user not found!!</div> //TODO add not found & loading
+    const { user, isLoading, error } = useUser();
 
-    /* when api added :
-    if (isLoading) return <Loading />
-    if (error) return <ErrorState />
-    if (!user) return <NotFound />
-
-    return <UserContent />
-     */
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>Error loading users</div>;
+    if (!user) return <div>No User selected</div>;
 
     const fullName =`${user.profile.first_name} ${user.profile.last_name}`;
 
@@ -36,7 +31,7 @@ export default function Employee(){
 
             <div className="grid grid-cols-2 gap-6">
                 <div>
-                    <label className="text-sm text-[var(--color-text-secondary)]">
+                    <label className="text-sm text-text-secondary">
                         First Name
                     </label>
                     <div className="mt-1 p-3 border rounded bg-[var(--color-surface)]">
@@ -44,7 +39,7 @@ export default function Employee(){
                     </div>
                 </div>
                 <div>
-                    <label className="text-sm text-[var(--color-text-secondary)]">
+                    <label className="text-sm text-text-secondary">
                         Last Name
                     </label>
                     <div className="mt-1 p-3 border rounded bg-[var(--color-surface)]">
@@ -52,19 +47,19 @@ export default function Employee(){
                     </div>
                 </div>
                 <div>
-                    <label className="text-sm text-[var(--color-text-secondary)]">
+                    <label className="text-sm text-text-secondary">
                         Department
                     </label>
                     <div className="mt-1 p-3 border rounded bg-[var(--color-surface)]">
-                        {user.department}
+                        {user.department_name}
                     </div>
                 </div>
                 <div>
-                    <label className="text-sm text-[var(--color-text-secondary)]">
+                    <label className="text-sm text-text-secondary">
                         Position
                     </label>
                     <div className="mt-1 p-3 border rounded bg-[var(--color-surface)]">
-                        {user.position}
+                        {user.position_name}
                     </div>
                 </div>
             </div>

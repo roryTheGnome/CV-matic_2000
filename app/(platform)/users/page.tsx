@@ -1,19 +1,20 @@
 "use client";
 import { useMemo, useState } from "react";
 import SortHeader from "@/lib/SortHeader"
-import {mockUsers} from "@/lib/mockUsers";
-import {User} from "@/types/user";
 import {SortKey} from "@/types/sorting";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
+import {useUsers} from "@/lib/hooks/useUser";
 
 export default function Employees(){
-    const [users] = useState<User[]>(mockUsers); //TODO change this to hook latr
+    const { users, isLoading, error } = useUsers();
+
 
     const [search, setSearch] = useState("");
 
     const [sortKey, setSortKey] = useState<SortKey>("first_name");
     const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
+
 
     const handleSort=(key:SortKey)=>{
         if(key==sortKey){
@@ -49,12 +50,12 @@ export default function Employees(){
                         valX=x.email;
                         break;
                     case "department":
-                        valY=y.department;
-                        valX=x.department;
+                        valY=y.department_name;
+                        valX=x.department_name;
                         break;
                     case "position":
-                        valY=y.position;
-                        valX=x.position;
+                        valY=y.position_name;
+                        valX=x.position_name;
                         break;
                 }
 
@@ -63,6 +64,9 @@ export default function Employees(){
                 return 0;
             });
     },[users, search, sortKey, sortDir]);
+
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>Error loading users</div>;
 
     return(
         <div>
@@ -135,13 +139,13 @@ export default function Employees(){
 
                             <td className="px-4 py-3">{user.profile.last_name}</td>
                             <td className="px-4 py-3">{user.email}</td>
-                            <td className="px-4 py-3">{user.department}</td>
-                            <td className="px-4 py-3">{user.position}</td>
+                            <td className="px-4 py-3">{user.department_name}</td>
+                            <td className="px-4 py-3">{user.position_name}</td>
 
                             <td className="w-8 text-right pr-2">
                                 <Link
                                     href={`/users/${user.id}`}
-                                    className="text-[var(--color-text-secondary)] hover:text-[var(--color-primary)]">
+                                    className="text-text-secondary hover:text-primary">
                                     <ChevronRight size={32} />
                                 </Link>
                             </td>

@@ -7,25 +7,27 @@ import {useUser} from "@/lib/hooks/useUser";
 
 export default function ProfileNav(){
     const pathname=usePathname();
-    const { user, id } = useUser();
+    const { user, isLoading, error } = useUser();
 
-    if(!user) return <div>user not found</div> //TODO create a not found page n loging page
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>Error loading users</div>;
+    if (!user) return <div>No User selected</div>;
 
     const tabs=[
-        {label:"Profile", path:`/users/${id}`},
-        {label:"Skills", path:`/users/${id}/skills`},
-        {label:"Languages", path:`/users/${id}/languages`},
+        {label:"Profile", path:`/users/${user.id}`},
+        {label:"Skills", path:`/users/${user.id}/skills`},
+        {label:"Languages", path:`/users/${user.id}/languages`},
     ];
 
     const isActive = (tabPath: string) => {
         if (pathname === tabPath) return true;
-        if (tabPath !== `/users/${id}` && pathname.startsWith(tabPath + "/")) return true;
+        if (tabPath !== `/users/${user.id}` && pathname.startsWith(tabPath + "/")) return true;
         return false;
     };
 
     return(
 
-        <nav className="flex gap-6 border-b border-[var(--color-surface-active)] mb-6">
+        <nav className="flex gap-6 border-b border-surface-active mb-6">
             {tabs.map((tab)=>{
                 const active=isActive(tab.path);
                 return(
@@ -38,7 +40,7 @@ export default function ProfileNav(){
                           }}>
                         {tab.label}
                         <span
-                            className="absolute left-0 bottom-0 h-[2px] w-full transition-transform duration-300"
+                            className="absolute left-0 bottom-0 h-0.5 w-full transition-transform duration-300"
                             style={{
                                 backgroundColor: "var(--color-primary)",
                                 transform: active ? "scaleX(1)" : "scaleX(0)",
