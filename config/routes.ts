@@ -17,6 +17,7 @@ export const PRIVATE_ROUTES = {
 } as const
 
 export const ADMIN_ROUTES = {
+  HOME: "/admin",
   PROJECTS: "/admin/projects",
   DEPARTMENTS: "/admin/departments",
   POSITIONS: "/admin/positions",

@@ -1,13 +1,15 @@
 "use client"
 
-import { DEPARTMENTS_QUERY } from "@/api/graphql/queries/auth"
+import { GET_DEPARTMENTS } from "@/api/graphql/queries/departments"
 import { LogoutButton } from "@/components/LogoutButton"
 import { ADMIN_ROUTES, PUBLIC_ROUTES } from "@/config/routes"
+import { GetDepartmentsResponse } from "@/types/department"
 import { useQuery } from "@apollo/client/react"
 import Link from "next/link"
 
 export default function Home() {
-  const { data, loading, error } = useQuery(DEPARTMENTS_QUERY)
+  const { data, loading, error } =
+    useQuery<GetDepartmentsResponse>(GET_DEPARTMENTS)
 
   if (loading) {
     return <div>Loading...</div>

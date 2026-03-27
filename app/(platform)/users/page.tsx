@@ -1,15 +1,20 @@
 "use client"
+
+import { AdminActionsMenu } from "@/components/admin/AdminActionsMenu"
+import { Button } from "@/components/ui/Button"
 import SortHeader from "@/lib/SortHeader"
 import { mockUsers } from "@/lib/mockUsers"
 import { useAuthStore } from "@/store/authStore"
+import { useModalStore } from "@/store/modalStore"
 import { SortKey } from "@/types/sorting"
 import { User } from "@/types/user"
-import { ChevronRight } from "lucide-react"
+import { ChevronRight, Plus } from "lucide-react"
 import Link from "next/link"
 import { useMemo, useState } from "react"
 
 export default function Employees() {
   const { isAdmin } = useAuthStore()
+  const openModal = useModalStore(state => state.openModal)
 
   const [users] = useState<User[]>(mockUsers) //TODO change this to hook latr
 
@@ -52,12 +57,12 @@ export default function Employees() {
             valX = x.email
             break
           case "department":
-            valY = y.department
-            valX = x.department
+            valY = y.department.name
+            valX = x.department.name
             break
           case "position":
-            valY = y.position
-            valX = x.position
+            valY = y.position.name
+            valX = x.position.name
             break
         }
 
@@ -78,7 +83,16 @@ export default function Employees() {
           className="mb-4 px-4 py-2 border border-gray-500 rounded-4xl w-full max-w-sm"
         />
 
-        {isAdmin && <div className="text-red-800">ADMIN PANEL</div>}
+        {isAdmin && (
+          <Button
+            Icon={Plus}
+            isTextButton
+            className="text-red-800"
+            onClick={() => openModal("CREATE_USER")}
+          >
+            CREATE USER
+          </Button>
+        )}
       </div>
 
       <div className="overflow-x-auto rounded-lg ">
@@ -146,16 +160,20 @@ export default function Employees() {
 
                 <td className="px-4 py-3">{user.profile.last_name}</td>
                 <td className="px-4 py-3">{user.email}</td>
-                <td className="px-4 py-3">{user.department}</td>
-                <td className="px-4 py-3">{user.position}</td>
+                <td className="px-4 py-3">{user.department.name}</td>
+                <td className="px-4 py-3">{user.position.name}</td>
 
                 <td className="w-8 text-right pr-2">
-                  <Link
-                    href={`/users/${user.id}`}
-                    className="text-[var(--color-text-secondary)] hover:text-[var(--color-primary)]"
-                  >
-                    <ChevronRight size={32} />
-                  </Link>
+                  {isAdmin ? (
+                    <AdminActionsMenu userId={user.id} />
+                  ) : (
+                    <Link
+                      href={`/users/${user.id}`}
+                      className="text-[var(--color-text-secondary)] hover:text-[var(--color-primary)]"
+                    >
+                      <ChevronRight size={32} />
+                    </Link>
+                  )}
                 </td>
 
                 <td className="last:border-b last:border-gray-500"></td>
