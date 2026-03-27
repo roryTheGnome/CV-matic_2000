@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "next/link"
 
 //TODO make it pretty
 export default function Nav(){
@@ -16,4 +16,4 @@ export default function Nav(){
 
         </nav>
     )
-}
+} 
