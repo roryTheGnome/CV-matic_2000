@@ -1,7 +1,7 @@
 "use client";
 
 import { useUser } from "@/lib/hooks/useUser";
-import Profile from "@/components/Profile";
+import EditableProfile from "@/components/EditableProfile";
 
 export default function Employee(){
 
@@ -13,7 +13,7 @@ export default function Employee(){
 
     return(
         <div className="p-6 max-w-4xl mx-auto">
-            <Profile user={user} />
+            <EditableProfile user={user} />
         </div>
     )
 }
