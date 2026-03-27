@@ -1,69 +1,12 @@
 "use client";
-import { useMemo, useState } from "react";
-import SortHeader from "@/lib/SortHeader"
-import {SortKey} from "@/types/sorting";
-import Link from "next/link";
-import { ChevronRight } from "lucide-react";
-import {useUsers} from "@/lib/hooks/useUser";
+import SortHeader from "@/components/SortHeader"
+import EmployeesList from "@/components/EmployeesList";
+import {useUsers} from "@/lib/hooks/useUsers";
+import {headers} from "@/constants/tableHeaders";
+
 
 export default function Employees(){
-    const { users, isLoading, error } = useUsers();
-
-
-    const [search, setSearch] = useState("");
-
-    const [sortKey, setSortKey] = useState<SortKey>("first_name");
-    const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
-
-
-    const handleSort=(key:SortKey)=>{
-        if(key==sortKey){
-            setSortDir(sortDir==="asc"? "desc":"asc");
-        }
-        else{
-            setSortKey(key);
-            setSortDir("asc")
-        }
-    }
-
-    const checkedUsers= useMemo(()=>{
-        return users
-            .filter((u)=>{
-            const fullname=`${u.profile.first_name} ${u.profile.last_name}`.toLowerCase();
-            return fullname.includes(search.toLowerCase());
-            })
-            .sort((x,y)=>{
-                let valX="";
-                let valY="";
-
-                switch (sortKey){
-                    case "first_name":
-                        valY=y.profile.first_name;
-                        valX=x.profile.first_name;
-                        break;
-                    case "last_name":
-                        valY=y.profile.last_name;
-                        valX=x.profile.last_name;
-                        break;
-                    case "email":
-                        valY=y.email;
-                        valX=x.email;
-                        break;
-                    case "department":
-                        valY=y.department_name;
-                        valX=x.department_name;
-                        break;
-                    case "position":
-                        valY=y.position_name;
-                        valX=x.position_name;
-                        break;
-                }
-
-                if(valX<valY) return sortDir==="asc"? -1 : 1;
-                if(valX>valY) return sortDir==="asc"? 1 : -1;
-                return 0;
-            });
-    },[users, search, sortKey, sortDir]);
+    const { users, isLoading, error, search, sortKey, sortDir, setSearch, handleSort } = useUsers();
 
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error loading users</div>;
@@ -82,85 +25,28 @@ export default function Employees(){
                 <table className="min-w-full divide-y divide-gray-500 ">
                     <thead>
                     <tr>
-                        <SortHeader
-                            label="First Name"
-                            sortKeyValue="first_name"
-                            currentSortKey={sortKey}
-                            sortDir={sortDir}
-                            onSort={handleSort}/>
-                        <SortHeader
-                            label="Last Name"
-                            sortKeyValue="last_name"
-                            currentSortKey={sortKey}
-                            sortDir={sortDir}
-                            onSort={handleSort}/>
-                        <SortHeader
-                            label="Email"
-                            sortKeyValue="email"
-                            currentSortKey={sortKey}
-                            sortDir={sortDir}
-                            onSort={handleSort}/>
-                        <SortHeader
-                            label="Department"
-                            sortKeyValue="department"
-                            currentSortKey={sortKey}
-                            sortDir={sortDir}
-                            onSort={handleSort}/>
-                        <SortHeader
-                            label="Position"
-                            sortKeyValue="position"
-                            currentSortKey={sortKey}
-                            sortDir={sortDir}
-                            onSort={handleSort}/>
-                        <td className="w-8"></td>
+                        {headers.map((header) => (
+                            <SortHeader
+                                key={header.key}
+                                label={header.label}
+                                sortKeyValue={header.key}
+                                currentSortKey={sortKey}
+                                sortDir={sortDir}
+                                onSort={handleSort}
+                            />
+                        ))}
                     </tr>
                     </thead>
 
-                    <tbody>
-
-                    {checkedUsers.map((user)=>(
-                        <tr key={user.id} className="divide-y divide-gray-500 ">
-                            <td className="px-4 py-3 flex items-center gap-3">
-                                {user.profile.avatar ?(
-                                    <img
-                                        src={user.profile.avatar}
-                                        alt={`${user.profile.first_name} ${user.profile.last_name}'s avatar`}
-                                        className="w-10 h-10 rounded-full"
-                                    />
-                                ):(
-                                    <img
-                                        src={"https://placehold.co/40"}
-                                        alt={`${user.profile.first_name} ${user.profile.last_name}'s avatar`}
-                                        className="w-10 h-10 rounded-full"
-                                    />
-                                )}
-                                {user.profile.first_name}
-                            </td>
-
-                            <td className="px-4 py-3">{user.profile.last_name}</td>
-                            <td className="px-4 py-3">{user.email}</td>
-                            <td className="px-4 py-3">{user.department_name}</td>
-                            <td className="px-4 py-3">{user.position_name}</td>
-
-                            <td className="w-8 text-right pr-2">
-                                <Link
-                                    href={`/users/${user.id}`}
-                                    className="text-text-secondary hover:text-primary">
-                                    <ChevronRight size={32} />
-                                </Link>
-                            </td>
-
-                            <td className="last:border-b last:border-gray-500"></td>
-                        </tr>
-                    ))}
-
-                    </tbody>
+                    <EmployeesList
+                        users={users}
+                        search={search}
+                        sortKey={sortKey}
+                        sortDir={sortDir}
+                    />
 
                 </table>
             </div>
-
         </div>
     )
-
-
 }

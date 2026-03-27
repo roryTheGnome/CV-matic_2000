@@ -1,5 +1,5 @@
 import {ArrowDown, ArrowUp, ArrowUpDown} from "lucide-react";
-import {SortKey} from "@/types/sorting";
+import {SortKey} from "@/types/table";
 
 export default function SortHeader({label, sortKeyValue, currentSortKey, sortDir, onSort,
                     }: {

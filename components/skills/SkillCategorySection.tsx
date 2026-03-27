@@ -12,7 +12,7 @@ export const SkillCategorySection = ({
 
     return (
         <div className="space-y-4">
-            <h3 className="text-sm font-semibold text-[var(--color-text-primary)]">
+            <h3 className="text-sm font-semibold text-text-primary">
                 {title}
             </h3>
 

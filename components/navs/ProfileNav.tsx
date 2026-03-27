@@ -4,26 +4,13 @@ import {usePathname} from "next/navigation";
 
 import Link from "next/link";
 import {useUser} from "@/lib/hooks/useUser";
+import {useProfileNav} from "@/lib/hooks/useProfileNav";
 
 export default function ProfileNav(){
-    const pathname=usePathname();
-    const { user, isLoading, error } = useUser();
-
+    const {user,isLoading,error,tabs, isActive}=useProfileNav();
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error loading users</div>;
     if (!user) return <div>No User selected</div>;
-
-    const tabs=[
-        {label:"Profile", path:`/users/${user.id}`},
-        {label:"Skills", path:`/users/${user.id}/skills`},
-        {label:"Languages", path:`/users/${user.id}/languages`},
-    ];
-
-    const isActive = (tabPath: string) => {
-        if (pathname === tabPath) return true;
-        if (tabPath !== `/users/${user.id}` && pathname.startsWith(tabPath + "/")) return true;
-        return false;
-    };
 
     return(
 
@@ -52,8 +39,5 @@ export default function ProfileNav(){
             })}
         </nav>
     )
-
-
-
 
 }
