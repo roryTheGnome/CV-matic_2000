@@ -31,7 +31,7 @@ export default function Nav() {
                 className={`flex items-center gap-3 px-5 py-4 rounded-r-full transition
                 ${isActive ? `bg-surface-active` : `hover:bg-surface-active`}`}
               >
-                <Icon size={20} className="text-text-secondary" />
+                <Icon size={20} className="w-5 h-5 text-text-secondary" />
                 <span>{item.name}</span>
               </Link>
             )

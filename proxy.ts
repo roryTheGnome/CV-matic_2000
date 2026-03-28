@@ -1,5 +1,5 @@
 import {
-  ADMIN_ROUTES,
+  isAdminPage,
   isAuthPage,
   PRIVATE_ROUTES,
   PUBLIC_ROUTES,
@@ -34,7 +34,7 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL(PRIVATE_ROUTES.HOME, request.url))
   }
 
-  if (pathname.startsWith(ADMIN_ROUTES.HOME)) {
+  if (isAdminPage(pathname)) {
     if (accessToken) {
       const adminCheck = await protectAdmin(request, accessToken)
       if (adminCheck) return adminCheck

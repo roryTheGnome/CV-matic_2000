@@ -1,15 +1,18 @@
 "use client"
 
 import { useAdminActionMenu } from "@/lib/hooks/useAdminActionMenu"
+import { ModalData, ModalType } from "@/store/modalStore"
 import { MoreVertical, Pencil, Trash2 } from "lucide-react"
 
 interface Props {
-  userId: string
+  deleteType: ModalType
+  createType: ModalType
+  item: ModalData
 }
 
-export function AdminActionsMenu({ userId }: Props) {
+export function AdminActionsMenu({ createType, deleteType, item }: Props) {
   const { menuRef, isOpen, setIsOpen, handleEdit, handleDelete } =
-    useAdminActionMenu(userId)
+    useAdminActionMenu(deleteType, createType, item)
 
   return (
     <div className="relative" ref={menuRef}>
