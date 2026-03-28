@@ -7,7 +7,7 @@ type EmployeesListProps = {
     search: string;
     sortKey: "first_name"| "last_name" | "email" | "department" | "position";
     sortDir: "asc" | "desc";
-    currentUserId: number | null;
+    currentUserId: number | undefined;
 };
 
 export default function EmployeesList({users, search,sortKey, sortDir, currentUserId}:EmployeesListProps){

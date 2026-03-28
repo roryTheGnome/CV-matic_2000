@@ -51,3 +51,6 @@ export interface DeleteUserResponse {
     affected: number
   }
 }
+export type GetUserResponse = {
+  user: User;
+};

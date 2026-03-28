@@ -3,20 +3,21 @@ import { useEffect, useState } from "react";
 import EmployeesList from "@/components/EmployeesList";
 import { useUsers } from "@/lib/hooks/useUsers";
 import { getAccessToken } from "@/actions/auth";
-import { getCurrentUserId } from "@/lib/GetCurrent";
+import { getCurrentUser } from "@/lib/GetCurrent";
 import {headers} from "@/constants/tableHeaders";
 import SortHeader from "@/components/SortHeader";
 
 export default function Employees() {
     const { users, isLoading, error, search, sortKey, sortDir, setSearch, handleSort } = useUsers();
 
-    const [currentUserId, setCurrentUserId] = useState<number | null>(null);
+    const [currentUserId, setCurrentUserId] = useState<number | undefined>(undefined);
 
     useEffect(() => {
         async function fetchToken() {
             const token = await getAccessToken();
             if (token) {
-                const id = getCurrentUserId(token);
+                const currentUser = getCurrentUser(token);
+                const id=currentUser?.sub;
                 setCurrentUserId(id);
             }
         }
