@@ -1,7 +1,7 @@
 "use client"
 
 import { GET_DEPARTMENTS } from "@/api/graphql/queries/departments"
-import { LogoutButton } from "@/components/LogoutButton"
+import { LogoutButton } from "@/components/ui/LogoutButton"
 import { ADMIN_ROUTES, PUBLIC_ROUTES } from "@/config/routes"
 import { GetDepartmentsResponse } from "@/types/department"
 import { useQuery } from "@apollo/client/react"
