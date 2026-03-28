@@ -1,23 +1,38 @@
 "use client";
-import SortHeader from "@/components/SortHeader"
+import { useEffect, useState } from "react";
 import EmployeesList from "@/components/EmployeesList";
-import {useUsers} from "@/lib/hooks/useUsers";
+import { useUsers } from "@/lib/hooks/useUsers";
+import { getAccessToken } from "@/actions/auth";
+import { getCurrentUserId } from "@/lib/GetCurrent";
 import {headers} from "@/constants/tableHeaders";
+import SortHeader from "@/components/SortHeader";
 
-
-export default function Employees(){
+export default function Employees() {
     const { users, isLoading, error, search, sortKey, sortDir, setSearch, handleSort } = useUsers();
+
+    const [currentUserId, setCurrentUserId] = useState<number | null>(null);
+
+    useEffect(() => {
+        async function fetchToken() {
+            const token = await getAccessToken();
+            if (token) {
+                const id = getCurrentUserId(token);
+                setCurrentUserId(id);
+            }
+        }
+        fetchToken();
+    }, []);
 
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error loading users</div>;
 
-    return(
+    return (
         <div>
             <input
                 type="text"
                 placeholder="Search.."
                 value={search}
-                onChange={(e)=>setSearch(e.target.value)}
+                onChange={(e) => setSearch(e.target.value)}
                 className="mb-4 px-4 py-2 border border-gray-500 rounded-4xl w-full max-w-sm"
             />
 
@@ -43,10 +58,10 @@ export default function Employees(){
                         search={search}
                         sortKey={sortKey}
                         sortDir={sortDir}
+                        currentUserId={currentUserId}
                     />
-
                 </table>
             </div>
         </div>
-    )
+    );
 }

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import {ChevronRight} from "lucide-react";
+import {ChevronRight, EllipsisVertical} from "lucide-react";
 import {User} from "@/types/user";
 
 type EmployeesListProps = {
@@ -7,9 +7,10 @@ type EmployeesListProps = {
     search: string;
     sortKey: "first_name"| "last_name" | "email" | "department" | "position";
     sortDir: "asc" | "desc";
+    currentUserId: number | null;
 };
 
-export default function EmployeesList({users, search,sortKey, sortDir}:EmployeesListProps){
+export default function EmployeesList({users, search,sortKey, sortDir, currentUserId}:EmployeesListProps){
     const checkedUsers= [...users]
         .filter((u:User)=>{
             const fullname=`${u.profile.first_name} ${u.profile.last_name}`.toLowerCase();
@@ -33,12 +34,12 @@ export default function EmployeesList({users, search,sortKey, sortDir}:Employees
                     valX=x.email;
                     break;
                 case "department":
-                    valY=y.department_name;
-                    valX=x.department_name;
+                    valY=y?.department_name ?? "";
+                    valX=x?.department_name ?? "";
                     break;
                 case "position":
-                    valY=y.position_name;
-                    valX=x.position_name;
+                    valY=y?.position_name ?? "";
+                    valX=x?.position_name ?? "";
                     break;
             }
 
@@ -76,8 +77,13 @@ export default function EmployeesList({users, search,sortKey, sortDir}:Employees
                 <td className="w-8 text-right pr-2">
                     <Link
                         href={`/users/${user.id}`}
-                        className="text-text-secondary hover:text-primary">
-                        <ChevronRight size={32} />
+                        className="text-text-secondary hover:text-primary"
+                    >
+                        {currentUserId === Number(user.id) ? (
+                            <EllipsisVertical size={32} />
+                        ) : (
+                            <ChevronRight size={32} />
+                        )}
                     </Link>
                 </td>
 
