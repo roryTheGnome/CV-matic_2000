@@ -1,4 +1,4 @@
-import { AdminNav } from "@/components/navs/AdminNav"
+import Nav from "@/components/navs/Nav"
 import "../globals.css"
 
 export default function AdminLayout({
@@ -8,9 +8,7 @@ export default function AdminLayout({
 }>) {
   return (
     <div className="grid grid-cols-[200px_auto] min-h-screen">
-      <nav className="">
-        <AdminNav />
-      </nav>
+      <Nav />
 
       <main>{children}</main>
     </div>
