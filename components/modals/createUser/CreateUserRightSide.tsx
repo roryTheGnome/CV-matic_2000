@@ -1,0 +1,40 @@
+import { InputField } from "@/components/ui/inputField/InputField"
+import { CreateUserProps } from "./CreateUserLeftSide"
+import { PositionsSelect } from "./PositionsSelect"
+
+export function CreateUserRightSide({
+  formId,
+  formData,
+  handleChange,
+}: CreateUserProps) {
+  return (
+    <div className="flex flex-col gap-8">
+      <InputField
+        inputId={`${formId}-password`}
+        label="Password"
+        type="password"
+        name="password"
+        placeholder="Password"
+        value={formData.password}
+        onChange={handleChange}
+        required
+      />
+      <InputField
+        inputId={`${formId}-lastName`}
+        label="Last Name"
+        type="text"
+        name="lastName"
+        placeholder="Last Name"
+        value={formData.lastName}
+        onChange={handleChange}
+        required
+      />
+
+      <PositionsSelect
+        formId={formId}
+        formData={formData}
+        handleChange={handleChange}
+      />
+    </div>
+  )
+}

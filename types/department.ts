@@ -1,11 +1,8 @@
-export type Department = {
-    id: string;
-    name: string;
-};
+export interface GetDepartmentsResponse {
+  departments: Department[]
+}
 
-export type GetDepartmentsResponse = {
-    departments: {
-        id: string;
-        name: string;
-    }[];
-};
+export interface Department {
+  id: string
+  name: string
+}

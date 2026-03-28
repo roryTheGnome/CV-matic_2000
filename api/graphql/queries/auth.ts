@@ -18,13 +18,3 @@ export const LOGIN_QUERY = gql`
     }
   }
 `
-
-export const DEPARTMENTS_QUERY = gql`
-  query Department {
-    departments {
-      id
-      created_at
-      name
-    }
-  }
-`
