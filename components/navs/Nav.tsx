@@ -3,9 +3,17 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import {navItems} from "@/constants/navLinks";
+import {useCurrentUser} from "@/lib/hooks/useCurrentUser";
+import {useUser} from "@/lib/hooks/useUser";
 
 export default function Nav() {
     const pathname = usePathname()
+
+    const { currentUserId }=useCurrentUser();
+
+    const { user } =useUser(
+        currentUserId ? String(currentUserId) : undefined
+    );
 
     return (
         <>
@@ -38,9 +46,9 @@ export default function Nav() {
 
                 <div className="flex items-center gap-3 px-2">
                     <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white">
-                        U
+                        {user?.profile.first_name.at(0) ?? "U"}
                     </div>
-                    <span>USER HERE</span>
+                    <span>{user?.profile.first_name} {user?.profile.last_name}</span>
                 </div>
             </nav>
 

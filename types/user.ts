@@ -3,7 +3,7 @@ import { Skill } from "@/types/skills"
 import { Cvs } from "./cvs"
 import { Department } from "./department"
 
-export type UserRole = "Admin" | "Employee"
+export type UserRole = "admin" | "employee"
 
 export type User = {
   id: string

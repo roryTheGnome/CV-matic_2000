@@ -3,33 +3,20 @@
 import { useUser } from "@/lib/hooks/useUser";
 import EditableProfile from "@/components/EditableProfile";
 import Profile from "@/components/Profile";
-import {useEffect, useState} from "react";
-import {getAccessToken} from "@/actions/auth";
-import {getCurrentUser} from "@/lib/GetCurrent";
+import LoadingPage from "@/app/(platform)/users/[id]/loading";
+import {useCurrentUser} from "@/lib/hooks/useCurrentUser";
 
 export default function Employee(){
 
     const { user, isLoading, error } = useUser();
 
-    const [currentUserId, setCurrentUserId] = useState<number | undefined>(undefined);
+    const {currentUserId} = useCurrentUser();
 
-    useEffect(() => {
-        async function fetchToken() {
-            const token = await getAccessToken();
-            if (token) {
-                const currentUser = getCurrentUser(token);
-                const id=currentUser?.sub;
-                setCurrentUserId(id);
-            }
-        }
-        fetchToken();
-    }, []);
-
-    if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error loading users</div>;
-    if (!user) return <div>No User selected</div>;
 
-
+    if (isLoading || !user || currentUserId===undefined) {
+        return <LoadingPage />;
+    }
 
     return(
         <div className="p-6 max-w-4xl mx-auto">

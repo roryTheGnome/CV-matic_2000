@@ -1,30 +1,15 @@
 "use client";
-import { useEffect, useState } from "react";
 import EmployeesList from "@/components/EmployeesList";
 import { useUsers } from "@/lib/hooks/useUsers";
-import { getAccessToken } from "@/actions/auth";
-import { getCurrentUser } from "@/lib/GetCurrent";
 import {headers} from "@/constants/tableHeaders";
 import SortHeader from "@/components/SortHeader";
+import {useCurrentUser} from "@/lib/hooks/useCurrentUser";
 
 export default function Employees() {
-    const { users, isLoading, error, search, sortKey, sortDir, setSearch, handleSort } = useUsers();
+    const { users, error, search, sortKey, sortDir, setSearch, handleSort } = useUsers();
 
-    const [currentUserId, setCurrentUserId] = useState<number | undefined>(undefined);
+    const {currentUserId}=useCurrentUser();
 
-    useEffect(() => {
-        async function fetchToken() {
-            const token = await getAccessToken();
-            if (token) {
-                const currentUser = getCurrentUser(token);
-                const id=currentUser?.sub;
-                setCurrentUserId(id);
-            }
-        }
-        fetchToken();
-    }, []);
-
-    if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error loading users</div>;
 
     return (

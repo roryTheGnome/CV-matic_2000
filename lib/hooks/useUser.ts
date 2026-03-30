@@ -5,13 +5,16 @@ import {useParams} from "next/navigation";
 
 
 
-export function useUser() {
+export function useUser(userId?: string) {
     const params = useParams();
     const id = params.id as string;
 
+    const idToUse=userId ?? id;
+
+
     const { data, loading, error } = useQuery<GetUserResponse>(GET_USER, {
-        variables: { userId: id },
-        skip: !id,
+        variables: { userId: idToUse },
+        skip: !idToUse,
     });
 
     const user: User | undefined = data?.user
