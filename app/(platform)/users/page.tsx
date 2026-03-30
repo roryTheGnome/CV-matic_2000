@@ -4,13 +4,14 @@ import { useUsers } from "@/lib/hooks/useUsers";
 import {headers} from "@/constants/tableHeaders";
 import SortHeader from "@/components/SortHeader";
 import {useCurrentUser} from "@/lib/hooks/useCurrentUser";
+import NotFoundPage from "@/app/(platform)/users/not-found";
 
 export default function Employees() {
-    const { users, error, search, sortKey, sortDir, setSearch, handleSort } = useUsers();
+    const { users, error, search, sortKey, sortDir, setSearch, handleSort, isLoading } = useUsers();
 
     const {currentUserId}=useCurrentUser();
 
-    if (error) return <div>Error loading users</div>;
+    if (error) return <NotFoundPage/>;
 
     return (
         <div>
@@ -45,6 +46,7 @@ export default function Employees() {
                         sortKey={sortKey}
                         sortDir={sortDir}
                         currentUserId={currentUserId}
+                        isLoading={isLoading}
                     />
                 </table>
             </div>

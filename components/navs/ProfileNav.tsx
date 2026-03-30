@@ -2,13 +2,12 @@
 
 import Link from "next/link";
 import {useProfileNav} from "@/lib/hooks/useProfileNav";
-import LoadingPage from "@/app/(platform)/users/[id]/loading";
 
 export default function ProfileNav(){
     const {user,error,tabs, isActive}=useProfileNav();
-    if (error) return <div>Error loading users</div>;
+    if (error) return <div></div>;
     if ( !user) {
-        return <LoadingPage />;
+        return<></>;
     }
 
     return(

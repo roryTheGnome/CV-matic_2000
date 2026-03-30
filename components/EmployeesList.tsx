@@ -1,6 +1,7 @@
 import Link from "next/link";
 import {ChevronRight, EllipsisVertical} from "lucide-react";
 import {User} from "@/types/user";
+import LoadingPage from "@/app/(platform)/users/loading";
 
 type EmployeesListProps = {
     users: User[] | [];
@@ -8,9 +9,11 @@ type EmployeesListProps = {
     sortKey: "first_name"| "last_name" | "email" | "department" | "position";
     sortDir: "asc" | "desc";
     currentUserId: number | undefined;
+    isLoading:boolean
 };
 
-export default function EmployeesList({users, search,sortKey, sortDir, currentUserId}:EmployeesListProps){
+export default function EmployeesList({users, search,sortKey, sortDir, currentUserId, isLoading}:EmployeesListProps){
+
     const checkedUsers= [...users]
         .filter((u:User)=>{
             const fullname=`${u.profile.first_name} ${u.profile.last_name}`.toLowerCase();
@@ -47,6 +50,19 @@ export default function EmployeesList({users, search,sortKey, sortDir, currentUs
             if(valX>valY) return sortDir==="asc"? 1 : -1;
             return 0;
         });
+
+    if(isLoading)return(
+        <tbody>
+        <tr>
+            <td colSpan={7} className="py-10">
+                <div className="flex flex-col items-center gap-3 text-text-secondary">
+                    <span className="animate-pulse">Loading users...</span>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    )
+
     return(
         <tbody>
 

@@ -54,3 +54,6 @@ export interface DeleteUserResponse {
 export type GetUserResponse = {
   user: User;
 };
+export type GetUsersResponse = {
+  users: User[];
+};
