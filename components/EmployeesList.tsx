@@ -1,7 +1,6 @@
 import Link from "next/link";
 import {ChevronRight, EllipsisVertical} from "lucide-react";
 import {User} from "@/types/user";
-import LoadingPage from "@/app/(platform)/users/loading";
 
 type EmployeesListProps = {
     users: User[] | [];
@@ -76,11 +75,9 @@ export default function EmployeesList({users, search,sortKey, sortDir, currentUs
                             className="w-10 h-10 rounded-full"
                         />
                     ):(
-                        <img
-                            src={"https://placehold.co/40"}
-                            alt={`${user.profile.first_name} ${user.profile.last_name}'s avatar`}
-                            className="w-10 h-10 rounded-full"
-                        />
+                        <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white">
+                            {user?.profile?.first_name?.at(0) ?? "U"}
+                        </div>
                     )}
                     {user.profile.first_name}
                 </td>
