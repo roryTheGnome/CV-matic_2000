@@ -2,13 +2,14 @@
 
 import {useUser} from "@/lib/hooks/useUser";
 import {Skills} from "@/components/skills/Skills";
+import NotFoundPage from "@/app/(platform)/users/not-found";
+import LoadingPage from "@/app/(platform)/users/[id]/loading";
 
 export default function EmployeeSkill(){
-    const { user, isLoading, error } = useUser();
+    const { user, error } = useUser();
 
-    if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>Error loading users</div>;
-    if (!user) return <div>No User selected</div>;
+    if (error) return <NotFoundPage/>;
+    if (!user) return <LoadingPage/>;
     return(
         <>
             <Skills skills={user.profile.skills} />

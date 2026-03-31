@@ -6,10 +6,9 @@ import {useUserNav} from "@/lib/hooks/useUserNav";
 
 
 export default function UserNav() {
-    const{user, isLoading, error, displayName, currentPiece, formatLabel,} =useUserNav();
+    const{user, error, displayName, currentPiece, formatLabel,} =useUserNav();
 
-    if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>Error loading users</div>;
+    if (error) return <div></div>;
 
     return(
         <nav className="mb-4 text-sm text-text-secondary flex items-center gap-2">

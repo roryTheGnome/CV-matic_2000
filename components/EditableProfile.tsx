@@ -154,7 +154,7 @@ export default function EditableProfile({user}:ProfileProp){
 
             {changeSuccess && (
                 <p className="mt-3 text-green-500 text-sm">
-                    Profile updated successfully; pls change me to toaster
+                    Profile updated successfully; pls change me to toast lrt
                 </p>
             )}
         </>

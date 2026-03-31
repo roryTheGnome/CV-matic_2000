@@ -1,6 +1,8 @@
 "use client";
 
 import ProfileNav from "@/components/navs/ProfileNav";
+import {Suspense} from "react";
+import LoadingPage from "@/app/(platform)/users/[id]/loading";
 
 export default function EmployeeLayout({
                                            children,
@@ -9,8 +11,10 @@ export default function EmployeeLayout({
 }) {
     return (
         <div className="p-6">
-            <ProfileNav />
-            <div>{children}</div>
+            <Suspense fallback={<LoadingPage />}>
+                <ProfileNav />
+                <div>{children}</div>
+            </Suspense>
         </div>
     );
 }

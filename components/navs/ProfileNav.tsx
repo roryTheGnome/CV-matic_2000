@@ -4,10 +4,11 @@ import Link from "next/link";
 import {useProfileNav} from "@/lib/hooks/useProfileNav";
 
 export default function ProfileNav(){
-    const {user,isLoading,error,tabs, isActive}=useProfileNav();
-    if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>Error loading users</div>;
-    if (!user) return <div>No User selected</div>;
+    const {user,error,tabs, isActive}=useProfileNav();
+    if (error) return <div></div>;
+    if ( !user) {
+        return<></>;
+    }
 
     return(
 

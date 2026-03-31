@@ -1,52 +1,27 @@
-"use client"
-import EmployeesList from "@/components/EmployeesList"
-import SortHeader from "@/components/SortHeader"
-import { Button } from "@/components/ui/Button"
-import { headers } from "@/constants/tableHeaders"
-import { useUsers } from "@/lib/hooks/useUsers"
-import { useAuthStore } from "@/store/authStore"
-import { useModalStore } from "@/store/modalStore"
-import { Plus } from "lucide-react"
+"use client";
+import EmployeesList from "@/components/EmployeesList";
+import { useUsers } from "@/lib/hooks/useUsers";
+import {headers} from "@/constants/tableHeaders";
+import SortHeader from "@/components/SortHeader";
+import {useCurrentUser} from "@/lib/hooks/useCurrentUser";
+import NotFoundPage from "@/app/(platform)/users/not-found";
 
 export default function Employees() {
-  const { isAdmin } = useAuthStore()
-  const { openModal } = useModalStore()
+    const { users, error, search, sortKey, sortDir, setSearch, handleSort, isLoading } = useUsers();
 
-  const {
-    users,
-    isLoading,
-    error,
-    search,
-    sortKey,
-    sortDir,
-    setSearch,
-    handleSort,
-  } = useUsers()
+    const {currentUserId}=useCurrentUser();
 
-  if (isLoading) return <div>Loading...</div>
-  if (error) return <div>Error loading users</div>
+    if (error) return <NotFoundPage/>;
 
-  return (
-    <div>
-      <div className="flex justify-between items-center">
-        <input
-          type="text"
-          placeholder="Search"
-          value={search}
-          onChange={e => setSearch(e.target.value)}
-          className="mb-4 px-4 py-2 border border-gray-500 rounded-4xl w-full max-w-sm"
-        />
-        {isAdmin && (
-          <Button
-            Icon={Plus}
-            isTextButton
-            className="text-red-400"
-            onClick={() => openModal("USER_CREATE")}
-          >
-            CREATE USER
-          </Button>
-        )}
-      </div>
+    return (
+        <div>
+            <input
+                type="text"
+                placeholder="Search.."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="mb-4 px-4 py-2 border border-gray-500 rounded-4xl w-full max-w-sm"
+            />
 
       <div className="overflow-x-auto rounded-lg ">
         <table className="min-w-full divide-y divide-gray-500 ">
@@ -65,14 +40,16 @@ export default function Employees() {
             </tr>
           </thead>
 
-          <EmployeesList
-            users={users}
-            search={search}
-            sortKey={sortKey}
-            sortDir={sortDir}
-          />
-        </table>
-      </div>
-    </div>
-  )
+                    <EmployeesList
+                        users={users}
+                        search={search}
+                        sortKey={sortKey}
+                        sortDir={sortDir}
+                        currentUserId={currentUserId}
+                        isLoading={isLoading}
+                    />
+                </table>
+            </div>
+        </div>
+    );
 }
