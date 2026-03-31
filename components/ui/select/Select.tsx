@@ -7,8 +7,6 @@ interface Props extends ComponentProps<"select"> {
   isRequired: boolean
   name: string
   title?: string | undefined
-  withLabel?: boolean
-  labelTitle?: string
   handleChange: (
     e: ChangeEvent<HTMLSelectElement | HTMLInputElement, Element>,
   ) => void
@@ -20,21 +18,18 @@ export function Select({
   isRequired,
   name,
   title,
-  withLabel = false,
-  labelTitle,
   handleChange,
   ...props
 }: Props) {
   return (
     <div className="relative">
-      {withLabel && (
-        <label
-          htmlFor={id}
-          className="absolute -top-1.5 left-3 px-1.5 bg-background text-xs text-gray-400"
-        >
-          {labelTitle}
-        </label>
-      )}
+      <label
+        htmlFor={id}
+        className="absolute left-2 -top-2.5 px-1 transition-all bg-background text-xs text-input-border"
+      >
+        {title}
+      </label>
+
       <select
         id={id}
         name={name}

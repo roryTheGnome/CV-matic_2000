@@ -7,11 +7,15 @@ export type ModalType =
   | "PROJECT_CREATE"
   | "PROJECT_DELETE"
   | "PROJECT_EDIT"
-  | "CREATE_SKILL"
-  | "DELETE_SKILL"
+  | "SKILL_CREATE"
+  | "SKILL_DELETE"
   | "SKILL_EDIT"
+  | "DEPARTMENT_CREATE"
   | "DEPARTMENT_EDIT"
   | "DEPARTMENT_DELETE"
+  | "CV_EDIT"
+  | "CV_DELETE"
+  | "CV_CREATE"
   | null
 
 export interface ModalData {

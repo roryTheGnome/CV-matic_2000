@@ -23,3 +23,48 @@ export const DELETE_USER_MUTATION = gql`
     }
   }
 `
+
+export const UPDATE_USER_MUTATION = gql`
+  mutation UpdateUser($user: UpdateUserInput!) {
+    updateUser(user: $user) {
+      id
+      created_at
+      email
+      is_verified
+      role
+      department_name
+      position_name
+    }
+  }
+`
+
+export const GET_USER_BY_ID = gql`
+  query GetUserById($userId: ID!) {
+    user(userId: $userId) {
+      id
+      created_at
+      email
+      is_verified
+      role
+      department_name
+      position_name
+
+      profile {
+        first_name
+        last_name
+      }
+      department {
+        id
+        name
+      }
+      position {
+        id
+        name
+      }
+      cvs {
+        id
+        name
+      }
+    }
+  }
+`

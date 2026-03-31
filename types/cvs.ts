@@ -28,3 +28,7 @@ export interface CvProject {
   roles: UserRole
   responsibilities: string
 }
+
+export interface GetCvsData {
+  cvs: Cvs[]
+}

@@ -1,6 +1,8 @@
 "use client"
 
-import { CreateUserModal } from "@/components/modals/CreateUserModal"
+import { ProjectModal } from "@/components/modals/createProject/ProjectModal"
+import { UserModal } from "@/components/modals/createUser/UserModal"
+
 import { DeleteModal } from "@/components/modals/DeleteUserModal"
 import { useModalStore } from "@/store/modalStore"
 
@@ -14,7 +16,10 @@ export function ModalProvider() {
       {type?.endsWith("_DELETE") && (
         <DeleteModal closeModal={closeModal} data={data} />
       )}
-      {type === "USER_CREATE" && <CreateUserModal />}
+      {type === "USER_CREATE" && <UserModal />}
+      {type === "USER_EDIT" && <UserModal />}
+      {type === "PROJECT_CREATE" && <ProjectModal />}
+      {type === "PROJECT_EDIT" && <ProjectModal />}
     </>
   )
 }

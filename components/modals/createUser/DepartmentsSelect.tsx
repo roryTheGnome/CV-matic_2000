@@ -38,6 +38,10 @@ export function DepartmentsSelect({
         <Option value="loading" title="Loading..." disabled />
       )}
 
+      {!departmentsData && formData?.departmentName && (
+        <Option value={formData.departmentId} title={formData.departmentName} />
+      )}
+
       {departmentsData?.departments.map(department => (
         <Option
           key={department.id}

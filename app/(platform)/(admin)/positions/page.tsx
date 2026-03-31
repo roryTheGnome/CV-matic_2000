@@ -11,7 +11,7 @@ import { TableSearch } from "@/components/ui/TableSearch"
 import { usePageWithTable } from "@/lib/hooks/usePageWithTable"
 import { GetPositionsResponse } from "@/types/position"
 import { Position } from "@/types/user"
-import { getSortByName } from "@/utils/getSortDepartmentValue"
+import { getSortByName } from "@/utils/getSortByName"
 
 export default function Positions() {
   const { data, loading, error } = useQuery<GetPositionsResponse>(GET_POSITIONS)

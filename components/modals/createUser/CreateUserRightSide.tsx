@@ -14,7 +14,6 @@ export function CreateUserRightSide({
         label="Password"
         type="password"
         name="password"
-        placeholder="Password"
         value={formData.password}
         onChange={handleChange}
         required
@@ -24,7 +23,6 @@ export function CreateUserRightSide({
         label="Last Name"
         type="text"
         name="lastName"
-        placeholder="Last Name"
         value={formData.lastName}
         onChange={handleChange}
         required

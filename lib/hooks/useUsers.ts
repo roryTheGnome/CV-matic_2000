@@ -1,4 +1,4 @@
-import { GET_USERS } from "@/lib/queries/user"
+import { GET_USERS } from "@/api/graphql/queries/user"
 import { GlobalSortKey } from "@/types/table"
 import { GetUsersResponse } from "@/types/user"
 import { useQuery } from "@apollo/client/react"

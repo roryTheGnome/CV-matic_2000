@@ -1,12 +1,13 @@
+import { GlobalSortKey } from "@/types/table"
 import { ReactNode } from "react"
 
 interface Props<T> {
   arrayOfItems: T[]
   search: string
-  sortKey: string
+  sortKey: GlobalSortKey
   sortDir: "asc" | "desc"
   getSearchText: (item: T) => string
-  getSortValue: (item: T, sortKey: string) => string | number | boolean
+  getSortValue: (item: T, sortKey: GlobalSortKey) => string | number | boolean
   renderRow: (item: T, index: number) => ReactNode
 }
 
@@ -20,7 +21,7 @@ export default function TableBody<T>({
   renderRow,
 }: Props<T>) {
   const processedItems = [...arrayOfItems]
-    .filter((item) => {
+    .filter(item => {
       const textToSearch = getSearchText(item).toLowerCase()
       return textToSearch.includes(search.toLowerCase())
     })
@@ -34,8 +35,6 @@ export default function TableBody<T>({
     })
 
   return (
-    <tbody>
-      {processedItems.map((item, index) => renderRow(item, index))}
-    </tbody>
+    <tbody>{processedItems.map((item, index) => renderRow(item, index))}</tbody>
   )
 }

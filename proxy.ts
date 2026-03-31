@@ -14,6 +14,8 @@ export async function proxy(request: NextRequest) {
   let accessToken = request.cookies.get(ACCESS_TOKEN)?.value
   const refreshToken = request.cookies.get(REFRESH_TOKEN)?.value
 
+  const responseObj = NextResponse.next()
+
   const { pathname } = request.nextUrl
   const isAuth = isAuthPage(pathname)
 
@@ -23,6 +25,11 @@ export async function proxy(request: NextRequest) {
       return NextResponse.redirect(new URL(PUBLIC_ROUTES.LOGIN, request.url))
     } else {
       accessToken = response.accessToken
+      responseObj.cookies.set(ACCESS_TOKEN, accessToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        path: "/",
+      })
     }
   }
 
@@ -43,7 +50,7 @@ export async function proxy(request: NextRequest) {
     }
   }
 
-  return NextResponse.next()
+  return responseObj
 }
 
 export const config = {

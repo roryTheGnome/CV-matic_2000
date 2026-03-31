@@ -1,10 +1,17 @@
 "use client"
 import EmployeesList from "@/components/EmployeesList"
 import SortHeader from "@/components/SortHeader"
+import { Button } from "@/components/ui/Button"
 import { headers } from "@/constants/tableHeaders"
 import { useUsers } from "@/lib/hooks/useUsers"
+import { useAuthStore } from "@/store/authStore"
+import { useModalStore } from "@/store/modalStore"
+import { Plus } from "lucide-react"
 
 export default function Employees() {
+  const { isAdmin } = useAuthStore()
+  const { openModal } = useModalStore()
+
   const {
     users,
     isLoading,
@@ -21,13 +28,25 @@ export default function Employees() {
 
   return (
     <div>
-      <input
-        type="text"
-        placeholder="Search.."
-        value={search}
-        onChange={e => setSearch(e.target.value)}
-        className="mb-4 px-4 py-2 border border-gray-500 rounded-4xl w-full max-w-sm"
-      />
+      <div className="flex justify-between items-center">
+        <input
+          type="text"
+          placeholder="Search"
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+          className="mb-4 px-4 py-2 border border-gray-500 rounded-4xl w-full max-w-sm"
+        />
+        {isAdmin && (
+          <Button
+            Icon={Plus}
+            isTextButton
+            className="text-red-400"
+            onClick={() => openModal("USER_CREATE")}
+          >
+            CREATE USER
+          </Button>
+        )}
+      </div>
 
       <div className="overflow-x-auto rounded-lg ">
         <table className="min-w-full divide-y divide-gray-500 ">

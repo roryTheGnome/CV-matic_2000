@@ -26,7 +26,6 @@ export default function ResetPassword() {
           label="Password"
           type="password"
           name="password"
-          placeholder="Password"
           autoComplete="new-password"
         />
         <span className="h-6 text-primary">

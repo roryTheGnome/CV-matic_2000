@@ -5,7 +5,7 @@ export const getSortByName = (
   sortKey: GlobalSortKey,
 ) => {
   switch (sortKey) {
-    case "first_name":
+    case "name":
       return item.name
     default:
       return ""

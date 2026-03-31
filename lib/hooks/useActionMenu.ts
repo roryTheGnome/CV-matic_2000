@@ -1,9 +1,9 @@
 import { ModalData, ModalType, useModalStore } from "@/store/modalStore"
 import { useEffect, useRef, useState } from "react"
 
-export const useAdminActionMenu = (
+export const useActionMenu = (
   deleteType: ModalType,
-  createType: ModalType,
+  editType: ModalType,
   item: ModalData,
 ) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -26,7 +26,8 @@ export const useAdminActionMenu = (
   }, [isOpen])
 
   const handleEdit = () => {
-    openModal(createType, item)
+    openModal(editType, item)
+    console.log(editType, item)
     setIsOpen(false)
   }
 

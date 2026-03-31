@@ -10,7 +10,7 @@ import TableBody from "@/components/ui/table/TableBody"
 import { TableSearch } from "@/components/ui/TableSearch"
 import { usePageWithTable } from "@/lib/hooks/usePageWithTable"
 import { Department, GetDepartmentsResponse } from "@/types/department"
-import { getSortByName } from "@/utils/getSortDepartmentValue"
+import { getSortByName } from "@/utils/getSortByName"
 
 export default function Departments() {
   const { data, loading, error } =

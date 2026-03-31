@@ -1,4 +1,4 @@
-import { AdminActionsMenu } from "@/components/admin/AdminActionsMenu"
+import { ActionsMenu } from "@/components/admin/ActionsMenu"
 
 export function NameTableItem({
   item,
@@ -10,8 +10,8 @@ export function NameTableItem({
       <td className="p-4">{item.name}</td>
 
       <td className="w-8 text-right pr-2">
-        <AdminActionsMenu
-          createType={"DEPARTMENT_EDIT"}
+        <ActionsMenu
+          editType={"DEPARTMENT_EDIT"}
           deleteType={"DEPARTMENT_DELETE"}
           item={{ id: item.id, name: `department ${item.name}` }}
         />

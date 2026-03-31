@@ -3,14 +3,14 @@ export type GlobalSortKey =
   | SkillSortKey
   | ProjectSortKey
   | CvsSortKey
-  | DepartmentSortKey
+  | OnlyNameSortKey
 
 export type GlobalHeader =
   | Header
   | SkillHeader
   | ProjectHeader
   | CvsHeader
-  | DepartmentHeader
+  | OnlyNameHeader
 
 export type SortKey =
   | "first_name"
