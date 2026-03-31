@@ -5,7 +5,15 @@ export const GET_USERS = gql`
     users {
       id
       email
+      department {
+        id
+        name
+      }
       department_name
+      position {
+        id
+        name
+      }
       position_name
       profile {
         created_at
@@ -48,4 +56,30 @@ export const GET_USER = gql`
       }
     }
   }
+`;
+
+export const UPDATE_PROFILE = gql`
+mutation UpdateProfile($profile: UpdateProfileInput!) {
+  updateProfile(profile: $profile) {
+    id
+    first_name
+    last_name
+  }
+}
+`;
+
+export const UPDATE_USER = gql`
+mutation UpdateUser($user: UpdateUserInput!) {
+  updateUser(user: $user) {
+    id
+    department {
+      id
+      name
+    }
+    position {
+      id
+      name
+    }
+  }
+}
 `;

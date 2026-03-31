@@ -1,9 +1,6 @@
 'use client'
 
-import {usePathname} from "next/navigation";
-
 import Link from "next/link";
-import {useUser} from "@/lib/hooks/useUser";
 import {useProfileNav} from "@/lib/hooks/useProfileNav";
 
 export default function ProfileNav(){
@@ -19,7 +16,7 @@ export default function ProfileNav(){
                 const active=isActive(tab.path);
                 return(
                     <Link key={tab.path} href={tab.path}
-                          className="relative pb-2 text-sm transition-colors duration-300"
+                          className="relative pb-2  transition-colors duration-300"
                           style={{
                               color: active
                                   ? "var(--color-primary)"
