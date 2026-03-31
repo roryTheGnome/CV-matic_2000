@@ -4,7 +4,6 @@ import { adminNavItems, navItems } from "@/constants/navLinks"
 import { useAuthStore } from "@/store/authStore"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import {navItems} from "@/constants/navLinks";
 import {useCurrentUser} from "@/lib/hooks/useCurrentUser";
 import {useUser} from "@/lib/hooks/useUser";
 
