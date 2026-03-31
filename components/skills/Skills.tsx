@@ -1,36 +1,32 @@
-import {Skill, skillsCategory} from "@/types/skills";
+import { SkillMastery } from "@/types/skills";
 import { SkillCategorySection } from "./SkillCategorySection";
 
 export type Props = {
-    skills: Skill[];
+    skills: SkillMastery[];
 };
 
 export const Skills = ({ skills }: Props) => {
-    const grouped = skillsCategory.map((category) => ({
-        ...category,
-        skills: skills.filter(
-            (s) => s.categoryId === category.id
-        ),
-    }));
 
-    const uncategorized = skills.filter((s) => !s.categoryId);
+    const grouped: Record<string, SkillMastery[]> = {};
+
+    skills.forEach((skill) => {
+        const key = skill.categoryId || "Other";
+
+        if (!grouped[key]) {
+            grouped[key] = [];
+        }
+        grouped[key].push(skill);
+    });
 
     return (
         <div className="space-y-8">
-            {grouped.map((category) => (
+            {Object.entries(grouped).map(([categoryId, skills]) => (
                 <SkillCategorySection
-                    key={category.id}
-                    title={category.name}
-                    skills={category.skills}
+                    key={categoryId}
+                    title={categoryId === "Other" ? "Other" : categoryId}
+                    skills={skills}
                 />
             ))}
-
-            {uncategorized.length > 0 && (
-                <SkillCategorySection
-                    title="Other"
-                    skills={uncategorized}
-                />
-            )}
         </div>
     );
 };

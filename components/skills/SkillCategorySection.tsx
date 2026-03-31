@@ -1,12 +1,12 @@
 import { SkillItem } from "./SkillItem";
-import {Skill} from "@/types/skills";
+import {SkillMastery} from "@/types/skills";
 
 export const SkillCategorySection = ({
                                          title,
                                          skills,
                                      }: {
     title: string;
-    skills: Skill[];
+    skills: SkillMastery[];
 }) => {
     if (!skills.length) return null;
 

@@ -1,7 +1,7 @@
-import {masteryToLevel, Skill} from "@/types/skills";
+import { masteryToLevel, SkillMastery } from "@/types/skills";
 import { SkillBar } from "./SkillBar";
 
-export const SkillItem = ({ skill }: { skill: Skill }) => {
+export const SkillItem = ({ skill }: { skill: SkillMastery }) => {
     const level = masteryToLevel[skill.mastery];
 
     return (
