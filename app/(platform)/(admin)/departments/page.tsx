@@ -22,8 +22,13 @@ export default function Departments() {
   if (error) return <div>Error loading users</div>
 
   return (
-    <div >
-      <TableSearch search={search} setSearch={setSearch} />
+    <div>
+      <TableSearch
+        search={search}
+        createButtonText="CREATE DEPARTMENT"
+        typeOfCreateModal={"DEPARTMENT_CREATE"}
+        setSearch={setSearch}
+      />
 
       <div className="overflow-x-auto rounded-lg ">
         <table className="min-w-full divide-y divide-gray-500 ">

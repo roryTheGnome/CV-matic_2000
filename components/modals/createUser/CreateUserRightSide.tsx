@@ -16,7 +16,6 @@ export function CreateUserRightSide({
         name="password"
         value={formData.password}
         onChange={handleChange}
-        required
       />
       <InputField
         inputId={`${formId}-lastName`}
@@ -25,7 +24,6 @@ export function CreateUserRightSide({
         name="lastName"
         value={formData.lastName}
         onChange={handleChange}
-        required
       />
 
       <PositionsSelect

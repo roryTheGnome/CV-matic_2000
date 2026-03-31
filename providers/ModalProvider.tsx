@@ -1,5 +1,6 @@
 "use client"
 
+import { CvModal } from "@/components/modals/createCV/CvModal"
 import { ProjectModal } from "@/components/modals/createProject/ProjectModal"
 import { UserModal } from "@/components/modals/createUser/UserModal"
 
@@ -20,6 +21,8 @@ export function ModalProvider() {
       {type === "USER_EDIT" && <UserModal />}
       {type === "PROJECT_CREATE" && <ProjectModal />}
       {type === "PROJECT_EDIT" && <ProjectModal />}
+      {type === "CV_CREATE" && <CvModal />}
+      {type === "CV_EDIT" && <CvModal />}
     </>
   )
 }
