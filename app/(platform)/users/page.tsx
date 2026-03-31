@@ -23,22 +23,22 @@ export default function Employees() {
                 className="mb-4 px-4 py-2 border border-gray-500 rounded-4xl w-full max-w-sm"
             />
 
-            <div className="overflow-x-auto rounded-lg ">
-                <table className="min-w-full divide-y divide-gray-500 ">
-                    <thead>
-                    <tr>
-                        {headers.map((header) => (
-                            <SortHeader
-                                key={header.key}
-                                label={header.label}
-                                sortKeyValue={header.key}
-                                currentSortKey={sortKey}
-                                sortDir={sortDir}
-                                onSort={handleSort}
-                            />
-                        ))}
-                    </tr>
-                    </thead>
+      <div className="overflow-x-auto rounded-lg ">
+        <table className="min-w-full divide-y divide-gray-500 ">
+          <thead>
+            <tr>
+              {headers.map(header => (
+                <SortHeader
+                  key={header.key}
+                  label={header.label}
+                  sortKeyValue={header.key}
+                  currentSortKey={sortKey}
+                  sortDir={sortDir}
+                  onSort={handleSort}
+                />
+              ))}
+            </tr>
+          </thead>
 
                     <EmployeesList
                         users={users}

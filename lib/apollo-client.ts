@@ -91,5 +91,18 @@ const errorLink = new ErrorLink(({ error, operation, forward }) => {
 
 export const client = new ApolloClient({
   link: errorLink.concat(authLink).concat(httpLink),
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    typePolicies: {
+      User: {
+        fields: {
+          profile: {
+            merge(existing, incoming) {
+              if (!existing) return incoming
+              return { ...existing, ...incoming }
+            },
+          },
+        },
+      },
+    },
+  }),
 })

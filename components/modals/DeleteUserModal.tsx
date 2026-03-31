@@ -1,30 +1,28 @@
-"use client"
-
 import { useDeleteUser } from "@/lib/hooks/useDeleteUser"
-import { useModalStore } from "@/store/modalStore"
 
 import { Button } from "../ui/Button"
 import { CancelButton } from "../ui/CancelButton"
 import { ModalLayout } from "./ModalLayout"
 
-export function DeleteUserModal() {
-  const { closeModal, data } = useModalStore()
+interface Props {
+  data: { id: string; name: string } | undefined
+  closeModal: () => void
+}
 
-  const userId = data?.id
-
-  const { handleDelete, loading } = useDeleteUser(userId, closeModal)
+export function DeleteModal({ closeModal, data }: Props) {
+  const { handleDelete, loading } = useDeleteUser(data?.id, closeModal)
 
   return (
     <ModalLayout title="Delete user" maxWidth="max-w-2xl">
       <div className="flex flex-col gap-6">
         <p className="text-gray-300 text-lg">
-          Are you sure you want to delete user {"User Name"}?
+          Are you sure you want to delete {data?.name}?
         </p>
 
         <div className="flex flex-col sm:flex-row justify-end gap-4">
           <CancelButton closeModal={closeModal} />
 
-          <Button onClick={handleDelete} disabled={loading || !userId}>
+          <Button onClick={handleDelete} disabled={loading || !data?.id}>
             {loading ? "DELETING..." : "CONFIRM"}
           </Button>
         </div>

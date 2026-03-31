@@ -20,7 +20,6 @@ export function AuthForm() {
         label="Email"
         name="email"
         type="email"
-        placeholder="Email"
         autoComplete="email"
       />
       <InputField
@@ -30,7 +29,6 @@ export function AuthForm() {
         label="Password"
         name="password"
         type="password"
-        placeholder="Password"
         autoComplete={
           pathname === PUBLIC_ROUTES.LOGIN ? "current-password" : "new-password"
         }

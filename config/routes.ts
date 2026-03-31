@@ -17,10 +17,9 @@ export const PRIVATE_ROUTES = {
 } as const
 
 export const ADMIN_ROUTES = {
-  HOME: "/admin",
-  PROJECTS: "/admin/projects",
-  DEPARTMENTS: "/admin/departments",
-  POSITIONS: "/admin/positions",
+  PROJECTS: "/projects",
+  DEPARTMENTS: "/departments",
+  POSITIONS: "/positions",
 } as const
 
 export const isAuthPage = (pathname: string) => {
@@ -29,5 +28,13 @@ export const isAuthPage = (pathname: string) => {
     PUBLIC_ROUTES.REGISTER,
     PUBLIC_ROUTES.FORGOT_PASSWORD,
     PUBLIC_ROUTES.RESET_PASSWORD,
+  ].some(route => pathname.startsWith(route))
+}
+
+export const isAdminPage = (pathname: string) => {
+  return [
+    ADMIN_ROUTES.PROJECTS,
+    ADMIN_ROUTES.DEPARTMENTS,
+    ADMIN_ROUTES.POSITIONS,
   ].some(route => pathname.startsWith(route))
 }

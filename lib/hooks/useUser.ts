@@ -1,9 +1,7 @@
-import {GetUserResponse, User} from "@/types/user";
-import {useQuery} from "@apollo/client/react";
-import {GET_USER} from "@/lib/queries/user";
-import {useParams} from "next/navigation";
-
-
+import { GET_USER } from "@/api/graphql/queries/user"
+import { GetUserResponse, User } from "@/types/user"
+import { useQuery } from "@apollo/client/react"
+import { useParams } from "next/navigation"
 
 export function useUser(userId?: string) {
     const params = useParams();
@@ -17,11 +15,11 @@ export function useUser(userId?: string) {
         skip: !idToUse,
     });
 
-    const user: User | undefined = data?.user
+  const user: User | undefined = data?.user
 
-    return {
-        user,
-        isLoading: loading,
-        error,
-    };
+  return {
+    user,
+    isLoading: loading,
+    error,
+  }
 }
