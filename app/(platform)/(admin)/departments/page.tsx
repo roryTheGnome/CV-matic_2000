@@ -22,7 +22,7 @@ export default function Departments() {
   if (error) return <div>Error loading users</div>
 
   return (
-    <div>
+    <div className="p-6">
       <TableSearch search={search} setSearch={setSearch} />
 
       <div className="overflow-x-auto rounded-lg ">

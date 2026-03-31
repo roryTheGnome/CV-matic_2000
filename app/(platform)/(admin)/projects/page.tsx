@@ -25,7 +25,7 @@ export default function Projects() {
   if (error) return <div>Error loading users</div>
 
   return (
-    <div>
+    <div className="p-6">
       <div className="flex justify-between items-center">
         <TableSearch search={search} setSearch={setSearch} />
 

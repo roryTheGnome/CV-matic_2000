@@ -13,6 +13,8 @@ type EmployeesListProps = {
   search: string
   sortKey: GlobalSortKey
   sortDir: "asc" | "desc"
+  currentUserId: number | undefined
+  isLoading: boolean
 }
 
 export default function EmployeesList({
@@ -20,6 +22,7 @@ export default function EmployeesList({
   search,
   sortKey,
   sortDir,
+    currentUserId,isLoading
 }: EmployeesListProps) {
   const { isAdmin } = useAuthStore()
 
