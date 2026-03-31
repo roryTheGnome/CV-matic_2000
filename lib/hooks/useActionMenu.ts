@@ -1,7 +1,11 @@
-import { useModalStore } from "@/store/modalStore"
+import { ModalData, ModalType, useModalStore } from "@/store/modalStore"
 import { useEffect, useRef, useState } from "react"
 
-export const useAdminActionMenu = (userId: string) => {
+export const useActionMenu = (
+  deleteType: ModalType,
+  editType: ModalType,
+  item: ModalData,
+) => {
   const [isOpen, setIsOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
 
@@ -22,12 +26,13 @@ export const useAdminActionMenu = (userId: string) => {
   }, [isOpen])
 
   const handleEdit = () => {
-    openModal("CREATE_USER", { id: userId })
+    openModal(editType, item)
+    console.log(editType, item)
     setIsOpen(false)
   }
 
   const handleDelete = () => {
-    openModal("DELETE_USER", { id: userId })
+    openModal(deleteType, item)
     setIsOpen(false)
   }
 

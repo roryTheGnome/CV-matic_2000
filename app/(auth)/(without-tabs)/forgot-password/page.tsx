@@ -26,7 +26,6 @@ export default function ForgotPassword() {
           label="Email"
           type="email"
           name="email"
-          placeholder="Email"
           autoComplete="email"
         />
         <span className="h-6 text-primary">
