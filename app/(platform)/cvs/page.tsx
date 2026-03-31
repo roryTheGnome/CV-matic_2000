@@ -1,6 +1,6 @@
 export default function CVs(){
     return(
-        <div className="p-6">
+        <div >
             <h1>CVs page</h1>
         </div>
     )
