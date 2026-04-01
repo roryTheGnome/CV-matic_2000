@@ -8,12 +8,16 @@ import {Skills} from "@/components/skills/Skills";
 import {Plus} from "lucide-react";
 import {useModalStore} from "@/store/modalStore";
 import {Button} from "@/components/ui/Button";
+import {useQuery} from "@apollo/client/react";
+import {GET_SKILLS} from "@/api/graphql/queries/skills";
+import {GetSkillsData} from "@/types/skills";
 
 
 export default function SkillsPage() {
     const { currentUserId } = useCurrentUser();
 
     const { openModal } = useModalStore()
+    const { data: skillsData } = useQuery<GetSkillsData>(GET_SKILLS);
 
 
     const { user, error } = useUser(
@@ -27,7 +31,10 @@ export default function SkillsPage() {
     return (
         <div className="p-6">
             <h1>Skills Page</h1>
-            <Skills skills={user.profile.skills} />
+            <Skills
+                skills={user.profile.skills}
+                allSkills={skillsData?.skills || []}
+            />
 
             <Button
                 Icon={Plus}

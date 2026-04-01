@@ -1,5 +1,5 @@
 import { User } from "@/types/user"
-import { ChevronRight } from "lucide-react"
+import {ChevronRight, EllipsisVertical} from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -7,6 +7,7 @@ import { useAuthStore } from "@/store/authStore"
 import { GlobalSortKey } from "@/types/table"
 import defaultProfile from "../public/default-profile.png"
 import { ActionsMenu } from "./admin/ActionsMenu"
+import LoadingPage from "@/app/(platform)/users/loading";
 
 type EmployeesListProps = {
   users: User[] | []
@@ -14,7 +15,6 @@ type EmployeesListProps = {
   sortKey: GlobalSortKey
   sortDir: "asc" | "desc"
   currentUserId: number | undefined
-  isLoading: boolean
 }
 
 export default function EmployeesList({
@@ -22,7 +22,7 @@ export default function EmployeesList({
   search,
   sortKey,
   sortDir,
-    currentUserId,isLoading
+    currentUserId
 }: EmployeesListProps) {
   const { isAdmin } = useAuthStore()
 
@@ -63,6 +63,7 @@ export default function EmployeesList({
       if (valX > valY) return sortDir === "asc" ? 1 : -1
       return 0
     })
+
   return (
     <tbody>
       {checkedUsers.map(user => (
@@ -100,8 +101,8 @@ export default function EmployeesList({
               <Link
                 href={`/users/${user.id}`}
                 className="text-text-secondary hover:text-primary"
-              >
-                <ChevronRight size={32} />
+              >{currentUserId==Number(user.id) ?(
+                  <EllipsisVertical size={30}/> ):(<ChevronRight size={32}/>)}
               </Link>
             )}
           </td>
