@@ -2,10 +2,10 @@ import {User} from "@/types/user";
 import {useState} from "react";
 import {useMutation, useQuery} from "@apollo/client/react";
 import {Department, GetDepartmentsResponse} from "@/types/department";
-import {GET_DEPARTMENTS} from "@/lib/queries/department";
+import {GET_DEPARTMENTS} from "@/api/graphql/queries/departments";
 import {GetPositionsResponse, Position} from "@/types/position";
-import {GET_POSITIONS} from "@/lib/queries/position";
-import {UPDATE_PROFILE, UPDATE_USER} from "@/lib/queries/user";
+import {GET_POSITIONS} from "@/api/graphql/queries/positions";
+import {UPDATE_PROFILE, UPDATE_USER} from "@/api/graphql/queries/user";
 
 type ProfileProp = {
     user: User

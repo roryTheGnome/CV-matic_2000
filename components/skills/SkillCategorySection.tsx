@@ -1,24 +1,37 @@
 import { SkillItem } from "./SkillItem";
-import {Skill} from "@/types/skills";
+import {SkillMastery} from "@/types/skills";
 
 export const SkillCategorySection = ({
                                          title,
                                          skills,
+                                         deleteMode,
+                                         selected,
+                                         onSelect,
                                      }: {
     title: string;
-    skills: Skill[];
+    skills: SkillMastery[];
+    deleteMode: boolean;
+    selected: string[];
+    onSelect: (name: string) => void;
 }) => {
+
     if (!skills.length) return null;
 
     return (
         <div className="space-y-4">
-            <h3 className="text-sm font-semibold text-text-primary">
+            <h3 className="text-sm font-bold text-text-primary">
                 {title}
             </h3>
 
             <div className="flex flex-wrap gap-x-10 gap-y-4">
                 {skills.map((skill) => (
-                    <SkillItem key={skill.name} skill={skill} />
+                    <SkillItem
+                        key={skill.name}
+                        skill={skill}
+                        deleteMode={deleteMode}
+                        isSelected={selected.includes(skill.name)}
+                        onClick={() => onSelect(skill.name)}
+                    />
                 ))}
             </div>
         </div>

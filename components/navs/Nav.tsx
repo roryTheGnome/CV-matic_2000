@@ -48,7 +48,7 @@ export default function Nav() {
 
                 <div className="flex items-center gap-3 px-2">
                     <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white">
-                        {user?.profile.first_name.at(0) ?? "U"}
+                        {user?.profile?.first_name?.at(0) ?? "U"}
                     </div>
                     <span>{user?.profile.first_name} {user?.profile.last_name}</span>
                 </div>

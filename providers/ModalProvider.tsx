@@ -5,6 +5,8 @@ import { UserModal } from "@/components/modals/createUser/UserModal"
 
 import { DeleteModal } from "@/components/modals/DeleteUserModal"
 import { useModalStore } from "@/store/modalStore"
+import {SkillModal} from "@/components/modals/addSkill/SkillModal";
+import {LanguageModal} from "@/components/modals/addLanguage/LanguageModal";
 
 export function ModalProvider() {
   const { type, data, isOpen, closeModal } = useModalStore()
@@ -20,6 +22,8 @@ export function ModalProvider() {
       {type === "USER_EDIT" && <UserModal />}
       {type === "PROJECT_CREATE" && <ProjectModal />}
       {type === "PROJECT_EDIT" && <ProjectModal />}
+      {type === "PROFILE_SKILL_ADD" && <SkillModal  />}
+      {type === "PROFILE_LANGUAGE_ADD" && <LanguageModal  />}
     </>
   )
 }
