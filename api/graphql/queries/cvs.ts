@@ -1,0 +1,47 @@
+import { gql } from "@apollo/client"
+
+export const GET_CVS = gql`
+  query GetCvs {
+    cvs {
+      id
+      name
+      education
+      description
+      created_at
+    }
+  }
+`
+export const GET_CV_BY_ID = gql`
+  query GetCvById($cvId: ID!) {
+    cv(cvId: $cvId) {
+      id
+      created_at
+      name
+      education
+      description
+
+      user {
+        id
+        email
+        profile {
+          first_name
+          last_name
+        }
+      }
+
+      projects {
+        id
+        name
+      }
+
+      skills {
+        name
+      }
+
+      languages {
+        name
+        proficiency
+      }
+    }
+  }
+`
