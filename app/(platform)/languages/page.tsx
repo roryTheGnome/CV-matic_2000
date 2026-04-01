@@ -5,35 +5,49 @@ import {useCurrentUser} from "@/lib/hooks/useCurrentUser";
 import {useUser} from "@/lib/hooks/useUser";
 import NotFoundPage from "@/app/(platform)/users/not-found";
 import LoadingPage from "@/app/(platform)/users/[id]/loading";
-import {useModalStore} from "@/store/modalStore";
-import {Plus} from "lucide-react";
-import {Button} from "@/components/ui/Button";
+import {useMutation} from "@apollo/client/react";
+import {DELETE_PROFILE_LANGUAGE} from "@/api/graphql/mutations/profile";
+import {GET_USER} from "@/api/graphql/queries/user";
 
-export default function Language(){
+export default function Language() {
     const { currentUserId } = useCurrentUser();
-
-    const { openModal } = useModalStore()
 
     const { user, error } = useUser(
         currentUserId ? String(currentUserId) : undefined
     );
 
+    const [deleteLanguages]=useMutation(DELETE_PROFILE_LANGUAGE,{
+        refetchQueries:[
+            {
+                query:GET_USER,
+                variables:{userId:currentUserId}
+            }
+        ]
+    })
+
     if (error) return <NotFoundPage />;
     if (!user) return <LoadingPage />;
+
+    const handleDelete=async (names: string[])=>{
+        await deleteLanguages({
+            variables:{
+                language:{
+                    userId:currentUserId,
+                    name:names
+                }
+            }
+        });
+    }
 
     return(
         <div className="p-6">
             <h1>Languages Page</h1>
-            <LanguageList languages={user.profile.languages}/>
+            <LanguageList
+                languages={user.profile.languages}
+                onDelete={handleDelete}
+                owner={true}
+            />
 
-            <Button
-                Icon={Plus}
-                isTextButton
-                className="text-red-400"
-                onClick={() => openModal("PROFILE_LANGUAGE_ADD")}
-            >
-                ADD LANGUAGE
-            </Button>
         </div>
     )
 }
