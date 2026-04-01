@@ -1,4 +1,4 @@
-import { Language } from "@/types/lang"
+import { LanguageProficiency } from "@/types/lang"
 import { SkillMastery } from "@/types/skills"
 import { LoginVariables } from "./auth"
 import { Cvs } from "./cvs"
@@ -27,7 +27,7 @@ export type UserProfile = {
   last_name: string
   avatar?: string | null
   skills: SkillMastery[]
-  languages: Language[]
+  languages: LanguageProficiency[]
 }
 
 export type Position = {

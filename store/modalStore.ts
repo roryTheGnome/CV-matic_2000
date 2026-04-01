@@ -5,6 +5,7 @@ export type ModalType =
   | "USER_DELETE"
   | "USER_EDIT"
   | "PROFILE_SKILL_ADD"
+  | "PROFILE_LANGUAGE_ADD"
   | "PROJECT_CREATE"
   | "PROJECT_DELETE"
   | "PROJECT_EDIT"

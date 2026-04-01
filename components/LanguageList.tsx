@@ -1,6 +1,6 @@
-import { Language } from "@/types/lang";
+import {LanguageProficiency} from "@/types/lang";
 
-const getTextColor = (level: Language["proficiency"]) => {
+const getTextColor = (level: LanguageProficiency["proficiency"]) => {
     switch (level) {
         case "A1":
             return "var(--color-level-novice)";
@@ -23,7 +23,7 @@ const getTextColor = (level: Language["proficiency"]) => {
 
 
 type Props = {
-    languages: Language[];
+    languages: LanguageProficiency[];
 };
 
 export const LanguageList = ({ languages }: Props) => {
@@ -31,7 +31,7 @@ export const LanguageList = ({ languages }: Props) => {
         <div className="flex flex-wrap gap-30 pl-30 pr-30">
             {languages.map((lang) => (
                 <div
-                    key={lang.id}
+                    key={lang.name}
                     className="flex items-center gap-5  p-4 rounded-xl hover:bg-[#1a1a1a]"
                 >
                     <span className="text-white font-medium ">

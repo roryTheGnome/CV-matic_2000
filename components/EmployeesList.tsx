@@ -7,7 +7,6 @@ import { useAuthStore } from "@/store/authStore"
 import { GlobalSortKey } from "@/types/table"
 import defaultProfile from "../public/default-profile.png"
 import { ActionsMenu } from "./admin/ActionsMenu"
-import LoadingPage from "@/app/(platform)/users/loading";
 
 type EmployeesListProps = {
   users: User[] | []
