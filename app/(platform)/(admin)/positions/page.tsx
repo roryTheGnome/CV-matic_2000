@@ -26,7 +26,7 @@ export default function Positions() {
       <TableSearch
         search={search}
         createButtonText="CREATE POSITION"
-        typeOfCreateModal={null}
+        typeOfCreateModal={"POSITION_CREATE"}
         setSearch={setSearch}
       />
 
@@ -47,7 +47,12 @@ export default function Positions() {
             getSearchText={position => `${position.name}`}
             getSortValue={position => getSortByName(position, sortKey)}
             renderRow={position => (
-              <NameTableItem key={position.id} item={position} />
+              <NameTableItem
+                key={position.id}
+                item={position}
+                editType={"POSITION_EDIT"}
+                deleteType={"POSITION_DELETE"}
+              />
             )}
           />
         </table>

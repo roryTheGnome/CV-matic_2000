@@ -8,17 +8,6 @@ export const GET_CVS = gql`
       education
       description
       created_at
-      user {
-        id
-        email
-      }
-      skills {
-        name
-      }
-      languages {
-        name
-        proficiency
-      }
     }
   }
 `

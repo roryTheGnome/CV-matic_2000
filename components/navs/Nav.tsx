@@ -1,8 +1,8 @@
 "use client"
 
 import { adminNavItems, navItems } from "@/constants/navLinks"
-import { useCurrentUser } from "@/lib/hooks/useCurrentUser"
-import { useUser } from "@/lib/hooks/useUser"
+import { useCurrentUser } from "@/lib/hooks/userHooks/useCurrentUser"
+import { useUser } from "@/lib/hooks/userHooks/useUser"
 import { useAuthStore } from "@/store/authStore"
 import Link from "next/link"
 import { usePathname } from "next/navigation"

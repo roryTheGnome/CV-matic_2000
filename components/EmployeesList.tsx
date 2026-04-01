@@ -22,7 +22,8 @@ export default function EmployeesList({
   search,
   sortKey,
   sortDir,
-    currentUserId,isLoading
+  currentUserId,
+  isLoading,
 }: EmployeesListProps) {
   const { isAdmin } = useAuthStore()
 
@@ -93,7 +94,7 @@ export default function EmployeesList({
                 deleteType={"USER_DELETE"}
                 item={{
                   id: user.id,
-                  name: `user ${user.profile.first_name} ${user.profile.last_name}`,
+                  name: `${user.profile.first_name} ${user.profile.last_name}`,
                 }}
               />
             ) : (

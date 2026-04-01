@@ -4,7 +4,7 @@ import { Select } from "@/components/ui/select/Select"
 
 import { CreateUserModalFormState } from "@/types/user"
 import { ChangeEvent } from "react"
-import { DepartmentsSelect } from "./DepartmentsSelect"
+import { DepartmentsSelect } from "../DepartmentsSelect"
 
 export interface CreateUserProps {
   formId: string

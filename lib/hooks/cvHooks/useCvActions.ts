@@ -16,6 +16,7 @@ import {
 import { useMutation } from "@apollo/client/react"
 import { SubmitEvent, useId, useState } from "react"
 import toast from "react-hot-toast"
+import { useCurrentUser } from "../userHooks/useCurrentUser"
 
 export function useCvActions(
   initialData?: CreateCvModalFormState,
@@ -23,6 +24,7 @@ export function useCvActions(
 ) {
   const formId = useId()
   const { type, closeModal } = useModalStore()
+  const { currentUserId } = useCurrentUser()
 
   const [formData, setFormData] = useState<CreateCvModalFormState>(
     initialData || {
@@ -121,8 +123,7 @@ export function useCvActions(
             education:
               formData.education.trim() === "" ? null : formData.education,
             description: formData.description,
-            userId: formData.user?.id === "" ? null : formData.user?.id,
-            user: formData.user,
+            userId: currentUserId ? `${currentUserId}` : null,
           },
         },
       })

@@ -1,10 +1,10 @@
 "use client";
 
-import { useCurrentUser } from "@/lib/hooks/useCurrentUser";
-import { useUser } from "@/lib/hooks/useUser";
-import NotFoundPage from "@/app/(platform)/users/not-found";
-import LoadingPage from "@/app/(platform)/users/[id]/loading";
-import {Skills} from "@/components/skills/Skills";
+import LoadingPage from "@/app/(platform)/users/[id]/loading"
+import NotFoundPage from "@/app/(platform)/users/not-found"
+import { Skills } from "@/components/skills/Skills"
+import { useCurrentUser } from "@/lib/hooks/userHooks/useCurrentUser"
+import { useUser } from "@/lib/hooks/userHooks/useUser"
 
 export default function SkillsPage() {
     const { currentUserId } = useCurrentUser();

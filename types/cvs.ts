@@ -46,7 +46,6 @@ export interface CreateCvVariables {
     education?: string | null
     description: string
     userId?: string | null
-    user: User | null
   }
 }
 
@@ -76,16 +75,17 @@ export interface GetCvByIdVariables {
 }
 
 export interface GetCvByIdData {
-  cv: {
-    id: string
-    created_at: string
-    name: string
-    education: string | null
-    description: string
+  cv: Cvs
+}
 
-    user: User | null
-    projects: Project[] | null
-    skills: Skill[]
-    languages: Language[]
+export interface DeleteCvVariables {
+  cv: {
+    cvId: string
+  }
+}
+
+export interface DeleteCvResponse {
+  deleteCv: {
+    affected: number
   }
 }

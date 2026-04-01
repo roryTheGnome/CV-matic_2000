@@ -15,7 +15,7 @@ export function CvTableItem({ cv }: { cv: Cvs }) {
           deleteType={"CV_DELETE"}
           item={{
             id: cv.id,
-            name: `CV ${cv.name}`,
+            name: cv.name,
           }}
         />
       </td>

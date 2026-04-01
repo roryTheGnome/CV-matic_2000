@@ -47,7 +47,12 @@ export default function Departments() {
             getSearchText={department => `${department.name}`}
             getSortValue={department => getSortByName(department, sortKey)}
             renderRow={department => (
-              <NameTableItem key={department.id} item={department} />
+              <NameTableItem
+                key={department.id}
+                item={department}
+                editType={"DEPARTMENT_EDIT"}
+                deleteType={"DEPARTMENT_DELETE"}
+              />
             )}
           />
         </table>

@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/Button"
 import { CancelButton } from "@/components/ui/CancelButton"
-import { useUserActions } from "@/lib/hooks/useUserActions"
+import { useUserActions } from "@/lib/hooks/userHooks/useUserActions"
 import { CreateUserModalFormState } from "@/types/user"
 import { CreateUserLeftSide } from "./CreateUserLeftSide"
 import { CreateUserRightSide } from "./CreateUserRightSide"

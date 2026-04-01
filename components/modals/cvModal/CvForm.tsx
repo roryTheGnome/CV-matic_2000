@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/Button"
 import { CancelButton } from "@/components/ui/CancelButton"
 import { InputField } from "@/components/ui/inputField/InputField"
 import { TextareaField } from "@/components/ui/TextareaField"
-import { useCvActions } from "@/lib/hooks/useCvActions"
+import { useCvActions } from "@/lib/hooks/cvHooks/useCvActions"
 import { CreateCvModalFormState } from "@/types/cvs"
 
 export function CvForm({

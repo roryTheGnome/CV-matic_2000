@@ -1,6 +1,6 @@
 import { InputField } from "@/components/ui/inputField/InputField"
+import { PositionsSelect } from "../PositionsSelect"
 import { CreateUserProps } from "./CreateUserLeftSide"
-import { PositionsSelect } from "./PositionsSelect"
 
 export function CreateUserRightSide({
   formId,

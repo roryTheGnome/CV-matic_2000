@@ -43,7 +43,7 @@ export function CvModal() {
         name: editedItem.cv.name || "",
         description: editedItem.cv.description || "",
         education: editedItem.cv.education || "",
-        user: editedItem?.cv.user ? editedItem?.cv.user : null,
+        user: editedItem?.cv.user || null,
       }
     : undefined
 

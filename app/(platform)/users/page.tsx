@@ -4,8 +4,8 @@ import EmployeesList from "@/components/EmployeesList"
 import SortHeader from "@/components/SortHeader"
 import { TableSearch } from "@/components/ui/TableSearch"
 import { headers } from "@/constants/tableHeaders"
-import { useCurrentUser } from "@/lib/hooks/useCurrentUser"
-import { useUsers } from "@/lib/hooks/useUsers"
+import { useCurrentUser } from "@/lib/hooks/userHooks/useCurrentUser"
+import { useUsers } from "@/lib/hooks/userHooks/useUsers"
 
 export default function Employees() {
   const {

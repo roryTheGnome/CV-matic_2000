@@ -16,7 +16,7 @@ export function ProjectTableItem({ project }: { project: Project }) {
           deleteType={"PROJECT_DELETE"}
           item={{
             id: project.id,
-            name: `project ${project.name}`,
+            name: project.name,
           }}
         />
       </td>
