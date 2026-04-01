@@ -7,11 +7,16 @@ import { useModalStore } from "@/store/modalStore";
 import { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client/react";
 
-import {ADD_PROFILE_SKILL, GET_SKILLS} from "@/api/graphql/queries/skills";
+import { GET_SKILLS} from "@/api/graphql/queries/skills";
+import {ADD_PROFILE_SKILL} from "@/api/graphql/mutations/profile";
 
 import { GetSkillsData, Mastery } from "@/types/skills";
 
-export function SkillForm() {
+type SkillFormProps={
+    userSkills: { name: string }[];
+}
+
+export function SkillForm({userSkills}:SkillFormProps) {
     const { currentUserId } = useCurrentUser();
     const { closeModal } = useModalStore();
 
@@ -64,7 +69,14 @@ export function SkillForm() {
             >
                 <option value="">Select skill</option>
 
-                {data?.skills.map((skill) => (
+                {data?.skills
+                    .filter(
+                        (skill)=>
+                            !userSkills.some(
+                                (userSkill)=>userSkill.name=== skill.name
+                            )
+                    )
+                    .map((skill) => (
                     <option key={skill.id} value={skill.name}>
                         {skill.name}
                     </option>
