@@ -10,6 +10,7 @@ import { useMutation, useQuery } from "@apollo/client/react";
 import { GetLanguagesData, Proficiency } from "@/types/lang";
 import {GET_LANGUAGES} from "@/api/graphql/queries/language";
 import {PROFILE_LANGUAGE_ADD} from "@/api/graphql/mutations/profile";
+import {GET_USER} from "@/api/graphql/queries/user";
 
 type LanguageFormProps={
     userLanguages: { name: string }[];
@@ -21,7 +22,14 @@ export function LanguageForm({userLanguages}:LanguageFormProps) {
 
     const { data, loading, error } = useQuery<GetLanguagesData>(GET_LANGUAGES);
 
-    const [addLanguage, { loading: saving }] = useMutation(PROFILE_LANGUAGE_ADD);
+    const [addLanguage, { loading: saving }] = useMutation(PROFILE_LANGUAGE_ADD ,{
+        refetchQueries: [
+            {
+                query: GET_USER,
+                variables: { userId: currentUserId },
+            },
+        ],
+    });
 
     const [selectedLanguage, setSelectedLanguage] = useState<string>("");
     const [proficiency, setProficiency] = useState<Proficiency>("A1");

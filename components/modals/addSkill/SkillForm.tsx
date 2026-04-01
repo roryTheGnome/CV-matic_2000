@@ -11,6 +11,7 @@ import { GET_SKILLS} from "@/api/graphql/queries/skills";
 import {ADD_PROFILE_SKILL} from "@/api/graphql/mutations/profile";
 
 import { GetSkillsData, Mastery } from "@/types/skills";
+import {GET_USER} from "@/api/graphql/queries/user";
 
 type SkillFormProps={
     userSkills: { name: string }[];
@@ -22,7 +23,14 @@ export function SkillForm({userSkills}:SkillFormProps) {
 
     const { data, loading, error } = useQuery<GetSkillsData>(GET_SKILLS);
 
-    const [addSkill, { loading: saving }] = useMutation(ADD_PROFILE_SKILL);
+    const [addSkill, { loading: saving }] = useMutation(ADD_PROFILE_SKILL,{
+        refetchQueries: [
+            {
+                query: GET_USER,
+                variables: { userId: currentUserId },
+            },
+        ],
+    });
 
     const [selectedSkill, setSelectedSkill] = useState<{
         name: string;
