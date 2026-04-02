@@ -1,18 +1,18 @@
-import { useDeleteProject } from "@/lib/hooks/projectHooks/useDeleteProject"
+import { useDeleteLanguage } from "@/lib/hooks/languageHooks/useDeleteLanguage"
 import { DeleteModal } from "../DeleteModal"
 
-export function DeleteProjectModal() {
+export function DeleteLanguageModal() {
   const {
     modalData: data,
     loading,
     closeModal,
     handleDelete,
-  } = useDeleteProject()
+  } = useDeleteLanguage()
 
   return (
     <DeleteModal
-      deleteText={`project ${data?.name}`}
-      headingText="project"
+      deleteText={`language ${data?.name}`}
+      headingText="language"
       data={data}
       loading={loading}
       closeModal={closeModal}

@@ -35,3 +35,63 @@ export const skillsCategory = [
   { id: "5", name: "DevOps" },
   { id: "6", name: "Source control systems" },
 ]
+
+export interface SkillCategory {
+  id: string
+  name: string
+  order: number
+  parent: { id: string; name: string }
+  children: { id: string; name: string; order: number }[]
+}
+
+export interface GetSkillCategoriesData {
+  skillCategories: SkillCategory[]
+}
+
+export interface SkillItem {
+  id: string
+  created_at?: string
+  name: string
+  category_name: string
+  category: {
+    id: string
+  }
+  category_parent_name: string
+}
+
+export interface GetSkillsData {
+  skills: SkillItem[]
+}
+
+export interface SkillModalFormState {
+  name: string
+  categoryId: string
+}
+
+export interface CreateSkillVariables {
+  skill: SkillModalFormState
+}
+
+export interface CreateSkillData {
+  createSkill: SkillItem
+}
+
+export interface UpdateSkillVariables {
+  skill: SkillModalFormState & { skillId: string }
+}
+
+export type UpdateSkillData = {
+  updateSkill: SkillItem
+}
+
+export interface DeleteSkillVariables {
+  skill: {
+    skillId: string
+  }
+}
+
+export interface DeleteSkillResponse {
+  deleteSkill: {
+    affected: number
+  }
+}

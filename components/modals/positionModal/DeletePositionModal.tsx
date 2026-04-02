@@ -12,6 +12,7 @@ export function DeletePositionModal() {
   return (
     <DeleteModal
       deleteText={`position ${data?.name}`}
+      headingText="position"
       data={data}
       loading={loading}
       closeModal={closeModal}

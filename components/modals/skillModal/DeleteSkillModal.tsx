@@ -1,18 +1,18 @@
-import { useDeleteProject } from "@/lib/hooks/projectHooks/useDeleteProject"
+import { useDeleteSkill } from "@/lib/hooks/skillHooks/useDeleteSkill"
 import { DeleteModal } from "../DeleteModal"
 
-export function DeleteProjectModal() {
+export function DeleteSkillModal() {
   const {
     modalData: data,
     loading,
     closeModal,
     handleDelete,
-  } = useDeleteProject()
+  } = useDeleteSkill()
 
   return (
     <DeleteModal
-      deleteText={`project ${data?.name}`}
-      headingText="project"
+      deleteText={`skill ${data?.name}`}
+      headingText="skill"
       data={data}
       loading={loading}
       closeModal={closeModal}

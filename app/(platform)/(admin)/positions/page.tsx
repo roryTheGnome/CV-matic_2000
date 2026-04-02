@@ -5,7 +5,7 @@ import { onlyNameHeaders } from "@/constants/tableHeaders"
 import { useQuery } from "@apollo/client/react"
 
 import { GET_POSITIONS } from "@/api/graphql/queries/positions"
-import { NameTableItem } from "@/components/ui/table/DepartmentTableItem"
+import { NameTableItem } from "@/components/ui/table/NameTableItem"
 import TableBody from "@/components/ui/table/TableBody"
 import { TableSearch } from "@/components/ui/TableSearch"
 import { usePageWithTable } from "@/lib/hooks/usePageWithTable"

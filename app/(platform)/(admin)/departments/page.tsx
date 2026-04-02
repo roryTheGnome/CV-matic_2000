@@ -5,7 +5,7 @@ import { onlyNameHeaders } from "@/constants/tableHeaders"
 import { useQuery } from "@apollo/client/react"
 
 import { GET_DEPARTMENTS } from "@/api/graphql/queries/departments"
-import { NameTableItem } from "@/components/ui/table/DepartmentTableItem"
+import { NameTableItem } from "@/components/ui/table/NameTableItem"
 import TableBody from "@/components/ui/table/TableBody"
 import { TableSearch } from "@/components/ui/TableSearch"
 import { usePageWithTable } from "@/lib/hooks/usePageWithTable"

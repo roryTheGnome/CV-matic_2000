@@ -1,6 +1,7 @@
 import {
   CvsHeader,
   Header,
+  LanguageHeader,
   OnlyNameHeader,
   ProjectHeader,
   SkillHeader,
@@ -18,6 +19,12 @@ export const skillsHeaders: SkillHeader[] = [
   { label: "Name", key: "skill_name" },
   { label: "Type", key: "skill_type" },
   { label: "Category", key: "skill_category" },
+]
+
+export const languageHeaders: LanguageHeader[] = [
+  { label: "Name", key: "language_name" },
+  { label: "Native Name", key: "language_native_name" },
+  { label: "ISO2", key: "language_iso2" },
 ]
 
 export const projectsHeaders: ProjectHeader[] = [
