@@ -46,7 +46,6 @@ export default function SkillsPage() {
 
     return (
         <div className="p-6">
-            <h1>Skills Page</h1>
             <Skills
                 skills={user.profile.skills}
                 allSkills={skillsData?.skills || []}
