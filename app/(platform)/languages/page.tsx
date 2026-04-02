@@ -4,7 +4,6 @@ import { DELETE_PROFILE_LANGUAGE } from "@/api/graphql/mutations/profile"
 import { GET_LANGUAGES } from "@/api/graphql/queries/languages"
 import { GET_USER } from "@/api/graphql/queries/user"
 import LoadingPage from "@/app/(platform)/users/[id]/loading"
-import NotFoundPage from "@/app/(platform)/users/not-found"
 import { LanguageList } from "@/components/LanguageList"
 import { LanguageTableItem } from "@/components/ui/table/LanguageTableItem"
 
@@ -21,6 +20,7 @@ import { GetLanguagesData, LanguageItem } from "@/types/languages"
 import { getSortLanguageValue } from "@/utils/getSortLanguageValue"
 
 import { useMutation, useQuery } from "@apollo/client/react"
+import NotFoundPage from "@/app/(platform)/not-found";
 
 export default function Language() {
   const { currentUserId } = useCurrentUser()
