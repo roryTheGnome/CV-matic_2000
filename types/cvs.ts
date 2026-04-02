@@ -32,3 +32,60 @@ export interface CvProject {
 export interface GetCvsData {
   cvs: Cvs[]
 }
+
+export interface CreateCvModalFormState {
+  name: string
+  education: string
+  description: string
+  user: User | null
+}
+
+export interface CreateCvVariables {
+  cv: {
+    name: string
+    education?: string | null
+    description: string
+    userId?: string | null
+  }
+}
+
+export interface UpdateCvVariables {
+  cv: {
+    cvId: string
+    name: string
+    education?: string | null
+    description: string
+  }
+}
+
+export interface CreateCvData {
+  createCv: Cvs
+}
+
+export interface UpdateCvData {
+  updateCv: Cvs
+}
+
+export interface GetCvsData {
+  cvs: Cvs[]
+}
+
+export interface GetCvByIdVariables {
+  cvId: string
+}
+
+export interface GetCvByIdData {
+  cv: Cvs
+}
+
+export interface DeleteCvVariables {
+  cv: {
+    cvId: string
+  }
+}
+
+export interface DeleteCvResponse {
+  deleteCv: {
+    affected: number
+  }
+}

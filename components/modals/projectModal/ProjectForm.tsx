@@ -4,7 +4,7 @@ import { DatePickerField } from "@/components/ui/DatePickerField"
 import { EnvironmentSelect } from "@/components/ui/EnvironmentSelect"
 import { InputField } from "@/components/ui/inputField/InputField"
 import { TextareaField } from "@/components/ui/TextareaField"
-import { useProjectActions } from "@/lib/hooks/useProjectActions"
+import { useProjectActions } from "@/lib/hooks/projectHooks/useProjectActions"
 import { CreateProjectModalFormState } from "@/types/project"
 
 export function ProjectForm({

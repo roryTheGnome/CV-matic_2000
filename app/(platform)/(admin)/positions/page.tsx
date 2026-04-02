@@ -5,7 +5,7 @@ import { onlyNameHeaders } from "@/constants/tableHeaders"
 import { useQuery } from "@apollo/client/react"
 
 import { GET_POSITIONS } from "@/api/graphql/queries/positions"
-import { NameTableItem } from "@/components/ui/table/DepartmentTableItem"
+import { NameTableItem } from "@/components/ui/table/NameTableItem"
 import TableBody from "@/components/ui/table/TableBody"
 import { TableSearch } from "@/components/ui/TableSearch"
 import { usePageWithTable } from "@/lib/hooks/usePageWithTable"
@@ -22,8 +22,13 @@ export default function Positions() {
   if (error) return <div>Error loading users</div>
 
   return (
-    <div >
-      <TableSearch search={search} setSearch={setSearch} />
+    <div>
+      <TableSearch
+        search={search}
+        createButtonText="CREATE POSITION"
+        typeOfCreateModal={"POSITION_CREATE"}
+        setSearch={setSearch}
+      />
 
       <div className="overflow-x-auto rounded-lg ">
         <table className="min-w-full divide-y divide-gray-500 ">
@@ -42,7 +47,12 @@ export default function Positions() {
             getSearchText={position => `${position.name}`}
             getSortValue={position => getSortByName(position, sortKey)}
             renderRow={position => (
-              <NameTableItem key={position.id} item={position} />
+              <NameTableItem
+                key={position.id}
+                item={position}
+                editType={"POSITION_EDIT"}
+                deleteType={"POSITION_DELETE"}
+              />
             )}
           />
         </table>

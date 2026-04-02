@@ -17,7 +17,6 @@ export async function proxy(request: NextRequest) {
   const responseObj = NextResponse.next()
 
   const { pathname } = request.nextUrl
-  const isAuth = isAuthPage(pathname)
 
   if (!accessToken && refreshToken) {
     const response = await refreshTokens()
@@ -33,21 +32,17 @@ export async function proxy(request: NextRequest) {
     }
   }
 
-  if (!refreshToken && !isAuth) {
+  if (!refreshToken && !isAuthPage(pathname)) {
     return NextResponse.redirect(new URL(PUBLIC_ROUTES.LOGIN, request.url))
   }
 
-  if (accessToken && refreshToken && isAuth) {
+  if (accessToken && refreshToken && isAuthPage(pathname)) {
     return NextResponse.redirect(new URL(PRIVATE_ROUTES.HOME, request.url))
   }
 
-  if (isAdminPage(pathname)) {
-    if (accessToken) {
-      const adminCheck = await protectAdmin(request, accessToken)
-      if (adminCheck) return adminCheck
-    } else {
-      return NextResponse.redirect(new URL(PRIVATE_ROUTES.HOME, request.url))
-    }
+  if (accessToken && isAdminPage(pathname)) {
+    const adminCheck = await protectAdmin(request, accessToken)
+    if (adminCheck) return adminCheck
   }
 
   return responseObj
