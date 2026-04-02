@@ -35,7 +35,7 @@ export function Select({
         name={name}
         value={value}
         onChange={handleChange}
-        className="w-full bg-transparent border border-input-border p-3 text-text-primary appearance-none focus:outline-none focus:border-gray-500 transition-colors pr-10"
+        className="w-full bg-background border border-input-border p-3 text-text-primary appearance-none focus:outline-none focus:border-gray-500 transition-colors pr-10"
         required={isRequired}
         {...props}
       >

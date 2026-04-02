@@ -6,24 +6,24 @@ import { CancelButton } from "@/components/ui/CancelButton";
 import { useModalStore } from "@/store/modalStore";
 import { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client/react";
+import { GET_SKILLS } from "@/api/graphql/queries/skills";
+import { ADD_PROFILE_SKILL } from "@/api/graphql/mutations/profile";
+import { GET_USER } from "@/api/graphql/queries/user";
+import { GetSkillsData, Mastery, Skill } from "@/types/skills";
+import {Select} from "@/components/ui/select/Select";
 
-import { GET_SKILLS} from "@/api/graphql/queries/skills";
-import {ADD_PROFILE_SKILL} from "@/api/graphql/mutations/profile";
 
-import { GetSkillsData, Mastery } from "@/types/skills";
-import {GET_USER} from "@/api/graphql/queries/user";
-
-type SkillFormProps={
+type SkillFormProps = {
     userSkills: { name: string }[];
-}
+};
 
-export function SkillForm({userSkills}:SkillFormProps) {
+export function SkillForm({ userSkills }: SkillFormProps) {
     const { currentUserId } = useCurrentUser();
     const { closeModal } = useModalStore();
 
     const { data, loading, error } = useQuery<GetSkillsData>(GET_SKILLS);
 
-    const [addSkill, { loading: saving }] = useMutation(ADD_PROFILE_SKILL,{
+    const [addSkill, { loading: saving }] = useMutation(ADD_PROFILE_SKILL, {
         refetchQueries: [
             {
                 query: GET_USER,
@@ -32,10 +32,7 @@ export function SkillForm({userSkills}:SkillFormProps) {
         ],
     });
 
-    const [selectedSkill, setSelectedSkill] = useState<{
-        name: string;
-        categoryId?: string;
-    } | null>(null);
+    const [selectedSkill, setSelectedSkill] = useState<Skill | null>(null);
     const [mastery, setMastery] = useState<Mastery>("Novice");
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -49,7 +46,7 @@ export function SkillForm({userSkills}:SkillFormProps) {
                     skill: {
                         userId: currentUserId,
                         name: selectedSkill.name,
-                        categoryId: selectedSkill.categoryId,
+                        categoryId: selectedSkill.category?.id,
                         mastery,
                     },
                 },
@@ -61,47 +58,54 @@ export function SkillForm({userSkills}:SkillFormProps) {
         }
     };
 
-    if (loading) return <div>Loading skills...</div>; //TODO change these latr
+    if (loading) return <div>Loading skills...</div>;
     if (error) return <div>Error: {error.message}</div>;
+
+    const availableSkills =
+        data?.skills.filter(
+            (skill) =>
+                !userSkills.some((u) => u.name === skill.name)
+        ) || [];
 
     return (
         <form onSubmit={handleSubmit} className="space-y-6">
-            <select
-                 className="w-full p-2 bg-gray-800 rounded"  //TODO change select to MultiSelectField
+
+            <Select
+                id="skill"
+                name="skill"
                 value={selectedSkill?.name || ""}
-                onChange={(e) => {
-                    const skill = data?.skills.find(s => s.name === e.target.value);
+                isRequired={true}
+                title=" "
+                handleChange={(e) => {
+                    const skill = availableSkills.find(
+                        (s) => s.name === e.target.value
+                    );
                     setSelectedSkill(skill || null);
                 }}
-                required
             >
-                <option value="">Select skill</option>
-
-                {data?.skills
-                    .filter(
-                        (skill)=>
-                            !userSkills.some(
-                                (userSkill)=>userSkill.name=== skill.name
-                            )
-                    )
-                    .map((skill) => (
+                {availableSkills.map((skill) => (
                     <option key={skill.id} value={skill.name}>
                         {skill.name}
                     </option>
                 ))}
-            </select>
+            </Select>
 
-            <select
-                className="w-full p-2 bg-gray-800 rounded" //TODO change select to MultiSelectField
+            <Select
+                id="mastery"
+                name="mastery"
                 value={mastery}
-                onChange={(e) => setMastery(e.target.value as Mastery)}
+                isRequired={true}
+                title="Select mastery"
+                handleChange={(e) =>
+                    setMastery(e.target.value as Mastery)
+                }
             >
                 <option value="Novice">Novice</option>
                 <option value="Advanced">Advanced</option>
                 <option value="Competent">Competent</option>
                 <option value="Proficient">Proficient</option>
                 <option value="Expert">Expert</option>
-            </select>
+            </Select>
 
             <div className="flex justify-end gap-4">
                 <CancelButton closeModal={closeModal} />

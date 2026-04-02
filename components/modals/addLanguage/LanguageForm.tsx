@@ -7,10 +7,11 @@ import { useModalStore } from "@/store/modalStore";
 import { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client/react";
 
-import { GetLanguagesData, Proficiency } from "@/types/lang";
+import {GetLanguagesData, Language, Proficiency} from "@/types/lang";
 import {GET_LANGUAGES} from "@/api/graphql/queries/language";
 import {PROFILE_LANGUAGE_ADD} from "@/api/graphql/mutations/profile";
 import {GET_USER} from "@/api/graphql/queries/user";
+import {Select} from "@/components/ui/select/Select";
 
 type LanguageFormProps={
     userLanguages: { name: string }[];
@@ -31,7 +32,7 @@ export function LanguageForm({userLanguages}:LanguageFormProps) {
         ],
     });
 
-    const [selectedLanguage, setSelectedLanguage] = useState<string>("");
+    const [selectedLanguage, setSelectedLanguage] = useState<Language | null>(null);
     const [proficiency, setProficiency] = useState<Proficiency>("A1");
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -44,7 +45,7 @@ export function LanguageForm({userLanguages}:LanguageFormProps) {
                 variables: {
                     language: {
                         userId: currentUserId,
-                        name: selectedLanguage,
+                        name: selectedLanguage.name,
                         proficiency,
                     },
                 },
@@ -59,35 +60,40 @@ export function LanguageForm({userLanguages}:LanguageFormProps) {
     if (loading) return <div>Loading languages...</div>; //TODO change these latr
     if (error) return <div>Error: {error.message}</div>;
 
+    const availableLangs=
+        data?.languages.filter(
+            (lang)=>
+                !userLanguages.some((l)=>l.name===lang.name)
+        ) || [];
+
     return (
         <form onSubmit={handleSubmit} className="space-y-6">
-            <select
-                className="w-full p-2 bg-gray-800 rounded"   //TODO change select to MultiSelectField
-                value={selectedLanguage}
-                onChange={(e) => setSelectedLanguage(e.target.value)}
-                required
-            >
-                <option value="">Select language</option>
 
-                {data?.languages
-                    .filter(
-                        (lang) =>
-                            !userLanguages.some(
-                                (userLang) => userLang.name === lang.name
-                            )
-                    )
-                    .map((lang) => (
+            <Select
+                id="language"
+                value={selectedLanguage?.name || ''}
+                title=" "
+                isRequired={true} name="language"
+                handleChange={(e) => {
+                    const lang=availableLangs.find(
+                        (l)=>l.name===e.target.value
+                    );
+                setSelectedLanguage(lang || null)
+            }}>
+                {availableLangs
+                    .map((lang)=>(
                         <option key={lang.id} value={lang.name}>
                             {lang.name}
                         </option>
                     ))}
-            </select>
+            </Select>
 
-            <select
-                className="w-full p-2 bg-gray-800 rounded"  //TODO change select to MultiSelectField
+
+            <Select
+                id="profeciency"
                 value={proficiency}
-                onChange={(e) => setProficiency(e.target.value as Proficiency)}
-            >
+                isRequired={true} name="profeciency"
+                handleChange={(e) => setProficiency(e.target.value as Proficiency)}>
                 {/*TODO map this instead of hard coding later*/}
                 <option value="A1">A1</option>
                 <option value="A2">A2</option>
@@ -96,7 +102,8 @@ export function LanguageForm({userLanguages}:LanguageFormProps) {
                 <option value="C1">C1</option>
                 <option value="C2">C2</option>
                 <option value="Native">Native</option>
-            </select>
+            </Select>
+
 
             <div className="flex justify-end gap-4">
                 <CancelButton closeModal={closeModal} />
