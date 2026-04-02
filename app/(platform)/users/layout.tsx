@@ -1,7 +1,7 @@
 "use client"
 
 import {Suspense} from "react";
-import LoadingPage from "@/app/(platform)/users/loading";
+import LoadingPage from "@/app/(platform)/loading";
 
 export default function EmployeesLayout({
   children,

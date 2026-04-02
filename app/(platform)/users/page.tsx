@@ -4,8 +4,8 @@ import { useUsers } from "@/lib/hooks/useUsers";
 import {headers} from "@/constants/tableHeaders";
 import SortHeader from "@/components/SortHeader";
 import {useCurrentUser} from "@/lib/hooks/useCurrentUser";
-import NotFoundPage from "@/app/(platform)/users/not-found";
-import LoadingPage from "@/app/(platform)/users/loading";
+import NotFoundPage from "@/app/(platform)/not-found";
+import LoadingPage from "@/app/(platform)/loading";
 
 export default function Employees() {
     const { users, error, search, sortKey, sortDir, setSearch, handleSort, isLoading } = useUsers();

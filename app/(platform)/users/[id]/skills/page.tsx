@@ -2,7 +2,7 @@
 
 import {useUser} from "@/lib/hooks/useUser";
 import {Skills} from "@/components/skills/Skills";
-import NotFoundPage from "@/app/(platform)/users/not-found";
+import NotFoundPage from "@/app/(platform)/not-found";
 import LoadingPage from "@/app/(platform)/users/[id]/loading";
 import {useMutation, useQuery} from "@apollo/client/react";
 import {GET_SKILLS} from "@/api/graphql/queries/skills";
