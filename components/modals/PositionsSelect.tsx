@@ -1,6 +1,7 @@
 import { GET_POSITIONS } from "@/api/graphql/queries/positions"
 import { Option } from "@/components/ui/select/Option"
 import { Select } from "@/components/ui/select/Select"
+import { useModalStore } from "@/store/modalStore"
 import { GetPositionsResponse } from "@/types/position"
 import { CreateUserModalFormState } from "@/types/user"
 import { useLazyQuery } from "@apollo/client/react"
@@ -19,6 +20,7 @@ export function PositionsSelect({ formData, formId, handleChange }: Props) {
     getPositions,
     { data: positionsData, loading: positionsLoading, called: positionsCalled },
   ] = useLazyQuery<GetPositionsResponse>(GET_POSITIONS)
+  const { type } = useModalStore()
 
   const handlePositionsFocus = () => {
     if (!positionsCalled) {
@@ -30,7 +32,7 @@ export function PositionsSelect({ formData, formId, handleChange }: Props) {
       id={`${formId}-position`}
       name="positionId"
       value={formData.positionId}
-      isRequired
+      isRequired={type?.endsWith("_EDIT") ? false : true}
       title="Position"
       handleChange={handleChange}
       onFocus={handlePositionsFocus}

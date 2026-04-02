@@ -1,6 +1,6 @@
 import { InputField } from "@/components/ui/inputField/InputField"
+import { PositionsSelect } from "../PositionsSelect"
 import { CreateUserProps } from "./CreateUserLeftSide"
-import { PositionsSelect } from "./PositionsSelect"
 
 export function CreateUserRightSide({
   formId,
@@ -16,7 +16,6 @@ export function CreateUserRightSide({
         name="password"
         value={formData.password}
         onChange={handleChange}
-        required
       />
       <InputField
         inputId={`${formId}-lastName`}
@@ -25,7 +24,6 @@ export function CreateUserRightSide({
         name="lastName"
         value={formData.lastName}
         onChange={handleChange}
-        required
       />
 
       <PositionsSelect

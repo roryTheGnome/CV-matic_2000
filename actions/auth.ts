@@ -20,7 +20,7 @@ export async function setAuthTokens(
 
   cookieStore.set(ACCESS_TOKEN, accessToken, {
     ...cookieOptions,
-    maxAge: 60 * 15,
+    maxAge: 60 * 60,
   })
 
   cookieStore.set(REFRESH_TOKEN, refreshToken, {

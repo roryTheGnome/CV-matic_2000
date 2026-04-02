@@ -22,7 +22,13 @@ export default function CVs() {
 
   return (
     <div className="p-6">
-      <TableSearch search={search} setSearch={setSearch} />
+      <TableSearch
+        search={search}
+        createButtonText="CREATE CV"
+        typeOfCreateModal={"CV_CREATE"}
+        userCanInteract
+        setSearch={setSearch}
+      />
 
       <div className="overflow-x-auto rounded-lg ">
         <table className="min-w-full divide-y divide-gray-500 ">

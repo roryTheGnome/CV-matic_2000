@@ -11,7 +11,7 @@ export const getSortProjectValue = (
     case "project_domain":
       return project.domain
     case "project_end_date":
-      return project.end_date
+      return project.end_date ? project.end_date : ""
     case "project_start_date":
       return project.start_date
     default:

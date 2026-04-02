@@ -4,6 +4,7 @@ export type GlobalSortKey =
   | ProjectSortKey
   | CvsSortKey
   | OnlyNameSortKey
+  | LanguageSortKey
 
 export type GlobalHeader =
   | Header
@@ -11,6 +12,7 @@ export type GlobalHeader =
   | ProjectHeader
   | CvsHeader
   | OnlyNameHeader
+  | LanguageHeader
 
 export type SortKey =
   | "first_name"
@@ -20,6 +22,11 @@ export type SortKey =
   | "position"
 
 export type SkillSortKey = "skill_name" | "skill_type" | "skill_category"
+
+export type LanguageSortKey =
+  | "language_name"
+  | "language_native_name"
+  | "language_iso2"
 
 export type ProjectSortKey =
   | "project_name"
@@ -39,6 +46,11 @@ export type Header = {
 export type SkillHeader = {
   label: string
   key: SkillSortKey
+}
+
+export type LanguageHeader = {
+  label: string
+  key: LanguageSortKey
 }
 
 export type ProjectHeader = {

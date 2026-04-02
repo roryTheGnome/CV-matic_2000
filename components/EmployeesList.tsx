@@ -1,5 +1,5 @@
 import { User } from "@/types/user"
-import {ChevronRight, EllipsisVertical} from "lucide-react"
+import { ChevronRight, EllipsisVertical } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -21,7 +21,7 @@ export default function EmployeesList({
   search,
   sortKey,
   sortDir,
-    currentUserId
+  currentUserId,
 }: EmployeesListProps) {
   const { isAdmin } = useAuthStore()
 
@@ -93,15 +93,19 @@ export default function EmployeesList({
                 deleteType={"USER_DELETE"}
                 item={{
                   id: user.id,
-                  name: `user ${user.profile.first_name} ${user.profile.last_name}`,
+                  name: `${user.profile.first_name} ${user.profile.last_name}`,
                 }}
               />
             ) : (
               <Link
                 href={`/users/${user.id}`}
                 className="text-text-secondary hover:text-primary"
-              >{currentUserId==Number(user.id) ?(
-                  <EllipsisVertical size={30}/> ):(<ChevronRight size={32}/>)}
+              >
+                {currentUserId == Number(user.id) ? (
+                  <EllipsisVertical size={30} />
+                ) : (
+                  <ChevronRight size={32} />
+                )}
               </Link>
             )}
           </td>

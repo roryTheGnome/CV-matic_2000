@@ -5,7 +5,7 @@ export interface Project {
   internal_name?: string
   domain: string
   start_date: string
-  end_date: string
+  end_date?: string
   description: string
   environment: string[]
 }
@@ -59,4 +59,16 @@ export interface UpdateProjectVariables {
 
 export interface UpdateProjectData {
   updateProject: Project
+}
+
+export interface DeleteProjectVariables {
+  project: {
+    projectId: string
+  }
+}
+
+export interface DeleteProjectResponse {
+  deleteProject: {
+    affected: number
+  }
 }

@@ -9,6 +9,7 @@ import {
   CreateProjectModalFormState,
   CreateProjectVariables,
   GetProjectsData,
+  Project,
   UpdateProjectData,
   UpdateProjectVariables,
 } from "@/types/project"
@@ -112,32 +113,31 @@ export function useProjectActions(
       .map(env => env.trim())
       .filter(Boolean)
 
+    const projectPayload: Omit<Project, "id"> = {
+      name: formData.name,
+      domain: formData.domain,
+      start_date: formData.start_date,
+      description: formData.description,
+      environment: environmentArray,
+    }
+
+    if (formData.end_date && formData.end_date.trim() !== "") {
+      projectPayload.end_date = formData.end_date
+    }
+
     if (projectId) {
       updateProject({
         variables: {
           project: {
             projectId,
-            name: formData.name,
-            domain: formData.domain,
-            start_date: formData.start_date,
-            end_date: formData.end_date,
-            description: formData.description,
-            environment: environmentArray,
+            ...projectPayload,
           },
         },
       })
     } else {
       createProject({
         variables: {
-          project: {
-            name: formData.name,
-            domain: formData.domain,
-            start_date: formData.start_date,
-            end_date:
-              formData.end_date.trim() === "" ? null : formData.end_date,
-            description: formData.description,
-            environment: environmentArray,
-          },
+          project: projectPayload,
         },
       })
     }

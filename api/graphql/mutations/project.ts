@@ -31,3 +31,11 @@ export const UPDATE_PROJECT_MUTATION = gql`
     }
   }
 `
+
+export const DELETE_PROJECT_MUTATION = gql`
+  mutation DeleteProject($project: DeleteProjectInput!) {
+    deleteProject(project: $project) {
+      affected
+    }
+  }
+`

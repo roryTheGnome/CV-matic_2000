@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from "@apollo/client"
 
 export const GET_USERS = gql`
   query GetUsers {
@@ -21,17 +21,17 @@ export const GET_USERS = gql`
         last_name
         avatar
         skills {
-            name
-            mastery
+          name
+          mastery
         }
         languages {
-            name
-            proficiency
+          name
+          proficiency
         }
       }
     }
   }
-`;
+`
 
 export const GET_USER = gql`
   query GetUser($userId: ID!) {
@@ -46,40 +46,40 @@ export const GET_USER = gql`
         last_name
         avatar
         skills {
-            name
-            mastery
+          name
+          mastery
         }
         languages {
-            name
-            proficiency
+          name
+          proficiency
         }
       }
     }
   }
-`;
+`
 
 export const UPDATE_PROFILE = gql`
-mutation UpdateProfile($profile: UpdateProfileInput!) {
-  updateProfile(profile: $profile) {
-    id
-    first_name
-    last_name
+  mutation UpdateProfile($profile: UpdateProfileInput!) {
+    updateProfile(profile: $profile) {
+      id
+      first_name
+      last_name
+    }
   }
-}
-`;
+`
 
 export const UPDATE_USER = gql`
-mutation UpdateUser($user: UpdateUserInput!) {
-  updateUser(user: $user) {
-    id
-    department {
+  mutation UpdateUser($user: UpdateUserInput!) {
+    updateUser(user: $user) {
       id
-      name
-    }
-    position {
-      id
-      name
+      department {
+        id
+        name
+      }
+      position {
+        id
+        name
+      }
     }
   }
-}
-`;
+`

@@ -18,6 +18,12 @@ export type ModalType =
   | "CV_EDIT"
   | "CV_DELETE"
   | "CV_CREATE"
+  | "POSITION_CREATE"
+  | "POSITION_EDIT"
+  | "POSITION_DELETE"
+  | "LANGUAGE_CREATE"
+  | "LANGUAGE_EDIT"
+  | "LANGUAGE_DELETE"
   | null
 
 export interface ModalData {

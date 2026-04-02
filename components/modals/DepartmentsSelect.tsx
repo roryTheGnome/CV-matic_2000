@@ -1,6 +1,7 @@
 import { GET_DEPARTMENTS } from "@/api/graphql/queries/departments"
 import { Option } from "@/components/ui/select/Option"
 import { Select } from "@/components/ui/select/Select"
+import { useModalStore } from "@/store/modalStore"
 import { GetDepartmentsResponse } from "@/types/department"
 import { useLazyQuery } from "@apollo/client/react"
 import { CreateUserProps } from "./CreateUserLeftSide"
@@ -18,6 +19,7 @@ export function DepartmentsSelect({
       called: departmentsCalled,
     },
   ] = useLazyQuery<GetDepartmentsResponse>(GET_DEPARTMENTS)
+  const { type } = useModalStore()
 
   const handleDepartmentsFocus = () => {
     if (!departmentsCalled) {
@@ -29,7 +31,7 @@ export function DepartmentsSelect({
       id={`${formId}-department`}
       name="departmentId"
       value={formData.departmentId}
-      isRequired
+      isRequired={type?.endsWith("_EDIT") ? false : true}
       title="Department"
       handleChange={handleChange}
       onFocus={handleDepartmentsFocus}
