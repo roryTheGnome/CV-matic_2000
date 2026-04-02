@@ -1,12 +1,12 @@
 "use client"
-import NotFoundPage from "@/app/(platform)/users/not-found"
 import EmployeesList from "@/components/EmployeesList"
 import SortHeader from "@/components/SortHeader"
 import { TableSearch } from "@/components/ui/TableSearch"
 import { headers } from "@/constants/tableHeaders"
 import { useCurrentUser } from "@/lib/hooks/userHooks/useCurrentUser"
 import { useUsers } from "@/lib/hooks/userHooks/useUsers"
-import LoadingPage from "./loading"
+import NotFoundPage from "@/app/(platform)/not-found";
+import LoadingPage from "@/app/(platform)/loading";
 
 export default function Employees() {
   const {

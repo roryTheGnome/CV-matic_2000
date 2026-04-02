@@ -11,14 +11,16 @@ import { usePageWithTable } from "@/lib/hooks/usePageWithTable"
 import { Cvs, GetCvsData } from "@/types/cvs"
 import { getSortCvsValue } from "@/utils/getSortCvsValue"
 import { useQuery } from "@apollo/client/react"
+import NotFoundPage from "@/app/(platform)/not-found";
+import LoadingPage from "@/app/(platform)/loading";
 
 export default function CVs() {
   const { loading, error, data } = useQuery<GetCvsData>(GET_CVS)
 
   const { search, sortKey, sortDir, setSearch, handleSort } = usePageWithTable()
 
-  if (loading) return <div>Loading...</div>
-  if (error) return <div>Error loading users</div>
+  if (loading) return <LoadingPage/>
+  if (error) return <NotFoundPage/>
 
   return (
     <div className="p-6">

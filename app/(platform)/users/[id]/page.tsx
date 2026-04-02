@@ -1,11 +1,11 @@
 "use client"
 
 import LoadingPage from "@/app/(platform)/users/[id]/loading"
-import NotFoundPage from "@/app/(platform)/users/not-found"
 import EditableProfile from "@/components/EditableProfile"
 import Profile from "@/components/Profile"
 import { useCurrentUser } from "@/lib/hooks/userHooks/useCurrentUser"
 import { useUser } from "@/lib/hooks/userHooks/useUser"
+import NotFoundPage from "@/app/(platform)/not-found";
 
 export default function Employee() {
   const { user, isLoading, error } = useUser()

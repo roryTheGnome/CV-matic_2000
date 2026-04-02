@@ -24,7 +24,7 @@ export default function Nav() {
 
   return (
     <>
-      <nav className="hidden md:flex h-full flex-col justify-between p-4 pl-0 bg-surface">
+      <nav className="hidden md:flex h-full flex-col justify-between p-4 pl-0 bg-background">
         <div className="flex flex-col gap-2">
           {checkOnAdmin().map(item => {
             const isActive = pathname === item.href
