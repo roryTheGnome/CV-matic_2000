@@ -51,6 +51,9 @@ export function ModalProvider() {
       {type === "LANGUAGE_DELETE" && <DeleteLanguageModal />}
       {type === "LANGUAGE_CREATE" && <LanguageModal />}
       {type === "LANGUAGE_EDIT" && <LanguageModal />}
+
+      {type === "PROFILE_SKILL_ADD" && <SkillModal />}
+      {type === "PROFILE_LANGUAGE_ADD" && <LanguageModal />}
     </>
   )
 }

@@ -6,6 +6,7 @@ import { TableSearch } from "@/components/ui/TableSearch"
 import { headers } from "@/constants/tableHeaders"
 import { useCurrentUser } from "@/lib/hooks/userHooks/useCurrentUser"
 import { useUsers } from "@/lib/hooks/userHooks/useUsers"
+import LoadingPage from "./loading"
 
 export default function Employees() {
   const {
@@ -33,31 +34,33 @@ export default function Employees() {
       />
 
       <div className="overflow-x-auto rounded-lg ">
-        <table className="min-w-full divide-y divide-gray-500 ">
-          <thead>
-            <tr>
-              {headers.map(header => (
-                <SortHeader
-                  key={header.key}
-                  label={header.label}
-                  sortKeyValue={header.key}
-                  currentSortKey={sortKey}
-                  sortDir={sortDir}
-                  onSort={handleSort}
-                />
-              ))}
-            </tr>
-          </thead>
-
-          <EmployeesList
-            users={users}
-            search={search}
-            sortKey={sortKey}
-            sortDir={sortDir}
-            currentUserId={currentUserId}
-            isLoading={isLoading}
-          />
-        </table>
+        {isLoading ? (
+          <LoadingPage />
+        ) : (
+          <table className="min-w-full divide-y divide-gray-500 ">
+            <thead>
+              <tr>
+                {headers.map(header => (
+                  <SortHeader
+                    key={header.key}
+                    label={header.label}
+                    sortKeyValue={header.key}
+                    currentSortKey={sortKey}
+                    sortDir={sortDir}
+                    onSort={handleSort}
+                  />
+                ))}
+              </tr>
+            </thead>
+            <EmployeesList
+              users={users}
+              search={search}
+              sortKey={sortKey}
+              sortDir={sortDir}
+              currentUserId={currentUserId}
+            />
+          </table>
+        )}
       </div>
     </div>
   )

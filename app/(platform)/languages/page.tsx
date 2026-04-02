@@ -1,6 +1,8 @@
 "use client"
 
+import { DELETE_PROFILE_LANGUAGE } from "@/api/graphql/mutations/profile"
 import { GET_LANGUAGES } from "@/api/graphql/queries/languages"
+import { GET_USER } from "@/api/graphql/queries/user"
 import LoadingPage from "@/app/(platform)/users/[id]/loading"
 import NotFoundPage from "@/app/(platform)/users/not-found"
 import { LanguageList } from "@/components/LanguageList"
@@ -18,7 +20,7 @@ import { useAuthStore } from "@/store/authStore"
 import { GetLanguagesData, LanguageItem } from "@/types/languages"
 import { getSortLanguageValue } from "@/utils/getSortLanguageValue"
 
-import { useQuery } from "@apollo/client/react"
+import { useMutation, useQuery } from "@apollo/client/react"
 
 export default function Language() {
   const { currentUserId } = useCurrentUser()
@@ -28,6 +30,26 @@ export default function Language() {
   const { user, error } = useUser(
     currentUserId ? String(currentUserId) : undefined,
   )
+
+  const [deleteLanguages] = useMutation(DELETE_PROFILE_LANGUAGE, {
+    refetchQueries: [
+      {
+        query: GET_USER,
+        variables: { userId: currentUserId },
+      },
+    ],
+  })
+
+  const handleDelete = async (names: string[]) => {
+    await deleteLanguages({
+      variables: {
+        language: {
+          userId: currentUserId,
+          name: names,
+        },
+      },
+    })
+  }
 
   const {
     data,
@@ -76,7 +98,11 @@ export default function Language() {
           </div>
         </>
       ) : (
-        <LanguageList languages={user.profile.languages} />
+        <LanguageList
+          languages={user.profile.languages}
+          onDelete={handleDelete}
+          owner={true}
+        />
       )}
     </div>
   )

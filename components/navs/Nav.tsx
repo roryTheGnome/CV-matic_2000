@@ -49,7 +49,7 @@ export default function Nav() {
             {user?.profile?.first_name?.at(0) ?? "U"}
           </div>
           <span>
-            {user?.profile?.first_name} {user?.profile.last_name}
+            {user?.profile.first_name} {user?.profile.last_name}
           </span>
         </div>
       </nav>

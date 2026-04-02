@@ -1,6 +1,8 @@
 "use client"
 
+import { DELETE_PROFILE_SKILL } from "@/api/graphql/mutations/profile"
 import { GET_SKILLS } from "@/api/graphql/queries/skills"
+import { GET_USER } from "@/api/graphql/queries/user"
 import LoadingPage from "@/app/(platform)/users/[id]/loading"
 import NotFoundPage from "@/app/(platform)/users/not-found"
 import { Skills } from "@/components/skills/Skills"
@@ -13,19 +15,39 @@ import { usePageWithTable } from "@/lib/hooks/usePageWithTable"
 import { useCurrentUser } from "@/lib/hooks/userHooks/useCurrentUser"
 import { useUser } from "@/lib/hooks/userHooks/useUser"
 import { useAuthStore } from "@/store/authStore"
-
 import { GetSkillsData, SkillItem } from "@/types/skills"
 import { getSortSkillsValue } from "@/utils/getSortSkillValue"
-import { useQuery } from "@apollo/client/react"
+import { useMutation, useQuery } from "@apollo/client/react"
 
 export default function SkillsPage() {
   const { currentUserId } = useCurrentUser()
   const { isAdmin } = useAuthStore()
   const { search, sortKey, sortDir, setSearch, handleSort } = usePageWithTable()
 
+  const { data: skillsData } = useQuery<GetSkillsData>(GET_SKILLS)
+
   const { user, error } = useUser(
     currentUserId ? String(currentUserId) : undefined,
   )
+  const [deleteSkills] = useMutation(DELETE_PROFILE_SKILL, {
+    refetchQueries: [
+      {
+        query: GET_USER,
+        variables: { userId: currentUserId },
+      },
+    ],
+  })
+
+  const handleDelete = async (names: string[]) => {
+    await deleteSkills({
+      variables: {
+        skill: {
+          userId: currentUserId,
+          name: names,
+        },
+      },
+    })
+  }
 
   const {
     data,
@@ -73,7 +95,12 @@ export default function SkillsPage() {
           </div>
         </>
       ) : (
-        <Skills skills={user.profile.skills} />
+        <Skills
+          skills={user.profile.skills}
+          allSkills={skillsData?.skills || []}
+          onDelete={handleDelete}
+          owner={true}
+        />
       )}
     </div>
   )
