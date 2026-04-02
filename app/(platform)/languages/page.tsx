@@ -40,7 +40,7 @@ export default function Language() {
     }
 
     return(
-        <div className="p-6">
+        <div >
             <LanguageList
                 languages={user.profile.languages}
                 onDelete={handleDelete}

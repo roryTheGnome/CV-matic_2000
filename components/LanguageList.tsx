@@ -63,25 +63,25 @@ export const LanguageList = ({ languages,onDelete, owner }: Props) => {
 
     return (
         <div >
-            <div className="flex flex-wrap gap-30 pl-30 pr-30">
+            <div className="grid grid-cols-3 justify-items-center gap-6 px-30">
                 {languages.map((lang) => (
                     <div
                         key={lang.name}
                         onClick={()=>toggleSelect(lang.name)}
                         className="flex items-center gap-5  p-4 rounded-xl hover:bg-[#1a1a1a]"
                     >
-                    <span className="text-white font-medium ">
-                        {lang.name}
-                    </span>
-
                         <span
-                            className="px-3 py-1 rounded-md font-bold text-2xl"
+                            className="px-3 py-1 rounded-md font-bold "
                             style={{
                                 color: getTextColor(lang.proficiency),
                             }}
                         >
                         {lang.proficiency}
-                    </span>
+                        </span>
+
+                        <span className="--color-text-primary  ">
+                        {lang.name}
+                        </span>
                     </div>
                 ))}
             </div>
