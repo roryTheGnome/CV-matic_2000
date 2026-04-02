@@ -18,8 +18,8 @@ export const SkillCategorySection = ({
     if (!skills.length) return null;
 
     return (
-        <div className="space-y-4">
-            <h3 className="text-sm font-bold text-text-primary">
+        <div className="space-y-4 max-w-3xl mx-auto">
+            <h3 className="text-sm text-text-primary">
                 {title}
             </h3>
 
