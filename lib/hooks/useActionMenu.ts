@@ -1,6 +1,4 @@
-import { PRIVATE_ROUTES } from "@/config/routes"
 import { ModalData, ModalType, useModalStore } from "@/store/modalStore"
-import { useRouter } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 
 export const useActionMenu = (
@@ -10,7 +8,7 @@ export const useActionMenu = (
 ) => {
   const [isOpen, setIsOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
-  const router = useRouter()
+
   const { openModal } = useModalStore()
 
   useEffect(() => {
@@ -29,11 +27,8 @@ export const useActionMenu = (
 
   const handleEdit = () => {
     openModal(editType, item)
+    console.log(editType, item)
     setIsOpen(false)
-  }
-
-  const handleCvDetails = (cvId: string) => {
-    router.push(PRIVATE_ROUTES.CVS + `/${cvId}`)
   }
 
   const handleDelete = () => {
@@ -41,12 +36,5 @@ export const useActionMenu = (
     setIsOpen(false)
   }
 
-  return {
-    menuRef,
-    isOpen,
-    setIsOpen,
-    handleEdit,
-    handleDelete,
-    handleCvDetails,
-  }
+  return { menuRef, isOpen, setIsOpen, handleEdit, handleDelete }
 }

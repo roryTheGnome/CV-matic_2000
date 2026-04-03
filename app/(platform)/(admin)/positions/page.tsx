@@ -5,7 +5,7 @@ import { onlyNameHeaders } from "@/constants/tableHeaders"
 import { useQuery } from "@apollo/client/react"
 
 import { GET_POSITIONS } from "@/api/graphql/queries/positions"
-import { NameTableItem } from "@/components/ui/table/NameTableItem"
+import { NameTableItem } from "@/components/ui/table/DepartmentTableItem"
 import TableBody from "@/components/ui/table/TableBody"
 import { TableSearch } from "@/components/ui/TableSearch"
 import { usePageWithTable } from "@/lib/hooks/usePageWithTable"
@@ -30,7 +30,7 @@ export default function Positions() {
         setSearch={setSearch}
       />
 
-      <div className="overflow-x-auto rounded-lg min-h-screen">
+      <div className="overflow-x-auto rounded-lg ">
         <table className="min-w-full divide-y divide-gray-500 ">
           <TableHeader
             handleSort={handleSort}

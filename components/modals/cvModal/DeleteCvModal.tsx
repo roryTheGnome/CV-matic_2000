@@ -7,7 +7,6 @@ export function DeleteCvModal() {
   return (
     <DeleteModal
       deleteText={`CV ${data?.name}`}
-      headingText="CV"
       data={data}
       loading={loading}
       closeModal={closeModal}

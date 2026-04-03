@@ -4,10 +4,9 @@ import { CancelButton } from "../ui/CancelButton"
 import { ModalLayout } from "./ModalLayout"
 
 interface Props {
-  data: ModalData | undefined
-  loading: boolean
   deleteText: string
-  headingText: string
+  loading: boolean
+  data: ModalData | undefined
   closeModal: () => void
   handleDelete: () => void
 }
@@ -16,12 +15,11 @@ export function DeleteModal({
   data,
   loading,
   deleteText,
-  headingText,
   closeModal,
   handleDelete,
 }: Props) {
   return (
-    <ModalLayout title={`Delete ${headingText}`} maxWidth="max-w-2xl">
+    <ModalLayout title="Delete user" maxWidth="max-w-2xl">
       <div className="flex flex-col gap-6">
         <p className="text-gray-300 text-lg">
           Are you sure you want to delete {deleteText}?

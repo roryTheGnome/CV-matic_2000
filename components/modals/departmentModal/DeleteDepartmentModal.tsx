@@ -12,7 +12,6 @@ export function DeleteDepartmentModal() {
   return (
     <DeleteModal
       deleteText={`department ${data?.name}`}
-      headingText="department"
       data={data}
       loading={loading}
       closeModal={closeModal}

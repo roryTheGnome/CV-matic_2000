@@ -1,7 +1,7 @@
 import { levelToColor, levelToBgColor } from "@/types/skills";
 
 type Props = {
-    level:number;
+    level: 1 | 2 | 3 | 4 | 5;
 };
 
 export const SkillBar = ({ level }: Props) => {

@@ -4,8 +4,6 @@ export type ModalType =
   | "USER_CREATE"
   | "USER_DELETE"
   | "USER_EDIT"
-  | "PROFILE_SKILL_ADD"
-  | "PROFILE_LANGUAGE_ADD"
   | "PROJECT_CREATE"
   | "PROJECT_DELETE"
   | "PROJECT_EDIT"
@@ -15,14 +13,12 @@ export type ModalType =
   | "DEPARTMENT_CREATE"
   | "DEPARTMENT_EDIT"
   | "DEPARTMENT_DELETE"
+  | "CV_EDIT"
   | "CV_DELETE"
   | "CV_CREATE"
   | "POSITION_CREATE"
   | "POSITION_EDIT"
   | "POSITION_DELETE"
-  | "LANGUAGE_CREATE"
-  | "LANGUAGE_EDIT"
-  | "LANGUAGE_DELETE"
   | null
 
 export interface ModalData {
