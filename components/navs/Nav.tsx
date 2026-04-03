@@ -24,7 +24,7 @@ export default function Nav() {
 
   return (
     <>
-      <nav className="hidden md:flex h-full flex-col justify-between p-4 pl-0 bg-surface">
+      <nav className="hidden md:flex h-full flex-col justify-between p-4 pl-0 bg-background">
         <div className="flex flex-col gap-2">
           {checkOnAdmin().map(item => {
             const isActive = pathname === item.href
@@ -49,7 +49,7 @@ export default function Nav() {
             {user?.profile?.first_name?.at(0) ?? "U"}
           </div>
           <span>
-            {user?.profile?.first_name} {user?.profile.last_name}
+            {user?.profile.first_name} {user?.profile.last_name}
           </span>
         </div>
       </nav>

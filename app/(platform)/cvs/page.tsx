@@ -3,6 +3,8 @@
 import { GET_CVS } from "@/api/graphql/queries/cvs"
 import { CvTableItem } from "@/components/ui/table/CvTableItem"
 
+import LoadingPage from "@/app/(platform)/loading"
+import NotFoundPage from "@/app/(platform)/not-found"
 import TableBody from "@/components/ui/table/TableBody"
 import { TableHeader } from "@/components/ui/table/TableHeader"
 import { TableSearch } from "@/components/ui/TableSearch"
@@ -17,8 +19,8 @@ export default function CVs() {
 
   const { search, sortKey, sortDir, setSearch, handleSort } = usePageWithTable()
 
-  if (loading) return <div>Loading...</div>
-  if (error) return <div>Error loading users</div>
+  if (loading) return <LoadingPage />
+  if (error) return <NotFoundPage />
 
   return (
     <div className="p-6">
@@ -30,7 +32,7 @@ export default function CVs() {
         setSearch={setSearch}
       />
 
-      <div className="overflow-x-auto rounded-lg ">
+      <div className="overflow-x-auto rounded-lg min-h-screen">
         <table className="min-w-full divide-y divide-gray-500 ">
           <TableHeader
             handleSort={handleSort}

@@ -12,6 +12,7 @@ export function DeleteProjectModal() {
   return (
     <DeleteModal
       deleteText={`project ${data?.name}`}
+      headingText="project"
       data={data}
       loading={loading}
       closeModal={closeModal}

@@ -8,6 +8,7 @@ export function DeleteUserModal() {
   return (
     <DeleteModal
       deleteText={`user ${data?.name}`}
+      headingText="user"
       data={data}
       loading={loading}
       closeModal={closeModal}
