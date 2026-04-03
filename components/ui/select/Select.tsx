@@ -22,7 +22,7 @@ export function Select({
   ...props
 }: Props) {
   return (
-    <div className="relative">
+    <div className="relative h-fit">
       <label
         htmlFor={id}
         className="absolute left-2 -top-2.5 px-1 transition-all bg-background text-xs text-input-border"

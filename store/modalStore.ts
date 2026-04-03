@@ -15,7 +15,6 @@ export type ModalType =
   | "DEPARTMENT_CREATE"
   | "DEPARTMENT_EDIT"
   | "DEPARTMENT_DELETE"
-  | "CV_EDIT"
   | "CV_DELETE"
   | "CV_CREATE"
   | "POSITION_CREATE"

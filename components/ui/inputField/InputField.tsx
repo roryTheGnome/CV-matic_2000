@@ -13,7 +13,7 @@ export function InputField({ inputId, label, name, type, ...props }: Props) {
   const [currentType, setCurrentType] = useState(type)
 
   return (
-    <div className="relative w-full mt-2">
+    <div className="relative w-full mt-2 h-fit">
       <input
         id={inputId}
         name={name}

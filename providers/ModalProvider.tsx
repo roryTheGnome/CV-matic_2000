@@ -34,7 +34,6 @@ export function ModalProvider() {
 
       {type === "CV_DELETE" && <DeleteCvModal />}
       {type === "CV_CREATE" && <CvModal />}
-      {type === "CV_EDIT" && <CvModal />}
 
       {type === "DEPARTMENT_DELETE" && <DeleteDepartmentModal />}
       {type === "DEPARTMENT_CREATE" && <DepartmentModal />}
