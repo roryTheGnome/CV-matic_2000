@@ -1,6 +1,6 @@
-import { TokenPayload } from "@/types/auth"
-import { decodeJwt } from "jose"
-import { create } from "zustand"
+import { TokenPayload } from '@/types/auth'
+import { decodeJwt } from 'jose'
+import { create } from 'zustand'
 
 interface AuthStore {
   isAdmin: boolean
@@ -8,7 +8,7 @@ interface AuthStore {
   logout: () => void
 }
 
-export const useAuthStore = create<AuthStore>()(set => ({
+export const useAuthStore = create<AuthStore>()((set) => ({
   isAdmin: false,
   setIsAdminFromToken: (token: string | undefined) => {
     if (!token) {
@@ -17,9 +17,9 @@ export const useAuthStore = create<AuthStore>()(set => ({
     }
     try {
       const decodedUser = decodeJwt(token) as TokenPayload
-      set({ isAdmin: decodedUser.role === "Admin" })
+      set({ isAdmin: decodedUser.role === 'Admin' })
     } catch (error) {
-      console.error("Error while token parsing", error)
+      console.error('Error while token parsing', error)
       set({ isAdmin: false })
     }
   },

@@ -1,9 +1,9 @@
 import {
   CREATE_LANGUAGE_MUTATION,
   UPDATE_LANGUAGE_MUTATION,
-} from "@/api/graphql/mutations/languages"
-import { GET_LANGUAGES } from "@/api/graphql/queries/languages"
-import { useModalStore } from "@/store/modalStore"
+} from '@/api/graphql/mutations/languages'
+import { GET_LANGUAGES } from '@/api/graphql/queries/languages'
+import { useModalStore } from '@/store/modalStore'
 import {
   CreateLanguageData,
   CreateLanguageVariables,
@@ -11,11 +11,11 @@ import {
   LanguageModalFormState,
   UpdateLanguageData,
   UpdateLanguageVariables,
-} from "@/types/languages"
+} from '@/types/languages'
 
-import { useMutation } from "@apollo/client/react"
-import { ChangeEvent, SubmitEvent, useId, useState } from "react"
-import toast from "react-hot-toast"
+import { useMutation } from '@apollo/client/react'
+import { ChangeEvent, SubmitEvent, useId, useState } from 'react'
+import toast from 'react-hot-toast'
 
 export function useLanguageActions(
   initialData?: LanguageModalFormState,
@@ -26,9 +26,9 @@ export function useLanguageActions(
 
   const [formData, setFormData] = useState<LanguageModalFormState>(
     initialData || {
-      name: "",
-      native_name: "",
-      iso2: "",
+      name: '',
+      native_name: '',
+      iso2: '',
     },
   )
 
@@ -52,11 +52,11 @@ export function useLanguageActions(
         })
       }
     },
-    onCompleted: data => {
-      toast.success("Language created successfully!")
+    onCompleted: (data) => {
+      toast.success('Language created successfully!')
       closeModal()
     },
-    onError: err => {
+    onError: (err) => {
       toast.error(err.message)
     },
   })
@@ -66,23 +66,23 @@ export function useLanguageActions(
     UpdateLanguageVariables
   >(UPDATE_LANGUAGE_MUTATION, {
     onCompleted: () => {
-      toast.success("Language updated successfully!")
+      toast.success('Language updated successfully!')
       closeModal()
     },
-    onError: err => toast.error(err.message),
+    onError: (err) => toast.error(err.message),
   })
 
   const loading = creating || updating
 
   const isFormValid =
-    formData.name.trim() !== "" &&
-    formData.iso2.trim() !== "" &&
-    formData.native_name.trim() !== ""
+    formData.name.trim() !== '' &&
+    formData.iso2.trim() !== '' &&
+    formData.native_name.trim() !== ''
 
   const isDirty =
     !initialData ||
     Object.keys(formData).some(
-      key =>
+      (key) =>
         formData[key as keyof LanguageModalFormState] !==
         initialData[key as keyof LanguageModalFormState],
     )
@@ -91,7 +91,7 @@ export function useLanguageActions(
     e: ChangeEvent<HTMLSelectElement | HTMLInputElement, Element>,
   ) => {
     const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
+    setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
   const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
@@ -106,7 +106,7 @@ export function useLanguageActions(
       updateLanguage({
         variables: {
           language: {
-            languageId: modalData?.id ? modalData.id : "",
+            languageId: modalData?.id ? modalData.id : '',
             name: formData.name,
             iso2: formData.iso2,
             native_name: formData.native_name,

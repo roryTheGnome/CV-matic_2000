@@ -15,28 +15,28 @@ export type GlobalHeader =
   | LanguageHeader
 
 export type SortKey =
-  | "first_name"
-  | "last_name"
-  | "email"
-  | "department"
-  | "position"
+  | 'first_name'
+  | 'last_name'
+  | 'email'
+  | 'department'
+  | 'position'
 
-export type SkillSortKey = "skill_name" | "skill_type" | "skill_category"
+export type SkillSortKey = 'skill_name' | 'skill_type' | 'skill_category'
 
 export type LanguageSortKey =
-  | "language_name"
-  | "language_native_name"
-  | "language_iso2"
+  | 'language_name'
+  | 'language_native_name'
+  | 'language_iso2'
 
 export type ProjectSortKey =
-  | "project_name"
-  | "project_domain"
-  | "project_start_date"
-  | "project_end_date"
+  | 'project_name'
+  | 'project_domain'
+  | 'project_start_date'
+  | 'project_end_date'
 
-export type CvsSortKey = "cvs_name" | "cvs_education" | "cvs_employee"
+export type CvsSortKey = 'cvs_name' | 'cvs_education' | 'cvs_employee'
 
-export type OnlyNameSortKey = "name"
+export type OnlyNameSortKey = 'name'
 
 export type Header = {
   label: string

@@ -1,4 +1,4 @@
-import { UserRole } from "./user"
+import { UserRole } from './user'
 
 export interface LoginVariables {
   auth: {
@@ -14,7 +14,7 @@ export interface LoginResponse {
     user: {
       id: string
       email: string
-      role: "Employee" | "Admin"
+      role: 'Employee' | 'Admin'
       profile: {
         id: string
         full_name: string | null

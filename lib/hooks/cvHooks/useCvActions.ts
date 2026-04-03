@@ -1,9 +1,9 @@
 import {
   CREATE_CV_MUTATION,
   UPDATE_CV_MUTATION,
-} from "@/api/graphql/mutations/cv"
-import { GET_CVS } from "@/api/graphql/queries/cvs"
-import { useModalStore } from "@/store/modalStore"
+} from '@/api/graphql/mutations/cv'
+import { GET_CVS } from '@/api/graphql/queries/cvs'
+import { useModalStore } from '@/store/modalStore'
 import {
   CreateCvData,
   CreateCvModalFormState,
@@ -11,12 +11,12 @@ import {
   GetCvsData,
   UpdateCvData,
   UpdateCvVariables,
-} from "@/types/cvs"
+} from '@/types/cvs'
 
-import { useMutation } from "@apollo/client/react"
-import { SubmitEvent, useId, useState } from "react"
-import toast from "react-hot-toast"
-import { useCurrentUser } from "../userHooks/useCurrentUser"
+import { useMutation } from '@apollo/client/react'
+import { SubmitEvent, useId, useState } from 'react'
+import toast from 'react-hot-toast'
+import { useCurrentUser } from '../userHooks/useCurrentUser'
 
 export function useCvActions(
   initialData?: CreateCvModalFormState,
@@ -28,9 +28,9 @@ export function useCvActions(
 
   const [formData, setFormData] = useState<CreateCvModalFormState>(
     initialData || {
-      name: "",
-      education: "",
-      description: "",
+      name: '',
+      education: '',
+      description: '',
       user: null,
     },
   )
@@ -55,11 +55,11 @@ export function useCvActions(
         })
       }
     },
-    onCompleted: data => {
-      toast.success("CV created successfully!")
+    onCompleted: (data) => {
+      toast.success('CV created successfully!')
       closeModal()
     },
-    onError: err => {
+    onError: (err) => {
       toast.error(err.message)
     },
   })
@@ -69,21 +69,21 @@ export function useCvActions(
     UpdateCvVariables
   >(UPDATE_CV_MUTATION, {
     onCompleted: () => {
-      toast.success("CV updated successfully!")
+      toast.success('CV updated successfully!')
       closeModal()
     },
-    onError: err => toast.error(err.message),
+    onError: (err) => toast.error(err.message),
   })
 
   const loading = creating || updating
 
   const isFormValid =
-    formData.name.trim() !== "" && formData.description.trim() !== ""
+    formData.name.trim() !== '' && formData.description.trim() !== ''
 
   const isDirty =
     !initialData ||
     Object.keys(formData).some(
-      key =>
+      (key) =>
         formData[key as keyof CreateCvModalFormState] !==
         initialData[key as keyof CreateCvModalFormState],
     )
@@ -92,7 +92,7 @@ export function useCvActions(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
+    setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
   const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
@@ -110,7 +110,7 @@ export function useCvActions(
             cvId,
             name: formData.name,
             education:
-              formData.education.trim() === "" ? null : formData.education,
+              formData.education.trim() === '' ? null : formData.education,
             description: formData.description,
           },
         },
@@ -121,7 +121,7 @@ export function useCvActions(
           cv: {
             name: formData.name,
             education:
-              formData.education.trim() === "" ? null : formData.education,
+              formData.education.trim() === '' ? null : formData.education,
             description: formData.description,
             userId: currentUserId ? `${currentUserId}` : null,
           },

@@ -1,5 +1,5 @@
-import { ModalData, ModalType, useModalStore } from "@/store/modalStore"
-import { useEffect, useRef, useState } from "react"
+import { ModalData, ModalType, useModalStore } from '@/store/modalStore'
+import { useEffect, useRef, useState } from 'react'
 
 export const useActionMenu = (
   deleteType: ModalType,
@@ -19,10 +19,10 @@ export const useActionMenu = (
     }
 
     if (isOpen) {
-      document.addEventListener("mousedown", handleClickOutside)
+      document.addEventListener('mousedown', handleClickOutside)
     }
 
-    return () => document.removeEventListener("mousedown", handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [isOpen])
 
   const handleEdit = () => {

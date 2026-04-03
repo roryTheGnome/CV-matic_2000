@@ -1,12 +1,12 @@
-import { DELETE_POSITION_MUTATION } from "@/api/graphql/mutations/position"
-import { useModalStore } from "@/store/modalStore"
+import { DELETE_POSITION_MUTATION } from '@/api/graphql/mutations/position'
+import { useModalStore } from '@/store/modalStore'
 import {
   DeletePositionResponse,
   DeletePositionVariables,
-} from "@/types/position"
+} from '@/types/position'
 
-import { useMutation } from "@apollo/client/react"
-import toast from "react-hot-toast"
+import { useMutation } from '@apollo/client/react'
+import toast from 'react-hot-toast'
 
 export function useDeletePosition() {
   const { data: modalData, closeModal } = useModalStore()
@@ -17,24 +17,24 @@ export function useDeletePosition() {
   >(DELETE_POSITION_MUTATION, {
     update(cache) {
       cache.evict({
-        id: cache.identify({ __typename: "Position", id: modalData?.id }),
+        id: cache.identify({ __typename: 'Position', id: modalData?.id }),
       })
       cache.gc()
     },
-    onCompleted: data => {
+    onCompleted: (data) => {
       if (data.deletePosition.affected > 0) {
-        toast.success("Position successfully deleted")
+        toast.success('Position successfully deleted')
         closeModal()
       }
     },
-    onError: err => {
-      toast.error(err.message || "Failed to delete position")
+    onError: (err) => {
+      toast.error(err.message || 'Failed to delete position')
     },
   })
 
   const handleDelete = () => {
     if (!modalData?.id) {
-      toast.error("Position ID is missing!")
+      toast.error('Position ID is missing!')
       return
     }
 

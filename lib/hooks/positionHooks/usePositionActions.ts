@@ -1,20 +1,20 @@
 import {
   CREATE_POSITION_MUTATION,
   UPDATE_POSITION_MUTATION,
-} from "@/api/graphql/mutations/position"
-import { GET_POSITIONS } from "@/api/graphql/queries/positions"
-import { useModalStore } from "@/store/modalStore"
+} from '@/api/graphql/mutations/position'
+import { GET_POSITIONS } from '@/api/graphql/queries/positions'
+import { useModalStore } from '@/store/modalStore'
 import {
   CreatePositionModalFormState,
   CreatePositionVariables,
   GetPositionsResponse,
   PositionData,
   UpdatePositionVariables,
-} from "@/types/position"
+} from '@/types/position'
 
-import { useMutation } from "@apollo/client/react"
-import { SubmitEvent, useId, useState } from "react"
-import toast from "react-hot-toast"
+import { useMutation } from '@apollo/client/react'
+import { SubmitEvent, useId, useState } from 'react'
+import toast from 'react-hot-toast'
 
 export function usePositionActions(
   initialData?: CreatePositionModalFormState,
@@ -25,7 +25,7 @@ export function usePositionActions(
 
   const [formData, setFormData] = useState<CreatePositionModalFormState>(
     initialData || {
-      name: "",
+      name: '',
     },
   )
 
@@ -49,11 +49,11 @@ export function usePositionActions(
         })
       }
     },
-    onCompleted: data => {
-      toast.success("Position created successfully!")
+    onCompleted: (data) => {
+      toast.success('Position created successfully!')
       closeModal()
     },
-    onError: err => {
+    onError: (err) => {
       toast.error(err.message)
     },
   })
@@ -63,20 +63,20 @@ export function usePositionActions(
     UpdatePositionVariables
   >(UPDATE_POSITION_MUTATION, {
     onCompleted: () => {
-      toast.success("Position updated successfully!")
+      toast.success('Position updated successfully!')
       closeModal()
     },
-    onError: err => toast.error(err.message),
+    onError: (err) => toast.error(err.message),
   })
 
   const loading = creating || updating
 
-  const isFormValid = formData.name.trim() !== "" && formData.name.trim() !== ""
+  const isFormValid = formData.name.trim() !== '' && formData.name.trim() !== ''
 
   const isDirty =
     !initialData ||
     Object.keys(formData).some(
-      key =>
+      (key) =>
         formData[key as keyof CreatePositionModalFormState] !==
         initialData[key as keyof CreatePositionModalFormState],
     )
@@ -85,7 +85,7 @@ export function usePositionActions(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
+    setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
   const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
