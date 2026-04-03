@@ -1,3 +1,5 @@
+"use client"
+
 import { Loader2 } from "lucide-react"
 
 export default function LoadingPage() {
@@ -8,7 +10,7 @@ export default function LoadingPage() {
 
         <div className="text-center">
           <p className="text-lg font-semibold text-text-primary">Loading</p>
-          <p className="text-sm text-text-secondary">Getting user info...</p>
+          <p className="text-sm text-text-secondary">Getting CV details...</p>
         </div>
       </div>
     </div>

@@ -1,12 +1,12 @@
 "use client"
+import LoadingPage from "@/app/(platform)/loading"
+import NotFoundPage from "@/app/(platform)/not-found"
 import EmployeesList from "@/components/EmployeesList"
 import SortHeader from "@/components/SortHeader"
 import { TableSearch } from "@/components/ui/TableSearch"
 import { headers } from "@/constants/tableHeaders"
 import { useCurrentUser } from "@/lib/hooks/userHooks/useCurrentUser"
 import { useUsers } from "@/lib/hooks/userHooks/useUsers"
-import NotFoundPage from "@/app/(platform)/not-found";
-import LoadingPage from "@/app/(platform)/loading";
 
 export default function Employees() {
   const {
@@ -33,7 +33,7 @@ export default function Employees() {
         setSearch={setSearch}
       />
 
-      <div className="overflow-x-auto rounded-lg ">
+      <div className="overflow-x-auto rounded-lg min-h-screen">
         {isLoading ? (
           <LoadingPage />
         ) : (

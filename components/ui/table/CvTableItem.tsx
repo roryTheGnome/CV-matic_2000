@@ -11,12 +11,13 @@ export function CvTableItem({ cv }: { cv: Cvs }) {
 
       <td className="w-8 text-right pr-2">
         <ActionsMenu
-          editType={"CV_EDIT"}
+          editType={null}
           deleteType={"CV_DELETE"}
           item={{
             id: cv.id,
             name: cv.name,
           }}
+          cvId={cv.id}
         />
       </td>
 

@@ -19,8 +19,8 @@ import { useAuthStore } from "@/store/authStore"
 import { GetLanguagesData, LanguageItem } from "@/types/languages"
 import { getSortLanguageValue } from "@/utils/getSortLanguageValue"
 
+import NotFoundPage from "@/app/(platform)/not-found"
 import { useMutation, useQuery } from "@apollo/client/react"
-import NotFoundPage from "@/app/(platform)/not-found";
 
 export default function Language() {
   const { currentUserId } = useCurrentUser()
@@ -71,7 +71,7 @@ export default function Language() {
             setSearch={setSearch}
           />
 
-          <div className="overflow-x-auto rounded-lg ">
+          <div className="overflow-x-auto rounded-lg min-h-screen">
             <table className="min-w-full divide-y divide-gray-500 ">
               <TableHeader
                 handleSort={handleSort}
