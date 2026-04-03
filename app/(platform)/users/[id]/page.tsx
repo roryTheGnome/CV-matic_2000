@@ -1,11 +1,11 @@
-"use client"
+'use client'
 
-import LoadingPage from "@/app/(platform)/users/[id]/loading"
-import EditableProfile from "@/components/Profile/EditableProfile"
-import Profile from "@/components/Profile/Profile"
-import { useCurrentUser } from "@/lib/hooks/userHooks/useCurrentUser"
-import { useUser } from "@/lib/hooks/userHooks/useUser"
-import NotFoundPage from "@/app/(platform)/not-found";
+import LoadingPage from '@/app/(platform)/users/[id]/loading'
+import EditableProfile from '@/components/Profile/EditableProfile'
+import Profile from '@/components/Profile/Profile'
+import { useCurrentUser } from '@/lib/hooks/userHooks/useCurrentUser'
+import { useUser } from '@/lib/hooks/userHooks/useUser'
+import NotFoundPage from '@/app/(platform)/not-found'
 
 export default function Employee() {
   const { user, isLoading, error } = useUser()
@@ -19,7 +19,7 @@ export default function Employee() {
   }
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
+    <div className="mx-auto max-w-4xl p-6">
       {currentUserId === Number(user.id) ? (
         <EditableProfile user={user} />
       ) : (

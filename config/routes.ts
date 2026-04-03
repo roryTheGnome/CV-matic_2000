@@ -1,29 +1,29 @@
 export const PUBLIC_ROUTES = {
-  LOGIN: "/login",
-  REGISTER: "/register",
-  FORGOT_PASSWORD: "/forgot-password",
-  RESET_PASSWORD: "/reset-password",
-} as const;
+  LOGIN: '/login',
+  REGISTER: '/register',
+  FORGOT_PASSWORD: '/forgot-password',
+  RESET_PASSWORD: '/reset-password',
+} as const
 
 export const PRIVATE_ROUTES = {
-  HOME: "/",
+  HOME: '/',
 
-  USERS: "/users",
-  CVS: "/cvs",
-  LANGUAGES: "/languages",
-  PROFILE: "/profile",
-  SETTINGS: "/settings",
-  SKILLS: "/skills",
-  PROJECTS: "/projects",
-  DEPARTMENTS: "/departments",
-  POSITIONS: "/positions",
-} as const;
+  USERS: '/users',
+  CVS: '/cvs',
+  LANGUAGES: '/languages',
+  PROFILE: '/profile',
+  SETTINGS: '/settings',
+  SKILLS: '/skills',
+  PROJECTS: '/projects',
+  DEPARTMENTS: '/departments',
+  POSITIONS: '/positions',
+} as const
 
 export const ADMIN_ROUTES = {
-  PROJECTS: "/projects",
-  DEPARTMENTS: "/departments",
-  POSITIONS: "/positions",
-} as const;
+  PROJECTS: '/projects',
+  DEPARTMENTS: '/departments',
+  POSITIONS: '/positions',
+} as const
 
 export const isAuthPage = (pathname: string) => {
   return [
@@ -31,5 +31,5 @@ export const isAuthPage = (pathname: string) => {
     PUBLIC_ROUTES.REGISTER,
     PUBLIC_ROUTES.FORGOT_PASSWORD,
     PUBLIC_ROUTES.RESET_PASSWORD,
-  ].some((route) => pathname.startsWith(route));
-};
+  ].some((route) => pathname.startsWith(route))
+}

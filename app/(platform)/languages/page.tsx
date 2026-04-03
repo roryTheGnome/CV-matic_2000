@@ -1,26 +1,26 @@
-"use client"
+'use client'
 
-import { DELETE_PROFILE_LANGUAGE } from "@/api/graphql/mutations/profile"
-import { GET_LANGUAGES } from "@/api/graphql/queries/languages"
-import { GET_USER } from "@/api/graphql/queries/user"
-import LoadingPage from "@/app/(platform)/users/[id]/loading"
-import { LanguageList } from "@/components/LanguageList"
-import { LanguageTableItem } from "@/components/ui/table/LanguageTableItem"
+import { DELETE_PROFILE_LANGUAGE } from '@/api/graphql/mutations/profile'
+import { GET_LANGUAGES } from '@/api/graphql/queries/languages'
+import { GET_USER } from '@/api/graphql/queries/user'
+import LoadingPage from '@/app/(platform)/users/[id]/loading'
+import { LanguageList } from '@/components/LanguageList'
+import { LanguageTableItem } from '@/components/ui/table/LanguageTableItem'
 
-import TableBody from "@/components/ui/table/TableBody"
-import { TableHeader } from "@/components/ui/table/TableHeader"
-import { TableSearch } from "@/components/ui/TableSearch"
-import { languageHeaders } from "@/constants/tableHeaders"
+import TableBody from '@/components/ui/table/TableBody'
+import { TableHeader } from '@/components/ui/table/TableHeader'
+import { TableSearch } from '@/components/ui/TableSearch'
+import { languageHeaders } from '@/constants/tableHeaders'
 
-import { usePageWithTable } from "@/lib/hooks/usePageWithTable"
-import { useCurrentUser } from "@/lib/hooks/userHooks/useCurrentUser"
-import { useUser } from "@/lib/hooks/userHooks/useUser"
-import { useAuthStore } from "@/store/authStore"
-import { GetLanguagesData, LanguageItem } from "@/types/languages"
-import { getSortLanguageValue } from "@/utils/getSortLanguageValue"
+import { usePageWithTable } from '@/lib/hooks/usePageWithTable'
+import { useCurrentUser } from '@/lib/hooks/userHooks/useCurrentUser'
+import { useUser } from '@/lib/hooks/userHooks/useUser'
+import { useAuthStore } from '@/store/authStore'
+import { GetLanguagesData, LanguageItem } from '@/types/languages'
+import { getSortLanguageValue } from '@/utils/getSortLanguageValue'
 
-import { useMutation, useQuery } from "@apollo/client/react"
-import NotFoundPage from "@/app/(platform)/not-found";
+import { useMutation, useQuery } from '@apollo/client/react'
+import NotFoundPage from '@/app/(platform)/not-found'
 
 export default function Language() {
   const { currentUserId } = useCurrentUser()
@@ -67,12 +67,12 @@ export default function Language() {
           <TableSearch
             search={search}
             createButtonText="CREATE LANGUAGE"
-            typeOfCreateModal={"LANGUAGE_CREATE"}
+            typeOfCreateModal={'LANGUAGE_CREATE'}
             setSearch={setSearch}
           />
 
-          <div className="overflow-x-auto rounded-lg ">
-            <table className="min-w-full divide-y divide-gray-500 ">
+          <div className="overflow-x-auto rounded-lg">
+            <table className="min-w-full divide-y divide-gray-500">
               <TableHeader
                 handleSort={handleSort}
                 headers={languageHeaders}
@@ -85,11 +85,11 @@ export default function Language() {
                 search={search}
                 sortKey={sortKey}
                 sortDir={sortDir}
-                getSearchText={language => `${language.name}`}
-                getSortValue={language =>
+                getSearchText={(language) => `${language.name}`}
+                getSortValue={(language) =>
                   getSortLanguageValue(language, sortKey)
                 }
-                renderRow={language => (
+                renderRow={(language) => (
                   <LanguageTableItem key={language.id} item={language} />
                 )}
               />

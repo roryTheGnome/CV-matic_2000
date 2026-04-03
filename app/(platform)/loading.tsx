@@ -1,20 +1,17 @@
-"use client";
+'use client'
 
-import { Loader2 } from "lucide-react";
+import { Loader2 } from 'lucide-react'
 
 export default function LoadingPage() {
-    return (
-        <div className="flex items-center justify-center min-h-screen bg-background">
-            <div className="flex flex-col items-center gap-4 p-8 rounded-2xl bg-surface shadow-md">
+  return (
+    <div className="bg-background flex min-h-screen items-center justify-center">
+      <div className="bg-surface flex flex-col items-center gap-4 rounded-2xl p-8 shadow-md">
+        <Loader2 className="text-primary h-10 w-10 animate-spin" />
 
-                <Loader2 className="w-10 h-10 animate-spin text-primary" />
-
-                <div className="text-center">
-                    <p className="text-lg font-semibold text-text-primary">
-                        Loading
-                    </p>
-                </div>
-            </div>
+        <div className="text-center">
+          <p className="text-text-primary text-lg font-semibold">Loading</p>
         </div>
-    );
+      </div>
+    </div>
+  )
 }

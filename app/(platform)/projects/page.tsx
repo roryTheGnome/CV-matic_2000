@@ -1,35 +1,34 @@
-"use client";
+'use client'
 
-import { GET_PROJECTS } from "@/api/graphql/queries/projects";
-import { ProjectTableItem } from "@/components/ui/table/ProjectTableItem";
-import TableBody from "@/components/ui/table/TableBody";
-import { TableHeader } from "@/components/ui/table/TableHeader";
-import { TableSearch } from "@/components/ui/TableSearch";
-import { projectsHeaders } from "@/constants/tableHeaders";
-import { usePageWithTable } from "@/lib/hooks/usePageWithTable";
-import { GetProjectsData, Project } from "@/types/project";
-import { getSortProjectValue } from "@/utils/getSortProjectValue";
-import { useQuery } from "@apollo/client/react";
-import { useCurrentUser } from "@/lib/hooks/userHooks/useCurrentUser";
+import { GET_PROJECTS } from '@/api/graphql/queries/projects'
+import { ProjectTableItem } from '@/components/ui/table/ProjectTableItem'
+import TableBody from '@/components/ui/table/TableBody'
+import { TableHeader } from '@/components/ui/table/TableHeader'
+import { TableSearch } from '@/components/ui/TableSearch'
+import { projectsHeaders } from '@/constants/tableHeaders'
+import { usePageWithTable } from '@/lib/hooks/usePageWithTable'
+import { GetProjectsData, Project } from '@/types/project'
+import { getSortProjectValue } from '@/utils/getSortProjectValue'
+import { useQuery } from '@apollo/client/react'
+import { useCurrentUser } from '@/lib/hooks/userHooks/useCurrentUser'
 
 export default function Projects() {
-  const { loading, error, data } = useQuery<GetProjectsData>(GET_PROJECTS);
-  const { currentUserRole } = useCurrentUser();
-  const { search, sortKey, sortDir, setSearch, handleSort } =
-    usePageWithTable();
+  const { loading, error, data } = useQuery<GetProjectsData>(GET_PROJECTS)
+  const { currentUserRole } = useCurrentUser()
+  const { search, sortKey, sortDir, setSearch, handleSort } = usePageWithTable()
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error loading users</div>;
+  if (loading) return <div>Loading...</div>
+  if (error) return <div>Error loading users</div>
 
   return (
     <div>
       <TableSearch
         search={search}
         createButtonText="CREATE PROJECT"
-        typeOfCreateModal={"PROJECT_CREATE"}
+        typeOfCreateModal={'PROJECT_CREATE'}
         setSearch={setSearch}
       />
-      <div className="overflow-x-auto rounded-lg ">
+      <div className="overflow-x-auto rounded-lg">
         <table className="min-w-full border-separate border-spacing-y-3">
           <TableHeader
             handleSort={handleSort}
@@ -48,12 +47,12 @@ export default function Projects() {
               <ProjectTableItem
                 key={project.id}
                 project={project}
-                isAdmin={currentUserRole === "Admin"}
+                isAdmin={currentUserRole === 'Admin'}
               />
             )}
           />
         </table>
       </div>
     </div>
-  );
+  )
 }
