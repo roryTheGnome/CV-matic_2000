@@ -2,24 +2,17 @@
 
 import { useActionMenu } from "@/lib/hooks/useActionMenu"
 import { ModalData, ModalType } from "@/store/modalStore"
-import { Info, MoreVertical, Pencil, Trash2 } from "lucide-react"
+import { MoreVertical, Pencil, Trash2 } from "lucide-react"
 
 interface Props {
   deleteType: ModalType
   editType: ModalType
   item: ModalData
-  cvId?: string
 }
 
-export function ActionsMenu({ editType, deleteType, item, cvId }: Props) {
-  const {
-    menuRef,
-    isOpen,
-    setIsOpen,
-    handleEdit,
-    handleDelete,
-    handleCvDetails,
-  } = useActionMenu(deleteType, editType, item)
+export function ActionsMenu({ editType, deleteType, item }: Props) {
+  const { menuRef, isOpen, setIsOpen, handleEdit, handleDelete } =
+    useActionMenu(deleteType, editType, item)
 
   return (
     <div className="relative" ref={menuRef}>
@@ -32,24 +25,15 @@ export function ActionsMenu({ editType, deleteType, item, cvId }: Props) {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 top-full w-36 bg-background border border-input-border shadow-xl z-10 overflow-hidden">
-          {cvId ? (
-            <button
-              onClick={() => handleCvDetails(cvId)}
-              className="flex items-center w-full px-4 py-2.5 text-sm text-gray-300 hover:bg-black/10 hover:text-white transition-colors"
-            >
-              <Info size={16} className="mr-3" />
-              Details
-            </button>
-          ) : (
-            <button
-              onClick={handleEdit}
-              className="flex items-center w-full px-4 py-2.5 text-sm text-gray-300 hover:bg-black/10 hover:text-white transition-colors"
-            >
-              <Pencil size={16} className="mr-3 text-gray-400" />
-              Edit
-            </button>
-          )}
+        <div className="absolute right-0 top-full mt-1 w-36 bg-background border border-input-border rounded-lg shadow-xl z-10 overflow-hidden py-1">
+          <button
+            onClick={handleEdit}
+            className="flex items-center w-full px-4 py-2.5 text-sm text-gray-300 hover:bg-black/10 hover:text-white transition-colors"
+          >
+            <Pencil size={16} className="mr-3 text-gray-400" />
+            Edit
+          </button>
+
           <button
             onClick={handleDelete}
             className="flex items-center w-full px-4 py-2.5 text-sm text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-colors"

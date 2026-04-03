@@ -22,7 +22,7 @@ export function Select({
   ...props
 }: Props) {
   return (
-    <div className="relative h-fit">
+    <div className="relative">
       <label
         htmlFor={id}
         className="absolute left-2 -top-2.5 px-1 transition-all bg-background text-xs text-input-border"
@@ -35,7 +35,7 @@ export function Select({
         name={name}
         value={value}
         onChange={handleChange}
-        className="w-full bg-background border border-input-border p-3 text-text-primary appearance-none focus:outline-none focus:border-gray-500 transition-colors pr-10"
+        className="w-full bg-transparent border border-input-border p-3 text-text-primary appearance-none focus:outline-none focus:border-gray-500 transition-colors pr-10"
         required={isRequired}
         {...props}
       >

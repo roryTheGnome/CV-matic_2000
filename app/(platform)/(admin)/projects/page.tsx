@@ -26,7 +26,7 @@ export default function Projects() {
         typeOfCreateModal={"PROJECT_CREATE"}
         setSearch={setSearch}
       />
-      <div className="overflow-x-auto rounded-lg min-h-screen">
+      <div className="overflow-x-auto rounded-lg ">
         <table className="min-w-full divide-y divide-gray-500 ">
           <TableHeader
             handleSort={handleSort}

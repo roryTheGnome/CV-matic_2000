@@ -1,30 +1,31 @@
-"use client"
+"use client";
 
-import LoadingPage from "@/app/(platform)/users/[id]/loading"
-import EditableProfile from "@/components/EditableProfile"
-import Profile from "@/components/Profile"
-import { useCurrentUser } from "@/lib/hooks/userHooks/useCurrentUser"
-import { useUser } from "@/lib/hooks/userHooks/useUser"
-import NotFoundPage from "@/app/(platform)/not-found";
+import { useUser } from "@/lib/hooks/useUser";
+import EditableProfile from "@/components/EditableProfile";
+import Profile from "@/components/Profile";
+import LoadingPage from "@/app/(platform)/users/[id]/loading";
+import {useCurrentUser} from "@/lib/hooks/useCurrentUser";
+import NotFoundPage from "@/app/(platform)/users/not-found";
 
-export default function Employee() {
-  const { user, isLoading, error } = useUser()
+export default function Employee(){
 
-  const { currentUserId } = useCurrentUser()
+    const { user, isLoading, error } = useUser();
 
-  if (error) return <NotFoundPage />
+    const {currentUserId} = useCurrentUser();
 
-  if (isLoading || !user || currentUserId === undefined) {
-    return <LoadingPage />
-  }
+    if (error) return <NotFoundPage/>;
 
-  return (
-    <div className="p-6 max-w-4xl mx-auto">
-      {currentUserId === Number(user.id) ? (
-        <EditableProfile user={user} />
-      ) : (
-        <Profile user={user} />
-      )}
-    </div>
-  )
+    if (isLoading || !user || currentUserId===undefined) {
+        return <LoadingPage />;
+    }
+
+    return(
+        <div className="p-6 max-w-4xl mx-auto">
+            {currentUserId === Number(user.id) ? (
+                <EditableProfile user={user} />
+            ) : (
+                <Profile user={user}/>
+            )}
+        </div>
+    )
 }
