@@ -1,26 +1,28 @@
-"use client"
+"use client";
 
-import { CvModal } from "@/components/modals/cvModal/CvModal"
-import { DepartmentModal } from "@/components/modals/departmentModal/DepartmentModal"
-import { ProjectModal } from "@/components/modals/projectModal/ProjectModal"
-import { UserModal } from "@/components/modals/userModal/UserModal"
+import { CvModal } from "@/components/modals/cvModal/CvModal";
+import { DepartmentModal } from "@/components/modals/departmentModal/DepartmentModal";
+import { ProjectModal } from "@/components/modals/projectModal/ProjectModal";
+import { UserModal } from "@/components/modals/userModal/UserModal";
 
-import { DeleteCvModal } from "@/components/modals/cvModal/DeleteCvModal"
-import { DeleteDepartmentModal } from "@/components/modals/departmentModal/DeleteDepartmentModal"
-import { DeleteLanguageModal } from "@/components/modals/languageModal/DeleteLanguageModal"
-import { LanguageModal } from "@/components/modals/languageModal/LanguageModal"
-import { DeletePositionModal } from "@/components/modals/positionModal/DeletePositionModal"
-import { PositionModal } from "@/components/modals/positionModal/PositionModal"
-import { DeleteProjectModal } from "@/components/modals/projectModal/DeleteProjectModal"
-import { DeleteSkillModal } from "@/components/modals/skillModal/DeleteSkillModal"
-import { SkillModal } from "@/components/modals/skillModal/SkillModal"
-import { DeleteUserModal } from "@/components/modals/userModal/DeleteUserModal"
-import { useModalStore } from "@/store/modalStore"
+import { DeleteCvModal } from "@/components/modals/cvModal/DeleteCvModal";
+import { DeleteDepartmentModal } from "@/components/modals/departmentModal/DeleteDepartmentModal";
+import { DeleteLanguageModal } from "@/components/modals/languageModal/DeleteLanguageModal";
+import { LanguageModal } from "@/components/modals/languageModal/LanguageModal";
+import { DeletePositionModal } from "@/components/modals/positionModal/DeletePositionModal";
+import { PositionModal } from "@/components/modals/positionModal/PositionModal";
+import { DeleteProjectModal } from "@/components/modals/projectModal/DeleteProjectModal";
+import { DeleteSkillModal } from "@/components/modals/skillModal/DeleteSkillModal";
+import { SkillModal } from "@/components/modals/skillModal/SkillModal";
+import { DeleteUserModal } from "@/components/modals/userModal/DeleteUserModal";
+import { useModalStore } from "@/store/modalStore";
+import { ProfileSkillModal } from "@/components/modals/addSkill/SkillModal";
+import { ProfileLanguageModal } from "@/components/modals/addLanguage/LanguageModal";
 
 export function ModalProvider() {
-  const { type, isOpen } = useModalStore()
+  const { type, isOpen } = useModalStore();
 
-  if (!isOpen) return null
+  if (!isOpen) return null;
 
   return (
     <>
@@ -52,8 +54,8 @@ export function ModalProvider() {
       {type === "LANGUAGE_CREATE" && <LanguageModal />}
       {type === "LANGUAGE_EDIT" && <LanguageModal />}
 
-      {type === "PROFILE_SKILL_ADD" && <SkillModal />}
-      {type === "PROFILE_LANGUAGE_ADD" && <LanguageModal />}
+      {type === "PROFILE_SKILL_ADD" && <ProfileSkillModal />}
+      {type === "PROFILE_LANGUAGE_ADD" && <ProfileLanguageModal />}
     </>
-  )
+  );
 }

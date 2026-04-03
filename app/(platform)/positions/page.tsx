@@ -1,25 +1,30 @@
-"use client"
+"use client";
 
-import { TableHeader } from "@/components/ui/table/TableHeader"
-import { onlyNameHeaders } from "@/constants/tableHeaders"
-import { useQuery } from "@apollo/client/react"
+import { TableHeader } from "@/components/ui/table/TableHeader";
+import { onlyNameHeaders } from "@/constants/tableHeaders";
+import { useQuery } from "@apollo/client/react";
 
-import { GET_POSITIONS } from "@/api/graphql/queries/positions"
-import { NameTableItem } from "@/components/ui/table/NameTableItem"
-import TableBody from "@/components/ui/table/TableBody"
-import { TableSearch } from "@/components/ui/TableSearch"
-import { usePageWithTable } from "@/lib/hooks/usePageWithTable"
-import { GetPositionsResponse } from "@/types/position"
-import { Position } from "@/types/user"
-import { getSortByName } from "@/utils/getSortByName"
+import { GET_POSITIONS } from "@/api/graphql/queries/positions";
+import { NameTableItem } from "@/components/ui/table/NameTableItem";
+import TableBody from "@/components/ui/table/TableBody";
+import { TableSearch } from "@/components/ui/TableSearch";
+import { usePageWithTable } from "@/lib/hooks/usePageWithTable";
+import { GetPositionsResponse } from "@/types/position";
+import { Position } from "@/types/user";
+import { getSortByName } from "@/utils/getSortByName";
+import { useCurrentUser } from "@/lib/hooks/userHooks/useCurrentUser";
 
 export default function Positions() {
-  const { data, loading, error } = useQuery<GetPositionsResponse>(GET_POSITIONS)
+  const { data, loading, error } =
+    useQuery<GetPositionsResponse>(GET_POSITIONS);
 
-  const { search, sortKey, sortDir, setSearch, handleSort } = usePageWithTable()
+  const { search, sortKey, sortDir, setSearch, handleSort } =
+    usePageWithTable();
 
-  if (loading) return <div>Loading...</div>
-  if (error) return <div>Error loading users</div>
+  const { currentUserRole } = useCurrentUser();
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error loading users</div>;
 
   return (
     <div>
@@ -44,19 +49,20 @@ export default function Positions() {
             search={search}
             sortKey={sortKey}
             sortDir={sortDir}
-            getSearchText={position => `${position.name}`}
-            getSortValue={position => getSortByName(position, sortKey)}
-            renderRow={position => (
+            getSearchText={(position) => `${position.name}`}
+            getSortValue={(position) => getSortByName(position, sortKey)}
+            renderRow={(position) => (
               <NameTableItem
                 key={position.id}
                 item={position}
                 editType={"POSITION_EDIT"}
                 deleteType={"POSITION_DELETE"}
+                isAdmin={currentUserRole === "Admin"}
               />
             )}
           />
         </table>
       </div>
     </div>
-  )
+  );
 }

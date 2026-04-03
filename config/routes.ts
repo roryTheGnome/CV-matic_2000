@@ -3,7 +3,7 @@ export const PUBLIC_ROUTES = {
   REGISTER: "/register",
   FORGOT_PASSWORD: "/forgot-password",
   RESET_PASSWORD: "/reset-password",
-} as const
+} as const;
 
 export const PRIVATE_ROUTES = {
   HOME: "/",
@@ -14,13 +14,16 @@ export const PRIVATE_ROUTES = {
   PROFILE: "/profile",
   SETTINGS: "/settings",
   SKILLS: "/skills",
-} as const
+  PROJECTS: "/projects",
+  DEPARTMENTS: "/departments",
+  POSITIONS: "/positions",
+} as const;
 
 export const ADMIN_ROUTES = {
   PROJECTS: "/projects",
   DEPARTMENTS: "/departments",
   POSITIONS: "/positions",
-} as const
+} as const;
 
 export const isAuthPage = (pathname: string) => {
   return [
@@ -28,13 +31,5 @@ export const isAuthPage = (pathname: string) => {
     PUBLIC_ROUTES.REGISTER,
     PUBLIC_ROUTES.FORGOT_PASSWORD,
     PUBLIC_ROUTES.RESET_PASSWORD,
-  ].some(route => pathname.startsWith(route))
-}
-
-export const isAdminPage = (pathname: string) => {
-  return [
-    ADMIN_ROUTES.PROJECTS,
-    ADMIN_ROUTES.DEPARTMENTS,
-    ADMIN_ROUTES.POSITIONS,
-  ].some(route => pathname.startsWith(route))
-}
+  ].some((route) => pathname.startsWith(route));
+};
