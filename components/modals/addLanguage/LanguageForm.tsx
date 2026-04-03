@@ -1,6 +1,5 @@
 "use client";
 
-import { useCurrentUser } from "@/lib/hooks/useCurrentUser";
 import { Button } from "@/components/ui/Button";
 import { CancelButton } from "@/components/ui/CancelButton";
 import { useModalStore } from "@/store/modalStore";
@@ -12,6 +11,7 @@ import {GET_LANGUAGES} from "@/api/graphql/queries/language";
 import {PROFILE_LANGUAGE_ADD} from "@/api/graphql/mutations/profile";
 import {GET_USER} from "@/api/graphql/queries/user";
 import {Select} from "@/components/ui/select/Select";
+import {useCurrentUser} from "@/lib/hooks/userHooks/useCurrentUser";
 
 type LanguageFormProps={
     userLanguages: { name: string }[];

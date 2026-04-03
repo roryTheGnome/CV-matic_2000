@@ -6,12 +6,17 @@ import { useUser } from "@/lib/hooks/userHooks/useUser"
 import { useAuthStore } from "@/store/authStore"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import {useState} from "react";
+import {LogoutButton} from "@/components/ui/LogoutButton";
+import {CircleUserRound, Settings} from "lucide-react";
 
 export default function Nav() {
   const pathname = usePathname()
   const { isAdmin } = useAuthStore()
 
   const { currentUserId } = useCurrentUser()
+
+  const[open,setOpen]= useState(false);
 
   const { user } = useUser(currentUserId ? String(currentUserId) : undefined)
 
@@ -44,13 +49,46 @@ export default function Nav() {
           })}
         </div>
 
-        <div className="flex items-center gap-3 px-2">
-          <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white">
-            {user?.profile?.first_name?.at(0) ?? "U"}
-          </div>
-          <span>
-            {user?.profile.first_name} {user?.profile.last_name}
-          </span>
+        <div className="flex items-center gap-3 px-2 relative" >
+          <button
+              onClick={() => setOpen((isopen) => !isopen)}
+              className="flex items-center gap-3 px-2 hover:bg-surface-active rounded transition"
+          >
+          {user?.profile?.avatar ? (
+              <img
+                  src={user.profile.avatar}
+                  className="w-10 h-10 rounded-full bg-primary flex items-center justify-center"
+              />
+          ):(
+              <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-text-primary">
+                {user?.profile?.first_name?.at(0) ?? "U"}
+              </div>
+          )
+          }
+
+            <span>
+              {user?.profile.first_name} {user?.profile.last_name}
+            </span>
+          </button>
+          {open && (
+              <div className="absolute bottom-full left-0 mb-2 w-56
+                  bg-surface border border-input-border
+                  rounded shadow-lg z-50 ">
+
+                <div className="flex flex-col py-2">
+
+                  <Link href={`/users/${user?.id}`} className="flex items-center gap-3 px-5 py-4 hover:bg-surface-active transition">
+                    <CircleUserRound size={20} className="w-5 h-5 text-text-primary " /><span>Profile</span>
+                  </Link>
+                  <Link href={'/'} className="flex items-center gap-3 px-5 py-4 hover:bg-surface-active transition">
+                    <Settings size={20} className="w-5 h-5 text-text-primary" /><span>Settings</span>
+                  </Link>
+                  <div className="border-t border-input-border my-2" />
+                  <LogoutButton />
+
+                </div>
+              </div>
+          )}
         </div>
       </nav>
     </>

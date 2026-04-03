@@ -20,7 +20,7 @@ export default function Profile({user}:ProfileProp){
                 <p className="text-sm text-text-secondary">{user.email}</p>
 
                 <p className="text-sm text-text-secondary">
-                    A member since {new Date(user.profile.created_at).toDateString()}
+                    A member since {new Date(Number(user.profile.created_at)).toDateString()}
                 </p>
             </div>
 
@@ -30,7 +30,7 @@ export default function Profile({user}:ProfileProp){
                         First Name
                     </label>
                     <div className="mt-1 p-3 border rounded bg-surface">
-                        {user.profile.first_name}
+                        {user.profile?.first_name ? user.profile.first_name : "NA"}
                     </div>
                 </div>
                 <div>
@@ -38,7 +38,7 @@ export default function Profile({user}:ProfileProp){
                         Last Name
                     </label>
                     <div className="mt-1 p-3 border rounded bg-surface">
-                        {user.profile.last_name}
+                        {user.profile?.last_name ? user.profile.last_name : "NA"}
                     </div>
                 </div>
                 <div>
@@ -46,7 +46,7 @@ export default function Profile({user}:ProfileProp){
                         Department
                     </label>
                     <div className="mt-1 p-3 border rounded bg-surface">
-                        {user.department_name}
+                        {user?.department_name ? user?.department_name: "NA"}
                     </div>
                 </div>
                 <div>
@@ -54,7 +54,7 @@ export default function Profile({user}:ProfileProp){
                         Position
                     </label>
                     <div className="mt-1 p-3 border rounded bg-surface">
-                        {user.position_name}
+                        {user?.position_name ? user.position_name : "NA"}
                     </div>
                 </div>
             </div>
