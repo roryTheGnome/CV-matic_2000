@@ -5,7 +5,7 @@ import {Department, GetDepartmentsResponse} from "@/types/department";
 import {GET_DEPARTMENTS} from "@/api/graphql/queries/departments";
 import {GetPositionsResponse, Position} from "@/types/position";
 import {GET_POSITIONS} from "@/api/graphql/queries/positions";
-import {UPDATE_PROFILE, UPDATE_USER} from "@/api/graphql/queries/user";
+import {GET_USER, UPDATE_PROFILE, UPDATE_USER} from "@/api/graphql/queries/user";
 import {DELETE_AVATAR, UPLOAD_AVATAR} from "@/api/graphql/mutations/user";
 import {toBase64} from "@/constants/toBase64";
 
@@ -14,8 +14,6 @@ type ProfileProp = {
 };
 
 export default function EditableProfile({user}:ProfileProp){
-    const fullName=`${user.profile.first_name} ${user.profile.last_name}`;
-
     const [firstName, setFirstName] = useState(user.profile.first_name || "");
     const [lastName, setLastName] = useState(user.profile.last_name || "");
 
@@ -27,20 +25,34 @@ export default function EditableProfile({user}:ProfileProp){
     const {data: depData, loading:depLoading}=useQuery<GetDepartmentsResponse>(GET_DEPARTMENTS);
     const {data: posData, loading:posLoading}=useQuery<GetPositionsResponse>(GET_POSITIONS);
 
-    const [updateProfile,{loading: profileLoading}]= useMutation(UPDATE_PROFILE);
-    const [updateUser,{loading: userLoading}]= useMutation(UPDATE_USER);
+    const [updateProfile,{loading: profileLoading}]= useMutation(UPDATE_PROFILE,{
+        refetchQueries: [
+            {
+                query: GET_USER,
+                variables: { userId: user.id },
+            },
+        ],
+    });
+    const [updateUser,{loading: userLoading}]= useMutation(UPDATE_USER,{
+        refetchQueries: [
+            {
+                query: GET_USER,
+                variables: { userId: user.id },
+            },
+        ],
+    });
 
     const [uploadAvatar] = useMutation<UploadAvatarResponse,UploadAvatarVariables>(UPLOAD_AVATAR);
     const [deleteAvatar] = useMutation(DELETE_AVATAR);
 
     const [preview, setPreview] = useState<string | null>(user.profile?.avatar ?? null);
 
-    const hasChanges =
+    const hasChanges =()=>
         firstName !== (user.profile.first_name || "") ||
         lastName !== (user.profile.last_name || "") ||
         departmentId !== (user.department?.id || "") ||
         positionId !== (user.position?.id || "") ;
-
+    const hasUnsavedChanges = hasChanges();
     const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (!file) return;
@@ -99,8 +111,8 @@ export default function EditableProfile({user}:ProfileProp){
                 variables: {
                     user: {
                         userId: user.id,
-                        departmentId,
-                        positionId
+                        ...(departmentId && { departmentId }),
+                        ...(positionId && { positionId }),
                     }
                 }
             });
@@ -122,7 +134,7 @@ export default function EditableProfile({user}:ProfileProp){
 
                         <label
                             className="absolute inset-0 flex flex-col items-center justify-center
-                            rounded-full bg-black/60 text-white text-xs text-center
+                            rounded-full bg-background/60 text-text-primary text-xs text-center
                             opacity-0 group-hover:opacity-100 transition cursor-pointer px-2"
                         >
                             <span className="font-medium">Upload avatar image</span>
@@ -140,7 +152,7 @@ export default function EditableProfile({user}:ProfileProp){
                     {preview && (
                         <button
                             onClick={handleDeleteAvatar}
-                            className="mt-3 text-sm text-text-secondary hover:text-red-400 transition"
+                            className="mt-3 text-sm text-text-secondary hover:text-primary transition"
                         >
                             Remove avatar
                         </button>
@@ -188,7 +200,7 @@ export default function EditableProfile({user}:ProfileProp){
                         className="mt-1 p-3 border rounded bg-surface"
                         disabled={depLoading}
                     >
-                        <option value="">Select department</option>
+                        <option value=""disabled>Select department</option>
 
                         {depData?.departments.map((dep: Department) => (
                             <option key={dep.id} value={dep.id}>
@@ -209,7 +221,7 @@ export default function EditableProfile({user}:ProfileProp){
                         className="mt-1 p-3 border rounded bg-surface"
                         disabled={posLoading}
                     >
-                        <option value="">Select position</option>
+                        <option value="" disabled>Select position</option>
 
                         {posData?.positions.map((pos: Position) => (
                             <option key={pos.id} value={pos.id}>
@@ -222,9 +234,9 @@ export default function EditableProfile({user}:ProfileProp){
 
             <button
                 onClick={handleSave}
-                disabled={loading || !hasChanges}
+                disabled={loading || !hasUnsavedChanges}
                 className={`mt-6 px-4 py-2 rounded text-white ${
-                    (loading || !hasChanges)
+                    (loading || !hasUnsavedChanges)
                         ? "bg-surface-disabled"
                         : "bg-primary"
                 }`}

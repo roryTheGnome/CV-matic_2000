@@ -54,9 +54,18 @@ export default function Nav() {
               onClick={() => setOpen((isopen) => !isopen)}
               className="flex items-center gap-3 px-2 hover:bg-surface-active rounded transition"
           >
-            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-text-primary">
-              {user?.profile?.first_name?.at(0) ?? "U"}
-            </div>
+          {user?.profile?.avatar ? (
+              <img
+                  src={user.profile.avatar}
+                  className="w-10 h-10 rounded-full bg-primary flex items-center justify-center"
+              />
+          ):(
+              <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-text-primary">
+                {user?.profile?.first_name?.at(0) ?? "U"}
+              </div>
+          )
+          }
+
             <span>
               {user?.profile.first_name} {user?.profile.last_name}
             </span>
