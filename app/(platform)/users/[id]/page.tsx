@@ -1,8 +1,8 @@
 "use client"
 
 import LoadingPage from "@/app/(platform)/users/[id]/loading"
-import EditableProfile from "@/components/EditableProfile"
-import Profile from "@/components/Profile"
+import EditableProfile from "@/components/Profile/EditableProfile"
+import Profile from "@/components/Profile/Profile"
 import { useCurrentUser } from "@/lib/hooks/userHooks/useCurrentUser"
 import { useUser } from "@/lib/hooks/userHooks/useUser"
 import NotFoundPage from "@/app/(platform)/not-found";

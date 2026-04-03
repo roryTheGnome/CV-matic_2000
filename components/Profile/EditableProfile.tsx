@@ -1,4 +1,4 @@
-import {User} from "@/types/user";
+import {UploadAvatarResponse, UploadAvatarVariables, User} from "@/types/user";
 import {useState} from "react";
 import {useMutation, useQuery} from "@apollo/client/react";
 import {Department, GetDepartmentsResponse} from "@/types/department";
@@ -6,6 +6,8 @@ import {GET_DEPARTMENTS} from "@/api/graphql/queries/departments";
 import {GetPositionsResponse, Position} from "@/types/position";
 import {GET_POSITIONS} from "@/api/graphql/queries/positions";
 import {UPDATE_PROFILE, UPDATE_USER} from "@/api/graphql/queries/user";
+import {DELETE_AVATAR, UPLOAD_AVATAR} from "@/api/graphql/mutations/user";
+import {toBase64} from "@/constants/toBase64";
 
 type ProfileProp = {
     user: User
@@ -27,6 +29,56 @@ export default function EditableProfile({user}:ProfileProp){
 
     const [updateProfile,{loading: profileLoading}]= useMutation(UPDATE_PROFILE);
     const [updateUser,{loading: userLoading}]= useMutation(UPDATE_USER);
+
+    const [uploadAvatar] = useMutation<UploadAvatarResponse,UploadAvatarVariables>(UPLOAD_AVATAR);
+    const [deleteAvatar] = useMutation(DELETE_AVATAR);
+
+    const [preview, setPreview] = useState<string | null>(user.profile?.avatar ?? null);
+
+    const hasChanges =
+        firstName !== (user.profile.first_name || "") ||
+        lastName !== (user.profile.last_name || "") ||
+        departmentId !== (user.department?.id || "") ||
+        positionId !== (user.position?.id || "") ;
+
+    const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        try {
+            const base64 = await toBase64(file);
+
+            const res = await uploadAvatar({
+                variables: {
+                    avatar: {
+                        userId: user.id,
+                        base64,
+                        size: file.size,
+                        type: file.type
+                    }
+                }
+            });
+
+            if(res.data==undefined)return
+            setPreview(res.data.uploadAvatar);
+        } catch (err) {
+            console.error("Avatar upload failed", err);
+        }
+    };
+
+    const handleDeleteAvatar = async () => {
+        try {
+            await deleteAvatar({
+                variables: {
+                    avatar: { userId: user.id }
+                }
+            });
+
+            setPreview(null);
+        } catch (err) {
+            console.error(err);
+        }
+    };
 
     const loading= profileLoading ||userLoading;
 
@@ -57,21 +109,47 @@ export default function EditableProfile({user}:ProfileProp){
             console.error("Upsi! Update failed:", err);
         }
     }
-
     return (
         <>
-            <div className="flex flex-col items-center text-center mb-8">
-                <img
-                    src={user.profile?.avatar ?? 'https://placehold.co/100'}
-                    className="w-24 h-24 rounded-full object-cover mb-4"
-                />
+            <div className="flex flex-col items-center text-center mb-10">
+                <div className="flex flex-col items-center mb-6">
+                    <div className="relative group">
 
-                <h1 className="text-2xl font-semibold">{fullName}</h1>
+                        <img
+                            src={preview ?? 'https://placehold.co/120'} //TODO change this later to non human waiting thing
+                            className="w-32 h-32 rounded-full object-cover bg-surface"
+                        />
 
+                        <label
+                            className="absolute inset-0 flex flex-col items-center justify-center
+                            rounded-full bg-black/60 text-white text-xs text-center
+                            opacity-0 group-hover:opacity-100 transition cursor-pointer px-2"
+                        >
+                            <span className="font-medium">Upload avatar image</span>
+                            <span className="text-[10px] opacity-80 mt-1">png, jpg or gif (max 0.5MB)</span>
+
+                            <input
+                                type="file"
+                                accept="image/png, image/jpeg, image/jpg"
+                                className="hidden"
+                                onChange={handleAvatarChange}
+                            />
+                        </label>
+                    </div>
+
+                    {preview && (
+                        <button
+                            onClick={handleDeleteAvatar}
+                            className="mt-3 text-sm text-text-secondary hover:text-red-400 transition"
+                        >
+                            Remove avatar
+                        </button>
+                    )}
+                </div>
                 <p className="text-sm text-text-secondary">{user.email}</p>
 
                 <p className="text-sm text-text-secondary">
-                    Member since {new Date(user.profile.created_at).toDateString()}
+                    A member since {new Date(Number(user.profile.created_at)).toDateString()}
                 </p>
             </div>
 
@@ -144,9 +222,11 @@ export default function EditableProfile({user}:ProfileProp){
 
             <button
                 onClick={handleSave}
-                disabled={loading}
+                disabled={loading || !hasChanges}
                 className={`mt-6 px-4 py-2 rounded text-white ${
-                    loading ? "bg-gray-400" : "bg-blue-500 hover:bg-blue-600"
+                    (loading || !hasChanges)
+                        ? "bg-surface-disabled"
+                        : "bg-primary"
                 }`}
             >
                 {loading ? "Saving..." : "Save"}

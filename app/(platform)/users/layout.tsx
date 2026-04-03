@@ -9,7 +9,7 @@ export default function EmployeesLayout({
   children: React.ReactNode
 }) {
     return (
-        <div className="p-6">
+        <div >
             <Suspense fallback={<LoadingPage/>}>
                 <div>{children}</div>
             </Suspense>

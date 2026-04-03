@@ -20,7 +20,7 @@ export default function Profile({user}:ProfileProp){
                 <p className="text-sm text-text-secondary">{user.email}</p>
 
                 <p className="text-sm text-text-secondary">
-                    A member since {new Date(user.profile.created_at).toDateString()}
+                    A member since {new Date(Number(user.profile.created_at)).toDateString()}
                 </p>
             </div>
 

@@ -28,7 +28,7 @@ export default function GlobalNav() {
     const rootLabel = ROUTE_LABELS[root] || root;
 
     return (
-        <nav className="mb-4 text-sm text-text-secondary flex items-center gap-2">
+        <nav className="mb-4 text-sm text-text-secondary flex items-center">
 
             <Link href={`/${root}`} className="text-xl hover:text-text-primary">
             {rootLabel}

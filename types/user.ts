@@ -126,3 +126,16 @@ export interface GetUserByIdData {
     cvs: Cvs[] | null
   }
 }
+
+export interface UploadAvatarResponse {
+  uploadAvatar: string;
+}
+
+export interface UploadAvatarVariables {
+  avatar: {
+    userId: string;
+    base64: string;
+    size: number;
+    type: string;
+  };
+}
