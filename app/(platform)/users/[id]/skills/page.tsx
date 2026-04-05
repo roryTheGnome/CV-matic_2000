@@ -15,7 +15,7 @@ export default function EmployeeSkill() {
   const { user, error } = useUser()
   const { data: skillsData } = useQuery<GetSkillsData>(GET_SKILLS)
 
-  const { currentUserId } = useCurrentUser()
+  const { currentUserId, currentUserRole } = useCurrentUser()
 
   const [deleteSkills] = useMutation(DELETE_PROFILE_SKILL, {
     refetchQueries: [
@@ -45,7 +45,7 @@ export default function EmployeeSkill() {
         skills={user.profile.skills}
         allSkills={skillsData?.skills || []}
         onDelete={handleDelete}
-        owner={currentUserId === Number(user.id)}
+        owner={currentUserId === Number(user.id) || currentUserRole === 'Admin'}
       />
     </>
   )

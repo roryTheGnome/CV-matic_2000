@@ -12,7 +12,7 @@ import NotFoundPage from '@/app/(platform)/not-found'
 export default function EmployeeLanguage() {
   const { user, error } = useUser()
 
-  const { currentUserId } = useCurrentUser()
+  const { currentUserId, currentUserRole } = useCurrentUser()
 
   const [deleteLanguages] = useMutation(DELETE_PROFILE_LANGUAGE, {
     refetchQueries: [
@@ -42,7 +42,7 @@ export default function EmployeeLanguage() {
       <LanguageList
         languages={user.profile.languages}
         onDelete={handleDelete}
-        owner={currentUserId === Number(user.id)}
+        owner={currentUserId === Number(user.id) || currentUserRole === 'Admin'}
       />
     </>
   )
