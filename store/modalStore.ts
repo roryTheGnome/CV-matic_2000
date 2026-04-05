@@ -1,11 +1,13 @@
 import { create } from 'zustand'
 import { LanguageProficiency } from '@/types/lang'
+import { SkillMastery } from '@/types/skills'
 
 export type ModalType =
   | 'USER_CREATE'
   | 'USER_DELETE'
   | 'USER_EDIT'
   | 'PROFILE_SKILL_ADD'
+  | 'PROFILE_SKILL_EDIT'
   | 'PROFILE_LANGUAGE_ADD'
   | 'PROFILE_LANGUAGE_EDIT'
   | 'PROJECT_CREATE'
@@ -32,6 +34,7 @@ export interface ModalData {
   id?: string
   name?: string
   language?: LanguageProficiency
+  skill?: SkillMastery
 } //TODO THIS CAN NOT BE THE BEST PRACTICE, HELP
 
 interface ModalStore {
