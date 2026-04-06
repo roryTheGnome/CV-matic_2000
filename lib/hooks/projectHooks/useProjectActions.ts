@@ -1,9 +1,9 @@
 import {
   CREATE_PROJECT_MUTATION,
   UPDATE_PROJECT_MUTATION,
-} from "@/api/graphql/mutations/project"
-import { GET_PROJECTS } from "@/api/graphql/queries/projects"
-import { useModalStore } from "@/store/modalStore"
+} from '@/api/graphql/mutations/project'
+import { GET_PROJECTS } from '@/api/graphql/queries/projects'
+import { useModalStore } from '@/store/modalStore'
 import {
   CreateProjectData,
   CreateProjectModalFormState,
@@ -12,11 +12,11 @@ import {
   Project,
   UpdateProjectData,
   UpdateProjectVariables,
-} from "@/types/project"
+} from '@/types/project'
 
-import { useMutation } from "@apollo/client/react"
-import { SubmitEvent, useId, useState } from "react"
-import toast from "react-hot-toast"
+import { useMutation } from '@apollo/client/react'
+import { SubmitEvent, useId, useState } from 'react'
+import toast from 'react-hot-toast'
 
 export function useProjectActions(
   initialData?: CreateProjectModalFormState,
@@ -27,12 +27,12 @@ export function useProjectActions(
 
   const [formData, setFormData] = useState<CreateProjectModalFormState>(
     initialData || {
-      name: "",
-      domain: "",
-      start_date: "",
-      end_date: "",
-      description: "",
-      environment: "",
+      name: '',
+      domain: '',
+      start_date: '',
+      end_date: '',
+      description: '',
+      environment: '',
     },
   )
 
@@ -56,11 +56,11 @@ export function useProjectActions(
         })
       }
     },
-    onCompleted: data => {
-      toast.success("Project created successfully!")
+    onCompleted: (data) => {
+      toast.success('Project created successfully!')
       closeModal()
     },
-    onError: err => {
+    onError: (err) => {
       toast.error(err.message)
     },
   })
@@ -70,25 +70,25 @@ export function useProjectActions(
     UpdateProjectVariables
   >(UPDATE_PROJECT_MUTATION, {
     onCompleted: () => {
-      toast.success("Project updated successfully!")
+      toast.success('Project updated successfully!')
       closeModal()
     },
-    onError: err => toast.error(err.message),
+    onError: (err) => toast.error(err.message),
   })
 
   const loading = creating || updating
 
   const isFormValid =
-    formData.name.trim() !== "" &&
-    formData.domain.trim() !== "" &&
-    formData.start_date.trim() !== "" &&
-    formData.description.trim() !== "" &&
-    formData.environment.trim() !== ""
+    formData.name.trim() !== '' &&
+    formData.domain.trim() !== '' &&
+    formData.start_date.trim() !== '' &&
+    formData.description.trim() !== '' &&
+    formData.environment.trim() !== ''
 
   const isDirty =
     !initialData ||
     Object.keys(formData).some(
-      key =>
+      (key) =>
         formData[key as keyof CreateProjectModalFormState] !==
         initialData[key as keyof CreateProjectModalFormState],
     )
@@ -97,7 +97,7 @@ export function useProjectActions(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
+    setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
   const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
@@ -109,11 +109,11 @@ export function useProjectActions(
     }
 
     const environmentArray = formData.environment
-      .split(",")
-      .map(env => env.trim())
+      .split(',')
+      .map((env) => env.trim())
       .filter(Boolean)
 
-    const projectPayload: Omit<Project, "id"> = {
+    const projectPayload: Omit<Project, 'id'> = {
       name: formData.name,
       domain: formData.domain,
       start_date: formData.start_date,
@@ -121,7 +121,7 @@ export function useProjectActions(
       environment: environmentArray,
     }
 
-    if (formData.end_date && formData.end_date.trim() !== "") {
+    if (formData.end_date && formData.end_date.trim() !== '') {
       projectPayload.end_date = formData.end_date
     }
 

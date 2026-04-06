@@ -1,12 +1,12 @@
-"use client"
-import LoadingPage from "@/app/(platform)/loading"
-import NotFoundPage from "@/app/(platform)/not-found"
-import EmployeesList from "@/components/EmployeesList"
-import SortHeader from "@/components/SortHeader"
-import { TableSearch } from "@/components/ui/TableSearch"
-import { headers } from "@/constants/tableHeaders"
-import { useCurrentUser } from "@/lib/hooks/userHooks/useCurrentUser"
-import { useUsers } from "@/lib/hooks/userHooks/useUsers"
+'use client'
+import EmployeesList from '@/components/EmployeesList'
+import SortHeader from '@/components/SortHeader'
+import { TableSearch } from '@/components/ui/TableSearch'
+import { headers } from '@/constants/tableHeaders'
+import { useCurrentUser } from '@/lib/hooks/userHooks/useCurrentUser'
+import { useUsers } from '@/lib/hooks/userHooks/useUsers'
+import NotFoundPage from '@/app/(platform)/not-found'
+import LoadingPage from '@/app/(platform)/loading'
 
 export default function Employees() {
   const {
@@ -29,18 +29,18 @@ export default function Employees() {
       <TableSearch
         search={search}
         createButtonText="CREATE USER"
-        typeOfCreateModal={"USER_CREATE"}
+        typeOfCreateModal={'USER_CREATE'}
         setSearch={setSearch}
       />
 
-      <div className="overflow-x-auto rounded-lg min-h-screen">
+      <div className="overflow-x-auto rounded-lg">
         {isLoading ? (
           <LoadingPage />
         ) : (
-          <table className="min-w-full divide-y divide-gray-500 ">
+          <table className="min-w-full divide-y divide-gray-500">
             <thead>
               <tr>
-                {headers.map(header => (
+                {headers.map((header) => (
                   <SortHeader
                     key={header.key}
                     label={header.label}

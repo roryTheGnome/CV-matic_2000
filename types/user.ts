@@ -1,10 +1,10 @@
-import { LanguageProficiency } from "@/types/lang"
-import { SkillMastery } from "@/types/skills"
-import { LoginVariables } from "./auth"
-import { Cvs } from "./cvs"
-import { Department } from "./department"
+import { LanguageProficiency } from '@/types/lang'
+import { SkillMastery } from '@/types/skills'
+import { LoginVariables } from './auth'
+import { Cvs } from './cvs'
+import { Department } from './department'
 
-export type UserRole = "Admin" | "Employee"
+export type UserRole = 'Admin' | 'Employee'
 
 export type User = {
   id: string
@@ -128,14 +128,14 @@ export interface GetUserByIdData {
 }
 
 export interface UploadAvatarResponse {
-  uploadAvatar: string;
+  uploadAvatar: string
 }
 
 export interface UploadAvatarVariables {
   avatar: {
-    userId: string;
-    base64: string;
-    size: number;
-    type: string;
-  };
+    userId: string
+    base64: string
+    size: number
+    type: string
+  }
 }

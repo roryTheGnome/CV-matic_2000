@@ -1,10 +1,10 @@
-import { GET_DEPARTMENTS } from "@/api/graphql/queries/departments"
-import { Option } from "@/components/ui/select/Option"
-import { Select } from "@/components/ui/select/Select"
-import { useModalStore } from "@/store/modalStore"
-import { GetDepartmentsResponse } from "@/types/department"
-import { useLazyQuery } from "@apollo/client/react"
-import { CreateUserProps } from "./CreateUserLeftSide"
+import { GET_DEPARTMENTS } from '@/api/graphql/queries/departments'
+import { Option } from '@/components/ui/select/Option'
+import { Select } from '@/components/ui/select/Select'
+import { useModalStore } from '@/store/modalStore'
+import { GetDepartmentsResponse } from '@/types/department'
+import { useLazyQuery } from '@apollo/client/react'
+import { CreateUserProps } from '@/components/modals/userModal/CreateUserLeftSide'
 
 export function DepartmentsSelect({
   formData,
@@ -31,7 +31,7 @@ export function DepartmentsSelect({
       id={`${formId}-department`}
       name="departmentId"
       value={formData.departmentId}
-      isRequired={type?.endsWith("_EDIT") ? false : true}
+      isRequired={type?.endsWith('_EDIT') ? false : true}
       title="Department"
       handleChange={handleChange}
       onFocus={handleDepartmentsFocus}
@@ -44,7 +44,7 @@ export function DepartmentsSelect({
         <Option value={formData.departmentId} title={formData.departmentName} />
       )}
 
-      {departmentsData?.departments.map(department => (
+      {departmentsData?.departments.map((department) => (
         <Option
           key={department.id}
           value={department.id}

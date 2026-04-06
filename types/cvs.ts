@@ -1,7 +1,7 @@
-import { Project } from "next/dist/build/swc/types"
-import { Language } from "./lang"
-import { Skill } from "./skills"
-import { User, UserRole } from "./user"
+import { Project } from 'next/dist/build/swc/types'
+import { Language } from './lang'
+import { Skill } from './skills'
+import { User, UserRole } from './user'
 
 export interface Cvs {
   id: string

@@ -1,9 +1,9 @@
 import {
   CREATE_USER_MUTATION,
   UPDATE_USER_MUTATION,
-} from "@/api/graphql/mutations/user"
-import { GET_USERS } from "@/api/graphql/queries/user"
-import { useModalStore } from "@/store/modalStore"
+} from '@/api/graphql/mutations/user'
+import { GET_USERS } from '@/api/graphql/queries/user'
+import { useModalStore } from '@/store/modalStore'
 
 import {
   CreateUserData,
@@ -12,10 +12,10 @@ import {
   GetUsersResponse,
   UpdateUserData,
   UpdateUserVariables,
-} from "@/types/user"
-import { useMutation } from "@apollo/client/react"
-import { SubmitEvent, useId, useState } from "react"
-import toast from "react-hot-toast"
+} from '@/types/user'
+import { useMutation } from '@apollo/client/react'
+import { SubmitEvent, useId, useState } from 'react'
+import toast from 'react-hot-toast'
 
 export function useUserActions(
   initialData?: CreateUserModalFormState,
@@ -26,13 +26,13 @@ export function useUserActions(
 
   const [formData, setFormData] = useState<CreateUserModalFormState>(
     initialData || {
-      email: "",
-      password: "",
-      firstName: "",
-      lastName: "",
-      departmentId: "",
-      positionId: "",
-      role: "Employee",
+      email: '',
+      password: '',
+      firstName: '',
+      lastName: '',
+      departmentId: '',
+      positionId: '',
+      role: 'Employee',
     },
   )
 
@@ -56,12 +56,12 @@ export function useUserActions(
         })
       }
     },
-    onCompleted: data => {
-      console.log("Success! User created with ID:", data.createUser.id)
-      toast.success("User created successfully!")
+    onCompleted: (data) => {
+      console.log('Success! User created with ID:', data.createUser.id)
+      toast.success('User created successfully!')
       closeModal()
     },
-    onError: err => {
+    onError: (err) => {
       toast.error(err.message)
     },
   })
@@ -71,24 +71,24 @@ export function useUserActions(
     UpdateUserVariables
   >(UPDATE_USER_MUTATION, {
     onCompleted: () => {
-      toast.success("User updated successfully!")
+      toast.success('User updated successfully!')
       closeModal()
     },
-    onError: err => toast.error(err.message),
+    onError: (err) => toast.error(err.message),
   })
 
   const loading = creating || updating
 
   const isFormValid = userId
-    ? formData.firstName.trim() !== "" ||
-      formData.lastName.trim() !== "" ||
-      formData.email.trim() !== ""
-    : Object.values(formData).every(v => v.trim() !== "")
+    ? formData.firstName.trim() !== '' ||
+      formData.lastName.trim() !== '' ||
+      formData.email.trim() !== ''
+    : Object.values(formData).every((v) => v.trim() !== '')
 
   const isDirty =
     !initialData ||
     Object.keys(formData).some(
-      key =>
+      (key) =>
         formData[key as keyof CreateUserModalFormState] !==
         initialData[key as keyof CreateUserModalFormState],
     )
@@ -97,7 +97,7 @@ export function useUserActions(
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
+    setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
   const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {

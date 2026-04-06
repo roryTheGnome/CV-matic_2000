@@ -1,6 +1,6 @@
-import StoreInitializer from "@/components/StoreInitializer"
-import { ACCESS_TOKEN } from "@/constants/auth"
-import { cookies } from "next/headers"
+import StoreInitializer from '@/components/StoreInitializer'
+import { ACCESS_TOKEN } from '@/constants/auth'
+import { cookies } from 'next/headers'
 
 export async function AuthProvider({
   children,

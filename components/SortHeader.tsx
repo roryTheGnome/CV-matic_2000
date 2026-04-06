@@ -1,5 +1,5 @@
-import { GlobalSortKey } from "@/types/table"
-import { ArrowDown, ArrowUp, ArrowUpDown } from "lucide-react"
+import { GlobalSortKey } from '@/types/table'
+import { ArrowDown, ArrowUp, ArrowUpDown } from 'lucide-react'
 
 export default function SortHeader({
   label,
@@ -11,7 +11,7 @@ export default function SortHeader({
   label: string
   sortKeyValue: GlobalSortKey
   currentSortKey: GlobalSortKey
-  sortDir: "asc" | "desc"
+  sortDir: 'asc' | 'desc'
   onSort: (key: GlobalSortKey) => void
 }) {
   const isActive = currentSortKey === sortKeyValue
@@ -19,13 +19,13 @@ export default function SortHeader({
   return (
     <th
       onClick={() => onSort(sortKeyValue)}
-      className="px-4 py-2 text-left cursor-pointer select-none"
+      className="cursor-pointer px-4 py-2 text-left select-none"
     >
       <div className="flex items-center gap-1">
         {label}
 
         {isActive ? (
-          sortDir === "asc" ? (
+          sortDir === 'asc' ? (
             <ArrowUp size={16} />
           ) : (
             <ArrowDown size={16} />

@@ -1,15 +1,15 @@
-"use client"
+'use client'
 
-import { DELETE_PROFILE_SKILL } from "@/api/graphql/mutations/profile"
-import { GET_SKILLS } from "@/api/graphql/queries/skills"
-import { GET_USER } from "@/api/graphql/queries/user"
-import NotFoundPage from "@/app/(platform)/not-found"
-import LoadingPage from "@/app/(platform)/users/[id]/loading"
-import { Skills } from "@/components/skills/Skills"
-import { useCurrentUser } from "@/lib/hooks/userHooks/useCurrentUser"
-import { useUser } from "@/lib/hooks/userHooks/useUser"
-import { GetSkillsData } from "@/types/skills"
-import { useMutation, useQuery } from "@apollo/client/react"
+import { DELETE_PROFILE_SKILL } from '@/api/graphql/mutations/profile'
+import { GET_SKILLS } from '@/api/graphql/queries/skills'
+import { GET_USER } from '@/api/graphql/queries/user'
+import LoadingPage from '@/app/(platform)/users/[id]/loading'
+import { Skills } from '@/components/skills/Skills'
+import { useCurrentUser } from '@/lib/hooks/userHooks/useCurrentUser'
+import { useUser } from '@/lib/hooks/userHooks/useUser'
+import { GetSkillsData } from '@/types/skills'
+import { useMutation, useQuery } from '@apollo/client/react'
+import NotFoundPage from '@/app/(platform)/not-found'
 
 export default function EmployeeSkill() {
   const { user, error } = useUser()
