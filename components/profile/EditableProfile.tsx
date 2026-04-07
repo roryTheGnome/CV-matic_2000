@@ -126,8 +126,8 @@ export default function EditableProfile({ user }: ProfileProp) {
           variables: {
             user: {
               userId: user.id,
-              ...(departmentId && { departmentId }),
-              ...(positionId && { positionId }),
+               positionId: positionId ?  positionId:"",
+              departmentId: departmentId ? departmentId : ''
             },
           },
         }),
