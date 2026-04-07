@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { useUserNav } from "@/lib/hooks/userHooks/useUserNav";
+import { useUserNav } from "@/lib/hooks/nav/useUserNav";
+import { useProjectNav } from '@/lib/hooks/nav/useProjectNav'
 
 const ROUTE_LABELS: Record<string, string> = {
   users: "Employees",
@@ -19,8 +20,9 @@ export default function GlobalNav() {
   const pathname = usePathname();
 
   const { user, error, displayName, currentPiece, formatLabel } = useUserNav();
+  const { project, projectError,projectDisplayName } = useProjectNav();
 
-  if (error) return null; //TODO change me later
+  if (error|| projectError) return null; //TODO change me later
 
   const segments = pathname.split("/").filter(Boolean);
 
@@ -50,6 +52,14 @@ export default function GlobalNav() {
               </Link>
             </>
           )}
+        </>
+      )}
+      {root === "projects" && project && (
+        <>
+          <ChevronRight size={20} />
+          <Link href={`/projects/${project.id}`} className="text-xl text-primary">
+            {projectDisplayName}
+          </Link>
         </>
       )}
     </nav>
