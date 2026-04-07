@@ -1,8 +1,13 @@
 import { PRIVATE_ROUTES } from "@/config/routes"
 import { usePathname } from "next/navigation"
+import { useCv } from '@/lib/hooks/cvHooks/useCv'
 
-export function useCvNav(id: string) {
+export function useCvNav(id?: string) {
   const pathname = usePathname()
+  const {cv,isLoading,error }=useCv()
+  if (!cv) {
+    return { error }
+  }
 
   const tabs = [
     { label: "Details", path: `${PRIVATE_ROUTES.CVS}/${id}` },
@@ -21,5 +26,5 @@ export function useCvNav(id: string) {
     return false
   }
 
-  return { tabs, isActive }
+  return { cv,isLoading,error,tabs, isActive }
 }
