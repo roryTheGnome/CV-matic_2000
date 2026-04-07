@@ -1,5 +1,6 @@
 import { Project } from "@/types/project";
 import { ActionsMenu } from "@/components/admin/ActionsMenu";
+import { ProjectsActionsMenu } from '@/components/admin/ProjectsActionsMenu'
 
 export function ProjectTableItem({
   project,
@@ -16,13 +17,12 @@ export function ProjectTableItem({
         <td className="px-4 py-2">{project.start_date}</td>
         <td className="px-4 py-2">{project.end_date || "Till now"}</td>
         <td className="px-4 py-2">
-          {isAdmin && (
-            <ActionsMenu
+            <ProjectsActionsMenu
               editType="PROJECT_EDIT"
               deleteType="PROJECT_DELETE"
               item={{ id: project.id, name: project.name }}
+              isAdmin={isAdmin}
             />
-          )}
         </td>
       </tr>
 
