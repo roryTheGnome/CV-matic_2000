@@ -5,13 +5,13 @@ import { TextareaField } from "@/components/ui/TextareaField"
 import { useCvActions } from "@/lib/hooks/cvHooks/useCvActions"
 import { CreateCvModalFormState } from "@/types/cvs"
 
-export function CvForm({
-  initialData,
-  cvId,
-}: {
+interface Props {
   initialData?: CreateCvModalFormState
   cvId?: string
-}) {
+  isModal?: boolean
+}
+
+export function CvForm({ initialData, cvId, isModal = true }: Props) {
   const {
     formData,
     formId,
@@ -55,7 +55,7 @@ export function CvForm({
       </div>
 
       <div className="flex justify-end gap-4 mt-10">
-        <CancelButton closeModal={closeModal} />
+        {isModal && <CancelButton closeModal={closeModal} />}
         <Button type="submit" disabled={!isFormValid || saving || !isDirty}>
           {saving
             ? type === "CV_CREATE"
