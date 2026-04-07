@@ -21,7 +21,8 @@ export const Skills = ({ skills, allSkills, onDelete, owner }: Props) => {
   const grouped: Record<string, SkillMastery[]> = {}
 
   const toggleSelect = (name: string) => {
-    const skill = skills.find((s) => s.name === name)
+    if(owner)
+    {const skill = skills.find((s) => s.name === name)
     if (!skill) return
 
     if (deleteMode) {
@@ -36,7 +37,7 @@ export const Skills = ({ skills, allSkills, onDelete, owner }: Props) => {
           mastery: skill.mastery,
         },
       })
-    }
+    }}
   }
 
   const handleDelete = () => {

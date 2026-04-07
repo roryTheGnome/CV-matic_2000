@@ -38,7 +38,7 @@ export const LanguageList = ({ languages, onDelete, owner }: Props) => {
   const [selected, setSelected] = useState<string[]>([])
 
   const toggleSelect = (lang: LanguageProficiency) => {
-    if (deleteMode) {
+    if(owner){if (deleteMode) {
       setSelected((prev) =>
         prev.includes(lang.name)
           ? prev.filter((n) => n !== lang.name)
@@ -46,7 +46,7 @@ export const LanguageList = ({ languages, onDelete, owner }: Props) => {
       )
     } else {
       openModal('PROFILE_LANGUAGE_EDIT', { language: lang })
-    }
+    }}
   }
 
   const handleDelete = () => {
