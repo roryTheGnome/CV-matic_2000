@@ -48,3 +48,27 @@ export const DELETE_PROFILE_SKILL = gql`
     }
   }
 `
+
+export const UPDATE_PROFILE_LANGUAGE = gql`
+  mutation UpdateProfileLanguage($language: UpdateProfileLanguageInput!) {
+    updateProfileLanguage(language: $language) {
+      id
+      languages {
+        name
+        proficiency
+      }
+    }
+  }
+`
+
+export const UPDATE_PROFILE_SKILL = gql`
+  mutation UpdateProfileSkill($skill: UpdateProfileSkillInput!) {
+    updateProfileSkill(skill: $skill) {
+      id
+      skills {
+        name
+        mastery
+      }
+    }
+  }
+`

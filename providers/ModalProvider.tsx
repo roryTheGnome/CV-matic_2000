@@ -16,8 +16,10 @@ import { DeleteSkillModal } from '@/components/modals/skillModal/DeleteSkillModa
 import { SkillModal } from '@/components/modals/skillModal/SkillModal'
 import { DeleteUserModal } from '@/components/modals/userModal/DeleteUserModal'
 import { useModalStore } from '@/store/modalStore'
-import { ProfileSkillModal } from '@/components/modals/addSkill/SkillModal'
-import { ProfileLanguageModal } from '@/components/modals/addLanguage/LanguageModal'
+import { ProfileSkillModal } from '@/components/modals/profile/addSkill/SkillModal'
+import { ProfileLanguageModal } from '@/components/modals/profile/addLanguage/LanguageModal'
+import { ProfileLanguageEditModal } from '@/components/modals/profile/editLanguage/ProfileLanguageEditModel'
+import { ProfileSkillEditModal } from '@/components/modals/profile/editSkill/ProfileSkillEditModal'
 
 export function ModalProvider() {
   const { type, isOpen } = useModalStore()
@@ -55,7 +57,9 @@ export function ModalProvider() {
       {type === 'LANGUAGE_EDIT' && <LanguageModal />}
 
       {type === 'PROFILE_SKILL_ADD' && <ProfileSkillModal />}
+      {type === 'PROFILE_SKILL_EDIT' && <ProfileSkillEditModal />}
       {type === 'PROFILE_LANGUAGE_ADD' && <ProfileLanguageModal />}
+      {type === 'PROFILE_LANGUAGE_EDIT' && <ProfileLanguageEditModal />}
     </>
   )
 }

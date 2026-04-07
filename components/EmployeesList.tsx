@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { useAuthStore } from '@/store/authStore'
 import { GlobalSortKey } from '@/types/table'
 import defaultProfile from '../public/default-profile.png'
-import { ActionsMenu } from './admin/ActionsMenu'
+import { EmployeeActionsMenu } from './admin/EmployeeActionsMenu'
 
 type EmployeesListProps = {
   users: User[] | []
@@ -88,7 +88,7 @@ export default function EmployeesList({
 
           <td className="w-8 pr-2 text-right">
             {isAdmin ? (
-              <ActionsMenu
+              <EmployeeActionsMenu
                 editType={'USER_EDIT'}
                 deleteType={'USER_DELETE'}
                 item={{
