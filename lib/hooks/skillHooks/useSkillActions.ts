@@ -51,7 +51,7 @@ export function useSkillActions(
         })
       }
     },
-    onCompleted: data => {
+    onCompleted: () => {
       toast.success("Skill created successfully!")
       closeModal()
     },

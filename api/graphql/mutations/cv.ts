@@ -31,3 +31,38 @@ export const DELETE_CV_MUTATION = gql`
     }
   }
 `
+
+export const DELETE_CV_SKILL = gql`
+  mutation DeleteCvSkill($skill: DeleteCvSkillInput!) {
+    deleteCvSkill(skill: $skill) {
+      id
+      created_at
+      name
+      education
+      description
+
+      user {
+        id
+        email
+        profile {
+          first_name
+          last_name
+        }
+      }
+
+      projects {
+        id
+        name
+      }
+
+      skills {
+        name
+      }
+
+      languages {
+        name
+        proficiency
+      }
+    }
+  }
+`

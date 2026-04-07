@@ -1,58 +1,58 @@
-import { Button } from "@/components/ui/Button";
-import { useModalStore } from "@/store/modalStore";
-import { SkillItem, SkillMastery } from "@/types/skills";
-import { Plus, Trash2 } from "lucide-react";
-import { useState } from "react";
-import { SkillCategorySection } from "./SkillCategorySection";
+import { Button } from "@/components/ui/Button"
+import { useModalStore } from "@/store/modalStore"
+import { SkillItem, SkillMastery } from "@/types/skills"
+import { Plus, Trash2 } from "lucide-react"
+import { useState } from "react"
+import { SkillCategorySection } from "./SkillCategorySection"
 
 export type Props = {
-  skills: SkillMastery[];
-  allSkills: SkillItem[];
-  onDelete?: (names: string[]) => void;
-  owner: boolean;
-};
+  skills: SkillMastery[] | undefined
+  allSkills: SkillItem[]
+  onDelete?: (names: string[]) => void
+  owner: boolean
+}
 
 export const Skills = ({ skills, allSkills, onDelete, owner }: Props) => {
-  const { openModal } = useModalStore();
+  const { openModal } = useModalStore()
 
-  const [deleteMode, setDeleteMode] = useState(false);
-  const [selected, setSelected] = useState<string[]>([]);
+  const [deleteMode, setDeleteMode] = useState(false)
+  const [selected, setSelected] = useState<string[]>([])
 
-  const grouped: Record<string, SkillMastery[]> = {};
+  const grouped: Record<string, SkillMastery[]> = {}
 
   const toggleSelect = (name: string) => {
-    if (!deleteMode) return;
+    if (!deleteMode) return
 
-    setSelected((prev) =>
-      prev.includes(name) ? prev.filter((n) => n !== name) : [...prev, name],
-    );
-  };
+    setSelected(prev =>
+      prev.includes(name) ? prev.filter(n => n !== name) : [...prev, name],
+    )
+  }
 
   const handleDelete = () => {
     if (!deleteMode) {
-      setDeleteMode(true);
-      return;
+      setDeleteMode(true)
+      return
     }
 
-    if (selected.length === 0) return;
+    if (selected.length === 0) return
 
-    onDelete?.(selected);
+    onDelete?.(selected)
 
-    setSelected([]);
-    setDeleteMode(false);
-  };
+    setSelected([])
+    setDeleteMode(false)
+  }
 
-  skills.forEach((skill) => {
-    const fullSkill = allSkills.find((s) => s.name === skill.name);
+  skills?.forEach(skill => {
+    const fullSkill = allSkills.find(s => s.name === skill.name)
 
-    const categoryName = fullSkill?.category_name || "Other"; //i add otehr as fallback but i dont think it will be at use, max for debugging
+    const categoryName = fullSkill?.category_name || "Other" //i add otehr as fallback but i dont think it will be at use, max for debugging
 
     if (!grouped[categoryName]) {
-      grouped[categoryName] = [];
+      grouped[categoryName] = []
     }
 
-    grouped[categoryName].push(skill);
-  });
+    grouped[categoryName].push(skill)
+  })
 
   return (
     <div>
@@ -77,8 +77,8 @@ export const Skills = ({ skills, allSkills, onDelete, owner }: Props) => {
                 isTextButton
                 className="flex items-center justify-center cursor-pointer duration-300 disabled:bg-surface-disabled disabled:text-text-primary/40 uppercase p-3  bg-transparent rounded-full w-full max-w-57 hover:brightness-110 border border-input-border text-text-secondary hover:text-text-primary hover:border-text-primary"
                 onClick={() => {
-                  setDeleteMode(false);
-                  setSelected([]);
+                  setDeleteMode(false)
+                  setSelected([])
                 }}
               >
                 CANCEL
@@ -121,5 +121,5 @@ export const Skills = ({ skills, allSkills, onDelete, owner }: Props) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}

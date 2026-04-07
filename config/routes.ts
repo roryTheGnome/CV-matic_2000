@@ -30,11 +30,3 @@ export const isAuthPage = (pathname: string) => {
     PUBLIC_ROUTES.RESET_PASSWORD,
   ].some(route => pathname.startsWith(route))
 }
-
-export const isAdminPage = (pathname: string) => {
-  return [
-    ADMIN_ROUTES.PROJECTS,
-    ADMIN_ROUTES.DEPARTMENTS,
-    ADMIN_ROUTES.POSITIONS,
-  ].some(route => pathname.startsWith(route))
-}
