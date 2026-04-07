@@ -1,6 +1,6 @@
 import { Project } from 'next/dist/build/swc/types'
-import { Language } from './lang'
-import { Skill } from './skills'
+import { Language, LanguageProficiency } from './lang'
+import { Skill, SkillMastery } from './skills'
 import { User, UserRole } from './user'
 
 export interface Cvs {
@@ -10,9 +10,9 @@ export interface Cvs {
   education: string
   description: string
   user: User
-  projects: CvProject
-  skills: Skill
-  languages: Language
+  projects: CvProject[]
+  skills: SkillMastery[]
+  languages: LanguageProficiency[]
 }
 
 export interface CvProject {
@@ -24,9 +24,9 @@ export interface CvProject {
   domain: string
   start_date: string
   end_date: string
-  environment: string
-  roles: UserRole
-  responsibilities: string
+  environment: string[]
+  roles: UserRole[]
+  responsibilities: string[]
 }
 
 export interface GetCvsData {
