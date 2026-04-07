@@ -1,5 +1,3 @@
-'use client'
-
 import ProfileNav from '@/components/navs/ProfileNav'
 import { Suspense } from 'react'
 import LoadingPage from '@/app/(platform)/users/[id]/loading'
