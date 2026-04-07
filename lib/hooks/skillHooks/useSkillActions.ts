@@ -1,9 +1,9 @@
 import {
   CREATE_SKILL_MUTATION,
   UPDATE_SKILL_MUTATION,
-} from "@/api/graphql/mutations/skills"
-import { GET_SKILLS } from "@/api/graphql/queries/skills"
-import { useModalStore } from "@/store/modalStore"
+} from '@/api/graphql/mutations/skills'
+import { GET_SKILLS } from '@/api/graphql/queries/skills'
+import { useModalStore } from '@/store/modalStore'
 import {
   CreateSkillData,
   CreateSkillVariables,
@@ -11,11 +11,11 @@ import {
   SkillModalFormState,
   UpdateSkillData,
   UpdateSkillVariables,
-} from "@/types/skills"
+} from '@/types/skills'
 
-import { useMutation } from "@apollo/client/react"
-import { ChangeEvent, SubmitEvent, useId, useState } from "react"
-import toast from "react-hot-toast"
+import { useMutation } from '@apollo/client/react'
+import { ChangeEvent, SubmitEvent, useId, useState } from 'react'
+import toast from 'react-hot-toast'
 
 export function useSkillActions(
   initialData?: SkillModalFormState,
@@ -26,8 +26,8 @@ export function useSkillActions(
 
   const [formData, setFormData] = useState<SkillModalFormState>(
     initialData || {
-      name: "",
-      categoryId: "",
+      name: '',
+      categoryId: '',
     },
   )
 
@@ -51,11 +51,11 @@ export function useSkillActions(
         })
       }
     },
-    onCompleted: () => {
-      toast.success("Skill created successfully!")
+    onCompleted: (data) => {
+      toast.success('Skill created successfully!')
       closeModal()
     },
-    onError: err => {
+    onError: (err) => {
       toast.error(err.message)
     },
   })
@@ -65,21 +65,21 @@ export function useSkillActions(
     UpdateSkillVariables
   >(UPDATE_SKILL_MUTATION, {
     onCompleted: () => {
-      toast.success("Skill updated successfully!")
+      toast.success('Skill updated successfully!')
       closeModal()
     },
-    onError: err => toast.error(err.message),
+    onError: (err) => toast.error(err.message),
   })
 
   const loading = creating || updating
 
   const isFormValid =
-    formData.name.trim() !== "" && formData.categoryId.trim() !== ""
+    formData.name.trim() !== '' && formData.categoryId.trim() !== ''
 
   const isDirty =
     !initialData ||
     Object.keys(formData).some(
-      key =>
+      (key) =>
         formData[key as keyof SkillModalFormState] !==
         initialData[key as keyof SkillModalFormState],
     )
@@ -88,7 +88,7 @@ export function useSkillActions(
     e: ChangeEvent<HTMLSelectElement | HTMLInputElement, Element>,
   ) => {
     const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
+    setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
   const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
@@ -103,7 +103,7 @@ export function useSkillActions(
       updateSkill({
         variables: {
           skill: {
-            skillId: modalData?.id ? modalData.id : "",
+            skillId: modalData?.id ? modalData.id : '',
             name: formData.name,
             categoryId: formData.categoryId,
           },

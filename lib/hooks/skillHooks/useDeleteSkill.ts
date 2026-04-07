@@ -1,9 +1,9 @@
-import { DELETE_SKILL_MUTATION } from "@/api/graphql/mutations/skills"
-import { useModalStore } from "@/store/modalStore"
-import { DeleteSkillResponse, DeleteSkillVariables } from "@/types/skills"
+import { DELETE_SKILL_MUTATION } from '@/api/graphql/mutations/skills'
+import { useModalStore } from '@/store/modalStore'
+import { DeleteSkillResponse, DeleteSkillVariables } from '@/types/skills'
 
-import { useMutation } from "@apollo/client/react"
-import toast from "react-hot-toast"
+import { useMutation } from '@apollo/client/react'
+import toast from 'react-hot-toast'
 
 export function useDeleteSkill() {
   const { data: modalData, closeModal } = useModalStore()
@@ -14,24 +14,24 @@ export function useDeleteSkill() {
   >(DELETE_SKILL_MUTATION, {
     update(cache) {
       cache.evict({
-        id: cache.identify({ __typename: "Skill", id: modalData?.id }),
+        id: cache.identify({ __typename: 'Skill', id: modalData?.id }),
       })
       cache.gc()
     },
-    onCompleted: data => {
+    onCompleted: (data) => {
       if (data.deleteSkill.affected > 0) {
-        toast.success("Skill successfully deleted")
+        toast.success('Skill successfully deleted')
         closeModal()
       }
     },
-    onError: err => {
-      toast.error(err.message || "Failed to delete skill")
+    onError: (err) => {
+      toast.error(err.message || 'Failed to delete skill')
     },
   })
 
   const handleDelete = () => {
     if (!modalData?.id) {
-      toast.error("Skill ID is missing!")
+      toast.error('Skill ID is missing!')
       return
     }
 

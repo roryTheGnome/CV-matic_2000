@@ -1,6 +1,6 @@
-"use client"
+'use client'
 
-import { useAuthStore } from "@/store/authStore"
+import { useAuthStore } from '@/store/authStore'
 
 let initialized = false
 

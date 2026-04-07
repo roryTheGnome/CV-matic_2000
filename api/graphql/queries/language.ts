@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client"
+import { gql } from '@apollo/client'
 
 export const GET_LANGUAGES = gql`
   query GetLanguages {
@@ -7,4 +7,4 @@ export const GET_LANGUAGES = gql`
       name
     }
   }
-`;
+`

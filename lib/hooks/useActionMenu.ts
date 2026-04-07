@@ -21,14 +21,15 @@ export const useActionMenu = (
     }
 
     if (isOpen) {
-      document.addEventListener("mousedown", handleClickOutside)
+      document.addEventListener('mousedown', handleClickOutside)
     }
 
-    return () => document.removeEventListener("mousedown", handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [isOpen])
 
   const handleEdit = () => {
     openModal(editType, item)
+    console.log(editType, item)
     setIsOpen(false)
   }
 

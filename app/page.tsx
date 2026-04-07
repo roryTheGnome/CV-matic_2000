@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import { GET_DEPARTMENTS } from "@/api/graphql/queries/departments"
 import { LogoutButton } from "@/components/ui/LogoutButton"

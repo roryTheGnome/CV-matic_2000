@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client"
+import { gql } from '@apollo/client'
 
 export const PROFILE_LANGUAGE_ADD = gql`
   mutation AddProfileLanguage($language: AddProfileLanguageInput!) {
@@ -10,7 +10,7 @@ export const PROFILE_LANGUAGE_ADD = gql`
       }
     }
   }
-`;
+`
 
 export const ADD_PROFILE_SKILL = gql`
   mutation AddProfileSkill($skill: AddProfileSkillInput!) {
@@ -22,7 +22,7 @@ export const ADD_PROFILE_SKILL = gql`
       }
     }
   }
-`;
+`
 
 export const DELETE_PROFILE_LANGUAGE = gql`
   mutation DeleteProfileLanguage($language: DeleteProfileLanguageInput!) {
@@ -34,7 +34,7 @@ export const DELETE_PROFILE_LANGUAGE = gql`
       }
     }
   }
-`;
+`
 
 export const DELETE_PROFILE_SKILL = gql`
   mutation DeleteProfileSkill($skill: DeleteProfileSkillInput!) {
@@ -47,4 +47,28 @@ export const DELETE_PROFILE_SKILL = gql`
       }
     }
   }
-`;
+`
+
+export const UPDATE_PROFILE_LANGUAGE = gql`
+  mutation UpdateProfileLanguage($language: UpdateProfileLanguageInput!) {
+    updateProfileLanguage(language: $language) {
+      id
+      languages {
+        name
+        proficiency
+      }
+    }
+  }
+`
+
+export const UPDATE_PROFILE_SKILL = gql`
+  mutation UpdateProfileSkill($skill: UpdateProfileSkillInput!) {
+    updateProfileSkill(skill: $skill) {
+      id
+      skills {
+        name
+        mastery
+      }
+    }
+  }
+`

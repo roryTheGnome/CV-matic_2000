@@ -1,18 +1,18 @@
-import { User } from "@/types/user"
-import { ChevronRight, EllipsisVertical } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
+import { User } from '@/types/user'
+import { ChevronRight, EllipsisVertical } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
 
-import { useAuthStore } from "@/store/authStore"
-import { GlobalSortKey } from "@/types/table"
-import defaultProfile from "../public/default-profile.png"
-import { ActionsMenu } from "./admin/ActionsMenu"
+import { useAuthStore } from '@/store/authStore'
+import { GlobalSortKey } from '@/types/table'
+import defaultProfile from '../public/default-profile.png'
+import { EmployeeActionsMenu } from './admin/EmployeeActionsMenu'
 
 type EmployeesListProps = {
   users: User[] | []
   search: string
   sortKey: GlobalSortKey
-  sortDir: "asc" | "desc"
+  sortDir: 'asc' | 'desc'
   currentUserId: number | undefined
 }
 
@@ -32,43 +32,43 @@ export default function EmployeesList({
       return fullname.includes(search.toLowerCase())
     })
     .sort((x: User, y: User) => {
-      let valX = ""
-      let valY = ""
+      let valX = ''
+      let valY = ''
 
       switch (sortKey) {
-        case "first_name":
+        case 'first_name':
           valY = y.profile.first_name
           valX = x.profile.first_name
           break
-        case "last_name":
+        case 'last_name':
           valY = y.profile.last_name
           valX = x.profile.last_name
           break
-        case "email":
+        case 'email':
           valY = y.email
           valX = x.email
           break
-        case "department":
+        case 'department':
           valY = y.department_name
           valX = x.department_name
           break
-        case "position":
+        case 'position':
           valY = y.position_name
           valX = x.position_name
           break
       }
 
-      if (valX < valY) return sortDir === "asc" ? -1 : 1
-      if (valX > valY) return sortDir === "asc" ? 1 : -1
+      if (valX < valY) return sortDir === 'asc' ? -1 : 1
+      if (valX > valY) return sortDir === 'asc' ? 1 : -1
       return 0
     })
 
   return (
     <tbody>
-      {checkedUsers.map(user => (
-        <tr key={user.id} className="divide-y divide-gray-500 ">
-          <td className="px-4 py-3 flex items-center gap-3">
-            <div className="relative w-10 h-10">
+      {checkedUsers.map((user) => (
+        <tr key={user.id} className="divide-y divide-gray-500">
+          <td className="flex items-center gap-3 px-4 py-3">
+            <div className="relative h-10 w-10">
               <Image
                 src={user.profile.avatar || defaultProfile}
                 alt={`${user.profile.first_name} ${user.profile.last_name}'s avatar`}
@@ -78,7 +78,7 @@ export default function EmployeesList({
               />
             </div>
 
-            {user.profile.first_name ? user.profile.first_name : "Anonymous"}
+            {user.profile.first_name ? user.profile.first_name : 'Anonymous'}
           </td>
 
           <td className="px-4 py-3">{user.profile.last_name}</td>
@@ -86,11 +86,11 @@ export default function EmployeesList({
           <td className="px-4 py-3">{user.department_name}</td>
           <td className="px-4 py-3">{user.position_name}</td>
 
-          <td className="w-8 text-right pr-2">
+          <td className="w-8 pr-2 text-right">
             {isAdmin ? (
-              <ActionsMenu
-                editType={"USER_EDIT"}
-                deleteType={"USER_DELETE"}
+              <EmployeeActionsMenu
+                editType={'USER_EDIT'}
+                deleteType={'USER_DELETE'}
                 item={{
                   id: user.id,
                   name: `${user.profile.first_name} ${user.profile.last_name}`,

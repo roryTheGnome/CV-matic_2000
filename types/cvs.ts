@@ -1,7 +1,7 @@
-import { Project } from "next/dist/build/swc/types"
-import { Language } from "./lang"
-import { Skill, SkillMastery } from "./skills"
-import { User, UserRole } from "./user"
+import { Project } from 'next/dist/build/swc/types'
+import { Language } from './lang'
+import { Skill } from './skills'
+import { User, UserRole } from './user'
 
 export interface Cvs {
   id: string
@@ -75,9 +75,7 @@ export interface GetCvByIdVariables {
 }
 
 export interface GetCvByIdData {
-  cv: Omit<Cvs, "skills"> & {
-    skills: SkillMastery[]
-  }
+  cv: Cvs
 }
 
 export interface DeleteCvVariables {
@@ -89,12 +87,5 @@ export interface DeleteCvVariables {
 export interface DeleteCvResponse {
   deleteCv: {
     affected: number
-  }
-}
-
-export interface DeleteCvSkillInput {
-  skill: {
-    cvId: string
-    name: string[]
   }
 }
