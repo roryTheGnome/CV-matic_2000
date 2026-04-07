@@ -1,4 +1,5 @@
 import { SkillMastery } from '@/types/skills'
+import React from 'react'
 
 type Props = {
   grouped: Record<string, SkillMastery[]>
@@ -6,13 +7,13 @@ type Props = {
 
 export default function ProfecionalSkillsPage({ grouped }: Props) {
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-10">
+    <div className="flex min-h-screen items-center justify-center p-10">
       <div className="w-full max-w-5xl">
-        <h1 className="text-4xl font-medium text-text-primary mb-10">
+        <h1 className="text-text-primary mb-10 text-4xl font-medium">
           Professional skills
         </h1>
 
-        <div className="grid grid-cols-4 text-sm font-semibold text-text-primary mb-4">
+        <div className="text-text-primary mb-4 grid grid-cols-4 text-sm font-semibold">
           <div>SKILLS</div>
           <div></div>
           <div>EXPERIENCE IN YEARS</div>
@@ -21,34 +22,32 @@ export default function ProfecionalSkillsPage({ grouped }: Props) {
 
         {Object.entries(grouped).map(([category, skills], index) => (
           <div key={category}>
-            <div className={`${index === 0 ? "border-t-2 border-red-500 pt-4" : ""}`}>
-
-              <div className="grid grid-cols-4 gap-y-3 text-text-primary">
-
-                <div className="text-red-600 font-semibold">
-                  {category}
-                </div>
+            <div
+              className={`${index === 0 ? 'border-t-2 border-red-500 pt-4' : ''}`}
+            >
+              <div className="text-text-primary grid grid-cols-4 gap-y-3">
+                <div className="font-semibold text-red-600">{category}</div>
 
                 {skills[0] && (
                   <>
-                    <div>{skills[0].name}</div>
-                    <div>{ "X"}</div>
-                    <div>{"XXXX"}</div>
+                    <div key={skills[0].name}>{skills[0].name}</div>
+                    <div>{'X'}</div>
+                    <div>{'XXXX'}</div>
                   </>
                 )}
 
                 {skills.slice(1).map((skill) => (
-                  <>
-                    <div key={skill.name + "-spacer"}></div>
-                    <div key={skill.name}>{skill.name}</div>
-                    <div>{"X"}</div>
-                    <div>{"XXXX"}</div>
-                  </>
+                  <React.Fragment key={skill.name}>
+                    <div></div> {/* spacer */}
+                    <div>{skill.name}</div>
+                    <div>{'X'}</div>
+                    <div>{'XXXX'}</div>
+                  </React.Fragment>
                 ))}
               </div>
             </div>
 
-            <div className="border-t border-gray-400 my-8" />
+            <div className="my-8 border-t border-gray-400" />
           </div>
         ))}
       </div>

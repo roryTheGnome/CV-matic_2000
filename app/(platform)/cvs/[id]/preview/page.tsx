@@ -6,33 +6,67 @@ import { useQuery } from '@apollo/client/react'
 import { GetSkillsData, SkillMastery } from '@/types/skills'
 import { GET_SKILLS } from '@/api/graphql/queries/skills'
 import ProfecionalSkillsPage from '@/components/cv/ProfecionalSkillsPage'
+import { Button } from '@/components/ui/Button'
+import { useRef } from 'react'
 
 export default function CvPreview() {
-  const { isLoading,cv,error}=useCv()
+  const { isLoading, cv, error } = useCv()
+  const printRef = useRef<HTMLDivElement>(null)
   const { data } = useQuery<GetSkillsData>(GET_SKILLS)
-  const allSkills=data ? data.skills : []
+  const allSkills = data ? data.skills : []
 
-  if(cv===undefined)return;
+  if (!cv) return null
+
   const grouped: Record<string, SkillMastery[]> = {}
-
   cv.skills.forEach((skill) => {
     const fullSkill = allSkills.find((s) => s.name === skill.name)
-
-    const categoryName = fullSkill?.category_name || 'Other' //i add otehr as fallback but i dont think it will be at use, max for debugging
-
-    if (!grouped[categoryName]) {
-      grouped[categoryName] = []
-    }
-
+    const categoryName = fullSkill?.category_name || 'Other'
+    if (!grouped[categoryName]) grouped[categoryName] = []
     grouped[categoryName].push(skill)
   })
 
+  const handleDownload = async () => {
+    const element = printRef.current
+    if (!element) return
 
+    element.classList.add('pdf-safe')
 
+    const html2pdf = (await import('html2pdf.js')).default
+
+    await html2pdf()
+      .set({
+        margin: 10,
+        filename: 'cv.pdf',
+        html2canvas: {
+          scale: 2,
+          backgroundColor: '#ffffff',
+          logging: false,
+        },
+        jsPDF: {
+          unit: 'mm',
+          format: 'a4',
+          orientation: 'portrait',
+        },
+      })
+      .from(element)
+      .save()
+
+    element.classList.remove('pdf-safe')
+  }
   return (
     <div>
-      <MainPage cv={cv} grouped={grouped} />
-      <ProfecionalSkillsPage grouped={grouped} />
+      <Button onClick={handleDownload}>Download PDF</Button>
+      <div ref={printRef}>
+        <div className="pdf-page p-8">
+          <MainPage cv={cv} grouped={grouped} />
+        </div>
+
+        <div className="page-break" />
+
+        <div className="pdf-page p-8">
+          <ProfecionalSkillsPage grouped={grouped} />
+        </div>
+      </div>
     </div>
-  );
+  )
 }
