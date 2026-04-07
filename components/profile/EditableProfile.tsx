@@ -1,39 +1,35 @@
-import {
-  UploadAvatarResponse,
-  UploadAvatarVariables,
-  User,
-} from "@/types/user";
-import { useState } from "react";
-import { useMutation, useQuery } from "@apollo/client/react";
-import { Department, GetDepartmentsResponse } from "@/types/department";
-import { GET_DEPARTMENTS } from "@/api/graphql/queries/departments";
-import { GetPositionsResponse, Position } from "@/types/position";
-import { GET_POSITIONS } from "@/api/graphql/queries/positions";
+import { UploadAvatarResponse, UploadAvatarVariables, User } from '@/types/user'
+import { useState } from 'react'
+import { useMutation, useQuery } from '@apollo/client/react'
+import { Department, GetDepartmentsResponse } from '@/types/department'
+import { GET_DEPARTMENTS } from '@/api/graphql/queries/departments'
+import { GetPositionsResponse, Position } from '@/types/position'
+import { GET_POSITIONS } from '@/api/graphql/queries/positions'
 import {
   GET_USER,
   UPDATE_PROFILE,
   UPDATE_USER,
-} from "@/api/graphql/queries/user";
-import { DELETE_AVATAR, UPLOAD_AVATAR } from "@/api/graphql/mutations/user";
-import { toBase64 } from "@/constants/toBase64";
+} from '@/api/graphql/queries/user'
+import { DELETE_AVATAR, UPLOAD_AVATAR } from '@/api/graphql/mutations/user'
+import { toBase64 } from '@/constants/toBase64'
 
 type ProfileProp = {
-  user: User;
-};
+  user: User
+}
 
 export default function EditableProfile({ user }: ProfileProp) {
-  const [firstName, setFirstName] = useState(user.profile.first_name || "");
-  const [lastName, setLastName] = useState(user.profile.last_name || "");
+  const [firstName, setFirstName] = useState(user.profile.first_name || '')
+  const [lastName, setLastName] = useState(user.profile.last_name || '')
 
-  const [departmentId, setDepartmentId] = useState(user.department?.id || "");
-  const [positionId, setPositionId] = useState(user.position?.id || "");
+  const [departmentId, setDepartmentId] = useState(user.department?.id || '')
+  const [positionId, setPositionId] = useState(user.position?.id || '')
 
-  const [changeSuccess, setChangeSuccess] = useState(false);
+  const [changeSuccess, setChangeSuccess] = useState(false)
 
   const { data: depData, loading: depLoading } =
-    useQuery<GetDepartmentsResponse>(GET_DEPARTMENTS);
+    useQuery<GetDepartmentsResponse>(GET_DEPARTMENTS)
   const { data: posData, loading: posLoading } =
-    useQuery<GetPositionsResponse>(GET_POSITIONS);
+    useQuery<GetPositionsResponse>(GET_POSITIONS)
 
   const [updateProfile, { loading: profileLoading }] = useMutation(
     UPDATE_PROFILE,
@@ -45,7 +41,7 @@ export default function EditableProfile({ user }: ProfileProp) {
         },
       ],
     },
-  );
+  )
   const [updateUser, { loading: userLoading }] = useMutation(UPDATE_USER, {
     refetchQueries: [
       {
@@ -53,30 +49,30 @@ export default function EditableProfile({ user }: ProfileProp) {
         variables: { userId: user.id },
       },
     ],
-  });
+  })
 
   const [uploadAvatar] = useMutation<
     UploadAvatarResponse,
     UploadAvatarVariables
-  >(UPLOAD_AVATAR);
-  const [deleteAvatar] = useMutation(DELETE_AVATAR);
+  >(UPLOAD_AVATAR)
+  const [deleteAvatar] = useMutation(DELETE_AVATAR)
 
   const [preview, setPreview] = useState<string | null>(
     user.profile?.avatar ?? null,
-  );
+  )
 
   const hasChanges = () =>
-    firstName !== (user.profile.first_name || "") ||
-    lastName !== (user.profile.last_name || "") ||
-    departmentId !== (user.department?.id || "") ||
-    positionId !== (user.position?.id || "");
-  const hasUnsavedChanges = hasChanges();
+    firstName !== (user.profile.first_name || '') ||
+    lastName !== (user.profile.last_name || '') ||
+    departmentId !== (user.department?.id || '') ||
+    positionId !== (user.position?.id || '')
+  const hasUnsavedChanges = hasChanges()
   const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+    const file = e.target.files?.[0]
+    if (!file) return
 
     try {
-      const base64 = await toBase64(file);
+      const base64 = await toBase64(file)
 
       const res = await uploadAvatar({
         variables: {
@@ -87,14 +83,14 @@ export default function EditableProfile({ user }: ProfileProp) {
             type: file.type,
           },
         },
-      });
+      })
 
-      if (res.data == undefined) return;
-      setPreview(res.data.uploadAvatar);
+      if (res.data == undefined) return
+      setPreview(res.data.uploadAvatar)
     } catch (err) {
-      console.error("Avatar upload failed", err);
+      console.error('Avatar upload failed', err)
     }
-  };
+  }
 
   const handleDeleteAvatar = async () => {
     try {
@@ -102,18 +98,18 @@ export default function EditableProfile({ user }: ProfileProp) {
         variables: {
           avatar: { userId: user.id },
         },
-      });
+      })
 
-      setPreview(null);
+      setPreview(null)
     } catch (err) {
-      console.error(err);
+      console.error(err)
     }
-  };
+  }
 
-  const loading = profileLoading || userLoading;
+  const loading = profileLoading || userLoading
 
   const handleSave = async () => {
-    setChangeSuccess(false);
+    setChangeSuccess(false)
 
     try {
       await Promise.allSettled([
@@ -130,34 +126,30 @@ export default function EditableProfile({ user }: ProfileProp) {
           variables: {
             user: {
               userId: user.id,
-              ...(departmentId && { departmentId }),
-              ...(positionId && { positionId }),
+               positionId: positionId ?  positionId:"",
+              departmentId: departmentId ? departmentId : ''
             },
           },
         }),
-      ]);
-      setChangeSuccess(true);
+      ])
+      setChangeSuccess(true)
     } catch (err) {
-      console.error("Upsi! Update failed:", err);
+      console.error('Upsi! Update failed:', err)
     }
-  };
+  }
   return (
     <>
-      <div className="flex flex-col items-center text-center mb-10">
-        <div className="flex flex-col items-center mb-6">
-          <div className="relative group">
+      <div className="mb-10 flex flex-col items-center text-center">
+        <div className="mb-6 flex flex-col items-center">
+          <div className="group relative">
             <img
-              src={preview ?? "https://placehold.co/120"} //TODO change this later to non human waiting thing
-              className="w-32 h-32 rounded-full object-cover bg-surface"
+              src={preview ?? 'https://placehold.co/120'} //TODO change this later to non human waiting thing
+              className="bg-surface h-32 w-32 rounded-full object-cover"
             />
 
-            <label
-              className="absolute inset-0 flex flex-col items-center justify-center
-                            rounded-full bg-background/60 text-text-primary text-xs text-center
-                            opacity-0 group-hover:opacity-100 transition cursor-pointer px-2"
-            >
+            <label className="bg-background/60 text-text-primary absolute inset-0 flex cursor-pointer flex-col items-center justify-center rounded-full px-2 text-center text-xs opacity-0 transition group-hover:opacity-100">
               <span className="font-medium">Upload avatar image</span>
-              <span className="text-[10px] opacity-80 mt-1">
+              <span className="mt-1 text-[10px] opacity-80">
                 png, jpg or gif (max 0.5MB)
               </span>
 
@@ -173,50 +165,50 @@ export default function EditableProfile({ user }: ProfileProp) {
           {preview && (
             <button
               onClick={handleDeleteAvatar}
-              className="mt-3 text-sm text-text-secondary hover:text-primary transition"
+              className="text-text-secondary hover:text-primary mt-3 text-sm transition"
             >
               Remove avatar
             </button>
           )}
         </div>
-        <p className="text-sm text-text-secondary">{user.email}</p>
+        <p className="text-text-secondary text-sm">{user.email}</p>
 
-        <p className="text-sm text-text-secondary">
-          A member since{" "}
+        <p className="text-text-secondary text-sm">
+          A member since{' '}
           {new Date(Number(user.profile.created_at)).toDateString()}
         </p>
       </div>
 
       <div className="grid grid-cols-2 gap-6">
         <div className="flex flex-col">
-          <label className="text-sm text-text-secondary">First Name</label>
+          <label className="text-text-secondary text-sm">First Name</label>
           <input
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
-            className="mt-1 p-3 border rounded bg-surface"
+            className="bg-surface mt-1 rounded border p-3"
           />
         </div>
 
         <div className="flex flex-col">
-          <label className="text-sm text-text-secondary">Last Name</label>
+          <label className="text-text-secondary text-sm">Last Name</label>
           <input
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
-            className="mt-1 p-3 border rounded bg-surface"
+            className="bg-surface mt-1 rounded border p-3"
           />
         </div>
 
         <div className="flex flex-col">
-          <label className="text-sm text-text-secondary">Department</label>
+          <label className="text-text-secondary text-sm">Department</label>
 
           <select
             value={departmentId}
             onChange={(e) => setDepartmentId(e.target.value)}
-            className="mt-1 p-3 border rounded bg-surface"
+            className="bg-surface mt-1 rounded border p-3"
             disabled={depLoading}
           >
             <option value="" disabled>
-              Select department
+              {user.department_name}
             </option>
 
             {depData?.departments.map((dep: Department) => (
@@ -228,12 +220,12 @@ export default function EditableProfile({ user }: ProfileProp) {
         </div>
 
         <div className="flex flex-col">
-          <label className="text-sm text-text-secondary">Position</label>
+          <label className="text-text-secondary text-sm">Position</label>
 
           <select
             value={positionId}
             onChange={(e) => setPositionId(e.target.value)}
-            className="mt-1 p-3 border rounded bg-surface"
+            className="bg-surface mt-1 rounded border p-3"
             disabled={posLoading}
           >
             <option value="" disabled>
@@ -252,18 +244,18 @@ export default function EditableProfile({ user }: ProfileProp) {
       <button
         onClick={handleSave}
         disabled={loading || !hasUnsavedChanges}
-        className={`mt-6 px-4 py-2 rounded text-white ${
-          loading || !hasUnsavedChanges ? "bg-surface-disabled" : "bg-primary"
+        className={`mt-6 rounded px-4 py-2 text-white ${
+          loading || !hasUnsavedChanges ? 'bg-surface-disabled' : 'bg-primary'
         }`}
       >
-        {loading ? "Saving..." : "Save"}
+        {loading ? 'Saving...' : 'Save'}
       </button>
 
       {changeSuccess && (
-        <p className="mt-3 text-green-500 text-sm">
+        <p className="mt-3 text-sm text-green-500">
           Profile updated successfully; pls change me to toast lrt
         </p>
       )}
     </>
-  );
+  )
 }

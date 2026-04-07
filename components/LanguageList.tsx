@@ -37,12 +37,16 @@ export const LanguageList = ({ languages, onDelete, owner }: Props) => {
   const [deleteMode, setDeleteMode] = useState(false)
   const [selected, setSelected] = useState<string[]>([])
 
-  const toggleSelect = (name: string) => {
-    if (!deleteMode) return
-
-    setSelected((prev) =>
-      prev.includes(name) ? prev.filter((n) => n !== name) : [...prev, name],
-    )
+  const toggleSelect = (lang: LanguageProficiency) => {
+    if(owner){if (deleteMode) {
+      setSelected((prev) =>
+        prev.includes(lang.name)
+          ? prev.filter((n) => n !== lang.name)
+          : [...prev, lang.name],
+      )
+    } else {
+      openModal('PROFILE_LANGUAGE_EDIT', { language: lang })
+    }}
   }
 
   const handleDelete = () => {
@@ -65,7 +69,7 @@ export const LanguageList = ({ languages, onDelete, owner }: Props) => {
         {languages.map((lang) => (
           <div
             key={lang.name}
-            onClick={() => toggleSelect(lang.name)}
+            onClick={() => toggleSelect(lang)}
             className="flex items-center gap-5 rounded-xl p-4 hover:bg-[#1a1a1a]"
           >
             <span

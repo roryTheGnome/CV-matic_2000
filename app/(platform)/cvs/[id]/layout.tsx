@@ -1,5 +1,5 @@
-import LoadingPage from "@/app/(platform)/users/[id]/loading"
 import CvNav from "@/components/navs/CvNav"
+import { Loader } from "@/components/ui/Loader"
 import { Suspense } from "react"
 
 export default function CvLayout({

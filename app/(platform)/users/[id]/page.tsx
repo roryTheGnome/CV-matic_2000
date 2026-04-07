@@ -1,8 +1,8 @@
 'use client'
 
 import LoadingPage from '@/app/(platform)/users/[id]/loading'
-import EditableProfile from '@/components/Profile/EditableProfile'
-import Profile from '@/components/Profile/Profile'
+import EditableProfile from '@/components/profile/EditableProfile'
+import Profile from '@/components/profile/Profile'
 import { useCurrentUser } from '@/lib/hooks/userHooks/useCurrentUser'
 import { useUser } from '@/lib/hooks/userHooks/useUser'
 import NotFoundPage from '@/app/(platform)/not-found'
@@ -10,7 +10,7 @@ import NotFoundPage from '@/app/(platform)/not-found'
 export default function Employee() {
   const { user, isLoading, error } = useUser()
 
-  const { currentUserId } = useCurrentUser()
+  const { currentUserId, currentUserRole } = useCurrentUser()
 
   if (error) return <NotFoundPage />
 
@@ -20,7 +20,7 @@ export default function Employee() {
 
   return (
     <div className="mx-auto max-w-4xl p-6">
-      {currentUserId === Number(user.id) ? (
+      {currentUserId === Number(user.id) || currentUserRole === 'Admin' ? (
         <EditableProfile user={user} />
       ) : (
         <Profile user={user} />
