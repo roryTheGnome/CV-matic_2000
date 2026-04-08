@@ -35,7 +35,7 @@ export default function CvPreview() {
 
     await html2pdf()
       .set({
-        margin: 10,
+        margin: 2.5,
         filename: 'cv.pdf',
         html2canvas: {
           scale: 2,
@@ -60,8 +60,6 @@ export default function CvPreview() {
         <div className="pdf-page p-8">
           <MainPage cv={cv} grouped={grouped} />
         </div>
-
-        <div className="page-break" />
 
         <div className="pdf-page p-8">
           <ProfecionalSkillsPage grouped={grouped} />
