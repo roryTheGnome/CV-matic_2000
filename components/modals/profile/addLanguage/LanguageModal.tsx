@@ -1,26 +1,26 @@
-"use client";
+'use client'
 
-import { LanguageForm } from "./LanguageForm";
-import { ModalLayout } from "@/components/modals/ModalLayout";
-import { useCurrentUser } from "@/lib/hooks/userHooks/useCurrentUser";
-import { useUser } from "@/lib/hooks/userHooks/useUser";
+import { LanguageForm } from './LanguageForm'
+import { ModalLayout } from '@/components/modals/ModalLayout'
+import { useUser } from '@/lib/hooks/userHooks/useUser'
+import { useModalStore } from '@/store/modalStore'
 
 export function ProfileLanguageModal() {
-  const { currentUserId } = useCurrentUser();
-  const { user, isLoading, error } = useUser(
-    currentUserId ? String(currentUserId) : undefined,
-  );
+  const { data } = useModalStore()
+
+  const id = data?.id
+  const { user, isLoading, error } = useUser(id ? String(id) : undefined)
 
   if (isLoading) {
-    return <div className="p-6">Loading...</div>;
+    return <div className="p-6">Loading...</div>
   } //TODO create something gloabal for default
   if (error || !user) {
-    return <div className="p-6">Failed to load user</div>;
+    return <div className="p-6">Failed to load user</div>
   }
 
   return (
     <ModalLayout title="Add Language">
-      <LanguageForm userLanguages={user.profile.languages} />
+      <LanguageForm userLanguages={user.profile.languages} userId={user.id} />
     </ModalLayout>
-  );
+  )
 }

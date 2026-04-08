@@ -18,7 +18,7 @@ export default function EmployeeLanguage() {
     refetchQueries: [
       {
         query: GET_USER,
-        variables: { userId: currentUserId },
+        variables: { userId: user?.id },
       },
     ],
   })
@@ -30,7 +30,7 @@ export default function EmployeeLanguage() {
     await deleteLanguages({
       variables: {
         language: {
-          userId: currentUserId,
+          userId: user.id,
           name: names,
         },
       },
@@ -43,6 +43,7 @@ export default function EmployeeLanguage() {
         languages={user.profile.languages}
         onDelete={handleDelete}
         owner={currentUserId === Number(user.id) || currentUserRole === 'Admin'}
+        userId={user.id}
       />
     </>
   )

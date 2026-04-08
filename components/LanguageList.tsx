@@ -29,9 +29,10 @@ type Props = {
   languages: LanguageProficiency[]
   onDelete?: (names: string[]) => void
   owner: boolean
+  userId?: string
 }
 
-export const LanguageList = ({ languages, onDelete, owner }: Props) => {
+export const LanguageList = ({ languages, onDelete, owner, userId }: Props) => {
   const { openModal } = useModalStore()
 
   const [deleteMode, setDeleteMode] = useState(false)
@@ -46,7 +47,7 @@ export const LanguageList = ({ languages, onDelete, owner }: Props) => {
             : [...prev, lang.name],
         )
       } else {
-        openModal('PROFILE_LANGUAGE_EDIT', { language: lang })
+        openModal('PROFILE_LANGUAGE_EDIT', { language: lang, id: userId })
       }
     }
   }
