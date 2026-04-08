@@ -11,10 +11,12 @@ export default function MainPage({ cv, grouped }: Props) {
   cv.projects.map((pro) => console.log(pro.name))
   return (
     <>
-      <div className="mb-10">
+      <div className="mb-3">
         <div className="text-4xl font-bold">
           {cv.user.profile.first_name} {cv.user.profile.last_name}
         </div>
+      </div>
+      <div className="mb-10">
         <div className="text-lg">{cv.user.position_name}</div>
       </div>
 

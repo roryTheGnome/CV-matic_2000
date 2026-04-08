@@ -8,6 +8,7 @@ import { GET_SKILLS } from '@/api/graphql/queries/skills'
 import ProfecionalSkillsPage from '@/components/cv/ProfecionalSkillsPage'
 import { Button } from '@/components/ui/Button'
 import { useRef } from 'react'
+import ProjectsPage from '@/components/cv/ProjectsPage'
 
 export default function CvPreview() {
   const { isLoading, cv, error } = useCv()
@@ -56,12 +57,20 @@ export default function CvPreview() {
     <div>
       <Button onClick={handleDownload}>Download PDF</Button>
       <div ref={printRef}>
+
         <div className="pdf-page p-8">
           <MainPage cv={cv} grouped={grouped} />
         </div>
 
         <div className="pdf-page p-8">
-          <ProfecionalSkillsPage grouped={grouped} />
+          <ProjectsPage
+            projects={cv.projects}
+            userRole={cv.user.position_name}
+          />
+        </div>
+
+        <div className="pdf-page p-8">
+          <ProfecionalSkillsPage grouped={grouped} projects={cv.projects} />
         </div>
       </div>
     </div>
