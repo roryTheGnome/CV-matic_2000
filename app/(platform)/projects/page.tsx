@@ -7,10 +7,10 @@ import { TableHeader } from '@/components/ui/table/TableHeader'
 import { TableSearch } from '@/components/ui/TableSearch'
 import { projectsHeaders } from '@/constants/tableHeaders'
 import { usePageWithTable } from '@/lib/hooks/usePageWithTable'
+import { useCurrentUser } from '@/lib/hooks/userHooks/useCurrentUser'
 import { GetProjectsData, Project } from '@/types/project'
 import { getSortProjectValue } from '@/utils/getSortProjectValue'
 import { useQuery } from '@apollo/client/react'
-import { useCurrentUser } from '@/lib/hooks/userHooks/useCurrentUser'
 
 export default function Projects() {
   const { loading, error, data } = useQuery<GetProjectsData>(GET_PROJECTS)
@@ -28,7 +28,7 @@ export default function Projects() {
         typeOfCreateModal={'PROJECT_CREATE'}
         setSearch={setSearch}
       />
-      <div className="overflow-x-auto rounded-lg">
+      <div className="min-h-screen overflow-x-auto rounded-lg">
         <table className="min-w-full border-separate border-spacing-y-3">
           <TableHeader
             handleSort={handleSort}

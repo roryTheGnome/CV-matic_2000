@@ -1,7 +1,7 @@
-import { PRIVATE_ROUTES } from "@/config/routes"
-import { ModalData, ModalType, useModalStore } from "@/store/modalStore"
-import { useRouter } from "next/navigation"
-import { useEffect, useRef, useState } from "react"
+import { PRIVATE_ROUTES } from '@/config/routes'
+import { ModalData, ModalType, useModalStore } from '@/store/modalStore'
+import { useRouter } from 'next/navigation'
+import { useEffect, useRef, useState } from 'react'
 
 export const useActionMenu = (
   deleteType: ModalType,
@@ -29,7 +29,6 @@ export const useActionMenu = (
 
   const handleEdit = () => {
     openModal(editType, item)
-    console.log(editType, item)
     setIsOpen(false)
   }
 

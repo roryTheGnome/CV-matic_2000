@@ -9,9 +9,9 @@ import { NameTableItem } from '@/components/ui/table/NameTableItem'
 import TableBody from '@/components/ui/table/TableBody'
 import { TableSearch } from '@/components/ui/TableSearch'
 import { usePageWithTable } from '@/lib/hooks/usePageWithTable'
+import { useCurrentUser } from '@/lib/hooks/userHooks/useCurrentUser'
 import { Department, GetDepartmentsResponse } from '@/types/department'
 import { getSortByName } from '@/utils/getSortByName'
-import { useCurrentUser } from '@/lib/hooks/userHooks/useCurrentUser'
 
 export default function Departments() {
   const { data, loading, error } =
@@ -33,7 +33,7 @@ export default function Departments() {
         setSearch={setSearch}
       />
 
-      <div className="overflow-x-auto rounded-lg">
+      <div className="min-h-screen overflow-x-auto rounded-lg">
         <table className="min-w-full divide-y divide-gray-500">
           <TableHeader
             handleSort={handleSort}
