@@ -14,7 +14,6 @@ export default function CvPreview() {
   const printRef = useRef<HTMLDivElement>(null)
   const { data } = useQuery<GetSkillsData>(GET_SKILLS)
   const allSkills = data ? data.skills : []
-
   if (!cv) return null
 
   const grouped: Record<string, SkillMastery[]> = {}

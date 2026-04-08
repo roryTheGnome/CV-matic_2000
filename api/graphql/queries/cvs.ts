@@ -22,20 +22,32 @@ export const GET_CV_BY_ID = gql`
 
       user {
         id
-        email
         profile {
           first_name
           last_name
         }
+        email
+        position_name
+        is_verified
       }
 
       projects {
         id
         name
+        internal_name
+        description
+        domain
+        start_date
+        end_date
+        environment
+        roles
+        responsibilities
       }
 
       skills {
         name
+        categoryId
+        mastery
       }
 
       languages {
