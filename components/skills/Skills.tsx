@@ -10,9 +10,16 @@ export type Props = {
   allSkills: SkillItem[]
   onDelete?: (names: string[]) => void
   owner: boolean
+  userId: string
 }
 
-export const Skills = ({ skills, allSkills, onDelete, owner }: Props) => {
+export const Skills = ({
+  skills,
+  allSkills,
+  onDelete,
+  owner,
+  userId,
+}: Props) => {
   const { openModal } = useModalStore()
 
   const [deleteMode, setDeleteMode] = useState(false)
@@ -21,23 +28,27 @@ export const Skills = ({ skills, allSkills, onDelete, owner }: Props) => {
   const grouped: Record<string, SkillMastery[]> = {}
 
   const toggleSelect = (name: string) => {
-    if(owner)
-    {const skill = skills.find((s) => s.name === name)
-    if (!skill) return
+    if (owner) {
+      const skill = skills.find((s) => s.name === name)
+      if (!skill) return
 
-    if (deleteMode) {
-      setSelected((prev) =>
-        prev.includes(name) ? prev.filter((n) => n !== name) : [...prev, name],
-      )
-    } else {
-      openModal('PROFILE_SKILL_EDIT', {
-        skill: {
-          name: skill.name,
-          categoryId: skill.categoryId,
-          mastery: skill.mastery,
-        },
-      })
-    }}
+      if (deleteMode) {
+        setSelected((prev) =>
+          prev.includes(name)
+            ? prev.filter((n) => n !== name)
+            : [...prev, name],
+        )
+      } else {
+        openModal('PROFILE_SKILL_EDIT', {
+          skill: {
+            name: skill.name,
+            categoryId: skill.categoryId,
+            mastery: skill.mastery,
+          },
+          id: userId,
+        })
+      }
+    }
   }
 
   const handleDelete = () => {
@@ -113,7 +124,11 @@ export const Skills = ({ skills, allSkills, onDelete, owner }: Props) => {
                 Icon={Plus}
                 isTextButton
                 className="text-gray-400"
-                onClick={() => openModal('PROFILE_SKILL_ADD')}
+                onClick={() =>
+                  openModal('PROFILE_SKILL_ADD', {
+                    id: userId,
+                  })
+                }
               >
                 ADD SKILLS
               </Button>
