@@ -6,13 +6,22 @@ import { useState } from 'react'
 import { SkillCategorySection } from './SkillCategorySection'
 
 export type Props = {
-  skills: SkillMastery[]
+  skills: SkillMastery[] | undefined
   allSkills: SkillItem[]
-  onDelete?: (names: string[]) => void
   owner: boolean
+  modalType?: 'PROFILE_SKILL_ADD' | 'CV_SKILL_ADD'
+  cvId?: string
+  onDelete?: (names: string[]) => void
 }
 
-export const Skills = ({ skills, allSkills, onDelete, owner }: Props) => {
+export const Skills = ({
+  skills,
+  allSkills,
+  owner,
+  modalType = 'PROFILE_SKILL_ADD',
+  cvId,
+  onDelete,
+}: Props) => {
   const { openModal } = useModalStore()
 
   const [deleteMode, setDeleteMode] = useState(false)
@@ -21,23 +30,37 @@ export const Skills = ({ skills, allSkills, onDelete, owner }: Props) => {
   const grouped: Record<string, SkillMastery[]> = {}
 
   const toggleSelect = (name: string) => {
-    if(owner)
-    {const skill = skills.find((s) => s.name === name)
-    if (!skill) return
+    if (owner) {
+      const skill = skills?.find((s) => s.name === name)
+      if (!skill) return
 
-    if (deleteMode) {
-      setSelected((prev) =>
-        prev.includes(name) ? prev.filter((n) => n !== name) : [...prev, name],
-      )
-    } else {
-      openModal('PROFILE_SKILL_EDIT', {
-        skill: {
-          name: skill.name,
-          categoryId: skill.categoryId,
-          mastery: skill.mastery,
-        },
-      })
-    }}
+      if (deleteMode) {
+        setSelected((prev) =>
+          prev.includes(name)
+            ? prev.filter((n) => n !== name)
+            : [...prev, name],
+        )
+      } else {
+        if (modalType === 'PROFILE_SKILL_ADD') {
+          openModal('PROFILE_SKILL_EDIT', {
+            skill: {
+              name: skill.name,
+              categoryId: skill.categoryId,
+              mastery: skill.mastery,
+            },
+          })
+        } else {
+          openModal('CV_SKILL_EDIT', {
+            id: cvId,
+            skill: {
+              name: skill.name,
+              categoryId: skill.categoryId,
+              mastery: skill.mastery,
+            },
+          })
+        }
+      }
+    }
   }
 
   const handleDelete = () => {
@@ -54,7 +77,7 @@ export const Skills = ({ skills, allSkills, onDelete, owner }: Props) => {
     setDeleteMode(false)
   }
 
-  skills.forEach((skill) => {
+  skills?.forEach((skill) => {
     const fullSkill = allSkills.find((s) => s.name === skill.name)
 
     const categoryName = fullSkill?.category_name || 'Other' //i add otehr as fallback but i dont think it will be at use, max for debugging
@@ -65,6 +88,14 @@ export const Skills = ({ skills, allSkills, onDelete, owner }: Props) => {
 
     grouped[categoryName].push(skill)
   })
+
+  const handleAddBtn = () => {
+    if (modalType === 'PROFILE_SKILL_ADD') {
+      return openModal(modalType)
+    } else {
+      return openModal(modalType, { id: cvId })
+    }
+  }
 
   return (
     <div>
@@ -113,7 +144,7 @@ export const Skills = ({ skills, allSkills, onDelete, owner }: Props) => {
                 Icon={Plus}
                 isTextButton
                 className="text-gray-400"
-                onClick={() => openModal('PROFILE_SKILL_ADD')}
+                onClick={handleAddBtn}
               >
                 ADD SKILLS
               </Button>

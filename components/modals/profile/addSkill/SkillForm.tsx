@@ -1,26 +1,26 @@
-"use client";
+'use client'
 
-import { Button } from "@/components/ui/Button";
-import { CancelButton } from "@/components/ui/CancelButton";
-import { useModalStore } from "@/store/modalStore";
-import { useState } from "react";
-import { useMutation, useQuery } from "@apollo/client/react";
-import { GET_SKILLS } from "@/api/graphql/queries/skills";
-import { ADD_PROFILE_SKILL } from "@/api/graphql/mutations/profile";
-import { GET_USER } from "@/api/graphql/queries/user";
-import { GetSkillsData, Mastery, SkillItem } from "@/types/skills";
-import { Select } from "@/components/ui/select/Select";
-import { useCurrentUser } from "@/lib/hooks/userHooks/useCurrentUser";
+import { ADD_PROFILE_SKILL } from '@/api/graphql/mutations/profile'
+import { GET_SKILLS } from '@/api/graphql/queries/skills'
+import { GET_USER } from '@/api/graphql/queries/user'
+import { Button } from '@/components/ui/Button'
+import { CancelButton } from '@/components/ui/CancelButton'
+import { Select } from '@/components/ui/select/Select'
+import { useCurrentUser } from '@/lib/hooks/userHooks/useCurrentUser'
+import { useModalStore } from '@/store/modalStore'
+import { GetSkillsData, Mastery, SkillItem } from '@/types/skills'
+import { useMutation, useQuery } from '@apollo/client/react'
+import { useState } from 'react'
 
 type SkillFormProps = {
-  userSkills: { name: string }[];
-};
+  userSkills: { name: string }[]
+}
 
 export function SkillForm({ userSkills }: SkillFormProps) {
-  const { currentUserId } = useCurrentUser();
-  const { closeModal } = useModalStore();
+  const { currentUserId } = useCurrentUser()
+  const { closeModal } = useModalStore()
 
-  const { data, loading, error } = useQuery<GetSkillsData>(GET_SKILLS);
+  const { data, loading, error } = useQuery<GetSkillsData>(GET_SKILLS)
 
   const [addSkill, { loading: saving }] = useMutation(ADD_PROFILE_SKILL, {
     refetchQueries: [
@@ -29,15 +29,15 @@ export function SkillForm({ userSkills }: SkillFormProps) {
         variables: { userId: currentUserId },
       },
     ],
-  });
+  })
 
-  const [selectedSkill, setSelectedSkill] = useState<SkillItem | null>(null);
-  const [mastery, setMastery] = useState<Mastery>("Novice");
+  const [selectedSkill, setSelectedSkill] = useState<SkillItem | null>(null)
+  const [mastery, setMastery] = useState<Mastery>('Novice')
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    if (!currentUserId || !selectedSkill) return;
+    if (!currentUserId || !selectedSkill) return
 
     try {
       await addSkill({
@@ -49,33 +49,33 @@ export function SkillForm({ userSkills }: SkillFormProps) {
             mastery,
           },
         },
-      });
+      })
 
-      closeModal();
+      closeModal()
     } catch (err) {
-      console.error("BIG NO NO:", err);
+      console.error('BIG NO NO:', err)
     }
-  };
+  }
 
-  if (loading) return <div>Loading skills...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (loading) return <div>Loading skills...</div>
+  if (error) return <div>Error: {error.message}</div>
 
   const availableSkills =
     data?.skills.filter(
       (skill) => !userSkills.some((u) => u.name === skill.name),
-    ) || [];
+    ) || []
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <Select
         id="skill"
         name="skill"
-        value={selectedSkill?.name || ""}
+        value={selectedSkill?.name || ''}
         isRequired={true}
-        title=" "
+        title="Select Skill"
         handleChange={(e) => {
-          const skill = availableSkills.find((s) => s.name === e.target.value);
-          setSelectedSkill(skill || null);
+          const skill = availableSkills.find((s) => s.name === e.target.value)
+          setSelectedSkill(skill || null)
         }}
       >
         {availableSkills.map((skill) => (
@@ -103,9 +103,9 @@ export function SkillForm({ userSkills }: SkillFormProps) {
       <div className="flex justify-end gap-4">
         <CancelButton closeModal={closeModal} />
         <Button type="submit" disabled={saving || !selectedSkill}>
-          {saving ? "ADDING..." : "ADD"}
+          {saving ? 'ADDING...' : 'ADD'}
         </Button>
       </div>
     </form>
-  );
+  )
 }
