@@ -121,7 +121,11 @@ export const LanguageList = ({ languages, onDelete, owner, userId }: Props) => {
                 Icon={Plus}
                 isTextButton
                 className="text-gray-400"
-                onClick={() => openModal('PROFILE_LANGUAGE_ADD')}
+                onClick={() =>
+                  openModal('PROFILE_LANGUAGE_ADD', {
+                    id: userId,
+                  })
+                }
               >
                 ADD LANGUAGE
               </Button>

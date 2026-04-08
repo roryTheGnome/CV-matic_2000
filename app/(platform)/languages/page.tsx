@@ -101,6 +101,7 @@ export default function Language() {
           languages={user.profile.languages}
           onDelete={handleDelete}
           owner={true}
+          userId={String(currentUserId)}
         />
       )}
     </div>
