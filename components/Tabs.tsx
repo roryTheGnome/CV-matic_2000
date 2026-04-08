@@ -1,4 +1,4 @@
-import Link from "next/link"
+import Link from 'next/link'
 
 interface Props {
   tabs:
@@ -13,27 +13,27 @@ interface Props {
 
 export function Tabs({ tabs, isActive }: Props) {
   return (
-    <nav className="flex gap-6 border-b border-surface-active mb-6">
-      {tabs?.map(tab => {
+    <nav className="border-surface-active mb-3 flex gap-6 border-b text-sm sm:mb-6 sm:text-base">
+      {tabs?.map((tab) => {
         const active = isActive(tab.path)
         return (
           <Link
             key={tab.path}
             href={tab.path}
-            className="relative pb-2  transition-colors duration-300"
+            className="relative pb-2 transition-colors duration-300"
             style={{
               color: active
-                ? "var(--color-primary)"
-                : "var(--color-text-secondary)",
+                ? 'var(--color-primary)'
+                : 'var(--color-text-secondary)',
             }}
           >
             {tab.label}
             <span
-              className="absolute left-0 bottom-0 h-0.5 w-full transition-transform duration-300"
+              className="absolute bottom-0 left-0 h-0.5 w-full transition-transform duration-300"
               style={{
-                backgroundColor: "var(--color-primary)",
-                transform: active ? "scaleX(1)" : "scaleX(0)",
-                transformOrigin: "left",
+                backgroundColor: 'var(--color-primary)',
+                transform: active ? 'scaleX(1)' : 'scaleX(0)',
+                transformOrigin: 'left',
               }}
             />
           </Link>
