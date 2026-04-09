@@ -1,150 +1,52 @@
-import { UploadAvatarResponse, UploadAvatarVariables, User } from '@/types/user'
-import { useState } from 'react'
-import { useMutation, useQuery } from '@apollo/client/react'
-import { Department, GetDepartmentsResponse } from '@/types/department'
-import { GET_DEPARTMENTS } from '@/api/graphql/queries/departments'
-import { GetPositionsResponse, Position } from '@/types/position'
-import { GET_POSITIONS } from '@/api/graphql/queries/positions'
-import {
-  GET_USER,
-  UPDATE_PROFILE,
-  UPDATE_USER,
-} from '@/api/graphql/queries/user'
-import { DELETE_AVATAR, UPLOAD_AVATAR } from '@/api/graphql/mutations/user'
-import { toBase64 } from '@/constants/toBase64'
+import { useEditableProfile } from '@/lib/hooks/userHooks/useEditableProfile'
+import { Department } from '@/types/department'
+import { Position } from '@/types/position'
+import { User } from '@/types/user'
+import Image from 'next/image'
+import defaultProfile from '../../public/default-profile.png'
+import { Button } from '../ui/Button'
+import { InputField } from '../ui/inputField/InputField'
+import { Option } from '../ui/select/Option'
+import { Select } from '../ui/select/Select'
 
 type ProfileProp = {
   user: User
 }
 
 export default function EditableProfile({ user }: ProfileProp) {
-  const [firstName, setFirstName] = useState(user.profile.first_name || '')
-  const [lastName, setLastName] = useState(user.profile.last_name || '')
+  const {
+    firstName,
+    lastName,
+    departmentId,
+    positionId,
+    depData,
+    depLoading,
+    posData,
+    posLoading,
+    loading,
+    preview,
+    hasUnsavedChanges,
+    handleAvatarChange,
+    handleDeleteAvatar,
+    handleSave,
+    setFirstName,
+    setLastName,
+    setDepartmentId,
+    setPositionId,
+  } = useEditableProfile(user)
 
-  const [departmentId, setDepartmentId] = useState(user.department?.id || '')
-  const [positionId, setPositionId] = useState(user.position?.id || '')
-
-  const [changeSuccess, setChangeSuccess] = useState(false)
-
-  const { data: depData, loading: depLoading } =
-    useQuery<GetDepartmentsResponse>(GET_DEPARTMENTS)
-  const { data: posData, loading: posLoading } =
-    useQuery<GetPositionsResponse>(GET_POSITIONS)
-
-  const [updateProfile, { loading: profileLoading }] = useMutation(
-    UPDATE_PROFILE,
-    {
-      refetchQueries: [
-        {
-          query: GET_USER,
-          variables: { userId: user.id },
-        },
-      ],
-    },
-  )
-  const [updateUser, { loading: userLoading }] = useMutation(UPDATE_USER, {
-    refetchQueries: [
-      {
-        query: GET_USER,
-        variables: { userId: user.id },
-      },
-    ],
-  })
-
-  const [uploadAvatar] = useMutation<
-    UploadAvatarResponse,
-    UploadAvatarVariables
-  >(UPLOAD_AVATAR)
-  const [deleteAvatar] = useMutation(DELETE_AVATAR)
-
-  const [preview, setPreview] = useState<string | null>(
-    user.profile?.avatar ?? null,
-  )
-
-  const hasChanges = () =>
-    firstName !== (user.profile.first_name || '') ||
-    lastName !== (user.profile.last_name || '') ||
-    departmentId !== (user.department?.id || '') ||
-    positionId !== (user.position?.id || '')
-  const hasUnsavedChanges = hasChanges()
-  const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (!file) return
-
-    try {
-      const base64 = await toBase64(file)
-
-      const res = await uploadAvatar({
-        variables: {
-          avatar: {
-            userId: user.id,
-            base64,
-            size: file.size,
-            type: file.type,
-          },
-        },
-      })
-
-      if (res.data == undefined) return
-      setPreview(res.data.uploadAvatar)
-    } catch (err) {
-      console.error('Avatar upload failed', err)
-    }
-  }
-
-  const handleDeleteAvatar = async () => {
-    try {
-      await deleteAvatar({
-        variables: {
-          avatar: { userId: user.id },
-        },
-      })
-
-      setPreview(null)
-    } catch (err) {
-      console.error(err)
-    }
-  }
-
-  const loading = profileLoading || userLoading
-
-  const handleSave = async () => {
-    setChangeSuccess(false)
-
-    try {
-      await Promise.allSettled([
-        updateProfile({
-          variables: {
-            profile: {
-              userId: user.id,
-              first_name: firstName,
-              last_name: lastName,
-            },
-          },
-        }),
-        updateUser({
-          variables: {
-            user: {
-              userId: user.id,
-               positionId: positionId ?  positionId:"",
-              departmentId: departmentId ? departmentId : ''
-            },
-          },
-        }),
-      ])
-      setChangeSuccess(true)
-    } catch (err) {
-      console.error('Upsi! Update failed:', err)
-    }
-  }
   return (
     <>
       <div className="mb-10 flex flex-col items-center text-center">
         <div className="mb-6 flex flex-col items-center">
           <div className="group relative">
-            <img
-              src={preview ?? 'https://placehold.co/120'} //TODO change this later to non human waiting thing
+            <Image
+              src={preview ?? defaultProfile}
               className="bg-surface h-32 w-32 rounded-full object-cover"
+              alt="Preview avatar"
+              width={128}
+              height={128}
+              loading="eager"
             />
 
             <label className="bg-background/60 text-text-primary absolute inset-0 flex cursor-pointer flex-col items-center justify-center rounded-full px-2 text-center text-xs opacity-0 transition group-hover:opacity-100">
@@ -180,82 +82,61 @@ export default function EditableProfile({ user }: ProfileProp) {
       </div>
 
       <div className="grid grid-cols-2 gap-6">
-        <div className="flex flex-col">
-          <label className="text-text-secondary text-sm">First Name</label>
-          <input
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            className="bg-surface mt-1 rounded border p-3"
-          />
-        </div>
+        <InputField
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          inputId="first_name"
+          label="First Name"
+          name="first_name"
+          maxLength={50}
+        />
+        <InputField
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+          inputId="last_name"
+          label="Last Name"
+          name="last_name"
+          maxLength={50}
+        />
 
-        <div className="flex flex-col">
-          <label className="text-text-secondary text-sm">Last Name</label>
-          <input
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            className="bg-surface mt-1 rounded border p-3"
-          />
-        </div>
+        <Select
+          lable="Department"
+          title={user.department_name}
+          value={departmentId}
+          disabled={depLoading}
+          handleChange={(e) => setDepartmentId(e.target.value)}
+          id="department"
+          isRequired={false}
+          name="department"
+        >
+          {depData?.departments.map((dep: Department) => (
+            <Option title={dep.name} key={dep.id} value={dep.id} />
+          ))}
+        </Select>
 
-        <div className="flex flex-col">
-          <label className="text-text-secondary text-sm">Department</label>
-
-          <select
-            value={departmentId}
-            onChange={(e) => setDepartmentId(e.target.value)}
-            className="bg-surface mt-1 rounded border p-3"
-            disabled={depLoading}
-          >
-            <option value="" disabled>
-              {user.department_name}
-            </option>
-
-            {depData?.departments.map((dep: Department) => (
-              <option key={dep.id} value={dep.id}>
-                {dep.name}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="flex flex-col">
-          <label className="text-text-secondary text-sm">Position</label>
-
-          <select
-            value={positionId}
-            onChange={(e) => setPositionId(e.target.value)}
-            className="bg-surface mt-1 rounded border p-3"
-            disabled={posLoading}
-          >
-            <option value="" disabled>
-              Select position
-            </option>
-
-            {posData?.positions.map((pos: Position) => (
-              <option key={pos.id} value={pos.id}>
-                {pos.name}
-              </option>
-            ))}
-          </select>
-        </div>
+        <Select
+          lable="Position"
+          title={user.position_name} // Select position
+          value={positionId}
+          disabled={posLoading}
+          handleChange={(e) => setPositionId(e.target.value)}
+          id="department"
+          isRequired={false}
+          name="department"
+        >
+          {posData?.positions.map((pos: Position) => (
+            <Option title={pos.name} key={pos.id} value={pos.id} />
+          ))}
+        </Select>
       </div>
 
-      <button
+      <Button
         onClick={handleSave}
         disabled={loading || !hasUnsavedChanges}
-        className={`mt-6 rounded px-4 py-2 text-white ${
-          loading || !hasUnsavedChanges ? 'bg-surface-disabled' : 'bg-primary'
-        }`}
+        className={`mt-6`}
       >
         {loading ? 'Saving...' : 'Save'}
-      </button>
-
-      {changeSuccess && (
-        <p className="mt-3 text-sm text-green-500">
-          Profile updated successfully; pls change me to toast lrt
-        </p>
-      )}
+      </Button>
     </>
   )
 }

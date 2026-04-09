@@ -11,7 +11,6 @@ export const useTagInputField = ({ value, name, onChange }: Props) => {
   const [isFocused, setIsFocused] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
-  // Превращаем строку из формы в массив тегов
   const selectedNames = value
     ? value
         .split(',')
@@ -19,7 +18,6 @@ export const useTagInputField = ({ value, name, onChange }: Props) => {
         .filter(Boolean)
     : []
 
-  // Лейбл должен быть поднят, если есть теги, инпут в фокусе или в инпуте есть текст
   const isFilled =
     selectedNames.length > 0 || isFocused || inputValue.length > 0
 
@@ -28,20 +26,16 @@ export const useTagInputField = ({ value, name, onChange }: Props) => {
   }
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    // Добавляем тег по нажатию Enter или запятой
     if (e.key === 'Enter' || e.key === ',') {
       e.preventDefault()
       const trimmedValue = inputValue.trim()
 
       if (trimmedValue && !selectedNames.includes(trimmedValue)) {
         const newSelected = [...selectedNames, trimmedValue]
-        // Эмулируем событие для твоего handleChange
         onChange({ target: { name, value: newSelected.join(', ') } })
       }
-      setInputValue('') // Очищаем поле после добавления
-    }
-    // Если пользователь нажал Backspace в пустом поле, удаляем последний тег
-    else if (
+      setInputValue('')
+    } else if (
       e.key === 'Backspace' &&
       inputValue === '' &&
       selectedNames.length > 0
@@ -60,7 +54,6 @@ export const useTagInputField = ({ value, name, onChange }: Props) => {
     onChange({ target: { name, value: newSelected.join(', ') } })
   }
 
-  // При клике на контейнер фокусируемся на невидимом инпуте
   const focusInput = () => {
     inputRef.current?.focus()
   }

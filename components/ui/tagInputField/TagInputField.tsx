@@ -59,7 +59,6 @@ export function TagInputField({
           {label}
         </label>
 
-        {/* Отрендеренные теги (Responsibilities) */}
         {selectedNames.map((tagName) => (
           <span
             key={tagName}
@@ -69,7 +68,7 @@ export function TagInputField({
             <button
               type="button"
               onClick={(e) => {
-                e.stopPropagation() // Чтобы клик не сфокусировал инпут снова
+                e.stopPropagation()
                 removeTag(tagName)
               }}
               className="text-background bg-text-secondary hover:bg-text-primary cursor-pointer rounded-full p-0.5 transition-colors outline-none"
@@ -79,7 +78,6 @@ export function TagInputField({
           </span>
         ))}
 
-        {/* Скрытый инпут для ввода текста */}
         <input
           ref={inputRef}
           id={inputId}
@@ -91,11 +89,10 @@ export function TagInputField({
           onBlur={() => setIsFocused(false)}
           disabled={disabled}
           autoComplete="off"
-          className="text-text-primary min-w-[120px] flex-grow bg-transparent outline-none"
+          className="text-text-primary min-w-30 grow bg-transparent outline-none"
         />
       </div>
 
-      {/* Небольшая подсказка для пользователя (опционально) */}
       {!disabled && (
         <p className="text-text-secondary absolute -bottom-5 left-0 text-[10px]">
           Press <strong>Enter</strong> to add

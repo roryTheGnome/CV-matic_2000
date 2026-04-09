@@ -1,8 +1,8 @@
-import Nav from '@/components/navs/Nav'
-import '../globals.css'
-import GlobalNav from '@/components/navs/GlobalNav'
 import LoadingPage from '@/app/(platform)/loading'
+import GlobalNav from '@/components/navs/GlobalNav'
+import Nav from '@/components/navs/Nav'
 import { Suspense } from 'react'
+import '../globals.css'
 
 export default function PlatformLayout({
   children,
@@ -11,9 +11,9 @@ export default function PlatformLayout({
 }>) {
   return (
     <>
-      <nav className="fixed top-0 left-0 h-screen w-1/6">
+      <div className="fixed top-0 left-0 h-screen w-1/6">
         <Nav />
-      </nav>
+      </div>
 
       <main className="ml-[16%] w-5/6 p-6">
         <Suspense fallback={<LoadingPage />}>
