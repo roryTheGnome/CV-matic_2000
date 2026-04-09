@@ -1,9 +1,9 @@
-import { Button } from "@/components/ui/Button"
-import { CancelButton } from "@/components/ui/CancelButton"
-import { InputField } from "@/components/ui/inputField/InputField"
-import { useSkillActions } from "@/lib/hooks/skillHooks/useSkillActions"
-import { SkillModalFormState } from "@/types/skills"
-import { SkillSelect } from "../SkillCategorySelect"
+import { Button } from '@/components/ui/Button'
+import { CancelButton } from '@/components/ui/CancelButton'
+import { InputField } from '@/components/ui/inputField/InputField'
+import { useSkillActions } from '@/lib/hooks/skillHooks/useSkillActions'
+import { SkillModalFormState } from '@/types/skills'
+import { SkillSelect } from '../SkillCategorySelect'
 
 export function SkillForm({
   initialData,
@@ -34,6 +34,7 @@ export function SkillForm({
         value={formData.name}
         onChange={handleChange}
         required
+        maxLength={50}
       />
 
       <SkillSelect
@@ -42,16 +43,16 @@ export function SkillForm({
         handleChange={handleChange}
       />
 
-      <div className="flex justify-end gap-4 mt-10">
+      <div className="mt-10 flex justify-end gap-4">
         <CancelButton closeModal={closeModal} />
         <Button type="submit" disabled={!isFormValid || saving || !isDirty}>
           {saving
-            ? type === "SKILL_CREATE"
-              ? "CREATING"
-              : "SAVING"
-            : type === "SKILL_CREATE"
-              ? "CREATE"
-              : "SAVE"}
+            ? type === 'SKILL_CREATE'
+              ? 'CREATING'
+              : 'SAVING'
+            : type === 'SKILL_CREATE'
+              ? 'CREATE'
+              : 'SAVE'}
         </Button>
       </div>
     </form>

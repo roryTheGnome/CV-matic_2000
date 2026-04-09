@@ -63,6 +63,7 @@ export function CvProjectForm({
             className="opacity-40"
             disabled
             required
+            maxLength={50}
           />
           <DatePickerField
             inputId={`${formId}-endDate`}

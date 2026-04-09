@@ -1,8 +1,8 @@
-import { Button } from "@/components/ui/Button"
-import { CancelButton } from "@/components/ui/CancelButton"
-import { InputField } from "@/components/ui/inputField/InputField"
-import { useDepartmentActions } from "@/lib/hooks/departmentHooks/useDepartmentActions"
-import { CreateDepartmentModalFormState } from "@/types/department"
+import { Button } from '@/components/ui/Button'
+import { CancelButton } from '@/components/ui/CancelButton'
+import { InputField } from '@/components/ui/inputField/InputField'
+import { useDepartmentActions } from '@/lib/hooks/departmentHooks/useDepartmentActions'
+import { CreateDepartmentModalFormState } from '@/types/department'
 
 export function DepartmentForm({
   initialData,
@@ -33,18 +33,19 @@ export function DepartmentForm({
         value={formData.name}
         onChange={handleChange}
         required
+        maxLength={50}
       />
 
-      <div className="flex justify-end gap-4 mt-10">
+      <div className="mt-10 flex justify-end gap-4">
         <CancelButton closeModal={closeModal} />
         <Button type="submit" disabled={!isFormValid || saving || !isDirty}>
           {saving
-            ? type === "DEPARTMENT_CREATE"
-              ? "CREATING"
-              : "SAVING"
-            : type === "DEPARTMENT_CREATE"
-              ? "CREATE"
-              : "SAVE"}
+            ? type === 'DEPARTMENT_CREATE'
+              ? 'CREATING'
+              : 'SAVING'
+            : type === 'DEPARTMENT_CREATE'
+              ? 'CREATE'
+              : 'SAVE'}
         </Button>
       </div>
     </form>

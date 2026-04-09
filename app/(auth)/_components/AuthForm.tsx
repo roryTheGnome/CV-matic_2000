@@ -1,18 +1,18 @@
-"use client"
+'use client'
 
-import { Button } from "@/components/ui/Button"
-import { InputField } from "@/components/ui/inputField/InputField"
+import { Button } from '@/components/ui/Button'
+import { InputField } from '@/components/ui/inputField/InputField'
 
-import { PUBLIC_ROUTES } from "@/config/routes"
-import { useAuthForm } from "../(with-tabs)/_hooks/useAuthForm"
+import { PUBLIC_ROUTES } from '@/config/routes'
+import { useAuthForm } from '../(with-tabs)/_hooks/useAuthForm'
 
 export function AuthForm() {
   const { currentError, isLoading, pathname, handleSubmit } = useAuthForm()
 
   return (
     <form
-      onSubmit={e => handleSubmit(e)}
-      className="flex flex-col gap-4 items-center mb-4"
+      onSubmit={(e) => handleSubmit(e)}
+      className="mb-4 flex flex-col items-center gap-4"
     >
       <InputField
         required
@@ -24,18 +24,19 @@ export function AuthForm() {
       />
       <InputField
         required
-        minLength={5}
         inputId="password"
         label="Password"
         name="password"
         type="password"
         autoComplete={
-          pathname === PUBLIC_ROUTES.LOGIN ? "current-password" : "new-password"
+          pathname === PUBLIC_ROUTES.LOGIN ? 'current-password' : 'new-password'
         }
+        maxLength={100}
+        minLength={5}
       />
-      <span className="h-6 text-primary">{currentError?.message}</span>
+      <span className="text-primary h-6">{currentError?.message}</span>
       <Button isLoading={isLoading} className="mt-2">
-        {pathname === PUBLIC_ROUTES.LOGIN ? "Log in" : "Create Account"}
+        {pathname === PUBLIC_ROUTES.LOGIN ? 'Log in' : 'Create Account'}
       </Button>
     </form>
   )

@@ -1,8 +1,8 @@
-import { Button } from "@/components/ui/Button"
-import { CancelButton } from "@/components/ui/CancelButton"
-import { InputField } from "@/components/ui/inputField/InputField"
-import { useLanguageActions } from "@/lib/hooks/languageHooks/useLanguageActions"
-import { LanguageModalFormState } from "@/types/languages"
+import { Button } from '@/components/ui/Button'
+import { CancelButton } from '@/components/ui/CancelButton'
+import { InputField } from '@/components/ui/inputField/InputField'
+import { useLanguageActions } from '@/lib/hooks/languageHooks/useLanguageActions'
+import { LanguageModalFormState } from '@/types/languages'
 
 export function LanguageForm({
   initialData,
@@ -33,6 +33,7 @@ export function LanguageForm({
         value={formData.name}
         onChange={handleChange}
         required
+        maxLength={50}
       />
 
       <InputField
@@ -53,18 +54,19 @@ export function LanguageForm({
         name="native_name"
         value={formData.native_name}
         onChange={handleChange}
+        maxLength={50}
       />
 
-      <div className="flex justify-end gap-4 mt-10">
+      <div className="mt-10 flex justify-end gap-4">
         <CancelButton closeModal={closeModal} />
         <Button type="submit" disabled={!isFormValid || saving || !isDirty}>
           {saving
-            ? type === "LANGUAGE_CREATE"
-              ? "CREATING"
-              : "SAVING"
-            : type === "LANGUAGE_CREATE"
-              ? "CREATE"
-              : "SAVE"}
+            ? type === 'LANGUAGE_CREATE'
+              ? 'CREATING'
+              : 'SAVING'
+            : type === 'LANGUAGE_CREATE'
+              ? 'CREATE'
+              : 'SAVE'}
         </Button>
       </div>
     </form>
