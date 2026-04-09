@@ -1,10 +1,10 @@
-import { useLazyQuery } from "@apollo/client/react"
+import { useLazyQuery } from '@apollo/client/react'
 
-import { GET_POSITIONS } from "@/api/graphql/queries/positions"
-import { GetPositionsResponse } from "@/types/position"
-import { Position } from "@/types/user"
-import { ChangeEvent } from "react"
-import { MultiSelectField } from "./MultiSelectField"
+import { GET_POSITIONS } from '@/api/graphql/queries/positions'
+import { GetPositionsResponse } from '@/types/position'
+import { Position } from '@/types/user'
+import { ChangeEvent } from 'react'
+import { MultiSelectField } from './multiSelectField/MultiSelectField'
 
 interface Props {
   formId: string

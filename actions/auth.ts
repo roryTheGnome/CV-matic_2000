@@ -1,9 +1,9 @@
-"use server"
+'use server'
 
-import { RefreshTokenResult, UpdateTokenResonse } from "@/types/auth"
-import { cookies } from "next/headers"
-const ACCESS_TOKEN = "accessToken"
-const REFRESH_TOKEN = "refreshToken"
+import { RefreshTokenResult, UpdateTokenResonse } from '@/types/auth'
+import { cookies } from 'next/headers'
+const ACCESS_TOKEN = 'accessToken'
+const REFRESH_TOKEN = 'refreshToken'
 
 export async function setAuthTokens(
   accessToken: string,
@@ -13,9 +13,9 @@ export async function setAuthTokens(
 
   const cookieOptions = {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax" as const,
-    path: "/",
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax' as const,
+    path: '/',
   }
 
   cookieStore.set(ACCESS_TOKEN, accessToken, {
@@ -48,17 +48,17 @@ export async function refreshTokens(): Promise<RefreshTokenResult> {
 
   if (!refresh) {
     await removeAuthTokens()
-    return { success: false, message: "No refresh token available" }
+    return { success: false, message: 'No refresh token available' }
   }
 
   try {
     const response = await fetch(process.env.NEXT_PUBLIC_GRAPHQL_URL!, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${refresh}`,
       },
-      credentials: "include",
+      credentials: 'include',
       body: JSON.stringify({
         query: `
           mutation UpdateToken {
@@ -82,19 +82,18 @@ export async function refreshTokens(): Promise<RefreshTokenResult> {
 
     if (!access_token || !refresh_token) {
       await removeAuthTokens()
-      return { success: false, message: "Refresh token is invalid or expired" }
+      return { success: false, message: 'Refresh token is invalid or expired' }
     }
 
     await setAuthTokens(access_token, refresh_token)
-    console.log("Tokens successfully updated!")
 
     return { success: true, accessToken: access_token }
   } catch (error) {
-    console.error("Refresh token error:", error)
+    console.error('Refresh token error:', error)
     return {
       success: false,
       message:
-        error instanceof Error ? error.message : "Network error during refresh",
+        error instanceof Error ? error.message : 'Network error during refresh',
     }
   }
 }

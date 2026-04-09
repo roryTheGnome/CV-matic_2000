@@ -71,7 +71,7 @@ export function SkillForm({ userSkills, userId }: SkillFormProps) {
         name="skill"
         value={selectedSkill?.name || ''}
         isRequired={true}
-        title=" "
+        title="Select Skill"
         handleChange={(e) => {
           const skill = availableSkills.find((s) => s.name === e.target.value)
           setSelectedSkill(skill || null)

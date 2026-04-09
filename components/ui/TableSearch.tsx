@@ -1,7 +1,7 @@
-import { useAuthStore } from "@/store/authStore"
-import { ModalType, useModalStore } from "@/store/modalStore"
-import { Plus } from "lucide-react"
-import { Button } from "./Button"
+import { useAuthStore } from '@/store/authStore'
+import { ModalType, useModalStore } from '@/store/modalStore'
+import { Plus } from 'lucide-react'
+import { Button } from './Button'
 
 interface Props {
   search: string
@@ -21,14 +21,24 @@ export function TableSearch({
   const { isAdmin } = useAuthStore()
   const { openModal } = useModalStore()
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex items-center justify-between">
       <input
         type="text"
         placeholder="Search.."
         value={search}
-        onChange={e => setSearch(e.target.value)}
-        className="mb-4 px-4 py-2 border border-gray-500 rounded-4xl w-full max-w-sm"
+        onChange={(e) => setSearch(e.target.value)}
+        className="mb-4 w-full max-w-sm rounded-4xl border border-gray-500 px-4 py-2"
       />
+      {typeOfCreateModal === 'CV_PROJECT_ADD' && (
+        <Button
+          Icon={Plus}
+          isTextButton
+          className="text-red-400"
+          onClick={() => openModal(typeOfCreateModal)}
+        >
+          {createButtonText}
+        </Button>
+      )}
       {(isAdmin || userCanInteract) && (
         <Button
           Icon={Plus}

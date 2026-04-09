@@ -1,6 +1,6 @@
-import { Project } from 'next/dist/build/swc/types'
-import { Language, LanguageProficiency } from './lang'
-import { Skill, SkillMastery } from './skills'
+import { LanguageProficiency } from './lang'
+import { Project } from './project'
+import { Mastery, SkillMastery } from './skills'
 import { User, UserRole } from './user'
 
 export interface Cvs {
@@ -87,5 +87,111 @@ export interface DeleteCvVariables {
 export interface DeleteCvResponse {
   deleteCv: {
     affected: number
+  }
+}
+
+export interface DeleteCvSkillInput {
+  skill: {
+    cvId: string
+    name: string[]
+  }
+}
+
+export interface UpdateCvSkillInput {
+  skill: {
+    cvId: string
+    name: string
+    categoryId?: string
+    mastery: Mastery
+  }
+}
+
+export interface CreateCvSkillInput {
+  skill: {
+    cvId: string
+    name: string
+    categoryId?: string
+    mastery: Mastery
+  }
+}
+
+export interface CreateCvProjectInput {
+  project: {
+    cvId: string
+    projectId: string
+    start_date: string
+    end_date?: string
+    roles: string[]
+    responsibilities: string[]
+  }
+}
+
+export interface AddCvProjectModalFormState {
+  cvId: string
+  projectId: string
+  start_date: string
+  end_date?: string
+  roles: string
+  responsibilities: string
+
+  name: string
+  domain: string
+  description: string
+  environment: string
+}
+
+// Тип для переменных мутации
+export interface AddCvProjectVariables {
+  project: {
+    cvId: string
+    projectId: string
+    start_date: string
+    end_date?: string | null // Необязательное поле
+    roles: string[]
+    responsibilities: string[]
+  }
+}
+
+// Тип ответа от сервера (используй свой существующий тип Cvs/Cv, если он уже есть)
+export interface AddCvProjectData {
+  addCvProject: {
+    id: string
+    projects: CvProject[] // Твой существующий тип CvProject
+  }
+}
+
+// Тип для переменных мутации (входные данные)
+export interface UpdateCvProjectVariables {
+  project: {
+    cvId: string
+    projectId: string
+    start_date: string
+    end_date?: string | null
+    roles: string[]
+    responsibilities: string[]
+  }
+}
+
+// Тип ответа от сервера
+export interface UpdateCvProjectData {
+  updateCvProject: {
+    id: string
+    projects: CvProject[] // Твой существующий тип
+  }
+}
+
+// Тип для переменных мутации (входные данные)
+export interface RemoveCvProjectVariables {
+  project: {
+    cvId: string
+    projectId: string
+  }
+}
+
+// Тип ответа от сервера
+export interface RemoveCvProjectData {
+  removeCvProject: {
+    id: string
+    projects: CvProject[] // Твой существующий тип
   }
 }

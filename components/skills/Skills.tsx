@@ -6,19 +6,23 @@ import { useState } from 'react'
 import { SkillCategorySection } from './SkillCategorySection'
 
 export type Props = {
-  skills: SkillMastery[]
+  skills: SkillMastery[] | undefined
   allSkills: SkillItem[]
-  onDelete?: (names: string[]) => void
   owner: boolean
   userId: string
+  modalType?: 'PROFILE_SKILL_ADD' | 'CV_SKILL_ADD'
+  cvId?: string
+  onDelete?: (names: string[]) => void
 }
 
 export const Skills = ({
   skills,
   allSkills,
-  onDelete,
-  owner,
   userId,
+  owner,
+  modalType = 'PROFILE_SKILL_ADD',
+  cvId,
+  onDelete,
 }: Props) => {
   const { openModal } = useModalStore()
 
@@ -29,7 +33,7 @@ export const Skills = ({
 
   const toggleSelect = (name: string) => {
     if (owner) {
-      const skill = skills.find((s) => s.name === name)
+      const skill = skills?.find((s) => s.name === name)
       if (!skill) return
 
       if (deleteMode) {
@@ -39,14 +43,26 @@ export const Skills = ({
             : [...prev, name],
         )
       } else {
-        openModal('PROFILE_SKILL_EDIT', {
-          skill: {
-            name: skill.name,
-            categoryId: skill.categoryId,
-            mastery: skill.mastery,
-          },
-          id: userId,
-        })
+        
+        if (modalType === 'PROFILE_SKILL_ADD') {
+          openModal('PROFILE_SKILL_EDIT', {
+            skill: {
+              name: skill.name,
+              categoryId: skill.categoryId,
+              mastery: skill.mastery,
+            },
+            id: userId,
+          })
+        } else {
+          openModal('CV_SKILL_EDIT', {
+            id: cvId,
+            skill: {
+              name: skill.name,
+              categoryId: skill.categoryId,
+              mastery: skill.mastery,
+            },
+          })
+        }
       }
     }
   }
@@ -65,7 +81,7 @@ export const Skills = ({
     setDeleteMode(false)
   }
 
-  skills.forEach((skill) => {
+  skills?.forEach((skill) => {
     const fullSkill = allSkills.find((s) => s.name === skill.name)
 
     const categoryName = fullSkill?.category_name || 'Other' //i add otehr as fallback but i dont think it will be at use, max for debugging
@@ -76,6 +92,14 @@ export const Skills = ({
 
     grouped[categoryName].push(skill)
   })
+
+  const handleAddBtn = () => {
+    if (modalType === 'PROFILE_SKILL_ADD') {
+      return openModal(modalType)
+    } else {
+      return openModal(modalType, { id: cvId })
+    }
+  }
 
   return (
     <div>
