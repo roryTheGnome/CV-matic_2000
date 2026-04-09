@@ -1,17 +1,12 @@
-import CvNav from "@/components/navs/CvNav"
-import { Loader } from "@/components/ui/Loader"
-import { Suspense } from "react"
+import CvNav from '@/components/navs/CvNav'
+import { Loader } from '@/components/ui/Loader'
+import { Suspense } from 'react'
 import LoadingPage from '@/app/(platform)/loading'
 
-export default function CvLayout({
-                                   children,
-                                 }: {
-  children: React.ReactNode
-}) {
-
+export default function CvLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="p-6">
-      <Suspense fallback={<LoadingPage />}>
+      <Suspense fallback={<Loader />}>
         <CvNav />
         <div>{children}</div>
       </Suspense>

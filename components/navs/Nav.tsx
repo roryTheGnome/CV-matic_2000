@@ -6,13 +6,24 @@ import { adminNavItems, navItems } from '@/constants/navLinks'
 import { useCurrentUser } from '@/lib/hooks/userHooks/useCurrentUser'
 import { useUser } from '@/lib/hooks/userHooks/useUser'
 import { useAuthStore } from '@/store/authStore'
-import { CircleUserRound, Settings } from 'lucide-react'
+import {
+  ArrowLeftToLine,
+  ArrowRightToLine,
+  CircleUserRound,
+  Settings,
+} from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 
-export default function Nav() {
+export default function Nav({
+  collapsed,
+  setCollapsed,
+}: {
+  collapsed: boolean
+  setCollapsed: (val: boolean) => void
+}) {
   const pathname = usePathname()
   const { isAdmin } = useAuthStore()
 
@@ -33,6 +44,27 @@ export default function Nav() {
     <>
       <nav className="bg-background hidden h-full flex-col justify-between p-4 pl-0 md:flex">
         <div className="flex flex-col gap-2">
+          {collapsed ? (
+            <button
+              onClick={() => setCollapsed(false)}
+              className="flex w-full justify-end gap-3 rounded p-2 transition"
+            >
+              <ArrowRightToLine
+                size={20}
+                className="text-text-secondary hidden h-5 w-5 lg:inline"
+              />
+            </button>
+          ) : (
+            <button
+              onClick={() => setCollapsed(true)}
+              className="flex w-full justify-end gap-3 rounded p-2 transition"
+            >
+              <ArrowLeftToLine
+                size={20}
+                className="text-text-secondary hidden h-5 w-5 lg:inline"
+              />
+            </button>
+          )}
           {checkOnAdmin().map((item) => {
             const isActive = pathname === item.href
             const Icon = item.icon
@@ -43,11 +75,17 @@ export default function Nav() {
                 href={item.href}
                 className={`flex items-center gap-3 rounded-r-full px-5 py-4 transition ${isActive ? `bg-surface-active` : `hover:bg-surface-active`}`}
               >
-                <Icon
-                  size={20}
-                  className="text-text-secondary hidden h-5 w-5 lg:inline"
-                />
-                <span>{item.name}</span>
+                {collapsed ? (
+                  <Icon size={20} className="text-text-secondary h-5 w-5" />
+                ) : (
+                  <>
+                    <Icon
+                      size={20}
+                      className="text-text-secondary hidden h-5 w-5 lg:inline"
+                    />
+                    <span>{item.name}</span>
+                  </>
+                )}
               </Link>
             )
           })}
@@ -58,29 +96,49 @@ export default function Nav() {
             onClick={() => setOpen((isopen) => !isopen)}
             className="hover:bg-surface-active flex w-full items-center gap-3 rounded p-2 transition"
           >
-            {user?.profile?.avatar ? (
-              <Image
-                src={user.profile.avatar}
-                className="bg-primary flex h-10 w-10 items-center justify-center rounded-full"
-                alt="User avatar"
-                width={40}
-                height={40}
-              />
+            {collapsed ? (
+              <>
+                {user?.profile?.avatar ? (
+                  <Image
+                    src={user.profile.avatar}
+                    className="bg-primary flex h-10 w-10 items-center justify-center rounded-full"
+                    alt="User avatar"
+                    width={40}
+                    height={40}
+                  />
+                ) : (
+                  <div className="bg-primary text-text-primary flex h-10 w-10 items-center justify-center rounded-full">
+                    {user?.profile?.first_name?.at(0) ?? 'U'}
+                  </div>
+                )}
+              </>
             ) : (
-              <div className="bg-primary text-text-primary flex h-10 w-10 items-center justify-center rounded-full">
-                {user?.profile?.first_name?.at(0) ?? 'U'}
-              </div>
-            )}
+              <>
+                {user?.profile?.avatar ? (
+                  <Image
+                    src={user.profile.avatar}
+                    className="bg-primary hidden h-10 w-10 items-center justify-center rounded-full lg:flex"
+                    alt="User avatar"
+                    width={40}
+                    height={40}
+                  />
+                ) : (
+                  <div className="bg-primary text-text-primary hidden h-10 w-10 items-center justify-center rounded-full lg:flex">
+                    {user?.profile?.first_name?.at(0) ?? 'U'}
+                  </div>
+                )}
 
-            <span className="truncate">
-              {user?.profile.first_name} {user?.profile.last_name}
-            </span>
+                <span className="truncate">
+                  {user?.profile.first_name} {user?.profile.last_name}
+                </span>
+              </>
+            )}
           </button>
           {open && (
             <div className="bg-surface border-input-border absolute bottom-full left-2 z-50 mb-2 w-56 rounded border shadow-lg">
               <div className="flex flex-col">
                 <Link
-                  href={`${PRIVATE_ROUTES.USERS}/${user?.id}`}
+                  href={`${PRIVATE_ROUTES.USERS}/${currentUserId}`}
                   className="hover:bg-surface-active flex items-center gap-3 px-5 py-4 transition"
                 >
                   <CircleUserRound

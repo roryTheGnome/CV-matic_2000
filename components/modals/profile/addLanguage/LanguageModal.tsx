@@ -5,6 +5,7 @@ import { Loader } from '@/components/ui/Loader'
 import { useCurrentUser } from '@/lib/hooks/userHooks/useCurrentUser'
 import { useUser } from '@/lib/hooks/userHooks/useUser'
 import { LanguageForm } from './LanguageForm'
+import { useModalStore } from '@/store/modalStore'
 
 export function ProfileLanguageModal() {
   const { data } = useModalStore()
