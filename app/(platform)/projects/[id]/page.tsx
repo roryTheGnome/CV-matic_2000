@@ -1,38 +1,31 @@
-'use client';
+'use client'
 
-import { useCurrentUser } from '@/lib/hooks/userHooks/useCurrentUser';
-import { useProject } from '@/lib/hooks/projectHooks/useProject';
-import { ActionsMenu } from '@/components/admin/ActionsMenu';
+import { useProject } from '@/lib/hooks/projectHooks/useProject'
+import { ActionsMenu } from '@/components/admin/ActionsMenu'
+import { useAuthStore } from '@/store/authStore'
 
 export default function ProjectDetails() {
-  const { isLoading, error, project } = useProject();
-  const { currentUserRole } = useCurrentUser();
+  const { isLoading, error, project } = useProject()
+  const { isAdmin } = useAuthStore()
 
-  if (isLoading) return <div className="p-4">Loading...</div>;
-  if (error) return <div className="p-4 text-red-500">Error loading project</div>;
-  if (!project) return null;
+  if (isLoading) return <div className="p-4">Loading...</div>
+  if (error)
+    return <div className="p-4 text-red-500">Error loading project</div>
+  if (!project) return null
 
-  const {
-    id,
-    name,
-    domain,
-    start_date,
-    end_date,
-    description,
-    environment,
-  } = project;
+  const { id, name, domain, start_date, end_date, description, environment } =
+    project
 
   return (
     <div className="">
-      <div >
-
-        <div className="flex items-start justify-between px-6 py-4 border-b border-border">
+      <div>
+        <div className="border-border flex items-start justify-between border-b px-6 py-4">
           <div>
-            <h2 className="text-xl font-semibold text-foreground">{name}</h2>
-            <p className="text-sm text-muted-foreground">{domain}</p>
+            <h2 className="text-foreground text-xl font-semibold">{name}</h2>
+            <p className="text-muted-foreground text-sm">{domain}</p>
           </div>
 
-          {currentUserRole === 'Admin' && (
+          {isAdmin && (
             <ActionsMenu
               editType="PROJECT_EDIT"
               deleteType="PROJECT_DELETE"
@@ -49,15 +42,13 @@ export default function ProjectDetails() {
 
           <div>
             <p className="text-muted-foreground">End date</p>
-            <p className="font-medium">
-              {end_date ? end_date : 'Till now'}
-            </p>
+            <p className="font-medium">{end_date ? end_date : 'Till now'}</p>
           </div>
         </div>
 
         {description && (
           <div className="px-6 pb-4">
-            <p className="text-sm text-muted-foreground leading-relaxed">
+            <p className="text-muted-foreground text-sm leading-relaxed">
               {description}
             </p>
           </div>
@@ -69,7 +60,7 @@ export default function ProjectDetails() {
               {environment.map((env) => (
                 <span
                   key={env}
-                  className="text-xs px-2.5 py-1 rounded-full bg-muted text-muted-foreground border border-border"
+                  className="bg-muted text-muted-foreground border-border rounded-full border px-2.5 py-1 text-xs"
                 >
                   {env}
                 </span>
@@ -79,5 +70,5 @@ export default function ProjectDetails() {
         )}
       </div>
     </div>
-  );
+  )
 }

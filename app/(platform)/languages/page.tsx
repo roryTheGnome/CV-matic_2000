@@ -13,7 +13,6 @@ import { TableSearch } from '@/components/ui/TableSearch'
 import { languageHeaders } from '@/constants/tableHeaders'
 
 import { usePageWithTable } from '@/lib/hooks/usePageWithTable'
-import { useCurrentUser } from '@/lib/hooks/userHooks/useCurrentUser'
 import { useUser } from '@/lib/hooks/userHooks/useUser'
 import { useAuthStore } from '@/store/authStore'
 import { GetLanguagesData, LanguageItem } from '@/types/languages'
@@ -23,8 +22,7 @@ import NotFoundPage from '@/app/(platform)/not-found'
 import { useMutation, useQuery } from '@apollo/client/react'
 
 export default function Language() {
-  const { currentUserId } = useCurrentUser()
-  const { isAdmin } = useAuthStore()
+  const { currentUserId, isAdmin } = useAuthStore()
   const { search, sortKey, sortDir, setSearch, handleSort } = usePageWithTable()
 
   const { user, error } = useUser(

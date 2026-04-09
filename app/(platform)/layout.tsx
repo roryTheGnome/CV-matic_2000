@@ -15,13 +15,13 @@ export default function PlatformLayout({
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 h-screen transition-all duration-300 ${collapsed ? 'w-[80px]' : 'w-1/6'}`}
+        className={`fixed top-0 left-0 h-screen transition-all duration-300 ${collapsed ? 'w-20' : 'w-1/6'}`}
       >
         <Nav collapsed={collapsed} setCollapsed={setCollapsed} />
       </nav>
 
       <main
-        className={`p-6 transition-all duration-300 ${collapsed ? 'ml-[80px] w-[calc(100%-80px)]' : 'ml-[16%] w-5/6'}`}
+        className={`p-6 pb-24 transition-all duration-300 lg:pb-6 ${collapsed ? 'lg:ml-20 lg:w-[calc(100%-80px)]' : 'lg:ml-[16%] lg:w-5/6'} `}
       >
         <Suspense fallback={<LoadingPage />}>
           <GlobalNav />

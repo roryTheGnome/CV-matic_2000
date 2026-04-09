@@ -16,7 +16,7 @@ import {
 import { useMutation } from '@apollo/client/react'
 import { SubmitEvent, useId, useState } from 'react'
 import toast from 'react-hot-toast'
-import { useCurrentUser } from '../userHooks/useCurrentUser'
+import { useAuthStore } from '@/store/authStore'
 
 export function useCvActions(
   initialData?: CreateCvModalFormState,
@@ -24,7 +24,7 @@ export function useCvActions(
 ) {
   const formId = useId()
   const { type, closeModal } = useModalStore()
-  const { currentUserId } = useCurrentUser()
+  const { currentUserId } = useAuthStore()
 
   const [formData, setFormData] = useState<CreateCvModalFormState>(
     initialData || {

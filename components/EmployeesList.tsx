@@ -13,7 +13,7 @@ type EmployeesListProps = {
   search: string
   sortKey: GlobalSortKey
   sortDir: 'asc' | 'desc'
-  currentUserId: number | undefined
+  currentUserId: string | undefined
 }
 
 export default function EmployeesList({
