@@ -5,6 +5,7 @@ import { CancelButton } from '@/components/ui/CancelButton'
 import { useModalStore } from '@/store/modalStore'
 import { useState } from 'react'
 import { useMutation, useQuery } from '@apollo/client/react'
+import { Loader } from '@/components/ui/Loader'
 
 import { GetLanguagesData, Language, Proficiency } from '@/types/lang'
 import { GET_LANGUAGES } from '@/api/graphql/queries/language'
@@ -58,7 +59,7 @@ export function LanguageForm({ userLanguages, userId }: LanguageFormProps) {
     }
   }
 
-  if (loading) return <div>Loading languages...</div> //TODO change these latr
+  if (loading) return <Loader />
   if (error) return <div>Error: {error.message}</div>
 
   const availableLangs =

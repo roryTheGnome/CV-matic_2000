@@ -4,6 +4,7 @@ import { SkillForm } from './SkillForm'
 import { ModalLayout } from '@/components/modals/ModalLayout'
 import { useUser } from '@/lib/hooks/userHooks/useUser'
 import { useModalStore } from '@/store/modalStore'
+import { Loader } from '@/components/ui/Loader'
 
 export function ProfileSkillModal() {
   const { data } = useModalStore()
@@ -12,8 +13,8 @@ export function ProfileSkillModal() {
   const { user, isLoading, error } = useUser(id ? String(id) : undefined)
 
   if (isLoading) {
-    return <div className="p-6">Loading...</div>
-  } //TODO create something gloabal for default
+    return <Loader />
+  }
   if (error || !user) {
     return <div className="p-6">Failed to load user</div>
   }

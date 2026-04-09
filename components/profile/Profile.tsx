@@ -1,4 +1,6 @@
 import { User } from '@/types/user'
+import Image from 'next/image'
+import defaultProfile from '../../public/default-profile.png'
 
 type ProfileProp = {
   user: User
@@ -10,9 +12,13 @@ export default function Profile({ user }: ProfileProp) {
   return (
     <>
       <div className="mb-8 flex flex-col items-center text-center">
-        <img
-          src={user.profile?.avatar ?? 'https://placehold.co/40'}
+        <Image
+          src={user.profile?.avatar ?? defaultProfile}
           className="mb-4 h-24 w-24 rounded-full object-cover"
+          alt="Preview avatar"
+          width={96}
+          height={96}
+          loading="eager"
         />
 
         <h1 className="text-2xl font-semibold">{fullName}</h1>

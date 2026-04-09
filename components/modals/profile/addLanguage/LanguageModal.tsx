@@ -1,9 +1,10 @@
 'use client'
 
-import { LanguageForm } from './LanguageForm'
 import { ModalLayout } from '@/components/modals/ModalLayout'
+import { Loader } from '@/components/ui/Loader'
+import { useCurrentUser } from '@/lib/hooks/userHooks/useCurrentUser'
 import { useUser } from '@/lib/hooks/userHooks/useUser'
-import { useModalStore } from '@/store/modalStore'
+import { LanguageForm } from './LanguageForm'
 
 export function ProfileLanguageModal() {
   const { data } = useModalStore()
@@ -12,8 +13,8 @@ export function ProfileLanguageModal() {
   const { user, isLoading, error } = useUser(id ? String(id) : undefined)
 
   if (isLoading) {
-    return <div className="p-6">Loading...</div>
-  } //TODO create something gloabal for default
+    return <Loader />
+  }
   if (error || !user) {
     return <div className="p-6">Failed to load user</div>
   }

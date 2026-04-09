@@ -140,27 +140,24 @@ export interface AddCvProjectModalFormState {
   environment: string
 }
 
-// Тип для переменных мутации
 export interface AddCvProjectVariables {
   project: {
     cvId: string
     projectId: string
     start_date: string
-    end_date?: string | null // Необязательное поле
+    end_date?: string | null
     roles: string[]
     responsibilities: string[]
   }
 }
 
-// Тип ответа от сервера (используй свой существующий тип Cvs/Cv, если он уже есть)
 export interface AddCvProjectData {
   addCvProject: {
     id: string
-    projects: CvProject[] // Твой существующий тип CvProject
+    projects: CvProject[]
   }
 }
 
-// Тип для переменных мутации (входные данные)
 export interface UpdateCvProjectVariables {
   project: {
     cvId: string
@@ -172,15 +169,13 @@ export interface UpdateCvProjectVariables {
   }
 }
 
-// Тип ответа от сервера
 export interface UpdateCvProjectData {
   updateCvProject: {
     id: string
-    projects: CvProject[] // Твой существующий тип
+    projects: CvProject[]
   }
 }
 
-// Тип для переменных мутации (входные данные)
 export interface RemoveCvProjectVariables {
   project: {
     cvId: string
@@ -188,10 +183,9 @@ export interface RemoveCvProjectVariables {
   }
 }
 
-// Тип ответа от сервера
 export interface RemoveCvProjectData {
   removeCvProject: {
     id: string
-    projects: CvProject[] // Твой существующий тип
+    projects: CvProject[]
   }
 }
