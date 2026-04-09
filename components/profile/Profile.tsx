@@ -31,7 +31,7 @@ export default function Profile({ user }: ProfileProp) {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6">
         <div>
           <label className="text-text-secondary text-sm">First Name</label>
           <div className="bg-surface mt-1 rounded border p-3">

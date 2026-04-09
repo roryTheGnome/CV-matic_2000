@@ -21,7 +21,7 @@ export default function EmployeeSkill() {
     refetchQueries: [
       {
         query: GET_USER,
-        variables: { userId: currentUserId },
+        variables: { userId: user?.id },
       },
     ],
   })
@@ -30,7 +30,7 @@ export default function EmployeeSkill() {
     await deleteSkills({
       variables: {
         skill: {
-          userId: currentUserId,
+          userId: user?.id,
           name: names,
         },
       },
@@ -46,6 +46,7 @@ export default function EmployeeSkill() {
         allSkills={skillsData?.skills || []}
         onDelete={handleDelete}
         owner={currentUserId === Number(user.id) || currentUserRole === 'Admin'}
+        userId={user.id}
       />
     </>
   )

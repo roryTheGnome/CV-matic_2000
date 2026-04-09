@@ -7,10 +7,10 @@ import { useUser } from '@/lib/hooks/userHooks/useUser'
 import { LanguageForm } from './LanguageForm'
 
 export function ProfileLanguageModal() {
-  const { currentUserId } = useCurrentUser()
-  const { user, isLoading, error } = useUser(
-    currentUserId ? String(currentUserId) : undefined,
-  )
+  const { data } = useModalStore()
+
+  const id = data?.id
+  const { user, isLoading, error } = useUser(id ? String(id) : undefined)
 
   if (isLoading) {
     return <Loader />
@@ -21,7 +21,7 @@ export function ProfileLanguageModal() {
 
   return (
     <ModalLayout title="Add Language">
-      <LanguageForm userLanguages={user.profile.languages} />
+      <LanguageForm userLanguages={user.profile.languages} userId={user.id} />
     </ModalLayout>
   )
 }

@@ -8,12 +8,13 @@ export function ProfileSkillEditModal() {
   const { data } = useModalStore()
 
   const skill = data?.skill
+  const id = data?.id
 
   if (!skill) return null
 
   return (
     <ModalLayout title="Edit Skill">
-      <SkillEditForm skill={skill} />
+      <SkillEditForm skill={skill} userId={id} />
     </ModalLayout>
   )
 }

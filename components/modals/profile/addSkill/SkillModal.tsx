@@ -1,16 +1,16 @@
 'use client'
 
-import { ModalLayout } from '@/components/modals/ModalLayout'
-import { Loader } from '@/components/ui/Loader'
-import { useCurrentUser } from '@/lib/hooks/userHooks/useCurrentUser'
-import { useUser } from '@/lib/hooks/userHooks/useUser'
 import { SkillForm } from './SkillForm'
+import { ModalLayout } from '@/components/modals/ModalLayout'
+import { useUser } from '@/lib/hooks/userHooks/useUser'
+import { useModalStore } from '@/store/modalStore'
+import { Loader } from '@/components/ui/Loader'
 
 export function ProfileSkillModal() {
-  const { currentUserId } = useCurrentUser()
-  const { user, isLoading, error } = useUser(
-    currentUserId ? String(currentUserId) : undefined,
-  )
+  const { data } = useModalStore()
+
+  const id = data?.id
+  const { user, isLoading, error } = useUser(id ? String(id) : undefined)
 
   if (isLoading) {
     return <Loader />
@@ -20,7 +20,7 @@ export function ProfileSkillModal() {
   }
   return (
     <ModalLayout title="Add Skill">
-      <SkillForm userSkills={user.profile.skills} />
+      <SkillForm userSkills={user.profile.skills} userId={user.id} />
     </ModalLayout>
   )
 }

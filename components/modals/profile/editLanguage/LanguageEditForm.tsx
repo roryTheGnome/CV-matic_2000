@@ -13,10 +13,10 @@ import { useCurrentUser } from '@/lib/hooks/userHooks/useCurrentUser'
 
 type Props = {
   language: LanguageProficiency
+  userId?: string
 }
 
-export function LanguageEditForm({ language }: Props) {
-  const { currentUserId } = useCurrentUser()
+export function LanguageEditForm({ language, userId }: Props) {
   const { closeModal } = useModalStore()
 
   const [proficiency, setProficiency] = useState<Proficiency>(
@@ -27,7 +27,7 @@ export function LanguageEditForm({ language }: Props) {
     refetchQueries: [
       {
         query: GET_USER,
-        variables: { userId: currentUserId },
+        variables: { userId: userId },
       },
     ],
   })
@@ -35,13 +35,13 @@ export function LanguageEditForm({ language }: Props) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    if (!currentUserId) return
+    if (!userId) return
 
     try {
       await updateLanguage({
         variables: {
           language: {
-            userId: currentUserId,
+            userId: userId,
             name: language.name,
             proficiency,
           },

@@ -81,7 +81,7 @@ export default function EditableProfile({ user }: ProfileProp) {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6">
         <InputField
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}

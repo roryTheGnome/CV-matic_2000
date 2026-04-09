@@ -43,7 +43,10 @@ export default function Nav() {
                 href={item.href}
                 className={`flex items-center gap-3 rounded-r-full px-5 py-4 transition ${isActive ? `bg-surface-active` : `hover:bg-surface-active`}`}
               >
-                <Icon size={20} className="text-text-secondary h-5 w-5" />
+                <Icon
+                  size={20}
+                  className="text-text-secondary hidden h-5 w-5 lg:inline"
+                />
                 <span>{item.name}</span>
               </Link>
             )

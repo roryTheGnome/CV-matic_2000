@@ -3,23 +3,22 @@
 import { Button } from '@/components/ui/Button'
 import { CancelButton } from '@/components/ui/CancelButton'
 import { useModalStore } from '@/store/modalStore'
-import { useMutation, useQuery } from '@apollo/client/react'
 import { useState } from 'react'
-
-import { PROFILE_LANGUAGE_ADD } from '@/api/graphql/mutations/profile'
-import { GET_LANGUAGES } from '@/api/graphql/queries/language'
-import { GET_USER } from '@/api/graphql/queries/user'
+import { useMutation, useQuery } from '@apollo/client/react'
 import { Loader } from '@/components/ui/Loader'
-import { Select } from '@/components/ui/select/Select'
-import { useCurrentUser } from '@/lib/hooks/userHooks/useCurrentUser'
+
 import { GetLanguagesData, Language, Proficiency } from '@/types/lang'
+import { GET_LANGUAGES } from '@/api/graphql/queries/language'
+import { PROFILE_LANGUAGE_ADD } from '@/api/graphql/mutations/profile'
+import { GET_USER } from '@/api/graphql/queries/user'
+import { Select } from '@/components/ui/select/Select'
 
 type LanguageFormProps = {
   userLanguages: { name: string }[]
+  userId?: string
 }
 
-export function LanguageForm({ userLanguages }: LanguageFormProps) {
-  const { currentUserId } = useCurrentUser()
+export function LanguageForm({ userLanguages, userId }: LanguageFormProps) {
   const { closeModal } = useModalStore()
 
   const { data, loading, error } = useQuery<GetLanguagesData>(GET_LANGUAGES)
@@ -28,7 +27,7 @@ export function LanguageForm({ userLanguages }: LanguageFormProps) {
     refetchQueries: [
       {
         query: GET_USER,
-        variables: { userId: currentUserId },
+        variables: { userId: userId },
       },
     ],
   })
@@ -41,13 +40,13 @@ export function LanguageForm({ userLanguages }: LanguageFormProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    if (!currentUserId || !selectedLanguage) return
+    if (!userId || !selectedLanguage) return
 
     try {
       await addLanguage({
         variables: {
           language: {
-            userId: currentUserId,
+            userId: userId,
             name: selectedLanguage.name,
             proficiency,
           },
