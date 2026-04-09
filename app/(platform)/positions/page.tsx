@@ -9,10 +9,10 @@ import { NameTableItem } from '@/components/ui/table/NameTableItem'
 import TableBody from '@/components/ui/table/TableBody'
 import { TableSearch } from '@/components/ui/TableSearch'
 import { usePageWithTable } from '@/lib/hooks/usePageWithTable'
+import { useCurrentUser } from '@/lib/hooks/userHooks/useCurrentUser'
 import { GetPositionsResponse } from '@/types/position'
 import { Position } from '@/types/user'
 import { getSortByName } from '@/utils/getSortByName'
-import { useCurrentUser } from '@/lib/hooks/userHooks/useCurrentUser'
 
 export default function Positions() {
   const { data, loading, error } = useQuery<GetPositionsResponse>(GET_POSITIONS)
@@ -33,7 +33,7 @@ export default function Positions() {
         setSearch={setSearch}
       />
 
-      <div className="overflow-x-auto rounded-lg">
+      <div className="min-h-screen overflow-x-auto rounded-lg">
         <table className="min-w-full divide-y divide-gray-500">
           <TableHeader
             handleSort={handleSort}

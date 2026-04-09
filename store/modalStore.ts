@@ -1,6 +1,6 @@
-import { create } from 'zustand'
 import { LanguageProficiency } from '@/types/lang'
 import { SkillMastery } from '@/types/skills'
+import { create } from 'zustand'
 
 export type ModalType =
   | 'USER_CREATE'
@@ -28,6 +28,11 @@ export type ModalType =
   | 'LANGUAGE_CREATE'
   | 'LANGUAGE_EDIT'
   | 'LANGUAGE_DELETE'
+  | 'CV_SKILL_ADD'
+  | 'CV_SKILL_EDIT'
+  | 'CV_PROJECT_ADD'
+  | 'CV_PROJECT_EDIT'
+  | 'CV_PROJECT_DELETE'
   | null
 
 export interface ModalData {
@@ -35,6 +40,7 @@ export interface ModalData {
   name?: string
   language?: LanguageProficiency
   skill?: SkillMastery
+  projectId?: string
 } //TODO THIS CAN NOT BE THE BEST PRACTICE, HELP
 
 interface ModalStore {
@@ -43,6 +49,7 @@ interface ModalStore {
   data: ModalData | undefined
   openModal: (type: ModalType, data?: ModalData | undefined) => void
   closeModal: () => void
+  setModalData: (data: ModalData) => void
 }
 
 export const useModalStore = create<ModalStore>((set) => ({
@@ -52,4 +59,5 @@ export const useModalStore = create<ModalStore>((set) => ({
   openModal: (type, data: ModalData | undefined) =>
     set({ isOpen: true, type, data }),
   closeModal: () => set({ isOpen: false, type: null, data: undefined }),
+  setModalData: (data: ModalData) => set({ data }),
 }))

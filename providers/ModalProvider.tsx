@@ -6,20 +6,24 @@ import { ProjectModal } from '@/components/modals/projectModal/ProjectModal'
 import { UserModal } from '@/components/modals/userModal/UserModal'
 
 import { DeleteCvModal } from '@/components/modals/cvModal/DeleteCvModal'
+import { DeleteCvProjectModal } from '@/components/modals/cvProjectModal/DeleteCvProjectModal'
+
+import { CvProjectModal } from '@/components/modals/cvProjectModal/CvProjectModal'
+import { CvSkillModal } from '@/components/modals/cvSkillModal/CvSkillModal'
 import { DeleteDepartmentModal } from '@/components/modals/departmentModal/DeleteDepartmentModal'
 import { DeleteLanguageModal } from '@/components/modals/languageModal/DeleteLanguageModal'
 import { LanguageModal } from '@/components/modals/languageModal/LanguageModal'
 import { DeletePositionModal } from '@/components/modals/positionModal/DeletePositionModal'
 import { PositionModal } from '@/components/modals/positionModal/PositionModal'
+import { ProfileLanguageModal } from '@/components/modals/profile/addLanguage/LanguageModal'
+import { ProfileSkillModal } from '@/components/modals/profile/addSkill/SkillModal'
+import { ProfileLanguageEditModal } from '@/components/modals/profile/editLanguage/ProfileLanguageEditModel'
+import { ProfileSkillEditModal } from '@/components/modals/profile/editSkill/ProfileSkillEditModal'
 import { DeleteProjectModal } from '@/components/modals/projectModal/DeleteProjectModal'
 import { DeleteSkillModal } from '@/components/modals/skillModal/DeleteSkillModal'
 import { SkillModal } from '@/components/modals/skillModal/SkillModal'
 import { DeleteUserModal } from '@/components/modals/userModal/DeleteUserModal'
 import { useModalStore } from '@/store/modalStore'
-import { ProfileSkillModal } from '@/components/modals/profile/addSkill/SkillModal'
-import { ProfileLanguageModal } from '@/components/modals/profile/addLanguage/LanguageModal'
-import { ProfileLanguageEditModal } from '@/components/modals/profile/editLanguage/ProfileLanguageEditModel'
-import { ProfileSkillEditModal } from '@/components/modals/profile/editSkill/ProfileSkillEditModal'
 
 export function ModalProvider() {
   const { type, isOpen } = useModalStore()
@@ -60,6 +64,13 @@ export function ModalProvider() {
       {type === 'PROFILE_SKILL_EDIT' && <ProfileSkillEditModal />}
       {type === 'PROFILE_LANGUAGE_ADD' && <ProfileLanguageModal />}
       {type === 'PROFILE_LANGUAGE_EDIT' && <ProfileLanguageEditModal />}
+
+      {type === 'CV_SKILL_ADD' && <CvSkillModal />}
+      {type === 'CV_SKILL_EDIT' && <CvSkillModal />}
+
+      {type === 'CV_PROJECT_ADD' && <CvProjectModal />}
+      {type === 'CV_PROJECT_EDIT' && <CvProjectModal />}
+      {type === 'CV_PROJECT_DELETE' && <DeleteCvProjectModal />}
     </>
   )
 }

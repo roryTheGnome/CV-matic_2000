@@ -57,7 +57,6 @@ export function useUserActions(
       }
     },
     onCompleted: (data) => {
-      console.log('Success! User created with ID:', data.createUser.id)
       toast.success('User created successfully!')
       closeModal()
     },

@@ -1,0 +1,17 @@
+'use client'
+
+import { ModalLayout } from '@/components/modals/ModalLayout'
+import { useModalStore } from '@/store/modalStore'
+import { CvSkillForm } from './CvSkillForm'
+
+export function CvSkillModal() {
+  const { data, type } = useModalStore()
+
+  const skill = data?.skill
+
+  return (
+    <ModalLayout title={type?.endsWith('_EDIT') ? 'Edit Skill' : 'Add Skill'}>
+      <CvSkillForm skill={skill} />
+    </ModalLayout>
+  )
+}

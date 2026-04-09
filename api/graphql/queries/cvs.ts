@@ -35,13 +35,22 @@ export const GET_CV_BY_ID = gql`
         id
         name
         internal_name
-        description
+        roles
         domain
+        description
         start_date
         end_date
         environment
-        roles
         responsibilities
+        project {
+          id
+          name
+          domain
+          description
+          start_date
+          end_date
+          environment
+        }
       }
 
       skills {
