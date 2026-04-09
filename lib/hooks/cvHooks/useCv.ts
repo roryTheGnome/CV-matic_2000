@@ -1,4 +1,4 @@
-
+'use client'
 import { useQuery } from '@apollo/client/react'
 import { useParams } from 'next/navigation'
 import { GET_CV_BY_ID } from '@/api/graphql/queries/cvs'
