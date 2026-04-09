@@ -1,11 +1,11 @@
-import { Button } from "@/components/ui/Button"
-import { CancelButton } from "@/components/ui/CancelButton"
-import { DatePickerField } from "@/components/ui/DatePickerField"
-import { EnvironmentSelect } from "@/components/ui/EnvironmentSelect"
-import { InputField } from "@/components/ui/inputField/InputField"
-import { TextareaField } from "@/components/ui/TextareaField"
-import { useProjectActions } from "@/lib/hooks/projectHooks/useProjectActions"
-import { CreateProjectModalFormState } from "@/types/project"
+import { Button } from '@/components/ui/Button'
+import { CancelButton } from '@/components/ui/CancelButton'
+import { DatePickerField } from '@/components/ui/DatePickerField'
+import { EnvironmentSelect } from '@/components/ui/EnvironmentSelect'
+import { InputField } from '@/components/ui/inputField/InputField'
+import { TextareaField } from '@/components/ui/TextareaField'
+import { useProjectActions } from '@/lib/hooks/projectHooks/useProjectActions'
+import { CreateProjectModalFormState } from '@/types/project'
 
 export function ProjectForm({
   initialData,
@@ -28,7 +28,7 @@ export function ProjectForm({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         <div className="flex flex-col gap-4">
           <InputField
             inputId={`${formId}-name`}
@@ -38,6 +38,7 @@ export function ProjectForm({
             value={formData.name}
             onChange={handleChange}
             required
+            maxLength={50}
           />
           <DatePickerField
             inputId={`${formId}-startDate`}
@@ -56,6 +57,7 @@ export function ProjectForm({
             value={formData.domain}
             onChange={handleChange}
             required
+            maxLength={50}
           />
           <DatePickerField
             inputId={`${formId}-endDate`}
@@ -74,6 +76,7 @@ export function ProjectForm({
         value={formData.description}
         onChange={handleChange}
         required
+        maxLength={1000}
       />
       <EnvironmentSelect
         formId={formId}
@@ -81,16 +84,16 @@ export function ProjectForm({
         handleChange={handleChange}
       />
 
-      <div className="flex justify-end gap-4 mt-10">
+      <div className="mt-10 flex justify-end gap-4">
         <CancelButton closeModal={closeModal} />
         <Button type="submit" disabled={!isFormValid || saving || !isDirty}>
           {saving
-            ? type === "PROJECT_CREATE"
-              ? "CREATING"
-              : "SAVING"
-            : type === "PROJECT_CREATE"
-              ? "CREATE"
-              : "SAVE"}
+            ? type === 'PROJECT_CREATE'
+              ? 'CREATING'
+              : 'SAVING'
+            : type === 'PROJECT_CREATE'
+              ? 'CREATE'
+              : 'SAVE'}
         </Button>
       </div>
     </form>

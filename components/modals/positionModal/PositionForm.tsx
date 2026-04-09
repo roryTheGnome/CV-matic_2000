@@ -1,8 +1,8 @@
-import { Button } from "@/components/ui/Button"
-import { CancelButton } from "@/components/ui/CancelButton"
-import { InputField } from "@/components/ui/inputField/InputField"
-import { usePositionActions } from "@/lib/hooks/positionHooks/usePositionActions"
-import { CreatePositionModalFormState } from "@/types/position"
+import { Button } from '@/components/ui/Button'
+import { CancelButton } from '@/components/ui/CancelButton'
+import { InputField } from '@/components/ui/inputField/InputField'
+import { usePositionActions } from '@/lib/hooks/positionHooks/usePositionActions'
+import { CreatePositionModalFormState } from '@/types/position'
 
 export function PositionForm({
   initialData,
@@ -33,18 +33,19 @@ export function PositionForm({
         value={formData.name}
         onChange={handleChange}
         required
+        maxLength={50}
       />
 
-      <div className="flex justify-end gap-4 mt-10">
+      <div className="mt-10 flex justify-end gap-4">
         <CancelButton closeModal={closeModal} />
         <Button type="submit" disabled={!isFormValid || saving || !isDirty}>
           {saving
-            ? type === "POSITION_CREATE"
-              ? "CREATING"
-              : "SAVING"
-            : type === "POSITION_CREATE"
-              ? "CREATE"
-              : "SAVE"}
+            ? type === 'POSITION_CREATE'
+              ? 'CREATING'
+              : 'SAVING'
+            : type === 'POSITION_CREATE'
+              ? 'CREATE'
+              : 'SAVE'}
         </Button>
       </div>
     </form>

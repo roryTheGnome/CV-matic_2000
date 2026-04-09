@@ -2,8 +2,8 @@
 
 import { ModalLayout } from '@/components/modals/ModalLayout'
 import { Loader } from '@/components/ui/Loader'
-import { useCurrentUser } from '@/lib/hooks/userHooks/useCurrentUser'
 import { useUser } from '@/lib/hooks/userHooks/useUser'
+import { useModalStore } from '@/store/modalStore'
 import { LanguageForm } from './LanguageForm'
 
 export function ProfileLanguageModal() {

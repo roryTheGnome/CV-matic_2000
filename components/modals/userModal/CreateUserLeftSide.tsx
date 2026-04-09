@@ -1,10 +1,10 @@
-import { InputField } from "@/components/ui/inputField/InputField"
-import { Option } from "@/components/ui/select/Option"
-import { Select } from "@/components/ui/select/Select"
+import { InputField } from '@/components/ui/inputField/InputField'
+import { Option } from '@/components/ui/select/Option'
+import { Select } from '@/components/ui/select/Select'
 
-import { CreateUserModalFormState } from "@/types/user"
-import { ChangeEvent } from "react"
-import { DepartmentsSelect } from "../DepartmentsSelect"
+import { CreateUserModalFormState } from '@/types/user'
+import { ChangeEvent } from 'react'
+import { DepartmentsSelect } from '../DepartmentsSelect'
 
 export interface CreateUserProps {
   formId: string
@@ -37,6 +37,7 @@ export function CreateUserLeftSide({
         value={formData.firstName}
         onChange={handleChange}
         required
+        maxLength={50}
       />
 
       <DepartmentsSelect

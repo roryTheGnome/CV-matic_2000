@@ -1,9 +1,9 @@
-import { Button } from "@/components/ui/Button"
-import { CancelButton } from "@/components/ui/CancelButton"
-import { InputField } from "@/components/ui/inputField/InputField"
-import { TextareaField } from "@/components/ui/TextareaField"
-import { useCvActions } from "@/lib/hooks/cvHooks/useCvActions"
-import { CreateCvModalFormState } from "@/types/cvs"
+import { Button } from '@/components/ui/Button'
+import { CancelButton } from '@/components/ui/CancelButton'
+import { InputField } from '@/components/ui/inputField/InputField'
+import { TextareaField } from '@/components/ui/TextareaField'
+import { useCvActions } from '@/lib/hooks/cvHooks/useCvActions'
+import { CreateCvModalFormState } from '@/types/cvs'
 
 interface Props {
   initialData?: CreateCvModalFormState
@@ -35,6 +35,7 @@ export function CvForm({ initialData, cvId, isModal = true }: Props) {
           value={formData.name}
           onChange={handleChange}
           required
+          maxLength={50}
         />
         <InputField
           inputId={`${formId}-education`}
@@ -42,6 +43,7 @@ export function CvForm({ initialData, cvId, isModal = true }: Props) {
           value={formData.education}
           onChange={handleChange}
           name="education"
+          maxLength={100}
         />
 
         <TextareaField
@@ -51,19 +53,20 @@ export function CvForm({ initialData, cvId, isModal = true }: Props) {
           value={formData.description}
           onChange={handleChange}
           required
+          maxLength={1000}
         />
       </div>
 
-      <div className="flex justify-end gap-4 mt-10">
+      <div className="mt-10 flex justify-end gap-4">
         {isModal && <CancelButton closeModal={closeModal} />}
         <Button type="submit" disabled={!isFormValid || saving || !isDirty}>
           {saving
-            ? type === "CV_CREATE"
-              ? "CREATING"
-              : "SAVING"
-            : type === "CV_CREATE"
-              ? "CREATE"
-              : "SAVE"}
+            ? type === 'CV_CREATE'
+              ? 'CREATING'
+              : 'SAVING'
+            : type === 'CV_CREATE'
+              ? 'CREATE'
+              : 'SAVE'}
         </Button>
       </div>
     </form>
