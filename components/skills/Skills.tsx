@@ -9,6 +9,7 @@ export type Props = {
   skills: SkillMastery[] | undefined
   allSkills: SkillItem[]
   owner: boolean
+  userId: string
   modalType?: 'PROFILE_SKILL_ADD' | 'CV_SKILL_ADD'
   cvId?: string
   onDelete?: (names: string[]) => void
@@ -17,6 +18,7 @@ export type Props = {
 export const Skills = ({
   skills,
   allSkills,
+  userId,
   owner,
   modalType = 'PROFILE_SKILL_ADD',
   cvId,
@@ -41,6 +43,7 @@ export const Skills = ({
             : [...prev, name],
         )
       } else {
+        
         if (modalType === 'PROFILE_SKILL_ADD') {
           openModal('PROFILE_SKILL_EDIT', {
             skill: {
@@ -48,6 +51,7 @@ export const Skills = ({
               categoryId: skill.categoryId,
               mastery: skill.mastery,
             },
+            id: userId,
           })
         } else {
           openModal('CV_SKILL_EDIT', {
@@ -144,7 +148,11 @@ export const Skills = ({
                 Icon={Plus}
                 isTextButton
                 className="text-gray-400"
-                onClick={handleAddBtn}
+                onClick={() =>
+                  openModal('PROFILE_SKILL_ADD', {
+                    id: userId,
+                  })
+                }
               >
                 ADD SKILLS
               </Button>

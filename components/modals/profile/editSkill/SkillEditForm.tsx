@@ -9,14 +9,13 @@ import { GET_USER } from '@/api/graphql/queries/user'
 import { UPDATE_PROFILE_SKILL } from '@/api/graphql/mutations/profile'
 import { SkillMastery, Mastery } from '@/types/skills'
 import { Select } from '@/components/ui/select/Select'
-import { useCurrentUser } from '@/lib/hooks/userHooks/useCurrentUser'
 
 type Props = {
   skill: SkillMastery
+  userId?: string
 }
 
-export function SkillEditForm({ skill }: Props) {
-  const { currentUserId } = useCurrentUser()
+export function SkillEditForm({ skill, userId }: Props) {
   const { closeModal } = useModalStore()
 
   const [mastery, setMastery] = useState<Mastery>(skill.mastery)
@@ -25,7 +24,7 @@ export function SkillEditForm({ skill }: Props) {
     refetchQueries: [
       {
         query: GET_USER,
-        variables: { userId: currentUserId },
+        variables: { userId: userId },
       },
     ],
   })
@@ -33,13 +32,13 @@ export function SkillEditForm({ skill }: Props) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    if (!currentUserId) return
+    if (!userId) return
 
     try {
       await updateSkill({
         variables: {
           skill: {
-            userId: currentUserId,
+            userId: userId,
             name: skill.name,
             categoryId: skill.categoryId,
             mastery,

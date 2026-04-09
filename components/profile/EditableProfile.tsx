@@ -126,8 +126,8 @@ export default function EditableProfile({ user }: ProfileProp) {
           variables: {
             user: {
               userId: user.id,
-               positionId: positionId ?  positionId:"",
-              departmentId: departmentId ? departmentId : ''
+              positionId: positionId ? positionId : '',
+              departmentId: departmentId ? departmentId : '',
             },
           },
         }),
@@ -179,7 +179,7 @@ export default function EditableProfile({ user }: ProfileProp) {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6">
         <div className="flex flex-col">
           <label className="text-text-secondary text-sm">First Name</label>
           <input
@@ -208,7 +208,7 @@ export default function EditableProfile({ user }: ProfileProp) {
             disabled={depLoading}
           >
             <option value="" disabled>
-              {user.department_name}
+              {user?.department_name ?? 'Select Department'}
             </option>
 
             {depData?.departments.map((dep: Department) => (
@@ -229,7 +229,7 @@ export default function EditableProfile({ user }: ProfileProp) {
             disabled={posLoading}
           >
             <option value="" disabled>
-              Select position
+              {user?.position_name ?? 'Select position'}
             </option>
 
             {posData?.positions.map((pos: Position) => (

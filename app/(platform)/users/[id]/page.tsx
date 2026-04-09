@@ -19,7 +19,7 @@ export default function Employee() {
   }
 
   return (
-    <div className="mx-auto max-w-4xl p-6">
+    <div className="mx-auto max-w-4xl px-4 py-4 sm:p-6">
       {currentUserId === Number(user.id) || currentUserRole === 'Admin' ? (
         <EditableProfile user={user} />
       ) : (

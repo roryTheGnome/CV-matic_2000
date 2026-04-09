@@ -8,12 +8,13 @@ export function ProfileLanguageEditModal() {
   const { data } = useModalStore()
 
   const language = data?.language
+  const id = data?.id
 
   if (!language) return null
 
   return (
     <ModalLayout title="Edit Language">
-      <LanguageEditForm language={language} />
+      <LanguageEditForm language={language} userId={id} />
     </ModalLayout>
   )
 }

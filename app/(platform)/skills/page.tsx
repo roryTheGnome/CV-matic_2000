@@ -98,6 +98,7 @@ export default function SkillsPage() {
           allSkills={skillsData?.skills || []}
           onDelete={handleDelete}
           owner={true}
+          userId={String(currentUserId)}
         />
       )}
     </div>

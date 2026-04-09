@@ -29,24 +29,27 @@ type Props = {
   languages: LanguageProficiency[]
   onDelete?: (names: string[]) => void
   owner: boolean
+  userId?: string
 }
 
-export const LanguageList = ({ languages, onDelete, owner }: Props) => {
+export const LanguageList = ({ languages, onDelete, owner, userId }: Props) => {
   const { openModal } = useModalStore()
 
   const [deleteMode, setDeleteMode] = useState(false)
   const [selected, setSelected] = useState<string[]>([])
 
   const toggleSelect = (lang: LanguageProficiency) => {
-    if(owner){if (deleteMode) {
-      setSelected((prev) =>
-        prev.includes(lang.name)
-          ? prev.filter((n) => n !== lang.name)
-          : [...prev, lang.name],
-      )
-    } else {
-      openModal('PROFILE_LANGUAGE_EDIT', { language: lang })
-    }}
+    if (owner) {
+      if (deleteMode) {
+        setSelected((prev) =>
+          prev.includes(lang.name)
+            ? prev.filter((n) => n !== lang.name)
+            : [...prev, lang.name],
+        )
+      } else {
+        openModal('PROFILE_LANGUAGE_EDIT', { language: lang, id: userId })
+      }
+    }
   }
 
   const handleDelete = () => {
@@ -65,7 +68,7 @@ export const LanguageList = ({ languages, onDelete, owner }: Props) => {
 
   return (
     <div>
-      <div className="grid grid-cols-3 justify-items-center gap-6 px-30">
+      <div className="grid grid-cols-1 justify-items-center gap-6 px-30 sm:grid-cols-3 md:grid-cols-2">
         {languages.map((lang) => (
           <div
             key={lang.name}
@@ -118,7 +121,11 @@ export const LanguageList = ({ languages, onDelete, owner }: Props) => {
                 Icon={Plus}
                 isTextButton
                 className="text-gray-400"
-                onClick={() => openModal('PROFILE_LANGUAGE_ADD')}
+                onClick={() =>
+                  openModal('PROFILE_LANGUAGE_ADD', {
+                    id: userId,
+                  })
+                }
               >
                 ADD LANGUAGE
               </Button>

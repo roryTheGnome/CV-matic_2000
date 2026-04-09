@@ -15,7 +15,7 @@ export default function PlatformLayout({
         <Nav />
       </nav>
 
-      <main className="ml-[16%] w-5/6 p-6">
+      <main className="sm:ml-[16%] sm:w-5/6 sm:p-6">
         <Suspense fallback={<LoadingPage />}>
           <GlobalNav />
           {children}

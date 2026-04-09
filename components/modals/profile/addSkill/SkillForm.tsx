@@ -1,23 +1,22 @@
 'use client'
 
-import { ADD_PROFILE_SKILL } from '@/api/graphql/mutations/profile'
-import { GET_SKILLS } from '@/api/graphql/queries/skills'
-import { GET_USER } from '@/api/graphql/queries/user'
 import { Button } from '@/components/ui/Button'
 import { CancelButton } from '@/components/ui/CancelButton'
-import { Select } from '@/components/ui/select/Select'
-import { useCurrentUser } from '@/lib/hooks/userHooks/useCurrentUser'
 import { useModalStore } from '@/store/modalStore'
-import { GetSkillsData, Mastery, SkillItem } from '@/types/skills'
-import { useMutation, useQuery } from '@apollo/client/react'
 import { useState } from 'react'
+import { useMutation, useQuery } from '@apollo/client/react'
+import { GET_SKILLS } from '@/api/graphql/queries/skills'
+import { ADD_PROFILE_SKILL } from '@/api/graphql/mutations/profile'
+import { GET_USER } from '@/api/graphql/queries/user'
+import { GetSkillsData, Mastery, SkillItem } from '@/types/skills'
+import { Select } from '@/components/ui/select/Select'
 
 type SkillFormProps = {
   userSkills: { name: string }[]
+  userId?: string
 }
 
-export function SkillForm({ userSkills }: SkillFormProps) {
-  const { currentUserId } = useCurrentUser()
+export function SkillForm({ userSkills, userId }: SkillFormProps) {
   const { closeModal } = useModalStore()
 
   const { data, loading, error } = useQuery<GetSkillsData>(GET_SKILLS)
@@ -26,7 +25,7 @@ export function SkillForm({ userSkills }: SkillFormProps) {
     refetchQueries: [
       {
         query: GET_USER,
-        variables: { userId: currentUserId },
+        variables: { userId: userId },
       },
     ],
   })
@@ -37,13 +36,13 @@ export function SkillForm({ userSkills }: SkillFormProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    if (!currentUserId || !selectedSkill) return
+    if (!userId || !selectedSkill) return
 
     try {
       await addSkill({
         variables: {
           skill: {
-            userId: currentUserId,
+            userId: userId,
             name: selectedSkill.name,
             categoryId: selectedSkill.category?.id,
             mastery,
