@@ -38,6 +38,16 @@ export const UPDATE_USER_MUTATION = gql`
   }
 `
 
+export const UPDATE_PROFILE_MUTATION = gql`
+  mutation UpdateProfile($profile: UpdateProfileInput!) {
+    updateProfile(profile: $profile) {
+      id
+      first_name
+      last_name
+    }
+  }
+`
+
 export const GET_USER_BY_ID = gql`
   query GetUserById($userId: ID!) {
     user(userId: $userId) {
