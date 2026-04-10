@@ -13,7 +13,7 @@ type EmployeesListProps = {
   search: string
   sortKey: GlobalSortKey
   sortDir: 'asc' | 'desc'
-  currentUserId: number | undefined
+  currentUserId: string | undefined
 }
 
 export default function EmployeesList({
@@ -101,7 +101,7 @@ export default function EmployeesList({
                 href={`/users/${user.id}`}
                 className="text-text-secondary hover:text-primary"
               >
-                {currentUserId == Number(user.id) ? (
+                {currentUserId == user.id ? (
                   <EllipsisVertical size={30} />
                 ) : (
                   <ChevronRight size={32} />

@@ -1,7 +1,8 @@
+'use client'
 import LoadingPage from '@/app/(platform)/loading'
 import GlobalNav from '@/components/navs/GlobalNav'
 import Nav from '@/components/navs/Nav'
-import { Suspense } from 'react'
+import { Suspense, useState } from 'react'
 import '../globals.css'
 
 export default function PlatformLayout({
@@ -9,13 +10,19 @@ export default function PlatformLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const [collapsed, setCollapsed] = useState(false)
+
   return (
     <>
-      <div className="fixed top-0 left-0 h-screen w-1/6">
-        <Nav />
-      </div>
+      <nav
+        className={`fixed top-0 left-0 h-screen transition-all duration-300 ${collapsed ? 'w-20' : 'w-1/6'}`}
+      >
+        <Nav collapsed={collapsed} setCollapsed={setCollapsed} />
+      </nav>
 
-      <main className="sm:ml-[16%] sm:w-5/6 sm:p-6">
+      <main
+        className={`p-6 pb-24 transition-all duration-300 lg:pb-6 ${collapsed ? 'lg:ml-20 lg:w-[calc(100%-80px)]' : 'lg:ml-[16%] lg:w-5/6'} `}
+      >
         <Suspense fallback={<LoadingPage />}>
           <GlobalNav />
           {children}

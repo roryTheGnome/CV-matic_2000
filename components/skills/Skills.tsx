@@ -9,7 +9,7 @@ export type Props = {
   skills: SkillMastery[] | undefined
   allSkills: SkillItem[]
   owner: boolean
-  userId: string
+  userId?: string
   modalType?: 'PROFILE_SKILL_ADD' | 'CV_SKILL_ADD'
   cvId?: string
   onDelete?: (names: string[]) => void
@@ -43,7 +43,6 @@ export const Skills = ({
             : [...prev, name],
         )
       } else {
-        
         if (modalType === 'PROFILE_SKILL_ADD') {
           openModal('PROFILE_SKILL_EDIT', {
             skill: {

@@ -9,7 +9,6 @@ import { GET_USER } from '@/api/graphql/queries/user'
 import { UPDATE_PROFILE_LANGUAGE } from '@/api/graphql/mutations/profile'
 import { LanguageProficiency, Proficiency } from '@/types/lang'
 import { Select } from '@/components/ui/select/Select'
-import { useCurrentUser } from '@/lib/hooks/userHooks/useCurrentUser'
 
 type Props = {
   language: LanguageProficiency

@@ -9,18 +9,17 @@ import { NameTableItem } from '@/components/ui/table/NameTableItem'
 import TableBody from '@/components/ui/table/TableBody'
 import { TableSearch } from '@/components/ui/TableSearch'
 import { usePageWithTable } from '@/lib/hooks/usePageWithTable'
-import { useCurrentUser } from '@/lib/hooks/userHooks/useCurrentUser'
 import { GetPositionsResponse } from '@/types/position'
 import { Position } from '@/types/user'
 import { getSortByName } from '@/utils/getSortByName'
+import { useAuthStore } from '@/store/authStore'
 
 export default function Positions() {
   const { data, loading, error } = useQuery<GetPositionsResponse>(GET_POSITIONS)
 
   const { search, sortKey, sortDir, setSearch, handleSort } = usePageWithTable()
 
-  const { currentUserRole } = useCurrentUser()
-
+  const { isAdmin } = useAuthStore()
   if (loading) return <div>Loading...</div>
   if (error) return <div>Error loading users</div>
 
@@ -55,7 +54,7 @@ export default function Positions() {
                 item={position}
                 editType={'POSITION_EDIT'}
                 deleteType={'POSITION_DELETE'}
-                isAdmin={currentUserRole === 'Admin'}
+                isAdmin={isAdmin}
               />
             )}
           />

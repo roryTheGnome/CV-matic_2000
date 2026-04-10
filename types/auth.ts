@@ -74,4 +74,5 @@ export interface ResetPasswordData {
 export interface TokenPayload {
   email: string
   role: UserRole
+  sub: number
 }
