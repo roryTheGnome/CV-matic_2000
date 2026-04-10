@@ -17,6 +17,7 @@ export const PRIVATE_ROUTES = {
   PROJECTS: '/projects',
   DEPARTMENTS: '/departments',
   POSITIONS: '/positions',
+  MAIL_VERIFY: '/verify-email',
 } as const
 
 export const ADMIN_ROUTES = {
