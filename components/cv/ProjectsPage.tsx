@@ -1,6 +1,6 @@
 import { CvProject } from '@/types/cvs'
-import React from 'react'
 import { formatList } from '@/utils/formatList'
+import { useTranslations } from 'next-intl'
 
 type Props = {
   projects?: CvProject[]
@@ -8,9 +8,12 @@ type Props = {
 }
 
 export default function ProjectsPage({ projects, userRole }: Props) {
+  const t = useTranslations('CvPage')
   return (
     <>
-      <h1 className="text-text-primary mb-10 text-4xl font-medium">Projects</h1>
+      <h1 className="text-text-primary mb-10 text-4xl font-medium">
+        {t('projects')}
+      </h1>
       <div className="flex min-h-screen justify-center">
         <div className="w-full max-w-5xl">
           {projects?.map((project) => (
@@ -18,7 +21,7 @@ export default function ProjectsPage({ projects, userRole }: Props) {
               key={project.name}
               className="relative grid grid-cols-2 gap-12"
             >
-              <div className="absolute top-0 left-1/2 h-full w-[2px] -translate-x-1/2 bg-red-500" />
+              <div className="absolute top-0 left-1/2 h-full w-0.5 -translate-x-1/2 bg-red-500" />
 
               <div className="space-y-8 pr-6">
                 <div>
@@ -34,19 +37,21 @@ export default function ProjectsPage({ projects, userRole }: Props) {
               <div className="space-y-8 pl-6">
                 <div>
                   <p className="text-text-primary mb-2 font-semibold">
-                    Project Roles
+                    {t('projectRoles')}
                   </p>
                   <p className="text-text-primary text-sm">{userRole}</p>
                 </div>
                 <div>
-                  <p className="text-text-primary mb-2 font-semibold">Period</p>
+                  <p className="text-text-primary mb-2 font-semibold">
+                    {t('period')}
+                  </p>
                   <p className="text-text-primary text-sm">
                     {project.start_date} - {project.end_date}
                   </p>
                 </div>
                 <div>
                   <p className="text-text-primary mb-2 font-semibold">
-                    Responsibilities
+                    {t('responsibilities')}
                   </p>
                   <p className="text-text-primary text-sm">
                     {formatList(project.responsibilities)}
@@ -54,7 +59,7 @@ export default function ProjectsPage({ projects, userRole }: Props) {
                 </div>
                 <div>
                   <p className="text-text-primary mb-2 font-semibold">
-                    Enviroments
+                    {t('environments')}
                   </p>
                   <p className="text-text-primary text-sm">
                     {formatList(project.environment)}

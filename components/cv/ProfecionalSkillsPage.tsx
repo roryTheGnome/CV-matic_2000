@@ -1,8 +1,9 @@
-import { SkillMastery } from '@/types/skills'
-import React from 'react'
 import { CvProject } from '@/types/cvs'
-import { getLastUsed } from '@/utils/getLastUsed'
+import { SkillMastery } from '@/types/skills'
 import { getExperienceYears } from '@/utils/getFirstUsed'
+import { getLastUsed } from '@/utils/getLastUsed'
+import { useTranslations } from 'next-intl'
+import React from 'react'
 
 type Props = {
   grouped: Record<string, SkillMastery[]>
@@ -10,18 +11,19 @@ type Props = {
 }
 
 export default function ProfecionalSkillsPage({ grouped, projects }: Props) {
+  const t = useTranslations('CvPage')
   return (
     <>
       <h1 className="text-text-primary mb-10 text-4xl font-medium">
-        Professional skills
+        {t('professionalSkills')}
       </h1>
       <div className="flex min-h-screen justify-center p-10">
         <div className="w-full max-w-5xl">
           <div className="text-text-primary mb-4 grid grid-cols-4 text-sm font-semibold">
-            <div>SKILLS</div>
+            <div>{t('skills')}</div>
             <div></div>
-            <div className="flex items-start">EXPERIENCE IN YEARS</div>
-            <div className="flex items-end justify-center">LAST USED</div>
+            <div className="flex items-start">{t('experienceInYears')}</div>
+            <div className="flex items-end justify-center">{t('lastUsed')}</div>
           </div>
 
           {Object.entries(grouped).map(([category, skills], index) => (

@@ -21,8 +21,10 @@ import { getSortLanguageValue } from '@/utils/getSortLanguageValue'
 
 import NotFoundPage from '@/app/(platform)/not-found'
 import { useMutation, useQuery } from '@apollo/client/react'
+import { useTranslations } from 'next-intl'
 
 export default function Language() {
+  const t = useTranslations('TableActions')
   const { currentUserId } = useCurrentUser()
   const { isAdmin } = useAuthStore()
   const { search, sortKey, sortDir, setSearch, handleSort } = usePageWithTable()
@@ -66,7 +68,7 @@ export default function Language() {
         <>
           <TableSearch
             search={search}
-            createButtonText="CREATE LANGUAGE"
+            createButtonText={t('createLanguage')}
             typeOfCreateModal={'LANGUAGE_CREATE'}
             setSearch={setSearch}
           />

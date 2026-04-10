@@ -14,6 +14,7 @@ import {
 } from '@/types/languages'
 
 import { useMutation } from '@apollo/client/react'
+import { useTranslations } from 'next-intl'
 import { ChangeEvent, SubmitEvent, useId, useState } from 'react'
 import toast from 'react-hot-toast'
 
@@ -23,7 +24,7 @@ export function useLanguageActions(
 ) {
   const formId = useId()
   const { type, data: modalData, closeModal } = useModalStore()
-
+  const t = useTranslations('LanguageToast')
   const [formData, setFormData] = useState<LanguageModalFormState>(
     initialData || {
       name: '',
@@ -52,8 +53,8 @@ export function useLanguageActions(
         })
       }
     },
-    onCompleted: (data) => {
-      toast.success('Language created successfully!')
+    onCompleted: () => {
+      toast.success(t('languageCreatedSuccess'))
       closeModal()
     },
     onError: (err) => {
@@ -66,7 +67,7 @@ export function useLanguageActions(
     UpdateLanguageVariables
   >(UPDATE_LANGUAGE_MUTATION, {
     onCompleted: () => {
-      toast.success('Language updated successfully!')
+      toast.success(t('languageUpdatedSuccess'))
       closeModal()
     },
     onError: (err) => toast.error(err.message),

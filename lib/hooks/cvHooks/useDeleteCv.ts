@@ -4,11 +4,12 @@ import { useModalStore } from '@/store/modalStore'
 import { DeleteCvResponse, DeleteCvVariables } from '@/types/cvs'
 
 import { useMutation } from '@apollo/client/react'
+import { useTranslations } from 'next-intl'
 import toast from 'react-hot-toast'
 
 export function useDeleteCv() {
   const { data: modalData, closeModal } = useModalStore()
-
+  const t = useTranslations('CvToast')
   const [deleteCv, { loading }] = useMutation<
     DeleteCvResponse,
     DeleteCvVariables
@@ -21,18 +22,18 @@ export function useDeleteCv() {
     },
     onCompleted: (data) => {
       if (data.deleteCv.affected > 0) {
-        toast.success('Cv successfully deleted')
+        toast.success(t('cvDeleteSuccess'))
         closeModal()
       }
     },
     onError: (err) => {
-      toast.error(err.message || 'Failed to delete cv')
+      toast.error(err.message || t('cvDeleteError'))
     },
   })
 
   const handleDelete = () => {
     if (!modalData?.id) {
-      toast.error('Cv ID is missing!')
+      toast.error(t('cvIdMissing'))
       return
     }
 

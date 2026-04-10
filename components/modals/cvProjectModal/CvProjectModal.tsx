@@ -1,6 +1,7 @@
 'use client'
 
 import { GET_CV_BY_ID } from '@/api/graphql/queries/cvs'
+import { Loader } from '@/components/ui/Loader'
 import { useModalStore } from '@/store/modalStore'
 import {
   AddCvProjectModalFormState,
@@ -8,14 +9,15 @@ import {
   GetCvByIdVariables,
 } from '@/types/cvs'
 import { useQuery } from '@apollo/client/react'
+import { useTranslations } from 'next-intl'
 import { useParams } from 'next/navigation'
-import toast from 'react-hot-toast'
 import { ModalLayout } from '../ModalLayout'
 import { CvProjectForm } from './CvProjectForm'
 
 export function CvProjectModal() {
   const { data: modalData, type } = useModalStore()
   const isEditing = type === 'CV_PROJECT_EDIT'
+  const t = useTranslations('CvModal')
 
   const { id }: { id: string } = useParams()
   const {
@@ -29,14 +31,17 @@ export function CvProjectModal() {
 
   if (loading)
     return (
-      <ModalLayout title="Loading...">
-        <div className="p-8">Loading project data...</div>
+      <ModalLayout title={t('loading')}>
+        <Loader />
       </ModalLayout>
     )
 
   if (error) {
-    toast.error('Failed to load project: ' + error.message)
-    return null
+    return (
+      <ModalLayout title={t('errorOccurred')}>
+        <div>{error.message}</div>
+      </ModalLayout>
+    )
   }
 
   const selectedProject = cvData?.cv?.projects.find(
@@ -63,7 +68,7 @@ export function CvProjectModal() {
 
   return (
     <ModalLayout
-      title={isEditing ? 'Edit CV project' : 'Add project'}
+      title={isEditing ? t('cvEditProjectModal') : t('cvAddProjectModal')}
       maxWidth="max-w-5xl"
     >
       <CvProjectForm

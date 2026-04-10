@@ -1,5 +1,6 @@
-import { Eye, EyeOff } from "lucide-react"
-import { HTMLInputTypeAttribute } from "react"
+import { Eye, EyeOff } from 'lucide-react'
+import { useTranslations } from 'next-intl'
+import { HTMLInputTypeAttribute } from 'react'
 
 interface Props {
   currentType: HTMLInputTypeAttribute | undefined
@@ -8,23 +9,22 @@ interface Props {
 
 export function ShowPassword({ currentType, setCurrentType }: Props) {
   const changeType = () => {
-    if (currentType === "password") {
-      setCurrentType("text")
+    if (currentType === 'password') {
+      setCurrentType('text')
     } else {
-      setCurrentType("password")
+      setCurrentType('password')
     }
   }
+  const t = useTranslations('PasswordInput')
 
   return (
     <button
-      className="absolute right-3 top-1/2 -translate-y-1/2 hover:bg-surface-active duration-300 p-1.5 rounded-full cursor-pointer z-10"
+      className="hover:bg-surface-active absolute top-1/2 right-3 z-10 -translate-y-1/2 cursor-pointer rounded-full p-1.5 duration-300"
       type="button"
       onClick={changeType}
-      aria-label={
-        currentType === "password" ? "Show password" : "Hide password"
-      }
+      aria-label={currentType === 'password' ? t('show') : t('hide')}
     >
-      {currentType === "password" ? <Eye /> : <EyeOff />}
+      {currentType === 'password' ? <Eye /> : <EyeOff />}
     </button>
   )
 }

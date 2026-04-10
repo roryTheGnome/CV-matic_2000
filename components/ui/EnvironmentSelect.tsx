@@ -3,6 +3,7 @@ import { useLazyQuery } from '@apollo/client/react'
 import { GET_POSITIONS } from '@/api/graphql/queries/positions'
 import { GetPositionsResponse } from '@/types/position'
 import { Position } from '@/types/user'
+import { useTranslations } from 'next-intl'
 import { ChangeEvent } from 'react'
 import { MultiSelectField } from './multiSelectField/MultiSelectField'
 
@@ -30,11 +31,13 @@ export function EnvironmentSelect({ formId, value, handleChange }: Props) {
       name: position.name,
     })) || []
 
+  const t = useTranslations('EnvironmentSelect')
+
   return (
     <MultiSelectField
       inputId={`${formId}-environment`}
       name="environment"
-      label="Environment"
+      label={t('environment')}
       value={value}
       options={options}
       loading={loading}

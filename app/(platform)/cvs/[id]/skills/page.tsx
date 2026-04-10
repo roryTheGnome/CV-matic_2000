@@ -2,13 +2,15 @@
 
 import { Skills } from '@/components/skills/Skills'
 import { Loader } from '@/components/ui/Loader'
+import { useTranslations } from 'next-intl'
 import { useCvSkills } from '../_hooks/useCVSkills'
 
 export default function CvSkill() {
+  const t = useTranslations('Notifications')
   const { cvData, skillsData, id, error, loading, handleDelete } = useCvSkills()
 
   if (error) {
-    return <div className="text-red-500">Failed to load data.</div>
+    return <div className="text-red-500">{t('Notifications')}</div>
   }
   if (loading) {
     return <Loader />

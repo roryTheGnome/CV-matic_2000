@@ -1,9 +1,9 @@
-import { Button } from '@/components/ui/Button'
-import { CancelButton } from '@/components/ui/CancelButton'
 import { InputField } from '@/components/ui/inputField/InputField'
 import { TextareaField } from '@/components/ui/TextareaField'
 import { useCvActions } from '@/lib/hooks/cvHooks/useCvActions'
 import { CreateCvModalFormState } from '@/types/cvs'
+import { useTranslations } from 'next-intl'
+import { ModalButtons } from '../ModalButtons'
 
 interface Props {
   initialData?: CreateCvModalFormState
@@ -24,12 +24,14 @@ export function CvForm({ initialData, cvId, isModal = true }: Props) {
     handleSubmit,
   } = useCvActions(initialData, cvId)
 
+  const t = useTranslations('Forms')
+
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid grid-cols-1 gap-8">
         <InputField
           inputId={`${formId}-name`}
-          label="Name"
+          label={t('name')}
           type="text"
           name="name"
           value={formData.name}
@@ -39,7 +41,7 @@ export function CvForm({ initialData, cvId, isModal = true }: Props) {
         />
         <InputField
           inputId={`${formId}-education`}
-          label="Education"
+          label={t('education')}
           value={formData.education}
           onChange={handleChange}
           name="education"
@@ -48,7 +50,7 @@ export function CvForm({ initialData, cvId, isModal = true }: Props) {
 
         <TextareaField
           inputId={`${formId}-description`}
-          label="Description"
+          label={t('description')}
           name="description"
           value={formData.description}
           onChange={handleChange}
@@ -57,18 +59,12 @@ export function CvForm({ initialData, cvId, isModal = true }: Props) {
         />
       </div>
 
-      <div className="mt-10 flex justify-end gap-4">
-        {isModal && <CancelButton closeModal={closeModal} />}
-        <Button type="submit" disabled={!isFormValid || saving || !isDirty}>
-          {saving
-            ? type === 'CV_CREATE'
-              ? 'CREATING'
-              : 'SAVING'
-            : type === 'CV_CREATE'
-              ? 'CREATE'
-              : 'SAVE'}
-        </Button>
-      </div>
+      <ModalButtons
+        isDirty={isDirty}
+        isFormValid={isFormValid}
+        saving={saving}
+        isModal={isModal}
+      />
     </form>
   )
 }

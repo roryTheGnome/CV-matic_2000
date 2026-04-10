@@ -11,9 +11,12 @@ import { usePageWithTable } from '@/lib/hooks/usePageWithTable'
 import { CvProject, GetCvByIdData, GetCvByIdVariables } from '@/types/cvs'
 import { getSortProjectValue } from '@/utils/getSortProjectValue'
 import { useQuery } from '@apollo/client/react'
+import { useTranslations } from 'next-intl'
 import { useParams } from 'next/navigation'
 
 export default function CvProjects() {
+  const t = useTranslations('TableActions')
+  const n = useTranslations('Notifications')
   const { id }: { id: string } = useParams()
   const {
     data: cvData,
@@ -28,14 +31,14 @@ export default function CvProjects() {
     return <Loader />
   }
   if (error) {
-    return <div>Error loading cv projects</div>
+    return <div>{n('errorOccurred')}</div>
   }
 
   return (
     <div>
       <TableSearch
         search={search}
-        createButtonText="ADD PROJECT"
+        createButtonText={t('addProject')}
         typeOfCreateModal={'CV_PROJECT_ADD'}
         setSearch={setSearch}
       />

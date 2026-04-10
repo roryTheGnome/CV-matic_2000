@@ -1,0 +1,308 @@
+{
+  "Auth": {
+    "emailLabel": "Email",
+    "passwordLabel": "Пароль",
+    "loginButton": "Увійти",
+    "createAccountButton": "Створити акаунт",
+    "loginTab": "Увійти",
+    "signupTab": "Зареєструватися",
+    "loginTitle": "З поверненням",
+    "loginSubtitle": "Раді бачити вас знову! Увійдіть, щоб продовжити",
+    "registerTitle": "Зареєструватися зараз",
+    "registerSubtitle": "Вітаємо! Зареєструйтесь, щоб продовжити",
+    "forgotPasswordTitle": "Забули пароль",
+    "forgotPasswordSubtitle": "Ми надішлемо вам електронний лист із подальшими інструкціями",
+    "haveAnAccount": "У мене вже є акаунт",
+    "setNewPasswordTitle": "Встановити новий пароль",
+    "setNewPasswordSubtitle": "Майже готово! Тепер створіть новий пароль",
+    "resetPasswordButton": "Скинути пароль",
+    "cancelLink": "Скасувати",
+    "backToLoginLink": "Повернутися до входу",
+    "loadingText": "Завантаження"
+  },
+  "Notifications": {
+    "loggedSuccess": "Успішно здійснено вхід.",
+    "registerSuccess": "Успішно зареєстровано.",
+    "genericError": "Щось пішло не так.",
+    "sending": "Надсилання...",
+    "checkInbox": "Перевірте свою поштову скриньку.",
+    "updating": "Оновлення...",
+    "passwordUpdatedSuccess": "Пароль успішно оновлено.",
+    "errorOccurred": "Сталася помилка.",
+    "loadingText": "Завантаження",
+    "gettingUserInfo": "Отримання інформації про користувача..."
+  },
+  "TableActions": {
+    "downloadPdf": "Завантажити PDF",
+    "addProject": "ДОДАТИ ПРОЄКТ",
+    "createCv": "СТВОРИТИ РЕЗЮМЕ",
+    "createDepartment": "СТВОРИТИ ВІДДІЛ",
+    "createLanguage": "СТВОРИТИ МОВУ",
+    "createPosition": "СТВОРИТИ ПОСАДУ",
+    "createProject": "СТВОРИТИ ПРОЄКТ",
+    "createSkill": "СТВОРИТИ НАВИЧКУ",
+    "createUser": "СТВОРИТИ КОРИСТУВАЧА"
+  },
+  "ProjectDetails": {
+    "startDate": "Дата початку",
+    "endDate": "Дата завершення",
+    "tillNow": "Дотепер"
+  },
+  "NotFoundPage": {
+    "pageNotFound": "Сторінку не знайдено",
+    "errorText": "Сторінка, яку ви шукаєте, не існує або була переміщена.",
+    "backLink": "Повернутися на головну"
+  },
+  "ActionMenu": {
+    "openActionsAria": "Відкрити дії",
+    "details": "Деталі",
+    "edit": "Редагувати",
+    "delete": "Видалити",
+    "profile": "Профіль"
+  },
+  "CvPage": {
+    "education": "Освіта",
+    "languageProficiency": "Володіння мовами",
+    "domains": "Домени",
+    "professionalSkills": "Професійні навички",
+    "skills": "НАВИЧКИ",
+    "experienceInYears": "ДОСВІД У РОКАХ",
+    "lastUsed": "ОСТАННЄ ВИКОРИСТАННЯ",
+    "projects": "Проєкти",
+    "projectRoles": "Ролі в проєкті",
+    "period": "Період",
+    "responsibilities": "Обов'язки",
+    "environments": "Середовища"
+  },
+  "Forms": {
+    "email": "Email",
+    "password": "Пароль",
+    "name": "Назва",
+    "education": "Освіта",
+    "description": "Опис",
+    "project": "Проєкт",
+    "domain": "Домен",
+    "position": "Посада",
+    "skill": "Навичка",
+    "firstName": "Ім'я",
+    "lastName": "Прізвище",
+    "mastery": "Рівень володіння",
+    "department": "Відділ",
+    "responsibilities": "Обов'язки",
+    "startDate": "Дата початку",
+    "endDate": "Дата завершення",
+    "nativeName": "Назва мовою оригіналу",
+    "loading": "Завантаження",
+    "btnCreating": "СТВОРЕННЯ",
+    "btnSaving": "ЗБЕРЕЖЕННЯ",
+    "btnAdding": "ДОДАВАННЯ",
+    "btnAdd": "ДОДАТИ",
+    "btnCreate": "СТВОРИТИ",
+    "btnSave": "ЗБЕРЕГТИ"
+  },
+  "MasterySelect": {
+    "novice": "Початківець",
+    "advanced": "Просунутий",
+    "competent": "Компетентний",
+    "proficient": "Досвідчений",
+    "expert": "Експерт"
+  },
+  "SkillSelect": {
+    "selectSkill": "Обрати навичку"
+  },
+  "CvToast": {
+    "errorOccurred": "Сталася помилка.",
+    "cvProjectAdded": "Проєкт успішно додано до резюме!",
+    "cvProjectUpdated": "Проєкт успішно оновлено в резюме!",
+    "cvProjectRemoved": "Проєкт успішно видалено з резюме!",
+    "cvIdMissing": "Відсутній ID резюме!",
+    "cvDeleteError": "Не вдалося видалити резюме",
+    "cvDeleteSuccess": "Резюме успішно видалено"
+  },
+  "ProjectToast": {
+    "projectIdMissing": "Відсутній ID проєкту!",
+    "projectDeleteError": "Не вдалося видалити проєкт",
+    "projectDeleteSuccess": "Проєкт успішно видалено",
+    "projectCreatedSuccess": "Проєкт успішно створено!",
+    "projectUpdatedSuccess": "Проєкт успішно оновлено!"
+  },
+  "SkillToast": {
+    "skillIdMissing": "Відсутній ID навички!",
+    "skillDeleteError": "Не вдалося видалити навичку",
+    "skillDeleteSuccess": "Навичку успішно видалено",
+    "skillCreatedSuccess": "Навичку успішно створено!",
+    "skillUpdatedSuccess": "Навичку успішно оновлено!"
+  },
+  "UserToast": {
+    "userIdMissing": "Відсутній ID користувача!",
+    "userDeleteError": "Не вдалося видалити користувача",
+    "userDeleteSuccess": "Користувача успішно видалено",
+    "userCreatedSuccess": "Користувача успішно створено!",
+    "userUpdatedSuccess": "Користувача успішно оновлено!"
+  },
+  "PositionToast": {
+    "positionIdMissing": "Відсутній ID посади!",
+    "positionDeleteError": "Не вдалося видалити посаду",
+    "positionDeleteSuccess": "Посаду успішно видалено",
+    "positionCreatedSuccess": "Посаду успішно створено!",
+    "positionUpdatedSuccess": "Посаду успішно оновлено!"
+  },
+  "LanguageToast": {
+    "languageIdMissing": "Відсутній ID мови!",
+    "languageDeleteError": "Не вдалося видалити мову",
+    "languageDeleteSuccess": "Мову успішно видалено",
+    "languageCreatedSuccess": "Мову успішно створено!",
+    "languageUpdatedSuccess": "Мову успішно оновлено!"
+  },
+  "DepartmentToast": {    
+    "departmentIdMissing": "Відсутній ID відділу!",
+    "departmentDeleteError": "Не вдалося видалити відділ",
+    "departmentDeleteSuccess": "Відділ успішно видалено",
+    "departmentCreatedSuccess": "Відділ успішно створено!",
+    "departmentUpdatedSuccess": "Відділ успішно оновлено!"
+  },
+  "CvModal": {
+    "loading": "Завантаження",
+    "errorOccurred": "Сталася помилка.",
+    "cvAddProjectModal": "Додати проєкт",
+    "cvEditProjectModal": "Редагувати проєкт у резюме",
+    "deleteProjectModalHeading": "проєкт",
+    "deleteProjectModalDeleteText": "з резюме"
+  },
+  "SkillModal": {
+    "skill": "навичку",
+    "addSkill": "Додати навичку",
+    "editSkill": "Редагувати навичку",
+    "createSkill": "Створити навичку"
+  },
+  "DepartmentModal": {
+    "department": "відділ",
+    "departmentCreateModal": "Створити відділ",
+    "departmentEditModal": "Редагувати відділ"
+  },
+  "LanguageModal": {
+    "language": "мову",
+    "languageCreateModal": "Створити мову",
+    "languageEditModal": "Редагувати мову"
+  },
+  "PositionModal": {
+    "position": "посаду",
+    "positionCreateModal": "Створити посаду",
+    "positionEditModal": "Редагувати посаду"
+  },
+  "ProfileModal": {
+    "errorOccurred": "Сталася помилка.",
+    "addLanguage": "Додати мову",
+    "editLanguage": "Редагувати мову",
+    "language": "Мова",
+    "profeciency": "Рівень володіння",
+    "addSkill": "Додати навичку",
+    "editSkill": "Редагувати навичку"
+  },
+  "ProjectModal": {
+    "project": "проєкт",
+    "editProject": "Редагувати проєкт",
+    "createProject": "Створити проєкт"
+  },
+  "UserModal": {
+    "loading": "Завантаження",
+    "errorOccurred": "Сталася помилка.",
+    "user": "користувача",
+    "editUser": "Редагувати користувача",
+    "createUser": "Створити користувача"
+  },
+  "DeleteModal": {
+    "aYouSure": "Ви впевнені, що хочете видалити",
+    "deleting": "ВИДАЛЕННЯ",
+    "confirm": "ПІДТВЕРДИТИ"
+  },
+  "DataStates": {
+    "loading": "Завантаження",
+    "errorOccurred": "Сталася помилка."
+  },
+  "ComponentProfile": {
+    "previewAvatar": "Попередній перегляд аватара",
+    "uploadAvatar": "Завантажити зображення аватара",
+    "removeAvatar": "Видалити аватар",
+    "aMember": "Користувач з"
+  },
+  "Skills": {
+    "cancel": "СКАСУВАТИ",
+    "confirm": "ПІДТВЕРДИТИ",
+    "addSkills": "ДОДАТИ НАВИЧКИ",
+    "removeSkills": "ВИДАЛИТИ НАВИЧКИ"
+  },
+  "PasswordInput": {
+    "show": "Показати пароль",
+    "hide": "Приховати пароль"
+  },
+  "SearchableSelectMenu": {
+    "notFound": "Проєкти не знайдено"
+  },
+  "TagInputField": {
+    "press": "Натисніть",
+    "toAdd": "щоб додати"
+  },
+  "UserActionModal": {
+    "profile": "Профіль",
+    "settings": "Налаштування"
+  },
+  "CancelBtn": {
+    "cancel": "СКАСУВАТИ"
+  },
+  "LogoutBtn": {
+    "logout": "Вийти"
+  },
+  "EnvironmentSelect": {
+    "environment": "Середовище"
+  },
+  "LanguageSelect": {
+    "language": "Мова"
+  },
+  "ThemeSelect": {
+    "appearance": "Зовнішній вигляд"
+  },
+  "LanguageList": {
+    "cancel": "СКАСУВАТИ",
+    "confirm": "ПІДТВЕРДИТИ",
+    "addLanguage": "ДОДАТИ МОВИ",
+    "removeLanguage": "ВИДАЛИТИ МОВИ"
+  },
+  "Navigation": {
+    "employees": "Співробітники",
+    "skills": "Навички", 
+    "languages": "Мови",
+    "cvs": "Резюме",
+    "projects": "Проєкти",
+    "departments": "Відділи", 
+    "positions": "Посади"
+  },
+  "TableHeaders": {
+    "firstName": "Ім'я",
+    "lastName": "Прізвище",
+    "email": "Email",
+    "department": "Відділ",
+    "position": "Посада",
+    "name": "Назва",
+    "type": "Тип",
+    "category": "Категорія",
+    "nativeName": "Рідна назва",
+    "iso2": "ISO2",
+    "domain": "Домен",
+    "startDate": "Дата початку",
+    "endDate": "Дата завершення",
+    "education": "Освіта",
+    "employee": "Співробітник"
+  },
+  "CvNavItems": {
+    "details": "Деталі",
+    "skills": "Навички", 
+    "projects": "Проєкти",
+    "preview": "Перегляд"
+  },
+   "ProfileNavItems": {
+    "profile": "Профіль",
+    "skills": "Навички", 
+    "languages": "Мови"
+  }
+}

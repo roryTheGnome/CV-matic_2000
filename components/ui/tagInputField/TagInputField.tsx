@@ -1,6 +1,7 @@
 'use client'
 
 import { X } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { ChangeEvent } from 'react'
 import { useTagInputField } from './_hooks/useTagInputField'
 
@@ -37,6 +38,8 @@ export function TagInputField({
     removeTag,
     focusInput,
   } = useTagInputField({ value, name, onChange })
+
+  const t = useTranslations('TagInputField')
 
   return (
     <div
@@ -95,7 +98,7 @@ export function TagInputField({
 
       {!disabled && (
         <p className="text-text-secondary absolute -bottom-5 left-0 text-[10px]">
-          Press <strong>Enter</strong> to add
+          {t('press')} <strong>Enter</strong> {t('toAdd')}
         </p>
       )}
     </div>

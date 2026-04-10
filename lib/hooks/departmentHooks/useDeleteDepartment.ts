@@ -6,11 +6,12 @@ import {
 } from '@/types/department'
 
 import { useMutation } from '@apollo/client/react'
+import { useTranslations } from 'next-intl'
 import toast from 'react-hot-toast'
 
 export function useDeleteDepartment() {
   const { data: modalData, closeModal } = useModalStore()
-
+  const t = useTranslations('DepartmentToast')
   const [deleteDepartment, { loading }] = useMutation<
     DeleteDepartmentResponse,
     DeleteDepartmentVariables
@@ -23,18 +24,18 @@ export function useDeleteDepartment() {
     },
     onCompleted: (data) => {
       if (data.deleteDepartment.affected > 0) {
-        toast.success('Department successfully deleted')
+        toast.success(t('departmentDeleteSuccess'))
         closeModal()
       }
     },
     onError: (err) => {
-      toast.error(err.message || 'Failed to delete department')
+      toast.error(err.message || t('departmentDeleteError'))
     },
   })
 
   const handleDelete = () => {
     if (!modalData?.id) {
-      toast.error('Department ID is missing!')
+      toast.error(t('departmentIdMissing'))
       return
     }
 

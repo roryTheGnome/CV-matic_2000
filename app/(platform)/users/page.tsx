@@ -1,14 +1,16 @@
 'use client'
+import NotFoundPage from '@/app/(platform)/not-found'
 import EmployeesList from '@/components/EmployeesList'
 import SortHeader from '@/components/SortHeader'
+import { Loader } from '@/components/ui/Loader'
 import { TableSearch } from '@/components/ui/TableSearch'
 import { headers } from '@/constants/tableHeaders'
 import { useCurrentUser } from '@/lib/hooks/userHooks/useCurrentUser'
 import { useUsers } from '@/lib/hooks/userHooks/useUsers'
-import NotFoundPage from '@/app/(platform)/not-found'
-import LoadingPage from '@/app/(platform)/loading'
+import { useTranslations } from 'next-intl'
 
 export default function Employees() {
+  const t = useTranslations('TableActions')
   const {
     users,
     error,
@@ -28,14 +30,14 @@ export default function Employees() {
     <div>
       <TableSearch
         search={search}
-        createButtonText="CREATE USER"
+        createButtonText={t('createUser')}
         typeOfCreateModal={'USER_CREATE'}
         setSearch={setSearch}
       />
 
       <div className="overflow-x-auto rounded-lg">
         {isLoading ? (
-          <LoadingPage />
+          <Loader />
         ) : (
           <table className="min-w-full divide-y divide-gray-500">
             <thead>

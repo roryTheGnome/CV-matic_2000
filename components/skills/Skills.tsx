@@ -1,15 +1,15 @@
 import { Button } from '@/components/ui/Button'
-import { useModalStore } from '@/store/modalStore'
 import { SkillItem, SkillMastery } from '@/types/skills'
 import { Plus, Trash2 } from 'lucide-react'
-import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { SkillCategorySection } from './SkillCategorySection'
+import { useSkill } from './_hooks/useSkill'
 
 export type Props = {
   skills: SkillMastery[] | undefined
   allSkills: SkillItem[]
   owner: boolean
-  userId: string
+  userId?: string
   modalType?: 'PROFILE_SKILL_ADD' | 'CV_SKILL_ADD'
   cvId?: string
   onDelete?: (names: string[]) => void
@@ -24,82 +24,26 @@ export const Skills = ({
   cvId,
   onDelete,
 }: Props) => {
-  const { openModal } = useModalStore()
-
-  const [deleteMode, setDeleteMode] = useState(false)
-  const [selected, setSelected] = useState<string[]>([])
-
-  const grouped: Record<string, SkillMastery[]> = {}
-
-  const toggleSelect = (name: string) => {
-    if (owner) {
-      const skill = skills?.find((s) => s.name === name)
-      if (!skill) return
-
-      if (deleteMode) {
-        setSelected((prev) =>
-          prev.includes(name)
-            ? prev.filter((n) => n !== name)
-            : [...prev, name],
-        )
-      } else {
-        
-        if (modalType === 'PROFILE_SKILL_ADD') {
-          openModal('PROFILE_SKILL_EDIT', {
-            skill: {
-              name: skill.name,
-              categoryId: skill.categoryId,
-              mastery: skill.mastery,
-            },
-            id: userId,
-          })
-        } else {
-          openModal('CV_SKILL_EDIT', {
-            id: cvId,
-            skill: {
-              name: skill.name,
-              categoryId: skill.categoryId,
-              mastery: skill.mastery,
-            },
-          })
-        }
-      }
-    }
-  }
-
-  const handleDelete = () => {
-    if (!deleteMode) {
-      setDeleteMode(true)
-      return
-    }
-
-    if (selected.length === 0) return
-
-    onDelete?.(selected)
-
-    setSelected([])
-    setDeleteMode(false)
-  }
-
-  skills?.forEach((skill) => {
-    const fullSkill = allSkills.find((s) => s.name === skill.name)
-
-    const categoryName = fullSkill?.category_name || 'Other' //i add otehr as fallback but i dont think it will be at use, max for debugging
-
-    if (!grouped[categoryName]) {
-      grouped[categoryName] = []
-    }
-
-    grouped[categoryName].push(skill)
+  const {
+    grouped,
+    deleteMode,
+    selected,
+    setDeleteMode,
+    setSelected,
+    toggleSelect,
+    handleDelete,
+    handleAddBtn,
+  } = useSkill({
+    skills,
+    allSkills,
+    userId,
+    owner,
+    modalType,
+    cvId,
+    onDelete,
   })
 
-  const handleAddBtn = () => {
-    if (modalType === 'PROFILE_SKILL_ADD') {
-      return openModal(modalType)
-    } else {
-      return openModal(modalType, { id: cvId })
-    }
-  }
+  const t = useTranslations('Skills')
 
   return (
     <div>
@@ -128,7 +72,7 @@ export const Skills = ({
                   setSelected([])
                 }}
               >
-                CANCEL
+                {t('cancel')}
               </Button>
               <Button
                 isTextButton
@@ -139,7 +83,7 @@ export const Skills = ({
                 } disabled:bg-surface-disabled disabled:text-text-primary/40`}
                 onClick={handleDelete}
               >
-                CONFIRM ({selected.length})
+                {t('confirm')} ({selected.length})
               </Button>
             </>
           ) : (
@@ -148,13 +92,9 @@ export const Skills = ({
                 Icon={Plus}
                 isTextButton
                 className="text-gray-400"
-                onClick={() =>
-                  openModal('PROFILE_SKILL_ADD', {
-                    id: userId,
-                  })
-                }
+                onClick={handleAddBtn}
               >
-                ADD SKILLS
+                {t('addSkills')}
               </Button>
               <Button
                 Icon={Trash2}
@@ -162,7 +102,7 @@ export const Skills = ({
                 className="text-red-400"
                 onClick={handleDelete}
               >
-                REMOVE SKILLS
+                {t('removeSkills')}
               </Button>
             </>
           )}

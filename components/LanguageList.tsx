@@ -1,8 +1,9 @@
-import { LanguageProficiency } from '@/types/lang'
-import { useState } from 'react'
-import { Plus, Trash2 } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { useModalStore } from '@/store/modalStore'
+import { LanguageProficiency } from '@/types/lang'
+import { Plus, Trash2 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
+import { useState } from 'react'
 
 const getTextColor = (level: LanguageProficiency['proficiency']) => {
   switch (level) {
@@ -66,6 +67,8 @@ export const LanguageList = ({ languages, onDelete, owner, userId }: Props) => {
     setDeleteMode(false)
   }
 
+  const t = useTranslations('LanguageList')
+
   return (
     <div>
       <div className="grid grid-cols-1 justify-items-center gap-6 px-30 sm:grid-cols-3 md:grid-cols-2">
@@ -101,7 +104,7 @@ export const LanguageList = ({ languages, onDelete, owner, userId }: Props) => {
                   setSelected([])
                 }}
               >
-                CANCEL
+                {t('cancel')}
               </Button>
               <Button
                 isTextButton
@@ -112,7 +115,7 @@ export const LanguageList = ({ languages, onDelete, owner, userId }: Props) => {
                 } disabled:bg-surface-disabled disabled:text-text-primary/40`}
                 onClick={handleDelete}
               >
-                CONFIRM ({selected.length})
+                {t('confirm')} ({selected.length})
               </Button>
             </>
           ) : (
@@ -127,7 +130,7 @@ export const LanguageList = ({ languages, onDelete, owner, userId }: Props) => {
                   })
                 }
               >
-                ADD LANGUAGE
+                {t('addLanguage')}
               </Button>
               <Button
                 Icon={Trash2}
@@ -135,7 +138,7 @@ export const LanguageList = ({ languages, onDelete, owner, userId }: Props) => {
                 className="text-red-400"
                 onClick={handleDelete}
               >
-                REMOVE LANGUAGES
+                {t('removeLanguage')}
               </Button>
             </>
           )}

@@ -1,5 +1,6 @@
-import { useDeleteProject } from "@/lib/hooks/projectHooks/useDeleteProject"
-import { DeleteModal } from "../DeleteModal"
+import { useDeleteProject } from '@/lib/hooks/projectHooks/useDeleteProject'
+import { useTranslations } from 'next-intl'
+import { DeleteModal } from '../DeleteModal'
 
 export function DeleteProjectModal() {
   const {
@@ -9,10 +10,12 @@ export function DeleteProjectModal() {
     handleDelete,
   } = useDeleteProject()
 
+  const t = useTranslations('ProjectModal')
+
   return (
     <DeleteModal
-      deleteText={`project ${data?.name}`}
-      headingText="project"
+      deleteText={`${t('project')} ${data?.name}`}
+      headingText={t('project')}
       data={data}
       loading={loading}
       closeModal={closeModal}

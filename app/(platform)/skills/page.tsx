@@ -4,8 +4,8 @@ import { DELETE_PROFILE_SKILL } from '@/api/graphql/mutations/profile'
 import { GET_SKILLS } from '@/api/graphql/queries/skills'
 import { GET_USER } from '@/api/graphql/queries/user'
 import NotFoundPage from '@/app/(platform)/not-found'
-import LoadingPage from '@/app/(platform)/users/[id]/loading'
 import { Skills } from '@/components/skills/Skills'
+import { Loader } from '@/components/ui/Loader'
 import { SkillTableItem } from '@/components/ui/table/SkillTableItem'
 import TableBody from '@/components/ui/table/TableBody'
 import { TableHeader } from '@/components/ui/table/TableHeader'
@@ -18,8 +18,10 @@ import { useAuthStore } from '@/store/authStore'
 import { GetSkillsData, SkillItem } from '@/types/skills'
 import { getSortSkillsValue } from '@/utils/getSortSkillValue'
 import { useMutation, useQuery } from '@apollo/client/react'
+import { useTranslations } from 'next-intl'
 
 export default function SkillsPage() {
+  const t = useTranslations('TableActions')
   const { currentUserId } = useCurrentUser()
   const { isAdmin } = useAuthStore()
   const { search, sortKey, sortDir, setSearch, handleSort } = usePageWithTable()
@@ -56,7 +58,7 @@ export default function SkillsPage() {
   } = useQuery<GetSkillsData>(GET_SKILLS)
 
   if (error || skillError) return <NotFoundPage />
-  if (!user || loading) return <LoadingPage />
+  if (!user || loading) return <Loader />
 
   return (
     <div className="p-6">
@@ -64,7 +66,7 @@ export default function SkillsPage() {
         <>
           <TableSearch
             search={search}
-            createButtonText="CREATE SKILL"
+            createButtonText={t('createSkill')}
             typeOfCreateModal={'SKILL_CREATE'}
             setSearch={setSearch}
           />

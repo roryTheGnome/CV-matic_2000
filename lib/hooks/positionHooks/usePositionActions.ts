@@ -13,6 +13,7 @@ import {
 } from '@/types/position'
 
 import { useMutation } from '@apollo/client/react'
+import { useTranslations } from 'next-intl'
 import { SubmitEvent, useId, useState } from 'react'
 import toast from 'react-hot-toast'
 
@@ -22,7 +23,7 @@ export function usePositionActions(
 ) {
   const formId = useId()
   const { type, closeModal } = useModalStore()
-
+  const t = useTranslations('PositionToast')
   const [formData, setFormData] = useState<CreatePositionModalFormState>(
     initialData || {
       name: '',
@@ -49,8 +50,8 @@ export function usePositionActions(
         })
       }
     },
-    onCompleted: (data) => {
-      toast.success('Position created successfully!')
+    onCompleted: () => {
+      toast.success(t('positionCreatedSuccess'))
       closeModal()
     },
     onError: (err) => {
@@ -63,7 +64,7 @@ export function usePositionActions(
     UpdatePositionVariables
   >(UPDATE_POSITION_MUTATION, {
     onCompleted: () => {
-      toast.success('Position updated successfully!')
+      toast.success(t('positionUpdatedSuccess'))
       closeModal()
     },
     onError: (err) => toast.error(err.message),

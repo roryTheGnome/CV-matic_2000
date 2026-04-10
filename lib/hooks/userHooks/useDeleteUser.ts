@@ -2,11 +2,12 @@ import { DELETE_USER_MUTATION } from '@/api/graphql/mutations/user'
 import { useModalStore } from '@/store/modalStore'
 import { DeleteUserResponse, DeleteUserVariables } from '@/types/user'
 import { useMutation } from '@apollo/client/react'
+import { useTranslations } from 'next-intl'
 import toast from 'react-hot-toast'
 
 export function useDeleteUser() {
   const { data: modalData, closeModal } = useModalStore()
-
+  const t = useTranslations('UserToast')
   const [deleteUser, { loading }] = useMutation<
     DeleteUserResponse,
     DeleteUserVariables
@@ -20,18 +21,18 @@ export function useDeleteUser() {
 
     onCompleted: (data) => {
       if (data.deleteUser.affected > 0) {
-        toast.success('User successfully deleted')
+        toast.success(t('userDeleteSuccess'))
         closeModal()
       }
     },
     onError: (err) => {
-      toast.error(err.message || 'Failed to delete user')
+      toast.error(err.message || t('userDeleteError'))
     },
   })
 
   const handleDelete = () => {
     if (!modalData?.id) {
-      toast.error('User ID is missing!')
+      toast.error(t('userIdMissing'))
       return
     }
 

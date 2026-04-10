@@ -19,6 +19,7 @@ import {
 } from '@/types/project'
 
 import { useMutation, useQuery } from '@apollo/client/react'
+import { useTranslations } from 'next-intl'
 import { useParams } from 'next/navigation'
 import { SubmitEvent, useId, useState } from 'react'
 import toast from 'react-hot-toast'
@@ -27,6 +28,7 @@ export function useCvProjectModal(
   initialData?: AddCvProjectModalFormState,
   projectId?: string,
 ) {
+  const t = useTranslations('ProjectToast')
   const formId = useId()
   const { data: modalData, type, closeModal } = useModalStore()
   const { id }: { id: string } = useParams()
@@ -60,11 +62,11 @@ export function useCvProjectModal(
         },
       ],
       onCompleted: () => {
-        toast.success('Project successfully added to CV!')
+        toast.success(t('cvProjectAdded'))
         closeModal()
       },
       onError: (err) => {
-        toast.error(err.message)
+        toast.error(t('errorOccurred') + err.message)
       },
     },
   )
@@ -74,11 +76,11 @@ export function useCvProjectModal(
       UPDATE_CV_PROJECT_MUTATION,
       {
         onCompleted: () => {
-          toast.success('Project successfully updated in CV!')
+          toast.success(t('cvProjectUpdated'))
           closeModal()
         },
         onError: (err) => {
-          toast.error('Failed to update project: ' + err.message)
+          toast.error(t('errorOccurred') + err.message)
         },
       },
     )

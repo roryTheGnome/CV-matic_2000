@@ -29,7 +29,7 @@ export function Tabs({ tabs, isActive }: Props) {
           >
             {tab.label}
             <span
-              className="absolute bottom-0 left-0 h-0.5 w-full transition-transform duration-300"
+              className="absolute bottom-0 left-0 h-0.5 w-full truncate transition-transform duration-300"
               style={{
                 backgroundColor: 'var(--color-primary)',
                 transform: active ? 'scaleX(1)' : 'scaleX(0)',

@@ -5,6 +5,7 @@ import Link from 'next/link'
 
 import { useAuthStore } from '@/store/authStore'
 import { GlobalSortKey } from '@/types/table'
+import { useMemo } from 'react'
 import defaultProfile from '../public/default-profile.png'
 import { EmployeeActionsMenu } from './admin/EmployeeActionsMenu'
 
@@ -25,60 +26,63 @@ export default function EmployeesList({
 }: EmployeesListProps) {
   const { isAdmin } = useAuthStore()
 
-  const checkedUsers = [...users]
-    .filter((u: User) => {
-      const fullname =
-        `${u.profile.first_name} ${u.profile.last_name}`.toLowerCase()
-      return fullname.includes(search.toLowerCase())
-    })
-    .sort((x: User, y: User) => {
-      let valX = ''
-      let valY = ''
+  const checkedUsers = useMemo(() => {
+    return [...users]
+      .filter((u: User) => {
+        const fullname =
+          `${u.profile.first_name} ${u.profile.last_name}`.toLowerCase()
+        return fullname.includes(search.toLowerCase())
+      })
+      .sort((x: User, y: User) => {
+        let valX = ''
+        let valY = ''
 
-      switch (sortKey) {
-        case 'first_name':
-          valY = y.profile.first_name
-          valX = x.profile.first_name
-          break
-        case 'last_name':
-          valY = y.profile.last_name
-          valX = x.profile.last_name
-          break
-        case 'email':
-          valY = y.email
-          valX = x.email
-          break
-        case 'department':
-          valY = y.department_name
-          valX = x.department_name
-          break
-        case 'position':
-          valY = y.position_name
-          valX = x.position_name
-          break
-      }
+        switch (sortKey) {
+          case 'first_name':
+            valY = y.profile.first_name
+            valX = x.profile.first_name
+            break
+          case 'last_name':
+            valY = y.profile.last_name
+            valX = x.profile.last_name
+            break
+          case 'email':
+            valY = y.email
+            valX = x.email
+            break
+          case 'department':
+            valY = y.department_name
+            valX = x.department_name
+            break
+          case 'position':
+            valY = y.position_name
+            valX = x.position_name
+            break
+        }
 
-      if (valX < valY) return sortDir === 'asc' ? -1 : 1
-      if (valX > valY) return sortDir === 'asc' ? 1 : -1
-      return 0
-    })
+        if (valX < valY) return sortDir === 'asc' ? -1 : 1
+        if (valX > valY) return sortDir === 'asc' ? 1 : -1
+        return 0
+      })
+  }, [users, search, sortKey, sortDir])
 
   return (
     <tbody>
       {checkedUsers.map((user) => (
         <tr key={user.id} className="divide-y divide-gray-500">
           <td className="flex items-center gap-3 px-4 py-3">
-            <div className="relative h-10 w-10">
+            <div className="relative h-10 w-10 shrink-0">
               <Image
                 src={user.profile.avatar || defaultProfile}
-                alt={`${user.profile.first_name} ${user.profile.last_name}'s avatar`}
+                alt={`${user.profile.first_name} avatar`}
                 fill
+                className="z-0! rounded-full object-cover"
                 sizes="40px"
-                className="rounded-full object-cover"
               />
             </div>
-
-            {user.profile.first_name ? user.profile.first_name : 'Anonymous'}
+            <span className="truncate">
+              {user.profile.first_name || 'Anonymous'}
+            </span>
           </td>
 
           <td className="px-4 py-3">{user.profile.last_name}</td>
@@ -101,7 +105,7 @@ export default function EmployeesList({
                 href={`/users/${user.id}`}
                 className="text-text-secondary hover:text-primary"
               >
-                {currentUserId == Number(user.id) ? (
+                {currentUserId === Number(user.id) ? (
                   <EllipsisVertical size={30} />
                 ) : (
                   <ChevronRight size={32} />

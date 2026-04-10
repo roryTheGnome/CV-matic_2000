@@ -1,5 +1,5 @@
-import { AuthProvider } from '@/providers/AuthProvider'
 import { ClientProviders } from '@/providers/ClientProviders'
+import { ServerProviders } from '@/providers/ServerProviders'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.className} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
         <ClientProviders>
-          <AuthProvider>{children}</AuthProvider>
+          <ServerProviders>{children}</ServerProviders>
         </ClientProviders>
       </body>
     </html>

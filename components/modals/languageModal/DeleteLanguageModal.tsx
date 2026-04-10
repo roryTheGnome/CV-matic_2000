@@ -1,5 +1,6 @@
-import { useDeleteLanguage } from "@/lib/hooks/languageHooks/useDeleteLanguage"
-import { DeleteModal } from "../DeleteModal"
+import { useDeleteLanguage } from '@/lib/hooks/languageHooks/useDeleteLanguage'
+import { useTranslations } from 'next-intl'
+import { DeleteModal } from '../DeleteModal'
 
 export function DeleteLanguageModal() {
   const {
@@ -9,10 +10,12 @@ export function DeleteLanguageModal() {
     handleDelete,
   } = useDeleteLanguage()
 
+  const t = useTranslations('LanguageModal')
+
   return (
     <DeleteModal
-      deleteText={`language ${data?.name}`}
-      headingText="language"
+      deleteText={`${t('language')} ${data?.name}`}
+      headingText={t('language')}
       data={data}
       loading={loading}
       closeModal={closeModal}

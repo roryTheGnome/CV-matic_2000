@@ -1,15 +1,13 @@
 'use client'
 
-import { useState } from 'react'
-import { useMutation } from '@apollo/client/react'
-import { useModalStore } from '@/store/modalStore'
-import { Button } from '@/components/ui/Button'
-import { CancelButton } from '@/components/ui/CancelButton'
-import { GET_USER } from '@/api/graphql/queries/user'
 import { UPDATE_PROFILE_LANGUAGE } from '@/api/graphql/mutations/profile'
-import { LanguageProficiency, Proficiency } from '@/types/lang'
+import { GET_USER } from '@/api/graphql/queries/user'
 import { Select } from '@/components/ui/select/Select'
-import { useCurrentUser } from '@/lib/hooks/userHooks/useCurrentUser'
+import { useModalStore } from '@/store/modalStore'
+import { LanguageProficiency, Proficiency } from '@/types/lang'
+import { useMutation } from '@apollo/client/react'
+import { useState } from 'react'
+import { ModalButtons } from '../../ModalButtons'
 
 type Props = {
   language: LanguageProficiency
@@ -76,12 +74,7 @@ export function LanguageEditForm({ language, userId }: Props) {
         <option value="Native">Native</option>
       </Select>
 
-      <div className="flex justify-end gap-4">
-        <CancelButton closeModal={closeModal} />
-        <Button type="submit" disabled={loading}>
-          {loading ? 'SAVING...' : 'SAVE'}
-        </Button>
-      </div>
+      <ModalButtons saving={loading} />
     </form>
   )
 }

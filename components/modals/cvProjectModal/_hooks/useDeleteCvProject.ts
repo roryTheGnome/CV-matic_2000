@@ -3,22 +3,25 @@ import { useModalStore } from '@/store/modalStore'
 import { RemoveCvProjectData, RemoveCvProjectVariables } from '@/types/cvs'
 
 import { useMutation } from '@apollo/client/react'
+import { useTranslations } from 'next-intl'
 import { useParams } from 'next/navigation'
 import toast from 'react-hot-toast'
 
 export function useDeleteCvProject() {
+  const t = useTranslations('ProjectToast')
   const { data: modalData, closeModal } = useModalStore()
   const { id } = useParams<{ id: string }>()
+
   const [removeCvProject, { loading }] = useMutation<
     RemoveCvProjectData,
     RemoveCvProjectVariables
   >(REMOVE_CV_PROJECT_MUTATION, {
     onCompleted: () => {
-      toast.success('Project successfully removed from CV!')
+      toast.success(t('cvProjectRemoved'))
       closeModal()
     },
     onError: (err) => {
-      toast.error('Failed to remove project: ' + err.message)
+      toast.error(t('errorOccurred') + err.message)
     },
   })
 

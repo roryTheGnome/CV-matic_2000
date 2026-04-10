@@ -6,11 +6,12 @@ import {
 } from '@/types/languages'
 
 import { useMutation } from '@apollo/client/react'
+import { useTranslations } from 'next-intl'
 import toast from 'react-hot-toast'
 
 export function useDeleteLanguage() {
   const { data: modalData, closeModal } = useModalStore()
-
+  const t = useTranslations('LanguageToast')
   const [deleteLanguage, { loading }] = useMutation<
     DeleteLanguageResponse,
     DeleteLanguageVariables
@@ -23,18 +24,18 @@ export function useDeleteLanguage() {
     },
     onCompleted: (data) => {
       if (data.deleteLanguage.affected > 0) {
-        toast.success('Language successfully deleted')
+        toast.success(t('languageDeleteSuccess'))
         closeModal()
       }
     },
     onError: (err) => {
-      toast.error(err.message || 'Failed to delete language')
+      toast.error(err.message || t('languageDeleteError'))
     },
   })
 
   const handleDelete = () => {
     if (!modalData?.id) {
-      toast.error('Language ID is missing!')
+      toast.error(t('languageIdMissing'))
       return
     }
 
