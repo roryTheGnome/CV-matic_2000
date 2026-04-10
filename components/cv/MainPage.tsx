@@ -1,5 +1,6 @@
 import { Cvs } from '@/types/cvs'
 import { SkillMastery } from '@/types/skills'
+import { useTranslations } from 'next-intl'
 type Props = {
   cv: Cvs
   grouped: Record<string, SkillMastery[]>
@@ -9,6 +10,8 @@ export default function MainPage({ cv, grouped }: Props) {
 
   const domains = cv.projects.map((proj) => `${proj.domain}`).join(', ') + '.'
   cv.projects.map((pro) => console.log(pro.name))
+  const t = useTranslations('CvPage')
+
   return (
     <>
       <div className="mb-3">
@@ -23,25 +26,27 @@ export default function MainPage({ cv, grouped }: Props) {
       <div className="flex min-h-screen justify-center">
         <div className="w-full max-w-5xl">
           <div className="relative grid grid-cols-2 gap-12">
-            <div className="absolute top-0 left-1/2 h-full w-[2px] -translate-x-1/2 bg-red-500" />
+            <div className="absolute top-0 left-1/2 h-full w-0.5 -translate-x-1/2 bg-red-500" />
 
             <div className="space-y-8 pr-6">
               <div>
                 <p className="text-text-primary mb-2 font-semibold">
-                  Education
+                  {t('education')}
                 </p>
                 <p className="text-text-primary text-sm">{cv.education}</p>
               </div>
 
               <div>
                 <p className="text-text-primary mb-2 font-semibold">
-                  Language proficiency
+                  {t('languageProficiency')}
                 </p>
                 <p className="text-text-primary text-sm">{langs}</p>
               </div>
 
               <div>
-                <p className="text-text-primary mb-2 font-semibold">Domains</p>
+                <p className="text-text-primary mb-2 font-semibold">
+                  {t('domains')}
+                </p>
                 <p className="text-text-primary text-sm">{domains}</p>
               </div>
             </div>

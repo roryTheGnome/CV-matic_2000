@@ -2,6 +2,7 @@ import { useEditableProfile } from '@/lib/hooks/userHooks/useEditableProfile'
 import { Department } from '@/types/department'
 import { Position } from '@/types/position'
 import { User } from '@/types/user'
+import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import defaultProfile from '../../public/default-profile.png'
 import { Button } from '../ui/Button'
@@ -35,6 +36,9 @@ export default function EditableProfile({ user }: ProfileProp) {
     setPositionId,
   } = useEditableProfile(user)
 
+  const t = useTranslations('ComponentProfile')
+  const f = useTranslations('Forms')
+
   return (
     <>
       <div className="mb-10 flex flex-col items-center text-center">
@@ -43,14 +47,14 @@ export default function EditableProfile({ user }: ProfileProp) {
             <Image
               src={preview ?? defaultProfile}
               className="bg-surface h-32 w-32 rounded-full object-cover"
-              alt="Preview avatar"
+              alt={t('previewAvatar')}
               width={128}
               height={128}
               loading="eager"
             />
 
             <label className="bg-background/60 text-text-primary absolute inset-0 flex cursor-pointer flex-col items-center justify-center rounded-full px-2 text-center text-xs opacity-0 transition group-hover:opacity-100">
-              <span className="font-medium">Upload avatar image</span>
+              <span className="font-medium">{t('uploadAvatar')}</span>
               <span className="mt-1 text-[10px] opacity-80">
                 png, jpg or gif (max 0.5MB)
               </span>
@@ -69,14 +73,14 @@ export default function EditableProfile({ user }: ProfileProp) {
               onClick={handleDeleteAvatar}
               className="text-text-secondary hover:text-primary mt-3 text-sm transition"
             >
-              Remove avatar
+              {t('removeAvatar')}
             </button>
           )}
         </div>
         <p className="text-text-secondary text-sm">{user.email}</p>
 
         <p className="text-text-secondary text-sm">
-          A member since{' '}
+          {t('aMember')}{' '}
           {new Date(Number(user.profile.created_at)).toDateString()}
         </p>
       </div>
@@ -86,7 +90,7 @@ export default function EditableProfile({ user }: ProfileProp) {
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
           inputId="first_name"
-          label="First Name"
+          label={f('firstName')}
           name="first_name"
           maxLength={50}
         />
@@ -94,13 +98,13 @@ export default function EditableProfile({ user }: ProfileProp) {
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
           inputId="last_name"
-          label="Last Name"
+          label={f('lastName')}
           name="last_name"
           maxLength={50}
         />
 
         <Select
-          lable="Department"
+          label={f('department')}
           title={user.department_name}
           value={departmentId}
           disabled={depLoading}
@@ -115,14 +119,14 @@ export default function EditableProfile({ user }: ProfileProp) {
         </Select>
 
         <Select
-          lable="Position"
-          title={user.position_name} // Select position
+          label={f('position')}
+          title={user.position_name}
           value={positionId}
           disabled={posLoading}
           handleChange={(e) => setPositionId(e.target.value)}
-          id="department"
+          id="positionId"
           isRequired={false}
-          name="department"
+          name="positionId"
         >
           {posData?.positions.map((pos: Position) => (
             <Option title={pos.name} key={pos.id} value={pos.id} />
@@ -135,7 +139,7 @@ export default function EditableProfile({ user }: ProfileProp) {
         disabled={loading || !hasUnsavedChanges}
         className={`mt-6`}
       >
-        {loading ? 'Saving...' : 'Save'}
+        {loading ? f('btnSaving') : f('btnSave')}
       </Button>
     </>
   )

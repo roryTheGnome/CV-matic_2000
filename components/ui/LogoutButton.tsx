@@ -1,12 +1,13 @@
-"use client"
+'use client'
 
-import { removeAuthTokens } from "@/actions/auth"
-import { PUBLIC_ROUTES } from "@/config/routes"
-import { useAuthStore } from "@/store/authStore"
-import { useApolloClient } from "@apollo/client/react"
-import { useRouter } from "next/navigation"
-import toast from "react-hot-toast"
-import {LogOut} from "lucide-react";
+import { removeAuthTokens } from '@/actions/auth'
+import { PUBLIC_ROUTES } from '@/config/routes'
+import { useAuthStore } from '@/store/authStore'
+import { useApolloClient } from '@apollo/client/react'
+import { LogOut } from 'lucide-react'
+import { useTranslations } from 'next-intl'
+import { useRouter } from 'next/navigation'
+import toast from 'react-hot-toast'
 
 export function LogoutButton() {
   const router = useRouter()
@@ -20,20 +21,23 @@ export function LogoutButton() {
       await client.clearStore()
       logout()
 
-      toast.success("Successfully logged out.", { duration: 2000 })
+      toast.success('Successfully logged out.', { duration: 2000 })
 
       router.push(PUBLIC_ROUTES.LOGIN)
     } catch (error) {
-      console.error("Error while logout:", error)
+      console.error('Error while logout:', error)
     }
   }
+
+  const t = useTranslations('LogoutBtn')
 
   return (
     <button
       onClick={handleLogout}
-      className="flex items-center gap-3 px-5 py-4 hover:bg-surface-active transition"
+      className="hover:bg-surface-active flex items-center gap-3 px-5 py-4 transition"
     >
-      <LogOut size={20} className="w-5 h-5 text-text-primary" /><span>Logout</span>
+      <LogOut size={20} className="text-text-primary h-5 w-5" />
+      <span>{t('logout')}</span>
     </button>
   )
 }

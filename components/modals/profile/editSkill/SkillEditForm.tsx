@@ -1,14 +1,13 @@
 'use client'
 
-import { useState } from 'react'
-import { useMutation } from '@apollo/client/react'
-import { useModalStore } from '@/store/modalStore'
-import { Button } from '@/components/ui/Button'
-import { CancelButton } from '@/components/ui/CancelButton'
-import { GET_USER } from '@/api/graphql/queries/user'
 import { UPDATE_PROFILE_SKILL } from '@/api/graphql/mutations/profile'
-import { SkillMastery, Mastery } from '@/types/skills'
-import { Select } from '@/components/ui/select/Select'
+import { GET_USER } from '@/api/graphql/queries/user'
+import { MasterySelect } from '@/components/ui/MasterySelect'
+import { useModalStore } from '@/store/modalStore'
+import { Mastery, SkillMastery } from '@/types/skills'
+import { useMutation } from '@apollo/client/react'
+import { useState } from 'react'
+import { ModalButtons } from '../../ModalButtons'
 
 type Props = {
   skill: SkillMastery
@@ -58,26 +57,9 @@ export function SkillEditForm({ skill, userId }: Props) {
         {skill.name}
       </div>
 
-      <Select
-        id="mastery"
-        name="mastery"
-        value={mastery}
-        isRequired={true}
-        handleChange={(e) => setMastery(e.target.value as Mastery)}
-      >
-        <option value="Novice">Novice</option>
-        <option value="Advanced">Advanced</option>
-        <option value="Competent">Competent</option>
-        <option value="Proficient">Proficient</option>
-        <option value="Expert">Expert</option>
-      </Select>
+      <MasterySelect mastery={mastery} setMastery={setMastery} />
 
-      <div className="flex justify-end gap-4">
-        <CancelButton closeModal={closeModal} />
-        <Button type="submit" disabled={loading}>
-          {loading ? 'SAVING...' : 'SAVE'}
-        </Button>
-      </div>
+      <ModalButtons saving={loading} />
     </form>
   )
 }

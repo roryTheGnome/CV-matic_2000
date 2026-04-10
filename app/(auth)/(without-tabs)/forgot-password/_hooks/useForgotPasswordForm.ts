@@ -1,11 +1,13 @@
-import { FORGOT_PASSWORD_MUTATION } from "@/api/graphql/mutations/auth"
-import { ForgotPasswordData, ForgotPasswordVariables } from "@/types/auth"
-import { useMutation } from "@apollo/client/react"
+import { FORGOT_PASSWORD_MUTATION } from '@/api/graphql/mutations/auth'
+import { ForgotPasswordData, ForgotPasswordVariables } from '@/types/auth'
+import { useMutation } from '@apollo/client/react'
+import { useTranslations } from 'next-intl'
 
-import { SubmitEvent } from "react"
-import toast from "react-hot-toast"
+import { SubmitEvent } from 'react'
+import toast from 'react-hot-toast'
 
 export const useForgotPasswordForm = () => {
+  const t = useTranslations('Notifications')
   const [forgotPassword, { loading, error }] = useMutation<
     ForgotPasswordData,
     ForgotPasswordVariables
@@ -15,7 +17,7 @@ export const useForgotPasswordForm = () => {
     e.preventDefault()
 
     const formatData = new FormData(e.currentTarget)
-    const email = formatData.get("email") as string
+    const email = formatData.get('email') as string
 
     toast.promise(
       forgotPassword({
@@ -26,11 +28,11 @@ export const useForgotPasswordForm = () => {
         },
       }),
       {
-        loading: "Sending...",
-        success: "Check your inbox.",
-        error: error?.message || "Error occured.",
+        loading: t('sending'),
+        success: t('checkInbox'),
+        error: error?.message || t('errorOccurred'),
       },
-      { id: "forgot-password" },
+      { id: 'forgot-password' },
     )
   }
 

@@ -14,11 +14,14 @@ import {
 } from '@/types/cvs'
 import { GetSkillsData, Mastery, SkillItem, SkillMastery } from '@/types/skills'
 import { useMutation, useQuery } from '@apollo/client/react'
+import { useTranslations } from 'next-intl'
 import { SubmitEvent, useState } from 'react'
 import toast from 'react-hot-toast'
 
 export const useCvSkillForm = (skill: SkillMastery | undefined) => {
   const { data: modalData, type, closeModal } = useModalStore()
+
+  const t = useTranslations('CvToast')
 
   const { data: allSkillsData } = useQuery<GetSkillsData>(GET_SKILLS, {
     fetchPolicy: 'cache-and-network',
@@ -94,7 +97,7 @@ export const useCvSkillForm = (skill: SkillMastery | undefined) => {
 
       closeModal()
     } catch (err) {
-      toast.error('Error while adding a skill to the cv' + err)
+      toast.error(t('errorOccurred') + err)
     }
   }
 

@@ -3,11 +3,12 @@ import { useModalStore } from '@/store/modalStore'
 import { DeleteProjectResponse, DeleteProjectVariables } from '@/types/project'
 
 import { useMutation } from '@apollo/client/react'
+import { useTranslations } from 'next-intl'
 import toast from 'react-hot-toast'
 
 export function useDeleteProject() {
   const { data: modalData, closeModal } = useModalStore()
-
+  const t = useTranslations('ProjectToast')
   const [deleteProject, { loading }] = useMutation<
     DeleteProjectResponse,
     DeleteProjectVariables
@@ -20,18 +21,18 @@ export function useDeleteProject() {
     },
     onCompleted: (data) => {
       if (data.deleteProject.affected > 0) {
-        toast.success('Project successfully deleted')
+        toast.success(t('projectDeleteSuccess'))
         closeModal()
       }
     },
     onError: (err) => {
-      toast.error(err.message || 'Failed to delete project')
+      toast.error(err.message || t('projectDeleteError'))
     },
   })
 
   const handleDelete = () => {
     if (!modalData?.id) {
-      toast.error('Project ID is missing!')
+      toast.error(t('projectIdMissing'))
       return
     }
 

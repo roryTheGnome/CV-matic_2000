@@ -1,11 +1,13 @@
-import { RESET_PASSWORD_MUTATION } from "@/api/graphql/mutations/auth"
-import { ResetPasswordData, ResetPasswordVariables } from "@/types/auth"
-import { useMutation } from "@apollo/client/react"
+import { RESET_PASSWORD_MUTATION } from '@/api/graphql/mutations/auth'
+import { ResetPasswordData, ResetPasswordVariables } from '@/types/auth'
+import { useMutation } from '@apollo/client/react'
+import { useTranslations } from 'next-intl'
 
-import { SubmitEvent } from "react"
-import toast from "react-hot-toast"
+import { SubmitEvent } from 'react'
+import toast from 'react-hot-toast'
 
 export const useResetPasswordForm = () => {
+  const t = useTranslations('Notifications')
   const [resetPassword, { loading, error }] = useMutation<
     ResetPasswordData,
     ResetPasswordVariables
@@ -15,7 +17,7 @@ export const useResetPasswordForm = () => {
     e.preventDefault()
 
     const formatData = new FormData(e.currentTarget)
-    const password = formatData.get("password") as string
+    const password = formatData.get('password') as string
 
     toast.promise(
       resetPassword({
@@ -26,11 +28,11 @@ export const useResetPasswordForm = () => {
         },
       }),
       {
-        loading: "Updating...",
-        success: "Password successfully updated.",
-        error: error?.message || "Error occured.",
+        loading: t('updating'),
+        success: t('passwordUpdatedSuccess'),
+        error: error?.message || t('errorOccurred'),
       },
-      { id: "reset-password" },
+      { id: 'reset-password' },
     )
   }
 

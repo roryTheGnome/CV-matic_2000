@@ -8,38 +8,38 @@ import {
 } from '@/types/table'
 
 export const headers: Header[] = [
-  { label: 'First Name', key: 'first_name' },
-  { label: 'Last Name', key: 'last_name' },
-  { label: 'Email', key: 'email' },
-  { label: 'Department', key: 'department' },
-  { label: 'Position', key: 'position' },
+  { label: 'firstName', key: 'first_name' },
+  { label: 'lastName', key: 'last_name' },
+  { label: 'email', key: 'email' },
+  { label: 'department', key: 'department' },
+  { label: 'position', key: 'position' },
 ]
 
 export const skillsHeaders: SkillHeader[] = [
-  { label: 'Name', key: 'skill_name' },
-  { label: 'Type', key: 'skill_type' },
-  { label: 'Category', key: 'skill_category' },
+  { label: 'name', key: 'skill_name' },
+  { label: 'type', key: 'skill_type' },
+  { label: 'category', key: 'skill_category' },
 ]
 
 export const languageHeaders: LanguageHeader[] = [
-  { label: 'Name', key: 'language_name' },
-  { label: 'Native Name', key: 'language_native_name' },
-  { label: 'ISO2', key: 'language_iso2' },
+  { label: 'name', key: 'language_name' },
+  { label: 'nativeName', key: 'language_native_name' },
+  { label: 'iso2', key: 'language_iso2' },
 ]
 
 export const projectsHeaders: ProjectHeader[] = [
-  { label: 'Name', key: 'project_name' },
-  { label: 'Domain', key: 'project_domain' },
-  { label: 'Start Date', key: 'project_start_date' },
-  { label: 'End Date', key: 'project_end_date' },
+  { label: 'name', key: 'project_name' },
+  { label: 'domain', key: 'project_domain' },
+  { label: 'startDate', key: 'project_start_date' },
+  { label: 'endDate', key: 'project_end_date' },
 ]
 
 export const cvsHeaders: CvsHeader[] = [
-  { label: 'Name', key: 'cvs_name' },
-  { label: 'Education', key: 'cvs_education' },
-  { label: 'Employee', key: 'cvs_employee' },
+  { label: 'name', key: 'cvs_name' },
+  { label: 'education', key: 'cvs_education' },
+  { label: 'employee', key: 'cvs_employee' },
 ]
 
 export const onlyNameHeaders: OnlyNameHeader[] = [
-  { label: 'Name', key: 'name' },
+  { label: 'name', key: 'name' },
 ]

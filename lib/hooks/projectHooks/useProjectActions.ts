@@ -15,6 +15,7 @@ import {
 } from '@/types/project'
 
 import { useMutation } from '@apollo/client/react'
+import { useTranslations } from 'next-intl'
 import { SubmitEvent, useId, useState } from 'react'
 import toast from 'react-hot-toast'
 
@@ -24,7 +25,7 @@ export function useProjectActions(
 ) {
   const formId = useId()
   const { type, closeModal } = useModalStore()
-
+  const t = useTranslations('ProjectToast')
   const [formData, setFormData] = useState<CreateProjectModalFormState>(
     initialData || {
       name: '',
@@ -56,8 +57,8 @@ export function useProjectActions(
         })
       }
     },
-    onCompleted: (data) => {
-      toast.success('Project created successfully!')
+    onCompleted: () => {
+      toast.success(t('projectCreatedSuccess'))
       closeModal()
     },
     onError: (err) => {
@@ -70,7 +71,7 @@ export function useProjectActions(
     UpdateProjectVariables
   >(UPDATE_PROJECT_MUTATION, {
     onCompleted: () => {
-      toast.success('Project updated successfully!')
+      toast.success(t('projectUpdatedSuccess'))
       closeModal()
     },
     onError: (err) => toast.error(err.message),

@@ -1,22 +1,25 @@
-"use client"
+'use client'
 
-import { useModalStore } from "@/store/modalStore"
+import { useModalStore } from '@/store/modalStore'
 
-import { CreatePositionModalFormState } from "@/types/position"
-import { ModalLayout } from "../ModalLayout"
-import { PositionForm } from "./PositionForm"
+import { CreatePositionModalFormState } from '@/types/position'
+import { useTranslations } from 'next-intl'
+import { ModalLayout } from '../ModalLayout'
+import { PositionForm } from './PositionForm'
 
 export function PositionModal() {
   const { data: modalData, type } = useModalStore()
-  const isEditing = type === "POSITION_EDIT"
+  const isEditing = type === 'POSITION_EDIT'
 
   const initialData: CreatePositionModalFormState = {
-    name: modalData?.name || "",
+    name: modalData?.name || '',
   }
+
+  const t = useTranslations('LanguageModal')
 
   return (
     <ModalLayout
-      title={isEditing ? "Edit position" : "Create position"}
+      title={isEditing ? t('positionEditModal') : t('positionCreateModal')}
       maxWidth="max-w-5xl"
     >
       <PositionForm

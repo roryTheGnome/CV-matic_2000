@@ -1,8 +1,8 @@
-import { Button } from '@/components/ui/Button'
-import { CancelButton } from '@/components/ui/CancelButton'
 import { InputField } from '@/components/ui/inputField/InputField'
 import { useLanguageActions } from '@/lib/hooks/languageHooks/useLanguageActions'
 import { LanguageModalFormState } from '@/types/languages'
+import { useTranslations } from 'next-intl'
+import { ModalButtons } from '../ModalButtons'
 
 export function LanguageForm({
   initialData,
@@ -17,17 +17,17 @@ export function LanguageForm({
     loading: saving,
     isFormValid,
     isDirty,
-    type,
-    closeModal,
     handleChange,
     handleSubmit,
   } = useLanguageActions(initialData, languageId)
+
+  const t = useTranslations('Forms')
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <InputField
         inputId={`${formId}-name`}
-        label="Name"
+        label={t('name')}
         type="text"
         name="name"
         value={formData.name}
@@ -49,7 +49,7 @@ export function LanguageForm({
 
       <InputField
         inputId={`${formId}-nativeName`}
-        label="Native name"
+        label={t('nativeName')}
         type="text"
         name="native_name"
         value={formData.native_name}
@@ -57,18 +57,11 @@ export function LanguageForm({
         maxLength={50}
       />
 
-      <div className="mt-10 flex justify-end gap-4">
-        <CancelButton closeModal={closeModal} />
-        <Button type="submit" disabled={!isFormValid || saving || !isDirty}>
-          {saving
-            ? type === 'LANGUAGE_CREATE'
-              ? 'CREATING'
-              : 'SAVING'
-            : type === 'LANGUAGE_CREATE'
-              ? 'CREATE'
-              : 'SAVE'}
-        </Button>
-      </div>
+      <ModalButtons
+        isDirty={isDirty}
+        isFormValid={isFormValid}
+        saving={saving}
+      />
     </form>
   )
 }

@@ -1,68 +1,51 @@
-"use client"
+'use client'
 
-import { useActionMenu } from "@/lib/hooks/useActionMenu"
-import { ModalData, ModalType } from "@/store/modalStore"
-import { Info, MoreVertical, Pencil, Trash2 } from "lucide-react"
+import { useActionMenu } from '@/lib/hooks/useActionMenu'
+import { ModalData, ModalType } from '@/store/modalStore'
+import { Info } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import Link from 'next/link'
+import { ActionMenuLayout } from './ActionMenuLayout'
+import { ActionDeleteButton } from './_ui/ActionDeleteButton'
+import { ActionEditButton } from './_ui/ActionEditButton'
 
 interface Props {
   deleteType: ModalType
   editType: ModalType
   item: ModalData
-  isAdmin:boolean
+  isAdmin: boolean
 }
 
-export function ProjectsActionsMenu({ editType, deleteType, item, isAdmin }: Props) {
-  const {
-    menuRef,
-    isOpen,
-    setIsOpen,
-    handleEdit,
-    handleDelete,
-  } = useActionMenu(deleteType, editType, item)
+export function ProjectsActionsMenu({
+  editType,
+  deleteType,
+  item,
+  isAdmin,
+}: Props) {
+  const { menuRef, isOpen, setIsOpen, handleEdit, handleDelete } =
+    useActionMenu(deleteType, editType, item)
+  const t = useTranslations('ActionMenu')
 
   return (
-    <div className="relative" ref={menuRef}>
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="p-2 text-gray-400 hover:text-white hover:bg-gray-700/50 rounded-full transition-colors"
-        aria-label="Open actions"
-      >
-        <MoreVertical size={20} />
-      </button>
-
+    <ActionMenuLayout menuRef={menuRef} setIsOpen={() => setIsOpen(!isOpen)}>
       {isOpen && (
-        <div className="absolute right-0 top-full w-36 bg-background border border-input-border shadow-xl z-10 overflow-hidden">
-
-            <Link
-              href={`/projects/${item.id}`}
-              className="flex items-center w-full px-4 py-2.5 text-sm text-gray-300 hover:bg-black/10 hover:text-white transition-colors"
-            >
-              <Info  size={16} className="mr-3 text-gray-400" />
-              Details
-            </Link>
-          {isAdmin &&(
+        <div className="bg-background border-input-border absolute top-full right-0 z-10 w-36 overflow-hidden border shadow-xl">
+          <Link
+            href={`/projects/${item.id}`}
+            className="flex w-full items-center px-4 py-2.5 text-sm text-gray-300 transition-colors hover:bg-black/10 hover:text-white"
+          >
+            <Info size={16} className="mr-3 text-gray-400" />
+            {t('details')}
+          </Link>
+          {isAdmin && (
             <>
-              <button
-                onClick={handleEdit}
-                className="flex items-center w-full px-4 py-2.5 text-sm text-gray-300 hover:bg-black/10 hover:text-white transition-colors"
-              >
-                <Pencil size={16} className="mr-3 text-gray-400" />
-                Edit
-              </button>
+              <ActionEditButton handleEdit={handleEdit} />
 
-              <button
-                onClick={handleDelete}
-                className="flex items-center w-full px-4 py-2.5 text-sm text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-colors"
-              >
-                <Trash2 size={16} className="mr-3" />
-                Delete
-              </button>
+              <ActionDeleteButton handleDelete={handleDelete} />
             </>
           )}
-
         </div>
       )}
-    </div>
+    </ActionMenuLayout>
   )
 }

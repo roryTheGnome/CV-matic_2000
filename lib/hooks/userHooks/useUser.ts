@@ -12,6 +12,7 @@ export function useUser(userId?: string) {
   const { data, loading, error } = useQuery<GetUserResponse>(GET_USER, {
     variables: { userId: idToUse },
     skip: !idToUse,
+    fetchPolicy: 'cache-and-network',
   })
 
   const user: User | undefined = data?.user

@@ -1,17 +1,17 @@
 'use client'
 
-import { useCv } from '@/lib/hooks/cvHooks/useCv'
-import MainPage from '@/components/cv/MainPage'
-import { useQuery } from '@apollo/client/react'
-import { GetSkillsData, SkillMastery } from '@/types/skills'
 import { GET_SKILLS } from '@/api/graphql/queries/skills'
+import MainPage from '@/components/cv/MainPage'
 import ProfecionalSkillsPage from '@/components/cv/ProfecionalSkillsPage'
-import { Button } from '@/components/ui/Button'
-import { useRef } from 'react'
 import ProjectsPage from '@/components/cv/ProjectsPage'
+import { Button } from '@/components/ui/Button'
+import { useCv } from '@/lib/hooks/cvHooks/useCv'
+import { GetSkillsData, SkillMastery } from '@/types/skills'
+import { useQuery } from '@apollo/client/react'
+import { useRef } from 'react'
 
 export default function CvPreview() {
-  const { isLoading, cv, error } = useCv()
+  const { cv } = useCv()
   const printRef = useRef<HTMLDivElement>(null)
   const { data } = useQuery<GetSkillsData>(GET_SKILLS)
   const allSkills = data ? data.skills : []
@@ -57,7 +57,6 @@ export default function CvPreview() {
     <div>
       <Button onClick={handleDownload}>Download PDF</Button>
       <div ref={printRef}>
-
         <div className="pdf-page p-8">
           <MainPage cv={cv} grouped={grouped} />
         </div>

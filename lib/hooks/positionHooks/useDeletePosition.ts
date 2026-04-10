@@ -6,11 +6,12 @@ import {
 } from '@/types/position'
 
 import { useMutation } from '@apollo/client/react'
+import { useTranslations } from 'next-intl'
 import toast from 'react-hot-toast'
 
 export function useDeletePosition() {
   const { data: modalData, closeModal } = useModalStore()
-
+  const t = useTranslations('PositionToast')
   const [deletePosition, { loading }] = useMutation<
     DeletePositionResponse,
     DeletePositionVariables
@@ -23,18 +24,18 @@ export function useDeletePosition() {
     },
     onCompleted: (data) => {
       if (data.deletePosition.affected > 0) {
-        toast.success('Position successfully deleted')
+        toast.success(t('positionDeleteSuccess'))
         closeModal()
       }
     },
     onError: (err) => {
-      toast.error(err.message || 'Failed to delete position')
+      toast.error(err.message || t('positionDeleteError'))
     },
   })
 
   const handleDelete = () => {
     if (!modalData?.id) {
-      toast.error('Position ID is missing!')
+      toast.error(t('positionIdMissing'))
       return
     }
 

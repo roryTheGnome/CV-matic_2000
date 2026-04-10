@@ -3,18 +3,19 @@
 import { Button } from '@/components/ui/Button'
 import { InputField } from '@/components/ui/inputField/InputField'
 import { PUBLIC_ROUTES } from '@/config/routes'
+import { useTranslations } from 'next-intl'
 import { AuthHeading } from '../../_components/AuthHeading'
 import { AuthLink } from '../../_components/AuthLink'
 import { useResetPasswordForm } from './_hooks/useResetPasswordForm'
 
 export default function ResetPassword() {
   const { loading, error, handleSubmit } = useResetPasswordForm()
-
+  const t = useTranslations('Auth')
   return (
     <>
       <AuthHeading
-        title="Set a new password"
-        subtitle="Almost done! Now create a new password"
+        title={t('setNewPasswordTitle')}
+        subtitle={t('setNewPasswordSubtitle')}
       />
       <form
         onSubmit={(e) => handleSubmit(e)}
@@ -23,22 +24,19 @@ export default function ResetPassword() {
         <InputField
           required
           inputId="password"
-          label="Password"
+          label={t('passwordLabel')}
           type="password"
           name="password"
           autoComplete="new-password"
           maxLength={100}
           minLength={5}
         />
-        <span className="text-primary h-6">
-          {error?.message}
-          {loading && 'Loading...'}
-        </span>
+        <span className="text-primary h-6">{error?.message}</span>
         <Button disabled={loading} className="mt-2">
-          Reset password
+          {t('resetPasswordButton')}
         </Button>
       </form>
-      <AuthLink text="Back to Log in" href={PUBLIC_ROUTES.LOGIN} />
+      <AuthLink text={t('backToLoginLink')} href={PUBLIC_ROUTES.LOGIN} />
     </>
   )
 }

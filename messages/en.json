@@ -1,0 +1,311 @@
+{
+  "Auth": {
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "loginButton": "Log in",
+    "createAccountButton": "Create Account",
+    "loginTab": "Log in",
+    "signupTab": "Sign up",
+    "loginTitle": "Welcome back",
+    "loginSubtitle": "Hello again! Log in to continue",
+    "registerTitle": "Register now",
+    "registerSubtitle": "Welcome! Sign up to continue",
+    "forgotPasswordTitle": "Forgot password",
+    "forgotPasswordSubtitle": "We will send you an email with further instructions",
+    "haveAnAccount": "I have an account",
+    "setNewPasswordTitle": "Set a new password",
+    "setNewPasswordSubtitle": "Almost done! Now create a new password",
+    "resetPasswordButton": "Reset password",
+    "cancelLink": "Cancel",
+    "backToLoginLink": "Back to Log in",
+    "loadingText": "Loading"
+  },
+  "Notifications": {
+    "loggedSuccess": "Logged in successfully.",
+    "registerSuccess": "Registered successfully.",
+    "genericError": "Something went wrong.",
+    "sending": "Sending...",
+    "checkInbox": "Check your inbox.",
+    "updating": "Updating...",
+    "passwordUpdatedSuccess": "Password successfully updated.",
+    "errorOccurred": "Error occurred.",
+    "loadingText": "Loading",
+    "gettingUserInfo": "Getting user info..."
+  },
+  "TableActions": {
+    "downloadPdf": "Download PDF",
+    "addProject": "ADD PROJECT",
+    "createCv": "CREATE CV",
+    "createDepartment": "CREATE DEPARTMENT",
+    "createLanguage": "CREATE LANGUAGE",
+    "createPosition": "CREATE POSITION",
+    "createProject": "CREATE PROJECT",
+    "createSkill": "CREATE SKILL",
+    "createUser": "CREATE USER"
+  },
+  "ProjectDetails": {
+    "startDate": "Start date",
+    "endDate": "End date",
+    "tillNow": "Till now"
+  },
+  "NotFoundPage": {
+    "pageNotFound": "Page not found",
+    "errorText": "The page you are looking for doesn’t exist or has been moved.",
+    "backLink": "Go back home"
+  },
+  "ActionMenu": {
+    "openActionsAria": "Open actions",
+    "details": "Details",
+    "edit": "Edit",
+    "delete": "Delete",
+    "profile": "Profile"
+  },
+  "CvPage": {
+    "education": "Education",
+    "languageProficiency": "Language proficiency",
+    "domains": "Domains",
+    "professionalSkills": "Professional skills",
+    "skills": "SKILLS",
+    "experienceInYears": "EXPERIENCE IN YEARS",
+    "lastUsed": "LAST USED",
+    "projects": "Projects",
+    "projectRoles": "Project Roles",
+    "period": "Period",
+    "responsibilities": "Responsibilities",
+    "environments": "Enviroments"
+  },
+  "Forms": {
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "education": "Education",
+    "description": "Description",
+    "project": "Project",
+    "domain": "Domain",
+    "position": "Position",
+    "skill": "Skill",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "mastery": "Mastery",
+    "department": "Department",
+    "responsibilities": "Responsibilities",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "nativeName": "Native name",
+
+    "loading": "Loading",
+    "btnCreating": "CREATING",
+    "btnSaving": "SAVING",
+    "btnAdding": "ADDING",
+    "btnAdd": "ADD",
+    "btnCreate": "CREATE",
+    "btnSave": "SAVE"
+  },
+  "MasterySelect": {
+    "novice": "Novice",
+    "advanced": "Advanced",
+    "competent": "Competent",
+    "proficient": "Proficient",
+    "expert": "Expert"
+  },
+  "SkillSelect": {
+    "selectSkill":"Select Skill"
+  },
+  "CvToast": {
+    "errorOccurred": "Error occurred.",
+    "cvProjectAdded": "Project successfully added to CV!",
+    "cvProjectUpdated": "Project successfully updated in CV!",
+    "cvProjectRemoved": "Project successfully removed from CV!",
+
+    "cvIdMissing": "Cv ID is missing!",
+    "cvDeleteError": "Failed to delete cv",
+    "cvDeleteSuccess": "Cv successfully deleted"
+  },
+  "ProjectToast": {
+    "projectIdMissing": "Project ID is missing!",
+    "projectDeleteError": "Failed to delete project",
+    "projectDeleteSuccess": "Project successfully deleted",
+    "projectCreatedSuccess": "Project created successfully!",
+    "projectUpdatedSuccess": "Project updated successfully!"
+  },
+  "SkillToast": {
+    "skillIdMissing": "Skill ID is missing!",
+    "skillDeleteError": "Failed to delete skill",
+    "skillDeleteSuccess": "Skill successfully deleted",
+    "skillCreatedSuccess": "Skill created successfully!",
+    "skillUpdatedSuccess": "Skill updated successfully!"
+  },
+  "UserToast": {
+    "userIdMissing": "User ID is missing!",
+    "userDeleteError": "Failed to delete user",
+    "userDeleteSuccess": "User successfully deleted",
+    "userCreatedSuccess": "User created successfully!",
+    "userUpdatedSuccess": "User updated successfully!"
+  },
+  "PositionToast": {
+    "positionIdMissing": "Position ID is missing!",
+    "positionDeleteError": "Failed to delete position",
+    "positionDeleteSuccess": "Position successfully deleted",
+    "positionCreatedSuccess": "Position created successfully!",
+    "positionUpdatedSuccess": "Position updated successfully!"
+  },
+  "LanguageToast": {
+    "languageIdMissing": "Language ID is missing!",
+    "languageDeleteError": "Failed to delete language",
+    "languageDeleteSuccess": "Language successfully deleted",
+    "languageCreatedSuccess": "Language created successfully!",
+    "languageUpdatedSuccess": "Language updated successfully!"
+  },
+  "DepartmentToast": {    
+    "departmentIdMissing": "Department ID is missing!",
+    "departmentDeleteError": "Failed to delete department",
+    "departmentDeleteSuccess": "Department successfully deleted",
+    "departmentCreatedSuccess": "Department created successfully!",
+    "departmentUpdatedSuccess": "Department updated successfully!"
+  },
+  "CvModal": {
+    "loading": "Loading",
+    "errorOccurred": "Error occurred.",
+    "cvAddProjectModal": "Add project",
+    "cvEditProjectModal": "Edit CV project",
+    "deleteProjectModalHeading": "project",
+    "deleteProjectModalDeleteText": "from the CV"
+  },
+  "SkillModal": {
+    "skill": "skill",
+    "addSkill": "Add Skill",
+    "editSkill": "Edit Skill",
+    "createSkill": "Create skill"
+  },
+  "DepartmentModal": {
+    "department": "department",
+    "departmentCreateModal": "Create department",
+    "departmentEditModal": "Edit department"
+  },
+  "LanguageModal": {
+    "language": "language",
+    "languageCreateModal": "Create language",
+    "languageEditModal": "Edit language"
+  },
+  "PositionModal": {
+    "position": "position",
+    "positionCreateModal": "Create position",
+    "positionEditModal": "Edit position"
+  },
+  "ProfileModal": {
+    "errorOccurred": "Error occurred.",
+    "addLanguage": "Add Language",
+    "editLanguage": "Edit Language",
+    "language": "Language",
+    "profeciency": "Profeciency",
+    "addSkill": "Add Skill",
+    "editSkill": "Edit Skill"
+  },
+  "ProjectModal": {
+    "project": "project",
+    "editProject": "Edit project",
+    "createProject": "Create project"
+  },
+  "UserModal": {
+    "loading": "Loading",
+    "errorOccurred": "Error occurred.",
+    "user": "user",
+    "editUser": "Edit user",
+    "createUser": "Create user"
+  },
+  "DeleteModal": {
+    "aYouSure": "Are you sure you want to delete",
+    "deleting": "DELETING",
+    "confirm": "CONFIRM"
+  },
+  "DataStates": {
+    "loading": "Loading",
+    "errorOccurred": "Error occurred."
+  },
+  "ComponentProfile": {
+    "previewAvatar": "Preview avatar",
+    "uploadAvatar": "Upload avatar image",
+    "removeAvatar": "Remove avatar",
+    "aMember": "A member since"
+  },
+  "Skills": {
+    "cancel": "CANCEL",
+    "confirm": "CONFIRM",
+    "addSkills": "ADD SKILLS",
+    "removeSkills": "REMOVE SKILLS"
+  },
+  "PasswordInput": {
+    "show": "Show password",
+    "hide": "Hide password"
+  },
+  "SearchableSelectMenu": {
+    "notFound": "No projects found"
+  },
+  "TagInputField": {
+    "press": "Press",
+    "toAdd": "to add"
+  },
+  "UserActionModal": {
+    "profile": "Profile",
+    "settings": "Settings"
+  },
+  "CancelBtn": {
+    "cancel": "CANCEL"
+  },
+  "LogoutBtn": {
+    "logout": "Logout"
+  },
+  "EnvironmentSelect": {
+    "environment": "Environment"
+  },
+  "LanguageSelect": {
+    "language": "Language"
+  },
+  "ThemeSelect": {
+    "appearance": "Appearance"
+  },
+  "LanguageList": {
+    "cancel": "CANCEL",
+    "confirm": "CONFIRM",
+    "addLanguage": "ADD SKILLS",
+    "removeLanguage": "REMOVE SKILLS"
+  },
+  "Navigation": {
+    "employees":"Employees",
+    "skills":"Skills", 
+    "languages":"Languages",
+    "cvs":"CVs",
+
+    "projects":"Projects",
+    "departments":"Departments", 
+    "positions":"Positions"
+  },
+  "TableHeaders": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "department": "Department",
+    "position": "Position",
+    "name": "Name",
+    "type": "Type",
+    "category": "Category",
+    "nativeName": "Native Name",
+    "iso2": "ISO2",
+    "domain": "Domain",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "education": "Education",
+    "employee": "Employee"
+  },
+  "CvNavItems": {
+    "details": "Details",
+    "skills": "Skills", 
+    "projects": "Projects",
+    "preview": "Preview"
+  },
+   "ProfileNavItems": {
+    "profile": "Profile",
+    "skills": "Skills", 
+    "languages": "Languages"
+  }
+}

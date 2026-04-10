@@ -14,6 +14,7 @@ import {
   UpdateUserVariables,
 } from '@/types/user'
 import { useMutation } from '@apollo/client/react'
+import { useTranslations } from 'next-intl'
 import { SubmitEvent, useId, useState } from 'react'
 import toast from 'react-hot-toast'
 
@@ -23,7 +24,7 @@ export function useUserActions(
 ) {
   const formId = useId()
   const { type, closeModal } = useModalStore()
-
+  const t = useTranslations('UserToast')
   const [formData, setFormData] = useState<CreateUserModalFormState>(
     initialData || {
       email: '',
@@ -56,8 +57,8 @@ export function useUserActions(
         })
       }
     },
-    onCompleted: (data) => {
-      toast.success('User created successfully!')
+    onCompleted: () => {
+      toast.success(t('userCreatedSuccess'))
       closeModal()
     },
     onError: (err) => {
@@ -70,7 +71,7 @@ export function useUserActions(
     UpdateUserVariables
   >(UPDATE_USER_MUTATION, {
     onCompleted: () => {
-      toast.success('User updated successfully!')
+      toast.success(t('userUpdatedSuccess'))
       closeModal()
     },
     onError: (err) => toast.error(err.message),

@@ -1,4 +1,5 @@
 import { InputField } from '@/components/ui/inputField/InputField'
+import { useTranslations } from 'next-intl'
 import { PositionsSelect } from '../PositionsSelect'
 import { CreateUserProps } from './CreateUserLeftSide'
 
@@ -7,11 +8,12 @@ export function CreateUserRightSide({
   formData,
   handleChange,
 }: CreateUserProps) {
+  const t = useTranslations('Forms')
   return (
     <div className="flex flex-col gap-8">
       <InputField
         inputId={`${formId}-password`}
-        label="Password"
+        label={t('password')}
         type="password"
         name="password"
         value={formData.password}
@@ -20,7 +22,7 @@ export function CreateUserRightSide({
       />
       <InputField
         inputId={`${formId}-lastName`}
-        label="Last Name"
+        label={t('lastName')}
         type="text"
         name="lastName"
         value={formData.lastName}

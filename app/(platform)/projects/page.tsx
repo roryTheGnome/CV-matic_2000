@@ -1,6 +1,7 @@
 'use client'
 
 import { GET_PROJECTS } from '@/api/graphql/queries/projects'
+import { Loader } from '@/components/ui/Loader'
 import { ProjectTableItem } from '@/components/ui/table/ProjectTableItem'
 import TableBody from '@/components/ui/table/TableBody'
 import { TableHeader } from '@/components/ui/table/TableHeader'
@@ -10,21 +11,26 @@ import { usePageWithTable } from '@/lib/hooks/usePageWithTable'
 import { GetProjectsData, Project } from '@/types/project'
 import { getSortProjectValue } from '@/utils/getSortProjectValue'
 import { useQuery } from '@apollo/client/react'
+import { useTranslations } from 'next-intl'
 import { useAuthStore } from '@/store/authStore'
 
 export default function Projects() {
   const { loading, error, data } = useQuery<GetProjectsData>(GET_PROJECTS)
   const { isAdmin } = useAuthStore()
   const { search, sortKey, sortDir, setSearch, handleSort } = usePageWithTable()
+  const t = useTranslations('TableActions')
+  const n = useTranslations('Notifications')
 
-  if (loading) return <div>Loading...</div>
-  if (error) return <div>Error loading users</div>
+  if (loading) {
+    return <Loader />
+  }
+  if (error) return <div>{n('errorOccurred')}</div>
 
   return (
     <div>
       <TableSearch
         search={search}
-        createButtonText="CREATE PROJECT"
+        createButtonText={t('createProject')}
         typeOfCreateModal={'PROJECT_CREATE'}
         setSearch={setSearch}
       />

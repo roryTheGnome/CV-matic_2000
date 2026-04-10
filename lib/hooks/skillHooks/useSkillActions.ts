@@ -14,6 +14,7 @@ import {
 } from '@/types/skills'
 
 import { useMutation } from '@apollo/client/react'
+import { useTranslations } from 'next-intl'
 import { ChangeEvent, SubmitEvent, useId, useState } from 'react'
 import toast from 'react-hot-toast'
 
@@ -23,7 +24,7 @@ export function useSkillActions(
 ) {
   const formId = useId()
   const { type, data: modalData, closeModal } = useModalStore()
-
+  const t = useTranslations('SkillToast')
   const [formData, setFormData] = useState<SkillModalFormState>(
     initialData || {
       name: '',
@@ -51,8 +52,8 @@ export function useSkillActions(
         })
       }
     },
-    onCompleted: (data) => {
-      toast.success('Skill created successfully!')
+    onCompleted: () => {
+      toast.success(t('skillCreatedSuccess'))
       closeModal()
     },
     onError: (err) => {
@@ -65,7 +66,7 @@ export function useSkillActions(
     UpdateSkillVariables
   >(UPDATE_SKILL_MUTATION, {
     onCompleted: () => {
-      toast.success('Skill updated successfully!')
+      toast.success(t('skillUpdatedSuccess'))
       closeModal()
     },
     onError: (err) => toast.error(err.message),

@@ -5,6 +5,7 @@ import { onlyNameHeaders } from '@/constants/tableHeaders'
 import { useQuery } from '@apollo/client/react'
 
 import { GET_POSITIONS } from '@/api/graphql/queries/positions'
+import { Loader } from '@/components/ui/Loader'
 import { NameTableItem } from '@/components/ui/table/NameTableItem'
 import TableBody from '@/components/ui/table/TableBody'
 import { TableSearch } from '@/components/ui/TableSearch'
@@ -12,22 +13,25 @@ import { usePageWithTable } from '@/lib/hooks/usePageWithTable'
 import { GetPositionsResponse } from '@/types/position'
 import { Position } from '@/types/user'
 import { getSortByName } from '@/utils/getSortByName'
+import { useTranslations } from 'next-intl'
 import { useAuthStore } from '@/store/authStore'
 
 export default function Positions() {
+  const t = useTranslations('TableActions')
+  const n = useTranslations('Notifications')
   const { data, loading, error } = useQuery<GetPositionsResponse>(GET_POSITIONS)
 
   const { search, sortKey, sortDir, setSearch, handleSort } = usePageWithTable()
-
   const { isAdmin } = useAuthStore()
-  if (loading) return <div>Loading...</div>
-  if (error) return <div>Error loading users</div>
+
+  if (loading) return <Loader />
+  if (error) return <div>{n('errorOccurred')}</div>
 
   return (
     <div>
       <TableSearch
         search={search}
-        createButtonText="CREATE POSITION"
+        createButtonText={t('createPosition')}
         typeOfCreateModal={'POSITION_CREATE'}
         setSearch={setSearch}
       />

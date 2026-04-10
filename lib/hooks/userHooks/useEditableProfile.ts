@@ -11,17 +11,16 @@ import { GetDepartmentsResponse } from '@/types/department'
 import { GetPositionsResponse } from '@/types/position'
 import { UploadAvatarResponse, UploadAvatarVariables, User } from '@/types/user'
 import { useMutation, useQuery } from '@apollo/client/react'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 
 export const useEditableProfile = (user: User) => {
   const [firstName, setFirstName] = useState(user.profile.first_name || '')
   const [lastName, setLastName] = useState(user.profile.last_name || '')
-
+  const t = useTranslations('UserToast')
   const [departmentId, setDepartmentId] = useState(user.department?.id || '')
   const [positionId, setPositionId] = useState(user.position?.id || '')
-
-  const [changeSuccess, setChangeSuccess] = useState(false)
 
   const { data: depData, loading: depLoading } =
     useQuery<GetDepartmentsResponse>(GET_DEPARTMENTS)
@@ -47,10 +46,10 @@ export const useEditableProfile = (user: User) => {
       },
     ],
     onCompleted: () => {
-      toast.success(`Profile updated successfully`)
+      toast.success(t('userUpdatedSuccess'))
     },
     onError: (error) => {
-      toast.success(`Error while updating profile` + error.message)
+      toast.success(error.message)
     },
   })
 
@@ -112,8 +111,6 @@ export const useEditableProfile = (user: User) => {
   const loading = profileLoading || userLoading
 
   const handleSave = async () => {
-    setChangeSuccess(false)
-
     try {
       await Promise.allSettled([
         updateProfile({
@@ -135,7 +132,6 @@ export const useEditableProfile = (user: User) => {
           },
         }),
       ])
-      setChangeSuccess(true)
     } catch (err) {
       console.error('Upsi! Update failed:', err)
     }

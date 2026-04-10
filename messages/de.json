@@ -1,0 +1,308 @@
+{
+  "Auth": {
+    "emailLabel": "E-Mail",
+    "passwordLabel": "Passwort",
+    "loginButton": "Anmelden",
+    "createAccountButton": "Konto erstellen",
+    "loginTab": "Anmelden",
+    "signupTab": "Registrieren",
+    "loginTitle": "Willkommen zurück",
+    "loginSubtitle": "Hallo nochmal! Melden Sie sich an, um fortzufahren",
+    "registerTitle": "Jetzt registrieren",
+    "registerSubtitle": "Willkommen! Registrieren Sie sich, um fortzufahren",
+    "forgotPasswordTitle": "Passwort vergessen",
+    "forgotPasswordSubtitle": "Wir senden Ihnen eine E-Mail mit weiteren Anweisungen",
+    "haveAnAccount": "Ich habe bereits ein Konto",
+    "setNewPasswordTitle": "Neues Passwort festlegen",
+    "setNewPasswordSubtitle": "Fast geschafft! Erstellen Sie nun ein neues Passwort",
+    "resetPasswordButton": "Passwort zurücksetzen",
+    "cancelLink": "Abbrechen",
+    "backToLoginLink": "Zurück zur Anmeldung",
+    "loadingText": "Wird geladen"
+  },
+  "Notifications": {
+    "loggedSuccess": "Erfolgreich angemeldet.",
+    "registerSuccess": "Erfolgreich registriert.",
+    "genericError": "Etwas ist schiefgelaufen.",
+    "sending": "Wird gesendet...",
+    "checkInbox": "Überprüfen Sie Ihren Posteingang.",
+    "updating": "Wird aktualisiert...",
+    "passwordUpdatedSuccess": "Passwort erfolgreich aktualisiert.",
+    "errorOccurred": "Ein Fehler ist aufgetreten.",
+    "loadingText": "Wird geladen",
+    "gettingUserInfo": "Benutzerinformationen werden abgerufen..."
+  },
+  "TableActions": {
+    "downloadPdf": "PDF herunterladen",
+    "addProject": "PROJEKT HINZUFÜGEN",
+    "createCv": "LEBENSLAUF ERSTELLEN",
+    "createDepartment": "ABTEILUNG ERSTELLEN",
+    "createLanguage": "SPRACHE ERSTELLEN",
+    "createPosition": "POSITION ERSTELLEN",
+    "createProject": "PROJEKT ERSTELLEN",
+    "createSkill": "FÄHIGKEIT ERSTELLEN",
+    "createUser": "BENUTZER ERSTELLEN"
+  },
+  "ProjectDetails": {
+    "startDate": "Startdatum",
+    "endDate": "Enddatum",
+    "tillNow": "Bis jetzt"
+  },
+  "NotFoundPage": {
+    "pageNotFound": "Seite nicht gefunden",
+    "errorText": "Die gesuchte Seite existiert nicht oder wurde verschoben.",
+    "backLink": "Zurück zur Startseite"
+  },
+  "ActionMenu": {
+    "openActionsAria": "Aktionen öffnen",
+    "details": "Details",
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "profile": "Profil"
+  },
+  "CvPage": {
+    "education": "Ausbildung",
+    "languageProficiency": "Sprachkenntnisse",
+    "domains": "Fachbereiche",
+    "professionalSkills": "Berufliche Fähigkeiten",
+    "skills": "FÄHIGKEITEN",
+    "experienceInYears": "ERFAHRUNG IN JAHREN",
+    "lastUsed": "ZULETZT VERWENDET",
+    "projects": "Projekte",
+    "projectRoles": "Projektrollen",
+    "period": "Zeitraum",
+    "responsibilities": "Verantwortlichkeiten",
+    "environments": "Umgebungen"
+  },
+  "Forms": {
+    "email": "E-Mail",
+    "password": "Passwort",
+    "name": "Name",
+    "education": "Ausbildung",
+    "description": "Beschreibung",
+    "project": "Projekt",
+    "domain": "Fachbereich",
+    "position": "Position",
+    "skill": "Fähigkeit",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "mastery": "Niveau",
+    "department": "Abteilung",
+    "responsibilities": "Verantwortlichkeiten",
+    "startDate": "Startdatum",
+    "endDate": "Enddatum",
+    "nativeName": "Eigenbezeichnung",
+    "loading": "Wird geladen",
+    "btnCreating": "WIRD ERSTELLT",
+    "btnSaving": "WIRD GESPEICHERT",
+    "btnAdding": "WIRD HINZUGEFÜGT",
+    "btnAdd": "HINZUFÜGEN",
+    "btnCreate": "ERSTELLEN",
+    "btnSave": "SPEICHERN"
+  },
+  "MasterySelect": {
+    "novice": "Anfänger",
+    "advanced": "Fortgeschritten",
+    "competent": "Kompetent",
+    "proficient": "Versiert",
+    "expert": "Experte"
+  },
+  "SkillSelect": {
+    "selectSkill": "Fähigkeit auswählen"
+  },
+  "CvToast": {
+    "errorOccurred": "Ein Fehler ist aufgetreten.",
+    "cvProjectAdded": "Projekt erfolgreich zum Lebenslauf hinzugefügt!",
+    "cvProjectUpdated": "Projekt im Lebenslauf erfolgreich aktualisiert!",
+    "cvProjectRemoved": "Projekt erfolgreich aus dem Lebenslauf entfernt!",
+    "cvIdMissing": "Lebenslauf-ID fehlt!",
+    "cvDeleteError": "Lebenslauf konnte nicht gelöscht werden",
+    "cvDeleteSuccess": "Lebenslauf erfolgreich gelöscht"
+  },
+  "ProjectToast": {
+    "projectIdMissing": "Projekt-ID fehlt!",
+    "projectDeleteError": "Projekt konnte nicht gelöscht werden",
+    "projectDeleteSuccess": "Projekt erfolgreich gelöscht",
+    "projectCreatedSuccess": "Projekt erfolgreich erstellt!",
+    "projectUpdatedSuccess": "Projekt erfolgreich aktualisiert!"
+  },
+  "SkillToast": {
+    "skillIdMissing": "Fähigkeits-ID fehlt!",
+    "skillDeleteError": "Fähigkeit konnte nicht gelöscht werden",
+    "skillDeleteSuccess": "Fähigkeit erfolgreich gelöscht",
+    "skillCreatedSuccess": "Fähigkeit erfolgreich erstellt!",
+    "skillUpdatedSuccess": "Fähigkeit erfolgreich aktualisiert!"
+  },
+  "UserToast": {
+    "userIdMissing": "Benutzer-ID fehlt!",
+    "userDeleteError": "Benutzer konnte nicht gelöscht werden",
+    "userDeleteSuccess": "Benutzer erfolgreich gelöscht",
+    "userCreatedSuccess": "Benutzer erfolgreich erstellt!",
+    "userUpdatedSuccess": "Benutzer erfolgreich aktualisiert!"
+  },
+  "PositionToast": {
+    "positionIdMissing": "Positions-ID fehlt!",
+    "positionDeleteError": "Position konnte nicht gelöscht werden",
+    "positionDeleteSuccess": "Position erfolgreich gelöscht",
+    "positionCreatedSuccess": "Position erfolgreich erstellt!",
+    "positionUpdatedSuccess": "Position erfolgreich aktualisiert!"
+  },
+  "LanguageToast": {
+    "languageIdMissing": "Sprach-ID fehlt!",
+    "languageDeleteError": "Sprache konnte nicht gelöscht werden",
+    "languageDeleteSuccess": "Sprache erfolgreich gelöscht",
+    "languageCreatedSuccess": "Sprache erfolgreich erstellt!",
+    "languageUpdatedSuccess": "Sprache erfolgreich aktualisiert!"
+  },
+  "DepartmentToast": {    
+    "departmentIdMissing": "Abteilungs-ID fehlt!",
+    "departmentDeleteError": "Abteilung konnte nicht gelöscht werden",
+    "departmentDeleteSuccess": "Abteilung erfolgreich gelöscht",
+    "departmentCreatedSuccess": "Abteilung erfolgreich erstellt!",
+    "departmentUpdatedSuccess": "Abteilung erfolgreich aktualisiert!"
+  },
+  "CvModal": {
+    "loading": "Wird geladen",
+    "errorOccurred": "Ein Fehler ist aufgetreten.",
+    "cvAddProjectModal": "Projekt hinzufügen",
+    "cvEditProjectModal": "Lebenslauf-Projekt bearbeiten",
+    "deleteProjectModalHeading": "Projekt",
+    "deleteProjectModalDeleteText": "aus dem Lebenslauf"
+  },
+  "SkillModal": {
+    "skill": "Fähigkeit",
+    "addSkill": "Fähigkeit hinzufügen",
+    "editSkill": "Fähigkeit bearbeiten",
+    "createSkill": "Fähigkeit erstellen"
+  },
+  "DepartmentModal": {
+    "department": "Abteilung",
+    "departmentCreateModal": "Abteilung erstellen",
+    "departmentEditModal": "Abteilung bearbeiten"
+  },
+  "LanguageModal": {
+    "language": "Sprache",
+    "languageCreateModal": "Sprache erstellen",
+    "languageEditModal": "Sprache bearbeiten"
+  },
+  "PositionModal": {
+    "position": "Position",
+    "positionCreateModal": "Position erstellen",
+    "positionEditModal": "Position bearbeiten"
+  },
+  "ProfileModal": {
+    "errorOccurred": "Ein Fehler ist aufgetreten.",
+    "addLanguage": "Sprache hinzufügen",
+    "editLanguage": "Sprache bearbeiten",
+    "language": "Sprache",
+    "profeciency": "Sprachniveau",
+    "addSkill": "Fähigkeit hinzufügen",
+    "editSkill": "Fähigkeit bearbeiten"
+  },
+  "ProjectModal": {
+    "project": "Projekt",
+    "editProject": "Projekt bearbeiten",
+    "createProject": "Projekt erstellen"
+  },
+  "UserModal": {
+    "loading": "Wird geladen",
+    "errorOccurred": "Ein Fehler ist aufgetreten.",
+    "user": "Benutzer",
+    "editUser": "Benutzer bearbeiten",
+    "createUser": "Benutzer erstellen"
+  },
+  "DeleteModal": {
+    "aYouSure": "Möchten Sie wirklich löschen:",
+    "deleting": "WIRD GELÖSCHT",
+    "confirm": "BESTÄTIGEN"
+  },
+  "DataStates": {
+    "loading": "Wird geladen",
+    "errorOccurred": "Ein Fehler ist aufgetreten."
+  },
+  "ComponentProfile": {
+    "previewAvatar": "Avatar-Vorschau",
+    "uploadAvatar": "Avatar-Bild hochladen",
+    "removeAvatar": "Avatar entfernen",
+    "aMember": "Mitglied seit"
+  },
+  "Skills": {
+    "cancel": "ABBRECHEN",
+    "confirm": "BESTÄTIGEN",
+    "addSkills": "FÄHIGKEITEN HINZUFÜGEN",
+    "removeSkills": "FÄHIGKEITEN ENTFERNEN"
+  },
+  "PasswordInput": {
+    "show": "Passwort anzeigen",
+    "hide": "Passwort verbergen"
+  },
+  "SearchableSelectMenu": {
+    "notFound": "Keine Projekte gefunden"
+  },
+  "TagInputField": {
+    "press": "Drücken Sie",
+    "toAdd": "um hinzuzufügen"
+  },
+  "UserActionModal": {
+    "profile": "Profil",
+    "settings": "Einstellungen"
+  },
+  "CancelBtn": {
+    "cancel": "ABBRECHEN"
+  },
+  "LogoutBtn": {
+    "logout": "Abmelden"
+  },
+  "EnvironmentSelect": {
+    "environment": "Umgebung"
+  },
+  "LanguageSelect": {
+    "language": "Sprache"
+  },
+  "ThemeSelect": {
+    "appearance": "Erscheinungsbild"
+  },
+  "LanguageList": {
+    "cancel": "ABBRECHEN",
+    "confirm": "BESTÄTIGEN",
+    "addLanguage": "SPRACHEN HINZUFÜGEN", 
+    "removeLanguage": "SPRACHEN ENTFERNEN"
+  },
+  "Navigation": {
+    "employees": "Mitarbeiter",
+    "skills": "Fähigkeiten", 
+    "languages": "Sprachen",
+    "cvs": "Lebensläufe",
+    "projects": "Projekte",
+    "departments": "Abteilungen", 
+    "positions": "Positionen"
+  },
+  "TableHeaders": {
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "email": "E-Mail",
+    "department": "Abteilung",
+    "position": "Position",
+    "name": "Name",
+    "type": "Typ",
+    "category": "Kategorie",
+    "nativeName": "Eigenbezeichnung",
+    "iso2": "ISO2",
+    "domain": "Fachbereich",
+    "startDate": "Startdatum",
+    "endDate": "Enddatum",
+    "education": "Ausbildung",
+    "employee": "Mitarbeiter"
+  },
+  "CvNavItems": {
+    "details": "Details",
+    "skills": "Fähigkeiten", 
+    "projects": "Projekte",
+    "preview": "Vorschau"
+  },
+   "ProfileNavItems": {
+    "profile": "Profil",
+    "skills": "Fähigkeiten", 
+    "languages": "Sprachen"
+  }
+}

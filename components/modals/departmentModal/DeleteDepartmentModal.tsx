@@ -1,5 +1,6 @@
-import { useDeleteDepartment } from "@/lib/hooks/departmentHooks/useDeleteDepartment"
-import { DeleteModal } from "../DeleteModal"
+import { useDeleteDepartment } from '@/lib/hooks/departmentHooks/useDeleteDepartment'
+import { useTranslations } from 'next-intl'
+import { DeleteModal } from '../DeleteModal'
 
 export function DeleteDepartmentModal() {
   const {
@@ -9,10 +10,12 @@ export function DeleteDepartmentModal() {
     handleDelete,
   } = useDeleteDepartment()
 
+  const t = useTranslations('DepartmentModal')
+
   return (
     <DeleteModal
-      deleteText={`department ${data?.name}`}
-      headingText="department"
+      deleteText={`${t('department')} ${data?.name}`}
+      headingText={t('department')}
       data={data}
       loading={loading}
       closeModal={closeModal}

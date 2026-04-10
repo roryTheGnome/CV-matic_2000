@@ -3,11 +3,12 @@ import { useModalStore } from '@/store/modalStore'
 import { DeleteSkillResponse, DeleteSkillVariables } from '@/types/skills'
 
 import { useMutation } from '@apollo/client/react'
+import { useTranslations } from 'next-intl'
 import toast from 'react-hot-toast'
 
 export function useDeleteSkill() {
   const { data: modalData, closeModal } = useModalStore()
-
+  const t = useTranslations('SkillToast')
   const [deleteSkill, { loading }] = useMutation<
     DeleteSkillResponse,
     DeleteSkillVariables
@@ -20,18 +21,18 @@ export function useDeleteSkill() {
     },
     onCompleted: (data) => {
       if (data.deleteSkill.affected > 0) {
-        toast.success('Skill successfully deleted')
+        toast.success(t('skillDeleteSuccess'))
         closeModal()
       }
     },
     onError: (err) => {
-      toast.error(err.message || 'Failed to delete skill')
+      toast.error(err.message || t('skillDeleteError'))
     },
   })
 
   const handleDelete = () => {
     if (!modalData?.id) {
-      toast.error('Skill ID is missing!')
+      toast.error(t('skillIdMissing'))
       return
     }
 
