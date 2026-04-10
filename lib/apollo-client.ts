@@ -61,10 +61,10 @@ const errorLink = new ErrorLink(({ error, operation, forward }) => {
             if (typeof window !== "undefined") {
               window.location.href = PUBLIC_ROUTES.LOGIN
             }
-            return observer.error(new Error("Session expired"))
+            return observer.error(new Error('Session expired'))
           }
 
-          useAuthStore.getState().setIsAdminFromToken(result.accessToken)
+          useAuthStore.getState().setFromToken(result.accessToken)
 
           const oldHeaders = operation.getContext().headers
           operation.setContext({
