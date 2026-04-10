@@ -12,7 +12,6 @@ import { TableHeader } from '@/components/ui/table/TableHeader'
 import { TableSearch } from '@/components/ui/TableSearch'
 import { skillsHeaders } from '@/constants/tableHeaders'
 import { usePageWithTable } from '@/lib/hooks/usePageWithTable'
-import { useCurrentUser } from '@/lib/hooks/userHooks/useCurrentUser'
 import { useUser } from '@/lib/hooks/userHooks/useUser'
 import { useAuthStore } from '@/store/authStore'
 import { GetSkillsData, SkillItem } from '@/types/skills'
@@ -22,7 +21,7 @@ import { useTranslations } from 'next-intl'
 
 export default function SkillsPage() {
   const t = useTranslations('TableActions')
-  const { currentUserId } = useCurrentUser()
+  const { currentUserId } = useAuthStore()
   const { isAdmin } = useAuthStore()
   const { search, sortKey, sortDir, setSearch, handleSort } = usePageWithTable()
 

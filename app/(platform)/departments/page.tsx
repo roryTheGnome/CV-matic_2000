@@ -10,10 +10,10 @@ import { NameTableItem } from '@/components/ui/table/NameTableItem'
 import TableBody from '@/components/ui/table/TableBody'
 import { TableSearch } from '@/components/ui/TableSearch'
 import { usePageWithTable } from '@/lib/hooks/usePageWithTable'
-import { useCurrentUser } from '@/lib/hooks/userHooks/useCurrentUser'
 import { Department, GetDepartmentsResponse } from '@/types/department'
 import { getSortByName } from '@/utils/getSortByName'
 import { useTranslations } from 'next-intl'
+import { useAuthStore } from '@/store/authStore'
 
 export default function Departments() {
   const t = useTranslations('TableActions')
@@ -21,7 +21,7 @@ export default function Departments() {
   const { data, loading, error } =
     useQuery<GetDepartmentsResponse>(GET_DEPARTMENTS)
 
-  const { currentUserRole } = useCurrentUser()
+  const { isAdmin } = useAuthStore()
 
   const { search, sortKey, sortDir, setSearch, handleSort } = usePageWithTable()
 
@@ -61,7 +61,7 @@ export default function Departments() {
                 item={department}
                 editType={'DEPARTMENT_EDIT'}
                 deleteType={'DEPARTMENT_DELETE'}
-                isAdmin={currentUserRole === 'Admin'}
+                isAdmin={isAdmin}
               />
             )}
           />

@@ -1,14 +1,13 @@
 'use client'
 
-import { ActionsMenu } from '@/components/admin/ActionsMenu'
-import { Loader } from '@/components/ui/Loader'
 import { useProject } from '@/lib/hooks/projectHooks/useProject'
-import { useCurrentUser } from '@/lib/hooks/userHooks/useCurrentUser'
+import { ActionsMenu } from '@/components/admin/ActionsMenu'
+import { useAuthStore } from '@/store/authStore'
 import { useTranslations } from 'next-intl'
-
+      
 export default function ProjectDetails() {
   const { isLoading, error, project } = useProject()
-  const { currentUserRole } = useCurrentUser()
+  const { isAdmin } = useAuthStore()
   const t = useTranslations('ProjectDetails')
   const n = useTranslations('Notifications')
 
@@ -34,7 +33,7 @@ export default function ProjectDetails() {
             <p className="text-muted-foreground text-sm">{domain}</p>
           </div>
 
-          {currentUserRole === 'Admin' && (
+          {isAdmin && (
             <ActionsMenu
               editType="PROJECT_EDIT"
               deleteType="PROJECT_DELETE"

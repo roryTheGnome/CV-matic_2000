@@ -71,7 +71,7 @@ export const LanguageList = ({ languages, onDelete, owner, userId }: Props) => {
 
   return (
     <div>
-      <div className="grid grid-cols-1 justify-items-center gap-6 px-30 sm:grid-cols-3 md:grid-cols-2">
+      <div className="grid grid-cols-1 justify-items-center gap-6 px-30 md:grid-cols-2 lg:grid-cols-3">
         {languages.map((lang) => (
           <div
             key={lang.name}

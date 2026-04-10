@@ -8,15 +8,15 @@ import { TableHeader } from '@/components/ui/table/TableHeader'
 import { TableSearch } from '@/components/ui/TableSearch'
 import { projectsHeaders } from '@/constants/tableHeaders'
 import { usePageWithTable } from '@/lib/hooks/usePageWithTable'
-import { useCurrentUser } from '@/lib/hooks/userHooks/useCurrentUser'
 import { GetProjectsData, Project } from '@/types/project'
 import { getSortProjectValue } from '@/utils/getSortProjectValue'
 import { useQuery } from '@apollo/client/react'
 import { useTranslations } from 'next-intl'
+import { useAuthStore } from '@/store/authStore'
 
 export default function Projects() {
   const { loading, error, data } = useQuery<GetProjectsData>(GET_PROJECTS)
-  const { currentUserRole } = useCurrentUser()
+  const { isAdmin } = useAuthStore()
   const { search, sortKey, sortDir, setSearch, handleSort } = usePageWithTable()
   const t = useTranslations('TableActions')
   const n = useTranslations('Notifications')
@@ -53,7 +53,7 @@ export default function Projects() {
               <ProjectTableItem
                 key={project.id}
                 project={project}
-                isAdmin={currentUserRole === 'Admin'}
+                isAdmin={isAdmin}
               />
             )}
           />
