@@ -1,9 +1,9 @@
-import { RESET_PASSWORD_MUTATION } from "@/api/graphql/mutations/auth"
-import { ResetPasswordData, ResetPasswordVariables } from "@/types/auth"
-import { useMutation } from "@apollo/client/react"
+import { RESET_PASSWORD_MUTATION } from '@/api/graphql/mutations/auth'
+import { ResetPasswordData, ResetPasswordVariables } from '@/types/auth'
+import { useMutation } from '@apollo/client/react'
 
-import { SubmitEvent } from "react"
-import toast from "react-hot-toast"
+import { SubmitEvent } from 'react'
+import toast from 'react-hot-toast'
 
 export const useResetPasswordForm = () => {
   const [resetPassword, { loading, error }] = useMutation<
@@ -15,7 +15,17 @@ export const useResetPasswordForm = () => {
     e.preventDefault()
 
     const formatData = new FormData(e.currentTarget)
-    const password = formatData.get("password") as string
+    const password = formatData.get('password') as string
+
+    const token =
+      typeof window !== 'undefined'
+        ? new URLSearchParams(window.location.search).get('token')
+        : null
+
+    if (!token) {
+      toast.error('Invalid or missing token')
+      return
+    }
 
     toast.promise(
       resetPassword({
@@ -24,13 +34,17 @@ export const useResetPasswordForm = () => {
             newPassword: password,
           },
         },
+        context: {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
       }),
       {
-        loading: "Updating...",
-        success: "Password successfully updated.",
-        error: error?.message || "Error occured.",
+        loading: 'Updating...',
+        success: 'Password successfully updated.',
+        error: 'Upsi dupsi, error .',
       },
-      { id: "reset-password" },
     )
   }
 
