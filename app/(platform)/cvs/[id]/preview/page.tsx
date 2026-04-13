@@ -11,7 +11,7 @@ import { useRef } from 'react'
 import ProjectsPage from '@/components/cv/ProjectsPage'
 
 export default function CvPreview() {
-  const { isLoading, cv, error } = useCv()
+  const { cv } = useCv()
   const printRef = useRef<HTMLDivElement>(null)
   const { data } = useQuery<GetSkillsData>(GET_SKILLS)
   const allSkills = data ? data.skills : []
@@ -33,10 +33,12 @@ export default function CvPreview() {
 
     const html2pdf = (await import('html2pdf.js')).default
 
+    const cvName = `${cv?.name ?? 'UnnamedCv'}.pdf`
+
     await html2pdf()
       .set({
         margin: 2.5,
-        filename: 'cv.pdf',
+        filename: cvName,
         html2canvas: {
           scale: 2,
           backgroundColor: '#ffffff',
@@ -57,7 +59,6 @@ export default function CvPreview() {
     <div>
       <Button onClick={handleDownload}>Download PDF</Button>
       <div ref={printRef}>
-
         <div className="pdf-page p-8">
           <MainPage cv={cv} grouped={grouped} />
         </div>
