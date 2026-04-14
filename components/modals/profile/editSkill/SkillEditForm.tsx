@@ -27,6 +27,7 @@ export function SkillEditForm({ skill, userId }: Props) {
       },
     ],
   })
+  const isDirty = mastery !== skill.mastery
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -59,7 +60,7 @@ export function SkillEditForm({ skill, userId }: Props) {
 
       <MasterySelect mastery={mastery} setMastery={setMastery} />
 
-      <ModalButtons saving={loading} />
+      <ModalButtons saving={loading} isDirty={isDirty} />
     </form>
   )
 }

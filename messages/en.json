@@ -106,7 +106,8 @@
     "advanced": "Advanced",
     "competent": "Competent",
     "proficient": "Proficient",
-    "expert": "Expert"
+    "expert": "Expert",
+    "mastery": "Mastery"
   },
   "SkillSelect": {
     "selectSkill":"Select Skill"

@@ -105,7 +105,8 @@
     "advanced": "Fortgeschritten",
     "competent": "Kompetent",
     "proficient": "Versiert",
-    "expert": "Experte"
+    "expert": "Experte",
+    "mastery": "Meisterschaft"
   },
   "SkillSelect": {
     "selectSkill": "Fähigkeit auswählen"

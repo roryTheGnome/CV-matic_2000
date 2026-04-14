@@ -1,14 +1,13 @@
 'use client'
 import NotFoundPage from '@/app/(platform)/not-found'
 import EmployeesList from '@/components/EmployeesList'
-import SortHeader from '@/components/SortHeader'
 import { Loader } from '@/components/ui/Loader'
+import { TableHeader } from '@/components/ui/table/TableHeader'
 import { TableSearch } from '@/components/ui/TableSearch'
-import { headers, skillsHeaders } from '@/constants/tableHeaders'
+import { headers } from '@/constants/tableHeaders'
 import { useUsers } from '@/lib/hooks/userHooks/useUsers'
 import { useAuthStore } from '@/store/authStore'
 import { useTranslations } from 'next-intl'
-import { TableHeader } from '@/components/ui/table/TableHeader'
 
 export default function Employees() {
   const t = useTranslations('TableActions')

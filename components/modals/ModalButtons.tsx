@@ -13,7 +13,7 @@ interface Props {
 export function ModalButtons({
   saving,
   isFormValid = true,
-  isDirty = false,
+  isDirty,
   isModal = true,
 }: Props) {
   const { closeModal, type } = useModalStore()

@@ -81,7 +81,7 @@ export function SkillForm({ userSkills, userId }: SkillFormProps) {
 
       <MasterySelect mastery={mastery} setMastery={setMastery} />
 
-      <ModalButtons saving={saving} />
+      <ModalButtons isDirty={!!selectedSkill} saving={saving} />
     </form>
   )
 }
