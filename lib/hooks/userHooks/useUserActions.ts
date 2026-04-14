@@ -1,6 +1,7 @@
 import {
   CREATE_USER_MUTATION,
   UPDATE_USER_MUTATION,
+  UPDATE_PROFILE_MUTATION,
 } from '@/api/graphql/mutations/user'
 import { GET_USERS } from '@/api/graphql/queries/user'
 import { useModalStore } from '@/store/modalStore'
@@ -65,6 +66,9 @@ export function useUserActions(
       toast.error(err.message)
     },
   })
+  const [updateProfile] = useMutation(UPDATE_PROFILE_MUTATION, {
+    onError: (err) => toast.error(err.message),
+  })
 
   const [updateUser, { loading: updating }] = useMutation<
     UpdateUserData,
@@ -117,6 +121,15 @@ export function useUserActions(
             positionId: formData.positionId,
             role: formData.role,
             cvsIds: [],
+          },
+        },
+      })
+      updateProfile({
+        variables: {
+          profile: {
+            userId,
+            first_name: formData.firstName,
+            last_name: formData.lastName,
           },
         },
       })

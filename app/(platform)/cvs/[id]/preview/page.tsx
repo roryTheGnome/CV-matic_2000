@@ -33,10 +33,12 @@ export default function CvPreview() {
 
     const html2pdf = (await import('html2pdf.js')).default
 
+    const cvName = `${cv?.name ?? 'UnnamedCv'}.pdf`
+
     await html2pdf()
       .set({
         margin: 2.5,
-        filename: 'cv.pdf',
+        filename: cvName,
         html2canvas: {
           scale: 2,
           backgroundColor: '#ffffff',

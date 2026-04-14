@@ -22,7 +22,7 @@ export const useAuthForm = () => {
   const [signupFn, { loading: signupLoading, error: signupError }] =
     useMutation<SignupResponse, LoginVariables>(SIGNUP_MUTATION)
 
-  const { setIsAdminFromToken } = useAuthStore()
+  const { setFromToken } = useAuthStore()
   const pathname = usePathname()
   const router = useRouter()
   const isLogin = pathname === PUBLIC_ROUTES.LOGIN
@@ -47,7 +47,7 @@ export const useAuthForm = () => {
         if (data?.login) {
           toast.success(t('loggedSuccess'))
           await setAuthTokens(data.login.access_token, data.login.refresh_token)
-          setIsAdminFromToken(data.login.access_token)
+          setFromToken(data.login.access_token)
 
           router.push(PRIVATE_ROUTES.HOME)
         }
@@ -64,7 +64,7 @@ export const useAuthForm = () => {
             data.signup.access_token,
             data.signup.refresh_token,
           )
-          setIsAdminFromToken(data.signup.access_token)
+          setFromToken(data.signup.access_token)
 
           router.push(PRIVATE_ROUTES.HOME)
         }

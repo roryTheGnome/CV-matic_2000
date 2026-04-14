@@ -14,6 +14,7 @@ export interface LoginResponse {
     user: {
       id: string
       email: string
+      is_verified: boolean
       role: 'Employee' | 'Admin'
       profile: {
         id: string
@@ -31,6 +32,7 @@ export interface SignupResponse {
     user: {
       id: string
       email: string
+      is_verified: boolean
       profile: {
         full_name: string | null
       }

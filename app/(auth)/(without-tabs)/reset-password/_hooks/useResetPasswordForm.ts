@@ -1,7 +1,6 @@
 import { RESET_PASSWORD_MUTATION } from '@/api/graphql/mutations/auth'
 import { ResetPasswordData, ResetPasswordVariables } from '@/types/auth'
 import { useMutation } from '@apollo/client/react'
-import { useTranslations } from 'next-intl'
 
 import { SubmitEvent } from 'react'
 import toast from 'react-hot-toast'
@@ -19,11 +18,26 @@ export const useResetPasswordForm = () => {
     const formatData = new FormData(e.currentTarget)
     const password = formatData.get('password') as string
 
+    const token =
+      typeof window !== 'undefined'
+        ? new URLSearchParams(window.location.search).get('token')
+        : null
+
+    if (!token) {
+      toast.error('Invalid or missing token')
+      return
+    }
+
     toast.promise(
       resetPassword({
         variables: {
           auth: {
             newPassword: password,
+          },
+        },
+        context: {
+          headers: {
+            Authorization: `Bearer ${token}`,
           },
         },
       }),

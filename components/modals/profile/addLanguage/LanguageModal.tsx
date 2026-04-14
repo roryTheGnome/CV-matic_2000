@@ -6,7 +6,6 @@ import { useUser } from '@/lib/hooks/userHooks/useUser'
 import { useModalStore } from '@/store/modalStore'
 import { useTranslations } from 'next-intl'
 import { LanguageForm } from './LanguageForm'
-import { useModalStore } from '@/store/modalStore'
 
 export function ProfileLanguageModal() {
   const { data } = useModalStore()

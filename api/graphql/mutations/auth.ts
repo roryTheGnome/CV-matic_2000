@@ -39,3 +39,8 @@ export const RESET_PASSWORD_MUTATION = gql`
     resetPassword(auth: $auth)
   }
 `
+export const VERIFY_MAIL_MUTATION = gql`
+  mutation VerifyMail($mail: VerifyMailInput!) {
+    verifyMail(mail: $mail)
+  }
+`
