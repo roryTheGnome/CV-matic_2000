@@ -6,10 +6,8 @@ import { Loader } from '@/components/ui/Loader'
 import { TableSearch } from '@/components/ui/TableSearch'
 import { headers } from '@/constants/tableHeaders'
 import { useUsers } from '@/lib/hooks/userHooks/useUsers'
-import { useTranslations } from 'next-intl'
-import NotFoundPage from '@/app/(platform)/not-found'
-import LoadingPage from '@/app/(platform)/loading'
 import { useAuthStore } from '@/store/authStore'
+import { useTranslations } from 'next-intl'
 
 export default function Employees() {
   const t = useTranslations('TableActions')

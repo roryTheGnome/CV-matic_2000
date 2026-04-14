@@ -7,10 +7,9 @@ import NotFoundPage from '@/app/(platform)/not-found'
 import { Skills } from '@/components/skills/Skills'
 import { Loader } from '@/components/ui/Loader'
 import { useUser } from '@/lib/hooks/userHooks/useUser'
+import { useAuthStore } from '@/store/authStore'
 import { GetSkillsData } from '@/types/skills'
 import { useMutation, useQuery } from '@apollo/client/react'
-import NotFoundPage from '@/app/(platform)/not-found'
-import { useAuthStore } from '@/store/authStore'
 
 export default function EmployeeSkill() {
   const { user, error } = useUser()

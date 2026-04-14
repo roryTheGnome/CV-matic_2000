@@ -6,9 +6,8 @@ import NotFoundPage from '@/app/(platform)/not-found'
 import { LanguageList } from '@/components/LanguageList'
 import { Loader } from '@/components/ui/Loader'
 import { useUser } from '@/lib/hooks/userHooks/useUser'
-import { useMutation } from '@apollo/client/react'
-import NotFoundPage from '@/app/(platform)/not-found'
 import { useAuthStore } from '@/store/authStore'
+import { useMutation } from '@apollo/client/react'
 
 export default function EmployeeLanguage() {
   const { user, error } = useUser()
