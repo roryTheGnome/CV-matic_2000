@@ -41,7 +41,7 @@ export interface ModalData {
   language?: LanguageProficiency
   skill?: SkillMastery
   projectId?: string
-} //TODO THIS CAN NOT BE THE BEST PRACTICE, HELP
+}
 
 interface ModalStore {
   type: ModalType
