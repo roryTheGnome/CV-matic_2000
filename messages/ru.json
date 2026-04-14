@@ -105,7 +105,8 @@
     "advanced": "Продвинутый",
     "competent": "Компетентный",
     "proficient": "Опытный",
-    "expert": "Эксперт"
+    "expert": "Эксперт",
+    "mastery": "Мастерство"
   },
   "SkillSelect": {
     "selectSkill": "Выберите навык"

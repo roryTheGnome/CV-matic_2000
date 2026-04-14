@@ -105,7 +105,8 @@
     "advanced": "Просунутий",
     "competent": "Компетентний",
     "proficient": "Досвідчений",
-    "expert": "Експерт"
+    "expert": "Експерт",
+    "mastery": "Майстерність"
   },
   "SkillSelect": {
     "selectSkill": "Обрати навичку"

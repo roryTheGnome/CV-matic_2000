@@ -72,12 +72,14 @@ export function LanguageForm({ userLanguages, userId }: LanguageFormProps) {
       (lang) => !userLanguages.some((l) => l.name === lang.name),
     ) || []
 
+  const isDirty = !!selectedLanguage
+
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <Select
         id="language"
         value={selectedLanguage?.name || ''}
-        title=" "
+        title={t('language')}
         label={t('language')}
         isRequired={true}
         name="language"
@@ -101,7 +103,6 @@ export function LanguageForm({ userLanguages, userId }: LanguageFormProps) {
         label={t('profeciency')}
         handleChange={(e) => setProficiency(e.target.value as Proficiency)}
       >
-        {/*TODO map this instead of hard coding later*/}
         <option value="A1">A1</option>
         <option value="A2">A2</option>
         <option value="B1">B1</option>
@@ -111,7 +112,7 @@ export function LanguageForm({ userLanguages, userId }: LanguageFormProps) {
         <option value="Native">Native</option>
       </Select>
 
-      <ModalButtons saving={saving} />
+      <ModalButtons saving={saving} isDirty={isDirty} />
     </form>
   )
 }

@@ -29,6 +29,7 @@ export function LanguageEditForm({ language, userId }: Props) {
       },
     ],
   })
+  const isDirty = proficiency !== language.proficiency
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -74,7 +75,7 @@ export function LanguageEditForm({ language, userId }: Props) {
         <option value="Native">Native</option>
       </Select>
 
-      <ModalButtons saving={loading} />
+      <ModalButtons saving={loading} isDirty={isDirty} />
     </form>
   )
 }
