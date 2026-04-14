@@ -3,8 +3,9 @@
 import { DELETE_PROFILE_SKILL } from '@/api/graphql/mutations/profile'
 import { GET_SKILLS } from '@/api/graphql/queries/skills'
 import { GET_USER } from '@/api/graphql/queries/user'
-import LoadingPage from '@/app/(platform)/users/[id]/loading'
+import NotFoundPage from '@/app/(platform)/not-found'
 import { Skills } from '@/components/skills/Skills'
+import { Loader } from '@/components/ui/Loader'
 import { useUser } from '@/lib/hooks/userHooks/useUser'
 import { GetSkillsData } from '@/types/skills'
 import { useMutation, useQuery } from '@apollo/client/react'
@@ -37,7 +38,7 @@ export default function EmployeeSkill() {
   }
 
   if (error) return <NotFoundPage />
-  if (!user) return <LoadingPage />
+  if (!user) return <Loader />
   return (
     <>
       <Skills

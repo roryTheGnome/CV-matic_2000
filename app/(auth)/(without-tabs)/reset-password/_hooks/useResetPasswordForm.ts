@@ -6,6 +6,7 @@ import { SubmitEvent } from 'react'
 import toast from 'react-hot-toast'
 
 export const useResetPasswordForm = () => {
+  const t = useTranslations('Notifications')
   const [resetPassword, { loading, error }] = useMutation<
     ResetPasswordData,
     ResetPasswordVariables
@@ -41,10 +42,11 @@ export const useResetPasswordForm = () => {
         },
       }),
       {
-        loading: 'Updating...',
-        success: 'Password successfully updated.',
-        error: 'Upsi dupsi, error .',
+        loading: t('updating'),
+        success: t('passwordUpdatedSuccess'),
+        error: error?.message || t('errorOccurred'),
       },
+      { id: 'reset-password' },
     )
   }
 

@@ -12,6 +12,7 @@ import {
   UpdateDepartmentVariables,
 } from '@/types/department'
 import { useMutation } from '@apollo/client/react'
+import { useTranslations } from 'next-intl'
 import { SubmitEvent, useId, useState } from 'react'
 import toast from 'react-hot-toast'
 
@@ -27,7 +28,7 @@ export function useDepartmentActions(
       name: '',
     },
   )
-
+  const t = useTranslations('DepartmentToast')
   const [createDepartment, { loading: creating }] = useMutation<
     DepartmentData,
     CreateDepartmentVariables
@@ -48,8 +49,8 @@ export function useDepartmentActions(
         })
       }
     },
-    onCompleted: (data) => {
-      toast.success('Department created successfully!')
+    onCompleted: () => {
+      toast.success(t('departmentCreatedSuccess'))
       closeModal()
     },
     onError: (err) => {
@@ -62,7 +63,7 @@ export function useDepartmentActions(
     UpdateDepartmentVariables
   >(UPDATE_DEPARTMENT_MUTATION, {
     onCompleted: () => {
-      toast.success('Department updated successfully!')
+      toast.success(t('departmentUpdatedSuccess'))
       closeModal()
     },
     onError: (err) => toast.error(err.message),

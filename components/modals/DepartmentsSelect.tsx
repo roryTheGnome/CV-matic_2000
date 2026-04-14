@@ -1,10 +1,11 @@
 import { GET_DEPARTMENTS } from '@/api/graphql/queries/departments'
+import { CreateUserProps } from '@/components/modals/userModal/CreateUserLeftSide'
 import { Option } from '@/components/ui/select/Option'
 import { Select } from '@/components/ui/select/Select'
 import { useModalStore } from '@/store/modalStore'
 import { GetDepartmentsResponse } from '@/types/department'
 import { useLazyQuery } from '@apollo/client/react'
-import { CreateUserProps } from '@/components/modals/userModal/CreateUserLeftSide'
+import { useTranslations } from 'next-intl'
 
 export function DepartmentsSelect({
   formData,
@@ -26,18 +27,20 @@ export function DepartmentsSelect({
       getDepartments()
     }
   }
+  const t = useTranslations('Forms')
+
   return (
     <Select
       id={`${formId}-department`}
       name="departmentId"
       value={formData.departmentId}
       isRequired={type?.endsWith('_EDIT') ? false : true}
-      title="Department"
+      title={t('departments')}
       handleChange={handleChange}
       onFocus={handleDepartmentsFocus}
     >
       {departmentsLoading && (
-        <Option value="loading" title="Loading..." disabled />
+        <Option value="loading" title={t('loading')} disabled />
       )}
 
       {!departmentsData && formData?.departmentName && (

@@ -13,9 +13,11 @@ import { usePageWithTable } from '@/lib/hooks/usePageWithTable'
 import { Cvs, GetCvsData } from '@/types/cvs'
 import { getSortCvsValue } from '@/utils/getSortCvsValue'
 import { useQuery } from '@apollo/client/react'
+import { useTranslations } from 'next-intl'
 
 export default function CVs() {
   const { loading, error, data } = useQuery<GetCvsData>(GET_CVS)
+  const t = useTranslations('TableActions')
 
   const { search, sortKey, sortDir, setSearch, handleSort } = usePageWithTable()
 
@@ -26,7 +28,7 @@ export default function CVs() {
     <div className="p-6">
       <TableSearch
         search={search}
-        createButtonText="CREATE CV"
+        createButtonText={t('createCv')}
         typeOfCreateModal={'CV_CREATE'}
         userCanInteract
         setSearch={setSearch}

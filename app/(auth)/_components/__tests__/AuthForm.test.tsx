@@ -1,15 +1,15 @@
-import { render, screen } from "@testing-library/react"
-import userEvent from "@testing-library/user-event"
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 
-import { PUBLIC_ROUTES } from "@/config/routes"
-import { useAuthForm } from "../../(with-tabs)/_hooks/useAuthForm"
-import { AuthForm } from "../AuthForm"
+import { PUBLIC_ROUTES } from '@/config/routes'
+import { useAuthForm } from '../../(with-tabs)/_hooks/useAuthForm'
+import { AuthForm } from '../AuthForm'
 
-jest.mock("../../(with-tabs)/_hooks/useAuthForm")
+jest.mock('../../(with-tabs)/_hooks/useAuthForm')
 
 const mockedUseAuthForm = useAuthForm as jest.MockedFunction<typeof useAuthForm>
 
-describe("AuthForm Component", () => {
+describe('AuthForm Component', () => {
   beforeEach(() => {
     jest.clearAllMocks()
   })
@@ -24,10 +24,10 @@ describe("AuthForm Component", () => {
 
     render(<AuthForm />)
 
-    expect(screen.getByPlaceholderText("Email")).toBeInTheDocument()
-    expect(screen.getByPlaceholderText("Password")).toBeInTheDocument()
+    expect(screen.getByPlaceholderText('Email')).toBeInTheDocument()
+    expect(screen.getByPlaceholderText('Password')).toBeInTheDocument()
 
-    expect(screen.getByRole("button", { name: "Log in" })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Log in' })).toBeInTheDocument()
   })
 
   it("Should render the form in 'Registration' mode.", () => {
@@ -41,15 +41,15 @@ describe("AuthForm Component", () => {
     render(<AuthForm />)
 
     expect(
-      screen.getByRole("button", { name: "Create Account" }),
+      screen.getByRole('button', { name: 'Create Account' }),
     ).toBeInTheDocument()
   })
 
-  it("Should display an error message if one exists.", () => {
+  it('Should display an error message if one exists.', () => {
     mockedUseAuthForm.mockReturnValue({
       currentError: {
-        message: "Invalid email or password",
-        name: "",
+        message: 'Invalid email or password',
+        name: '',
       },
       isLoading: false,
       pathname: PUBLIC_ROUTES.LOGIN,
@@ -58,10 +58,10 @@ describe("AuthForm Component", () => {
 
     render(<AuthForm />)
 
-    expect(screen.getByText("Invalid email or password")).toBeInTheDocument()
+    expect(screen.getByText('Invalid email or password')).toBeInTheDocument()
   })
 
-  it("Should call handleSubmit when the form is submitted.", async () => {
+  it('Should call handleSubmit when the form is submitted.', async () => {
     const user = userEvent.setup()
     const mockSubmit = jest.fn()
 
@@ -74,12 +74,12 @@ describe("AuthForm Component", () => {
 
     render(<AuthForm />)
 
-    const emailInput = screen.getByPlaceholderText("Email")
-    const passwordInput = screen.getByPlaceholderText("Password")
-    const submitButton = screen.getByRole("button", { name: "Log in" })
+    const emailInput = screen.getByPlaceholderText('Email')
+    const passwordInput = screen.getByPlaceholderText('Password')
+    const submitButton = screen.getByRole('button', { name: 'Log in' })
 
-    await user.type(emailInput, "test@example.com")
-    await user.type(passwordInput, "secure123")
+    await user.type(emailInput, 'test@example.com')
+    await user.type(passwordInput, 'secure123')
 
     await user.click(submitButton)
 

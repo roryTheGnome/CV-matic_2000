@@ -1,5 +1,3 @@
-import { Button } from '@/components/ui/Button'
-import { CancelButton } from '@/components/ui/CancelButton'
 import { DatePickerField } from '@/components/ui/DatePickerField'
 import { EnvironmentSelect } from '@/components/ui/EnvironmentSelect'
 import { InputField } from '@/components/ui/inputField/InputField'
@@ -7,6 +5,8 @@ import { SearchableSelect } from '@/components/ui/searchableSelect/SearchableSel
 import { TagInputField } from '@/components/ui/tagInputField/TagInputField'
 import { TextareaField } from '@/components/ui/TextareaField'
 import { AddCvProjectModalFormState } from '@/types/cvs'
+import { useTranslations } from 'next-intl'
+import { ModalButtons } from '../ModalButtons'
 import { useCvProjectModal } from './_hooks/useCvProjectModal'
 
 export function CvProjectForm({
@@ -24,11 +24,11 @@ export function CvProjectForm({
     isDirty,
     type,
     projectOptions,
-    projectsLoading,
-    closeModal,
     handleChange,
     handleSubmit,
   } = useCvProjectModal(initialData, projectId)
+
+  const t = useTranslations('Forms')
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
@@ -36,7 +36,7 @@ export function CvProjectForm({
         <div className="flex flex-col gap-4">
           <SearchableSelect
             inputId={`${formId}-project`}
-            label={projectsLoading ? 'Loading projects...' : 'Project'}
+            label={t('project')}
             name="projectId"
             value={formData.projectId}
             options={projectOptions}
@@ -46,7 +46,7 @@ export function CvProjectForm({
           />
           <DatePickerField
             inputId={`${formId}-startDate`}
-            label="Start Date"
+            label={t('startDate')}
             value={formData.start_date}
             onChange={handleChange}
             name="start_date"
@@ -56,7 +56,7 @@ export function CvProjectForm({
         <div className="flex flex-col gap-4">
           <InputField
             inputId={`${formId}-domain`}
-            label="Domain"
+            label={t('domain')}
             name="domain"
             value={formData.domain}
             onChange={handleChange}
@@ -67,7 +67,7 @@ export function CvProjectForm({
           />
           <DatePickerField
             inputId={`${formId}-endDate`}
-            label="End Date"
+            label={t('endDate')}
             name="end_date"
             value={formData.end_date}
             onChange={handleChange}
@@ -77,7 +77,7 @@ export function CvProjectForm({
 
       <TextareaField
         inputId={`${formId}-description`}
-        label="Description"
+        label={t('description')}
         name="description"
         value={formData.description}
         onChange={handleChange}
@@ -94,24 +94,17 @@ export function CvProjectForm({
 
       <TagInputField
         inputId={`${formId}-responsibilities`}
-        label="Responsibilities"
+        label={t('responsibilities')}
         name="responsibilities"
         value={formData.responsibilities}
         onChange={handleChange}
       />
 
-      <div className="mt-10 flex justify-end gap-4">
-        <CancelButton closeModal={closeModal} />
-        <Button type="submit" disabled={!isFormValid || saving || !isDirty}>
-          {saving
-            ? type === 'PROJECT_CREATE'
-              ? 'CREATING'
-              : 'SAVING'
-            : type === 'PROJECT_CREATE'
-              ? 'CREATE'
-              : 'SAVE'}
-        </Button>
-      </div>
+      <ModalButtons
+        isDirty={isDirty}
+        isFormValid={isFormValid}
+        saving={saving}
+      />
     </form>
   )
 }

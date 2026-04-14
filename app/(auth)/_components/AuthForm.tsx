@@ -4,10 +4,12 @@ import { Button } from '@/components/ui/Button'
 import { InputField } from '@/components/ui/inputField/InputField'
 
 import { PUBLIC_ROUTES } from '@/config/routes'
+import { useTranslations } from 'next-intl'
 import { useAuthForm } from '../(with-tabs)/_hooks/useAuthForm'
 
 export function AuthForm() {
   const { currentError, isLoading, pathname, handleSubmit } = useAuthForm()
+  const t = useTranslations('Auth')
 
   return (
     <form
@@ -17,7 +19,7 @@ export function AuthForm() {
       <InputField
         required
         inputId="email"
-        label="Email"
+        label={t('emailLabel')}
         name="email"
         type="email"
         autoComplete="email"
@@ -25,7 +27,7 @@ export function AuthForm() {
       <InputField
         required
         inputId="password"
-        label="Password"
+        label={t('passwordLabel')}
         name="password"
         type="password"
         autoComplete={
@@ -36,7 +38,9 @@ export function AuthForm() {
       />
       <span className="text-primary h-6">{currentError?.message}</span>
       <Button isLoading={isLoading} className="mt-2">
-        {pathname === PUBLIC_ROUTES.LOGIN ? 'Log in' : 'Create Account'}
+        {pathname === PUBLIC_ROUTES.LOGIN
+          ? t('loginButton')
+          : t('createAccountButton')}
       </Button>
     </form>
   )

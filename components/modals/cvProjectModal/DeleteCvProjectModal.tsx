@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl'
 import { DeleteModal } from '../DeleteModal'
 import { useDeleteCvProject } from './_hooks/useDeleteCvProject'
 
@@ -9,10 +10,12 @@ export function DeleteCvProjectModal() {
     handleDelete,
   } = useDeleteCvProject()
 
+  const t = useTranslations('CvModal')
+
   return (
     <DeleteModal
-      deleteText={`project ${data?.name} from the CV`}
-      headingText="project"
+      deleteText={`${t('deleteProjectModalHeading')} ${data?.name} ${t('deleteProjectModalDeleteText')}`}
+      headingText={t('deleteProjectModalHeading')}
       data={data}
       loading={loading}
       closeModal={closeModal}

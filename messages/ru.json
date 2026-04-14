@@ -1,0 +1,308 @@
+{
+  "Auth": {
+    "emailLabel": "Email",
+    "passwordLabel": "Пароль",
+    "loginButton": "Войти",
+    "createAccountButton": "Создать аккаунт",
+    "loginTab": "Вход",
+    "signupTab": "Регистрация",
+    "loginTitle": "С возвращением",
+    "loginSubtitle": "Снова здравствуйте! Войдите, чтобы продолжить",
+    "registerTitle": "Зарегистрироваться",
+    "registerSubtitle": "Добро пожаловать! Зарегистрируйтесь, чтобы продолжить",
+    "forgotPasswordTitle": "Забыли пароль",
+    "forgotPasswordSubtitle": "Мы отправим вам письмо с дальнейшими инструкциями",
+    "haveAnAccount": "У меня есть аккаунт",
+    "setNewPasswordTitle": "Установите новый пароль",
+    "setNewPasswordSubtitle": "Почти готово! Теперь создайте новый пароль",
+    "resetPasswordButton": "Сбросить пароль",
+    "cancelLink": "Отмена",
+    "backToLoginLink": "Вернуться ко входу",
+    "loadingText": "Загрузка"
+  },
+  "Notifications": {
+    "loggedSuccess": "Вход выполнен успешно.",
+    "registerSuccess": "Регистрация прошла успешно.",
+    "genericError": "Что-то пошло не так.",
+    "sending": "Отправка...",
+    "checkInbox": "Проверьте вашу почту.",
+    "updating": "Обновление...",
+    "passwordUpdatedSuccess": "Пароль успешно обновлен.",
+    "errorOccurred": "Произошла ошибка.",
+    "loadingText": "Загрузка",
+    "gettingUserInfo": "Получение данных пользователя..."
+  },
+  "TableActions": {
+    "downloadPdf": "Скачать PDF",
+    "addProject": "ДОБАВИТЬ ПРОЕКТ",
+    "createCv": "СОЗДАТЬ РЕЗЮМЕ",
+    "createDepartment": "СОЗДАТЬ ОТДЕЛ",
+    "createLanguage": "СОЗДАТЬ ЯЗЫК",
+    "createPosition": "СОЗДАТЬ ДОЛЖНОСТЬ",
+    "createProject": "СОЗДАТЬ ПРОЕКТ",
+    "createSkill": "СОЗДАТЬ НАВЫК",
+    "createUser": "СОЗДАТЬ ПОЛЬЗОВАТЕЛЯ"
+  },
+  "ProjectDetails": {
+    "startDate": "Дата начала",
+    "endDate": "Дата окончания",
+    "tillNow": "По настоящее время"
+  },
+  "NotFoundPage": {
+    "pageNotFound": "Страница не найдена",
+    "errorText": "Страница, которую вы ищете, не существует или была перемещена.",
+    "backLink": "Вернуться на главную"
+  },
+  "ActionMenu": {
+    "openActionsAria": "Открыть меню действий",
+    "details": "Детали",
+    "edit": "Редактировать",
+    "delete": "Удалить",
+    "profile": "Профиль"
+  },
+  "CvPage": {
+    "education": "Образование",
+    "languageProficiency": "Владение языками",
+    "domains": "Предметные области",
+    "professionalSkills": "Профессиональные навыки",
+    "skills": "НАВЫКИ",
+    "experienceInYears": "ОПЫТ В ГОДАХ",
+    "lastUsed": "ПОСЛЕДНЕЕ ИСПОЛЬЗОВАНИЕ",
+    "projects": "Проекты",
+    "projectRoles": "Роли на проекте",
+    "period": "Период",
+    "responsibilities": "Обязанности",
+    "environments": "Окружение"
+  },
+  "Forms": {
+    "email": "Email",
+    "password": "Пароль",
+    "name": "Имя",
+    "education": "Образование",
+    "description": "Описание",
+    "project": "Проект",
+    "domain": "Предметная область",
+    "position": "Должность",
+    "skill": "Навык",
+    "firstName": "Имя",
+    "lastName": "Фамилия",
+    "mastery": "Уровень владения",
+    "department": "Отдел",
+    "responsibilities": "Обязанности",
+    "startDate": "Дата начала",
+    "endDate": "Дата окончания",
+    "nativeName": "Оригинальное название",
+    "loading": "Загрузка",
+    "btnCreating": "СОЗДАНИЕ",
+    "btnSaving": "СОХРАНЕНИЕ",
+    "btnAdding": "ДОБАВЛЕНИЕ",
+    "btnAdd": "ДОБАВИТЬ",
+    "btnCreate": "СОЗДАТЬ",
+    "btnSave": "СОХРАНИТЬ"
+  },
+  "MasterySelect": {
+    "novice": "Новичок",
+    "advanced": "Продвинутый",
+    "competent": "Компетентный",
+    "proficient": "Опытный",
+    "expert": "Эксперт"
+  },
+  "SkillSelect": {
+    "selectSkill": "Выберите навык"
+  },
+  "CvToast": {
+    "errorOccurred": "Произошла ошибка.",
+    "cvProjectAdded": "Проект успешно добавлен в резюме!",
+    "cvProjectUpdated": "Проект успешно обновлен в резюме!",
+    "cvProjectRemoved": "Проект успешно удален из резюме!",
+    "cvIdMissing": "ID резюме отсутствует!",
+    "cvDeleteError": "Не удалось удалить резюме",
+    "cvDeleteSuccess": "Резюме успешно удалено"
+  },
+  "ProjectToast": {
+    "projectIdMissing": "ID проекта отсутствует!",
+    "projectDeleteError": "Не удалось удалить проект",
+    "projectDeleteSuccess": "Проект успешно удален",
+    "projectCreatedSuccess": "Проект успешно создан!",
+    "projectUpdatedSuccess": "Проект успешно обновлен!"
+  },
+  "SkillToast": {
+    "skillIdMissing": "ID навыка отсутствует!",
+    "skillDeleteError": "Не удалось удалить навык",
+    "skillDeleteSuccess": "Навык успешно удален",
+    "skillCreatedSuccess": "Навык успешно создан!",
+    "skillUpdatedSuccess": "Навык успешно обновлен!"
+  },
+  "UserToast": {
+    "userIdMissing": "ID пользователя отсутствует!",
+    "userDeleteError": "Не удалось удалить пользователя",
+    "userDeleteSuccess": "Пользователь успешно удален",
+    "userCreatedSuccess": "Пользователь успешно создан!",
+    "userUpdatedSuccess": "Пользователь успешно обновлен!"
+  },
+  "PositionToast": {
+    "positionIdMissing": "ID должности отсутствует!",
+    "positionDeleteError": "Не удалось удалить должность",
+    "positionDeleteSuccess": "Должность успешно удалена",
+    "positionCreatedSuccess": "Должность успешно создана!",
+    "positionUpdatedSuccess": "Должность успешно обновлена!"
+  },
+  "LanguageToast": {
+    "languageIdMissing": "ID языка отсутствует!",
+    "languageDeleteError": "Не удалось удалить язык",
+    "languageDeleteSuccess": "Язык успешно удален",
+    "languageCreatedSuccess": "Язык успешно создан!",
+    "languageUpdatedSuccess": "Язык успешно обновлен!"
+  },
+  "DepartmentToast": {    
+    "departmentIdMissing": "ID отдела отсутствует!",
+    "departmentDeleteError": "Не удалось удалить отдел",
+    "departmentDeleteSuccess": "Отдел успешно удален",
+    "departmentCreatedSuccess": "Отдел успешно создан!",
+    "departmentUpdatedSuccess": "Отдел успешно обновлен!"
+  },
+  "CvModal": {
+    "loading": "Загрузка",
+    "errorOccurred": "Произошла ошибка.",
+    "cvAddProjectModal": "Добавить проект",
+    "cvEditProjectModal": "Редактировать проект в резюме",
+    "deleteProjectModalHeading": "проект",
+    "deleteProjectModalDeleteText": "из резюме"
+  },
+  "SkillModal": {
+    "skill": "навык",
+    "addSkill": "Добавить навык",
+    "editSkill": "Редактировать навык",
+    "createSkill": "Создать навык"
+  },
+  "DepartmentModal": {
+    "department": "отдел",
+    "departmentCreateModal": "Создать отдел",
+    "departmentEditModal": "Редактировать отдел"
+  },
+  "LanguageModal": {
+    "language": "язык",
+    "languageCreateModal": "Создать язык",
+    "languageEditModal": "Редактировать язык"
+  },
+  "PositionModal": {
+    "position": "должность",
+    "positionCreateModal": "Создать должность",
+    "positionEditModal": "Редактировать должность"
+  },
+  "ProfileModal": {
+    "errorOccurred": "Произошла ошибка.",
+    "addLanguage": "Добавить язык",
+    "editLanguage": "Редактировать язык",
+    "language": "Язык",
+    "profeciency": "Уровень владения",
+    "addSkill": "Добавить навык",
+    "editSkill": "Редактировать навык"
+  },
+  "ProjectModal": {
+    "project": "проект",
+    "editProject": "Редактировать проект",
+    "createProject": "Создать проект"
+  },
+  "UserModal": {
+    "loading": "Загрузка",
+    "errorOccurred": "Произошла ошибка.",
+    "user": "пользователя",
+    "editUser": "Редактировать пользователя",
+    "createUser": "Создать пользователя"
+  },
+  "DeleteModal": {
+    "aYouSure": "Вы уверены, что хотите удалить",
+    "deleting": "УДАЛЕНИЕ",
+    "confirm": "ПОДТВЕРДИТЬ"
+  },
+  "DataStates": {
+    "loading": "Загрузка",
+    "errorOccurred": "Произошла ошибка."
+  },
+  "ComponentProfile": {
+    "previewAvatar": "Предпросмотр аватара",
+    "uploadAvatar": "Загрузить изображение аватара",
+    "removeAvatar": "Удалить аватар",
+    "aMember": "Участник с"
+  },
+  "Skills": {
+    "cancel": "ОТМЕНА",
+    "confirm": "ПОДТВЕРДИТЬ",
+    "addSkills": "ДОБАВИТЬ НАВЫКИ",
+    "removeSkills": "УДАЛИТЬ НАВЫКИ"
+  },
+  "PasswordInput": {
+    "show": "Показать пароль",
+    "hide": "Скрыть пароль"
+  },
+  "SearchableSelectMenu": {
+    "notFound": "Проекты не найдены"
+  },
+  "TagInputField": {
+    "press": "Нажмите",
+    "toAdd": "чтобы добавить"
+  },
+  "UserActionModal": {
+    "profile": "Профиль",
+    "settings": "Настройки"
+  },
+  "CancelBtn": {
+    "cancel": "ОТМЕНА"
+  },
+  "LogoutBtn": {
+    "logout": "Выйти"
+  },
+  "EnvironmentSelect": {
+    "environment": "Окружение"
+  },
+  "LanguageSelect": {
+    "language": "Язык"
+  },
+  "ThemeSelect": {
+    "appearance": "Внешний вид"
+  },
+  "LanguageList": {
+    "cancel": "ОТМЕНА",
+    "confirm": "ПОДТВЕРДИТЬ",
+    "addLanguage": "ДОБАВИТЬ ЯЗЫКИ",
+    "removeLanguage": "УДАЛИТЬ ЯЗЫКИ"
+  },
+  "Navigation": {
+    "employees": "Сотрудники",
+    "skills": "Навыки",
+    "languages": "Языки",
+    "cvs": "Резюме",
+    "projects": "Проекты",
+    "departments": "Отделы",
+    "positions": "Должности"
+  },
+  "TableHeaders": {
+    "firstName": "Имя",
+    "lastName": "Фамилия",
+    "email": "Email",
+    "department": "Отдел",
+    "position": "Должность",
+    "name": "Название",
+    "type": "Тип",
+    "category": "Категория",
+    "nativeName": "Оригинальное название",
+    "iso2": "ISO2",
+    "domain": "Предметная область",
+    "startDate": "Дата начала",
+    "endDate": "Дата окончания",
+    "education": "Образование",
+    "employee": "Сотрудник"
+  },
+  "CvNavItems": {
+    "details": "Детали",
+    "skills": "Навыки",
+    "projects": "Проекты",
+    "preview": "Предпросмотр"
+  },
+  "ProfileNavItems": {
+    "profile": "Профиль",
+    "skills": "Навыки",
+    "languages": "Языки"
+  }
+}

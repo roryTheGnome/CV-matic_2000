@@ -1,8 +1,8 @@
-import { Button } from '@/components/ui/Button'
-import { CancelButton } from '@/components/ui/CancelButton'
 import { InputField } from '@/components/ui/inputField/InputField'
 import { useDepartmentActions } from '@/lib/hooks/departmentHooks/useDepartmentActions'
 import { CreateDepartmentModalFormState } from '@/types/department'
+import { useTranslations } from 'next-intl'
+import { ModalButtons } from '../ModalButtons'
 
 export function DepartmentForm({
   initialData,
@@ -17,17 +17,17 @@ export function DepartmentForm({
     loading: saving,
     isFormValid,
     isDirty,
-    type,
-    closeModal,
     handleChange,
     handleSubmit,
   } = useDepartmentActions(initialData, departmentId)
+
+  const t = useTranslations('Forms')
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <InputField
         inputId={`${formId}-name`}
-        label="Name"
+        label={t('name')}
         type="text"
         name="name"
         value={formData.name}
@@ -36,18 +36,11 @@ export function DepartmentForm({
         maxLength={50}
       />
 
-      <div className="mt-10 flex justify-end gap-4">
-        <CancelButton closeModal={closeModal} />
-        <Button type="submit" disabled={!isFormValid || saving || !isDirty}>
-          {saving
-            ? type === 'DEPARTMENT_CREATE'
-              ? 'CREATING'
-              : 'SAVING'
-            : type === 'DEPARTMENT_CREATE'
-              ? 'CREATE'
-              : 'SAVE'}
-        </Button>
-      </div>
+      <ModalButtons
+        isDirty={isDirty}
+        isFormValid={isFormValid}
+        saving={saving}
+      />
     </form>
   )
 }

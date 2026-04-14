@@ -1,7 +1,8 @@
-import { ModalData } from "@/store/modalStore"
-import { Button } from "../ui/Button"
-import { CancelButton } from "../ui/CancelButton"
-import { ModalLayout } from "./ModalLayout"
+import { ModalData } from '@/store/modalStore'
+import { useTranslations } from 'next-intl'
+import { Button } from '../ui/Button'
+import { CancelButton } from '../ui/CancelButton'
+import { ModalLayout } from './ModalLayout'
 
 interface Props {
   data: ModalData | undefined
@@ -20,18 +21,20 @@ export function DeleteModal({
   closeModal,
   handleDelete,
 }: Props) {
+  const t = useTranslations('DeleteModal')
+
   return (
     <ModalLayout title={`Delete ${headingText}`} maxWidth="max-w-2xl">
       <div className="flex flex-col gap-6">
-        <p className="text-gray-300 text-lg">
-          Are you sure you want to delete {deleteText}?
+        <p className="text-lg text-gray-300">
+          {t('aYouSure')} {deleteText}?
         </p>
 
-        <div className="flex flex-col sm:flex-row justify-end gap-4">
+        <div className="flex flex-col justify-end gap-4 sm:flex-row">
           <CancelButton closeModal={closeModal} />
 
           <Button onClick={handleDelete} disabled={loading || !data?.id}>
-            {loading ? "DELETING..." : "CONFIRM"}
+            {loading ? t('deleting') : t('confirm')}
           </Button>
         </div>
       </div>

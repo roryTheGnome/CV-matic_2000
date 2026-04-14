@@ -1,17 +1,17 @@
 'use client'
 
-import { Button } from '@/components/ui/Button'
-import { CancelButton } from '@/components/ui/CancelButton'
-import { useModalStore } from '@/store/modalStore'
-import { useState } from 'react'
-import { useMutation, useQuery } from '@apollo/client/react'
 import { Loader } from '@/components/ui/Loader'
+import { useModalStore } from '@/store/modalStore'
+import { useMutation, useQuery } from '@apollo/client/react'
+import { SubmitEvent, useState } from 'react'
 
-import { GetLanguagesData, Language, Proficiency } from '@/types/lang'
-import { GET_LANGUAGES } from '@/api/graphql/queries/language'
 import { PROFILE_LANGUAGE_ADD } from '@/api/graphql/mutations/profile'
+import { GET_LANGUAGES } from '@/api/graphql/queries/language'
 import { GET_USER } from '@/api/graphql/queries/user'
 import { Select } from '@/components/ui/select/Select'
+import { GetLanguagesData, Language, Proficiency } from '@/types/lang'
+import { useTranslations } from 'next-intl'
+import { ModalButtons } from '../../ModalButtons'
 
 type LanguageFormProps = {
   userLanguages: { name: string }[]
@@ -20,7 +20,7 @@ type LanguageFormProps = {
 
 export function LanguageForm({ userLanguages, userId }: LanguageFormProps) {
   const { closeModal } = useModalStore()
-
+  const t = useTranslations('ProfileModal')
   const { data, loading, error } = useQuery<GetLanguagesData>(GET_LANGUAGES)
 
   const [addLanguage, { loading: saving }] = useMutation(PROFILE_LANGUAGE_ADD, {
@@ -37,7 +37,7 @@ export function LanguageForm({ userLanguages, userId }: LanguageFormProps) {
   )
   const [proficiency, setProficiency] = useState<Proficiency>('A1')
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     if (!userId || !selectedLanguage) return
@@ -55,12 +55,17 @@ export function LanguageForm({ userLanguages, userId }: LanguageFormProps) {
 
       closeModal()
     } catch (err) {
-      console.error('ERROR:', err)
+      console.error(t('errorOccurred'), err)
     }
   }
 
   if (loading) return <Loader />
-  if (error) return <div>Error: {error.message}</div>
+  if (error)
+    return (
+      <div>
+        {t('errorOccurred')} {error.message}
+      </div>
+    )
 
   const availableLangs =
     data?.languages.filter(
@@ -73,6 +78,7 @@ export function LanguageForm({ userLanguages, userId }: LanguageFormProps) {
         id="language"
         value={selectedLanguage?.name || ''}
         title=" "
+        label={t('language')}
         isRequired={true}
         name="language"
         handleChange={(e) => {
@@ -92,6 +98,7 @@ export function LanguageForm({ userLanguages, userId }: LanguageFormProps) {
         value={proficiency}
         isRequired={true}
         name="profeciency"
+        label={t('profeciency')}
         handleChange={(e) => setProficiency(e.target.value as Proficiency)}
       >
         {/*TODO map this instead of hard coding later*/}
@@ -104,12 +111,7 @@ export function LanguageForm({ userLanguages, userId }: LanguageFormProps) {
         <option value="Native">Native</option>
       </Select>
 
-      <div className="flex justify-end gap-4">
-        <CancelButton closeModal={closeModal} />
-        <Button type="submit" disabled={saving || !selectedLanguage}>
-          {saving ? 'ADDING...' : 'ADD'}
-        </Button>
-      </div>
+      <ModalButtons saving={saving} />
     </form>
   )
 }

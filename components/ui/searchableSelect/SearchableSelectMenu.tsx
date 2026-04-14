@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl'
 import { SelectOption } from './SearchableSelect'
 
 interface Props {
@@ -13,6 +14,8 @@ export function SearchableSelectMenu({
   value,
   handleOptionSelect,
 }: Props) {
+  const t = useTranslations('notFound')
+
   return (
     <>
       {isOpen && (
@@ -33,7 +36,7 @@ export function SearchableSelectMenu({
             ))
           ) : (
             <li className="text-text-secondary p-2.5 text-center text-sm">
-              No projects found
+              {t('notFound')}
             </li>
           )}
         </ul>

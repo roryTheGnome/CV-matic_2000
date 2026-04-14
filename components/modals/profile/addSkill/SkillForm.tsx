@@ -1,15 +1,16 @@
 'use client'
 
-import { Button } from '@/components/ui/Button'
-import { CancelButton } from '@/components/ui/CancelButton'
-import { useModalStore } from '@/store/modalStore'
-import { useState } from 'react'
-import { useMutation, useQuery } from '@apollo/client/react'
-import { GET_SKILLS } from '@/api/graphql/queries/skills'
 import { ADD_PROFILE_SKILL } from '@/api/graphql/mutations/profile'
+import { GET_SKILLS } from '@/api/graphql/queries/skills'
 import { GET_USER } from '@/api/graphql/queries/user'
+import { Loader } from '@/components/ui/Loader'
+import { MasterySelect } from '@/components/ui/MasterySelect'
+import { SkillSelect } from '@/components/ui/SkillSelect'
+import { useModalStore } from '@/store/modalStore'
 import { GetSkillsData, Mastery, SkillItem } from '@/types/skills'
-import { Select } from '@/components/ui/select/Select'
+import { useMutation, useQuery } from '@apollo/client/react'
+import { useState } from 'react'
+import { ModalButtons } from '../../ModalButtons'
 
 type SkillFormProps = {
   userSkills: { name: string }[]
@@ -30,7 +31,9 @@ export function SkillForm({ userSkills, userId }: SkillFormProps) {
     ],
   })
 
-  const [selectedSkill, setSelectedSkill] = useState<SkillItem | null>(null)
+  const [selectedSkill, setSelectedSkill] = useState<Partial<SkillItem> | null>(
+    null,
+  )
   const [mastery, setMastery] = useState<Mastery>('Novice')
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -56,8 +59,12 @@ export function SkillForm({ userSkills, userId }: SkillFormProps) {
     }
   }
 
-  if (loading) return <div>Loading skills...</div>
-  if (error) return <div>Error: {error.message}</div>
+  if (loading) {
+    return <Loader />
+  }
+  if (error) {
+    return <div>Error: {error.message}</div>
+  }
 
   const availableSkills =
     data?.skills.filter(
@@ -66,45 +73,15 @@ export function SkillForm({ userSkills, userId }: SkillFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <Select
-        id="skill"
-        name="skill"
-        value={selectedSkill?.name || ''}
-        isRequired={true}
-        title="Select Skill"
-        handleChange={(e) => {
-          const skill = availableSkills.find((s) => s.name === e.target.value)
-          setSelectedSkill(skill || null)
-        }}
-      >
-        {availableSkills.map((skill) => (
-          <option key={skill.id} value={skill.name}>
-            {skill.name}
-          </option>
-        ))}
-      </Select>
+      <SkillSelect
+        selectedSkill={selectedSkill}
+        availableSkills={availableSkills}
+        setSelectedSkill={setSelectedSkill}
+      />
 
-      <Select
-        id="mastery"
-        name="mastery"
-        value={mastery}
-        isRequired={true}
-        title="Select mastery"
-        handleChange={(e) => setMastery(e.target.value as Mastery)}
-      >
-        <option value="Novice">Novice</option>
-        <option value="Advanced">Advanced</option>
-        <option value="Competent">Competent</option>
-        <option value="Proficient">Proficient</option>
-        <option value="Expert">Expert</option>
-      </Select>
+      <MasterySelect mastery={mastery} setMastery={setMastery} />
 
-      <div className="flex justify-end gap-4">
-        <CancelButton closeModal={closeModal} />
-        <Button type="submit" disabled={saving || !selectedSkill}>
-          {saving ? 'ADDING...' : 'ADD'}
-        </Button>
-      </div>
+      <ModalButtons saving={saving} />
     </form>
   )
 }

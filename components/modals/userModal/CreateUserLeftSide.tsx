@@ -3,6 +3,7 @@ import { Option } from '@/components/ui/select/Option'
 import { Select } from '@/components/ui/select/Select'
 
 import { CreateUserModalFormState } from '@/types/user'
+import { useTranslations } from 'next-intl'
 import { ChangeEvent } from 'react'
 import { DepartmentsSelect } from '../DepartmentsSelect'
 
@@ -18,11 +19,13 @@ export function CreateUserLeftSide({
   formId,
   handleChange,
 }: CreateUserProps) {
+  const t = useTranslations('Forms')
+
   return (
     <div className="flex flex-col gap-8">
       <InputField
         inputId={`${formId}-email`}
-        label="Email"
+        label={t('email')}
         type="email"
         name="email"
         value={formData.email}
@@ -31,7 +34,7 @@ export function CreateUserLeftSide({
       />
       <InputField
         inputId={`${formId}-firstName`}
-        label="First Name"
+        label={t('firstName')}
         type="text"
         name="firstName"
         value={formData.firstName}

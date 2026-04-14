@@ -6,12 +6,14 @@ import { useAuthStore } from '@/store/authStore'
 import { LoginResponse, LoginVariables, SignupResponse } from '@/types/auth'
 import { ErrorLike } from '@apollo/client'
 import { useLazyQuery, useMutation } from '@apollo/client/react'
+import { useTranslations } from 'next-intl'
 
 import { usePathname, useRouter } from 'next/navigation'
 import { SubmitEvent } from 'react'
 import toast from 'react-hot-toast'
 
 export const useAuthForm = () => {
+  const t = useTranslations('Notifications')
   const [loginFn, { loading: loginLoading, error: loginError }] = useLazyQuery<
     LoginResponse,
     LoginVariables
@@ -43,7 +45,7 @@ export const useAuthForm = () => {
         })
 
         if (data?.login) {
-          toast.success('Logged in successfully.')
+          toast.success(t('loggedSuccess'))
           await setAuthTokens(data.login.access_token, data.login.refresh_token)
           setFromToken(data.login.access_token)
 
@@ -57,7 +59,7 @@ export const useAuthForm = () => {
         })
 
         if (data?.signup) {
-          toast.success('Registered successfully.')
+          toast.success(t('registerSuccess'))
           await setAuthTokens(
             data.signup.access_token,
             data.signup.refresh_token,
@@ -68,7 +70,7 @@ export const useAuthForm = () => {
         }
       }
     } catch (error) {
-      toast.error('Something went wrong.')
+      toast.error(t('genericError'))
       console.error('Error:', error)
     }
   }

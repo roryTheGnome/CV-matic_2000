@@ -1,9 +1,8 @@
-import { Button } from "@/components/ui/Button"
-import { CancelButton } from "@/components/ui/CancelButton"
-import { useUserActions } from "@/lib/hooks/userHooks/useUserActions"
-import { CreateUserModalFormState } from "@/types/user"
-import { CreateUserLeftSide } from "./CreateUserLeftSide"
-import { CreateUserRightSide } from "./CreateUserRightSide"
+import { useUserActions } from '@/lib/hooks/userHooks/useUserActions'
+import { CreateUserModalFormState } from '@/types/user'
+import { ModalButtons } from '../ModalButtons'
+import { CreateUserLeftSide } from './CreateUserLeftSide'
+import { CreateUserRightSide } from './CreateUserRightSide'
 
 export function UserForm({
   initialData,
@@ -18,15 +17,13 @@ export function UserForm({
     loading: saving,
     isFormValid,
     isDirty,
-    type,
-    closeModal,
     handleChange,
     handleSubmit,
   } = useUserActions(initialData, userId)
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         <CreateUserLeftSide
           formId={formId}
           formData={formData}
@@ -39,18 +36,11 @@ export function UserForm({
         />
       </div>
 
-      <div className="flex justify-end gap-4 mt-10">
-        <CancelButton closeModal={closeModal} />
-        <Button type="submit" disabled={!isFormValid || saving || !isDirty}>
-          {saving
-            ? type === "USER_CREATE"
-              ? "CREATING"
-              : "SAVING"
-            : type === "USER_CREATE"
-              ? "CREATE"
-              : "SAVE"}
-        </Button>
-      </div>
+      <ModalButtons
+        isDirty={isDirty}
+        isFormValid={isFormValid}
+        saving={saving}
+      />
     </form>
   )
 }

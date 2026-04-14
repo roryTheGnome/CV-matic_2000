@@ -3,18 +3,20 @@
 import { Button } from '@/components/ui/Button'
 import { InputField } from '@/components/ui/inputField/InputField'
 import { PUBLIC_ROUTES } from '@/config/routes'
+import { useTranslations } from 'next-intl'
 import { AuthHeading } from '../../_components/AuthHeading'
 import { AuthLink } from '../../_components/AuthLink'
 import { useForgotPasswordForm } from './_hooks/useForgotPasswordForm'
 
 export default function ForgotPassword() {
   const { error, loading, handleSubmit } = useForgotPasswordForm()
+  const t = useTranslations('Auth')
 
   return (
     <>
       <AuthHeading
-        title="Forgot password"
-        subtitle="We will sent you an email with further instructions"
+        title={t('forgotPasswordTitle')}
+        subtitle={t('forgotPasswordSubtitle')}
       />
       <form
         onSubmit={(e) => handleSubmit(e)}
@@ -23,18 +25,15 @@ export default function ForgotPassword() {
         <InputField
           required
           inputId="email"
-          label="Email"
+          label={t('emailLabel')}
           type="email"
           name="email"
           autoComplete="email"
           maxLength={100}
         />
-        <span className="text-primary h-6">
-          {error?.message}
-          {loading && 'Loading...'}
-        </span>
+        <span className="text-primary h-6">{error?.message}</span>
         <Button disabled={loading} className="mt-2">
-          Reset password
+          {t('resetPasswordButton')}
         </Button>
       </form>
 

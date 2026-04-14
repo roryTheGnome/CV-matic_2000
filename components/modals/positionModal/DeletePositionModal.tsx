@@ -1,5 +1,6 @@
-import { useDeletePosition } from "@/lib/hooks/positionHooks/useDeletePosition"
-import { DeleteModal } from "../DeleteModal"
+import { useDeletePosition } from '@/lib/hooks/positionHooks/useDeletePosition'
+import { useTranslations } from 'next-intl'
+import { DeleteModal } from '../DeleteModal'
 
 export function DeletePositionModal() {
   const {
@@ -9,10 +10,12 @@ export function DeletePositionModal() {
     handleDelete,
   } = useDeletePosition()
 
+  const t = useTranslations('PositionModal')
+
   return (
     <DeleteModal
-      deleteText={`position ${data?.name}`}
-      headingText="position"
+      deleteText={`${t('position')} ${data?.name}`}
+      headingText={t('position')}
       data={data}
       loading={loading}
       closeModal={closeModal}
