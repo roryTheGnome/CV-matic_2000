@@ -20,11 +20,11 @@
     --level-expert: #b83031;
 
     /* skill levels - DARK (background) */
-    --level-novice-dark: #3a3a3a;
-    --level-advanced-dark: #175774;
-    --level-competent-dark: #335935;
-    --level-proficient-dark: #785805;
-    --level-expert-dark: #7a1f20;
+    --level-novice-dark: #b8b8b8;
+    --level-advanced-dark: #84d1f6;
+    --level-competent-dark: #9bf6a0;
+    --level-proficient-dark: #edd085;
+    --level-expert-dark: #f48a8b;
 }
 
 [data-theme='dark'] {

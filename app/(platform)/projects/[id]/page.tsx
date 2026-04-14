@@ -4,7 +4,8 @@ import { useProject } from '@/lib/hooks/projectHooks/useProject'
 import { ActionsMenu } from '@/components/admin/ActionsMenu'
 import { useAuthStore } from '@/store/authStore'
 import { useTranslations } from 'next-intl'
-      
+import { Loader } from '@/components/ui/Loader'
+
 export default function ProjectDetails() {
   const { isLoading, error, project } = useProject()
   const { isAdmin } = useAuthStore()
