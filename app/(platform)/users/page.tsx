@@ -4,10 +4,11 @@ import EmployeesList from '@/components/EmployeesList'
 import SortHeader from '@/components/SortHeader'
 import { Loader } from '@/components/ui/Loader'
 import { TableSearch } from '@/components/ui/TableSearch'
-import { headers } from '@/constants/tableHeaders'
+import { headers, skillsHeaders } from '@/constants/tableHeaders'
 import { useUsers } from '@/lib/hooks/userHooks/useUsers'
 import { useAuthStore } from '@/store/authStore'
 import { useTranslations } from 'next-intl'
+import { TableHeader } from '@/components/ui/table/TableHeader'
 
 export default function Employees() {
   const t = useTranslations('TableActions')
@@ -39,20 +40,12 @@ export default function Employees() {
           <Loader />
         ) : (
           <table className="min-w-full divide-y divide-gray-500">
-            <thead>
-              <tr>
-                {headers.map((header) => (
-                  <SortHeader
-                    key={header.key}
-                    label={header.label}
-                    sortKeyValue={header.key}
-                    currentSortKey={sortKey}
-                    sortDir={sortDir}
-                    onSort={handleSort}
-                  />
-                ))}
-              </tr>
-            </thead>
+            <TableHeader
+              handleSort={handleSort}
+              headers={headers}
+              sortDir={sortDir}
+              sortKey={sortKey}
+            />
             <EmployeesList
               users={users}
               search={search}

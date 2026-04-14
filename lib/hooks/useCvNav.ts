@@ -2,7 +2,6 @@ import { PRIVATE_ROUTES } from '@/config/routes'
 import { usePathname } from 'next/navigation'
 import { useCv } from '@/lib/hooks/cvHooks/useCv'
 import { useTranslations } from 'next-intl'
-import { usePathname } from 'next/navigation'
 
 export function useCvNav(id?: string) {
   const pathname = usePathname()
@@ -13,10 +12,10 @@ export function useCvNav(id?: string) {
   }
 
   const tabs = [
-    { label: t('details'), path: `${PRIVATE_ROUTES.CVS}/${id}` },
-    { label: t('skills'), path: `${PRIVATE_ROUTES.CVS}/${id}/skills` },
-    { label: t('projects'), path: `${PRIVATE_ROUTES.CVS}/${id}/projects` },
-    { label: t('preview'), path: `${PRIVATE_ROUTES.CVS}/${id}/preview` },
+    { label: t('details'), path: `${PRIVATE_ROUTES.CVS}/${cv.id}` },
+    { label: t('skills'), path: `${PRIVATE_ROUTES.CVS}/${cv.id}/skills` },
+    { label: t('projects'), path: `${PRIVATE_ROUTES.CVS}/${cv.id}/projects` },
+    { label: t('preview'), path: `${PRIVATE_ROUTES.CVS}/${cv.id}/preview` },
   ]
 
   const isActive = (tabPath: string) => {
