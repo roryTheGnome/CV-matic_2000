@@ -4,6 +4,7 @@ import { useMutation } from '@apollo/client/react'
 
 import { SubmitEvent } from 'react'
 import toast from 'react-hot-toast'
+import { useTranslations } from 'next-intl'
 
 export const useResetPasswordForm = () => {
   const t = useTranslations('Notifications')
