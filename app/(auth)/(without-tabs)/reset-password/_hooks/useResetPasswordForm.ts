@@ -1,6 +1,7 @@
 import { RESET_PASSWORD_MUTATION } from '@/api/graphql/mutations/auth'
 import { ResetPasswordData, ResetPasswordVariables } from '@/types/auth'
 import { useMutation } from '@apollo/client/react'
+import { useTranslations } from 'next-intl'
 
 import { SubmitEvent } from 'react'
 import toast from 'react-hot-toast'

@@ -5,7 +5,13 @@ import { act, renderHook } from '@testing-library/react'
 import toast from 'react-hot-toast'
 import { useDeletePosition } from '../useDeletePosition'
 
-jest.mock('react-hot-toast')
+jest.mock('react-hot-toast', () => ({
+  __esModule: true,
+  default: {
+    success: jest.fn(),
+    error: jest.fn(),
+  },
+}))
 
 jest.mock('next-intl', () => ({
   useTranslations: () => (key: string) => key,
