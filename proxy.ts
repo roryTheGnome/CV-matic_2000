@@ -30,6 +30,10 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL(PUBLIC_ROUTES.LOGIN, request.url))
   }
 
+  if (accessToken && refreshToken && pathname === '/') {
+    return NextResponse.redirect(new URL(PRIVATE_ROUTES.HOME, request.url))
+  }
+
   if (accessToken && refreshToken && isAuthPage(pathname)) {
     return NextResponse.redirect(new URL(PRIVATE_ROUTES.HOME, request.url))
   }
