@@ -18,8 +18,6 @@ export function CvForm({ initialData, cvId, isModal = true }: Props) {
     loading: saving,
     isFormValid,
     isDirty,
-    type,
-    closeModal,
     handleChange,
     handleSubmit,
   } = useCvActions(initialData, cvId)
