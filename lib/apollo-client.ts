@@ -1,7 +1,7 @@
-import { getAccessToken, refreshTokens } from "@/actions/auth"
-import { isAuthPage, PUBLIC_ROUTES } from "@/config/routes"
-import { useAuthStore } from "@/store/authStore"
-import { RefreshTokenResult } from "@/types/auth"
+import { getAccessToken, refreshTokens } from '@/actions/auth'
+import { isAuthPage, PUBLIC_ROUTES } from '@/config/routes'
+import { useAuthStore } from '@/store/authStore'
+import { RefreshTokenResult } from '@/types/auth'
 import {
   ApolloClient,
   CombinedGraphQLErrors,
@@ -9,9 +9,9 @@ import {
   InMemoryCache,
   Observable,
   ServerError,
-} from "@apollo/client"
-import { SetContextLink } from "@apollo/client/link/context"
-import { ErrorLink } from "@apollo/client/link/error"
+} from '@apollo/client'
+import { SetContextLink } from '@apollo/client/link/context'
+import { ErrorLink } from '@apollo/client/link/error'
 
 const httpLink = new HttpLink({
   uri: process.env.NEXT_PUBLIC_GRAPHQL_URL,
@@ -19,8 +19,8 @@ const httpLink = new HttpLink({
 
 let refreshTokenPromise: Promise<RefreshTokenResult> | null = null
 
-const authLink = new SetContextLink(async (prevContext, operation) => {
-  if (typeof window !== "undefined" && isAuthPage(window.location.pathname)) {
+const authLink = new SetContextLink(async (prevContext) => {
+  if (typeof window !== 'undefined' && isAuthPage(window.location.pathname)) {
     return { headers: prevContext.headers }
   }
 
@@ -29,7 +29,7 @@ const authLink = new SetContextLink(async (prevContext, operation) => {
   return {
     headers: {
       ...prevContext.headers,
-      authorization: token ? `Bearer ${token}` : "",
+      authorization: token ? `Bearer ${token}` : '',
     },
   }
 })
@@ -39,7 +39,7 @@ const errorLink = new ErrorLink(({ error, operation, forward }) => {
 
   if (CombinedGraphQLErrors.is(error)) {
     isUnauthorized = error.errors.some(
-      err => err.extensions?.code === "UNAUTHENTICATED",
+      (err) => err.extensions?.code === 'UNAUTHENTICATED',
     )
   } else if (ServerError.is(error)) {
     isUnauthorized = error.statusCode === 401
@@ -52,13 +52,13 @@ const errorLink = new ErrorLink(({ error, operation, forward }) => {
       })
     }
 
-    return new Observable(observer => {
+    return new Observable((observer) => {
       refreshTokenPromise!
-        .then(result => {
+        .then((result) => {
           if (!result?.success || !result.accessToken) {
             useAuthStore.getState().logout()
 
-            if (typeof window !== "undefined") {
+            if (typeof window !== 'undefined') {
               window.location.href = PUBLIC_ROUTES.LOGIN
             }
             return observer.error(new Error('Session expired'))
@@ -82,7 +82,7 @@ const errorLink = new ErrorLink(({ error, operation, forward }) => {
 
           forward(operation).subscribe(subscriber)
         })
-        .catch(err => {
+        .catch((err) => {
           observer.error(err)
         })
     })

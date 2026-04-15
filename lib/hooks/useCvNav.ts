@@ -1,9 +1,9 @@
 import { PRIVATE_ROUTES } from '@/config/routes'
-import { usePathname } from 'next/navigation'
 import { useCv } from '@/lib/hooks/cvHooks/useCv'
 import { useTranslations } from 'next-intl'
+import { usePathname } from 'next/navigation'
 
-export function useCvNav(id?: string) {
+export function useCvNav() {
   const pathname = usePathname()
   const { cv, isLoading, error } = useCv()
   const t = useTranslations('CvNavItems')
