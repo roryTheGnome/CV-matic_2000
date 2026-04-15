@@ -5,7 +5,6 @@ import { useTranslations } from 'next-intl'
 
 import { SubmitEvent } from 'react'
 import toast from 'react-hot-toast'
-import { useTranslations } from 'next-intl'
 
 export const useResetPasswordForm = () => {
   const t = useTranslations('Notifications')
