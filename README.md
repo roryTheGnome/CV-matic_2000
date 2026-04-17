@@ -18,7 +18,7 @@ The application is built using **Next.js (App Router)** with SSR/SSG support and
 ## 🚀 Live Demo
 
 Deployed on Vercel:
-[https://cv-matic-2000-cvmatic.vercel.app](https://cv-matic-2000-cvmatic.vercel.app)
+[https://cv-matic-2000-cvmatic.vercel.app](https://cv-matic-2000.vercel.app/login)
 
 ---
 
