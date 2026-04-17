@@ -80,7 +80,7 @@ export const useSkill = ({
   skills?.forEach((skill) => {
     const fullSkill = allSkills.find((s) => s.name === skill.name)
 
-    const categoryName = fullSkill?.category_name || 'Other' //i add otehr as fallback but i dont think it will be at use, max for debugging
+    const categoryName = fullSkill?.category_name || 'Other'
 
     if (!grouped[categoryName]) {
       grouped[categoryName] = []

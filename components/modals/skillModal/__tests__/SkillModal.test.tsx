@@ -66,7 +66,7 @@ describe('SkillModal', () => {
         initialData: { name: '', categoryId: '' },
         skillId: undefined,
       },
-      undefined, // Changed from undefined
+      undefined,
     )
   })
 
@@ -107,7 +107,7 @@ describe('SkillModal', () => {
         },
         skillId: 'skill-123',
       },
-      undefined, // Changed from undefined
+      undefined,
     )
   })
 
