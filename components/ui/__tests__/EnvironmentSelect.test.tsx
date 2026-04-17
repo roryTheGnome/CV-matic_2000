@@ -118,7 +118,7 @@ describe('EnvironmentSelect', () => {
           { id: '2', name: 'Backend' },
         ],
       }),
-      undefined, // FIX: Changed from undefined
+      undefined,
     )
   })
 
@@ -142,7 +142,7 @@ describe('EnvironmentSelect', () => {
         loading: true,
         value: mockValue,
       }),
-      undefined, // FIX: Changed from undefined
+      undefined,
     )
   })
 

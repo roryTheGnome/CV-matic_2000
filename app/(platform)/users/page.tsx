@@ -34,7 +34,7 @@ export default function Employees() {
         setSearch={setSearch}
       />
 
-      <div className="overflow-x-auto rounded-lg">
+      <div className="min-h-screen overflow-x-auto rounded-lg">
         {isLoading ? (
           <Loader />
         ) : (

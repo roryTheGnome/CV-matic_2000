@@ -154,7 +154,6 @@ describe('EditableProfile', () => {
   })
 
   it('calls setDepartmentId on department select change', () => {
-    // FIX: Provide the option with value 'dep-2' so the browser allows the change
     mockUseEditableProfile.mockReturnValue({
       ...defaultHookReturn,
       depData: {
@@ -174,7 +173,6 @@ describe('EditableProfile', () => {
   })
 
   it('calls setPositionId on position select change', () => {
-    // FIX: Provide the option with value 'pos-2'
     mockUseEditableProfile.mockReturnValue({
       ...defaultHookReturn,
       posData: {
