@@ -1,10 +1,11 @@
 'use client'
 
-import { useProject } from '@/lib/hooks/projectHooks/useProject'
 import { ActionsMenu } from '@/components/admin/ActionsMenu'
+import { Loader } from '@/components/ui/Loader'
+import { useProject } from '@/lib/hooks/projectHooks/useProject'
 import { useAuthStore } from '@/store/authStore'
 import { useTranslations } from 'next-intl'
-      
+
 export default function ProjectDetails() {
   const { isLoading, error, project } = useProject()
   const { isAdmin } = useAuthStore()
