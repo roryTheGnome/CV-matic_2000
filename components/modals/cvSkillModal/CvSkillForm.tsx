@@ -6,7 +6,13 @@ import { SkillMastery } from '@/types/skills'
 import { ModalButtons } from '../ModalButtons'
 import { useCvSkillForm } from './_hooks/useCvSkillForm'
 
-export function CvSkillForm({ skill }: { skill: SkillMastery | undefined }) {
+export function CvSkillForm({
+  skill,
+  isEdit,
+}: {
+  skill: SkillMastery | undefined
+  isEdit: boolean
+}) {
   const {
     selectedSkill,
     availableSkills,
@@ -15,6 +21,7 @@ export function CvSkillForm({ skill }: { skill: SkillMastery | undefined }) {
     handleSubmit,
     setMastery,
     setSelectedSkill,
+    isDirty,
   } = useCvSkillForm(skill)
 
   return (
@@ -27,7 +34,7 @@ export function CvSkillForm({ skill }: { skill: SkillMastery | undefined }) {
 
       <MasterySelect mastery={mastery} setMastery={setMastery} />
 
-      <ModalButtons saving={saving} />
+      <ModalButtons saving={saving} isDirty={isDirty} />
     </form>
   )
 }
