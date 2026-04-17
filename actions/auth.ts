@@ -75,6 +75,14 @@ export async function fetchNewTokens(refresh: string) {
   }
 }
 
+export async function getAccessToken(): Promise<string | undefined> {
+  const cookieStore = await cookies()
+
+  const token = cookieStore.get(ACCESS_TOKEN)?.value
+
+  return token
+}
+
 export async function refreshTokens(): Promise<RefreshTokenResult> {
   const cookiesStore = await cookies()
   const refresh = cookiesStore.get(REFRESH_TOKEN)?.value
