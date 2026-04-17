@@ -39,16 +39,17 @@ export function TableSearch({
           {createButtonText}
         </Button>
       )}
-      {(isAdmin || userCanInteract) && (
-        <Button
-          Icon={Plus}
-          isTextButton
-          className="text-red-400"
-          onClick={() => openModal(typeOfCreateModal)}
-        >
-          {createButtonText}
-        </Button>
-      )}
+      {typeOfCreateModal !== 'CV_PROJECT_ADD' &&
+        (isAdmin || userCanInteract) && (
+          <Button
+            Icon={Plus}
+            isTextButton
+            className="text-red-400"
+            onClick={() => openModal(typeOfCreateModal)}
+          >
+            {createButtonText}
+          </Button>
+        )}
     </div>
   )
 }
