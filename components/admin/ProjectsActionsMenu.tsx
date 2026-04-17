@@ -32,9 +32,9 @@ export function ProjectsActionsMenu({
         <div className="bg-background border-input-border absolute top-full right-0 z-10 w-36 overflow-hidden border shadow-xl">
           <Link
             href={`/projects/${item.id}`}
-            className="flex w-full items-center px-4 py-2.5 text-sm text-gray-300 transition-colors hover:bg-black/10 hover:text-white"
+            className="text-text-secondary hover:bg-surface-active hover:text-text-primary flex w-full items-center px-4 py-2.5 text-sm transition-colors"
           >
-            <Info size={16} className="mr-3 text-gray-400" />
+            <Info size={16} className="text-text-secondary mr-3" />
             {t('details')}
           </Link>
           {isAdmin && (

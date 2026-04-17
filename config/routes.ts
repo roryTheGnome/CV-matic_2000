@@ -6,7 +6,7 @@ export const PUBLIC_ROUTES = {
 } as const
 
 export const PRIVATE_ROUTES = {
-  HOME: '/',
+  HOME: '/users',
 
   USERS: '/users',
   CVS: '/cvs',

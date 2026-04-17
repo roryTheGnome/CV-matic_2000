@@ -76,7 +76,7 @@ export const LanguageList = ({ languages, onDelete, owner, userId }: Props) => {
           <div
             key={lang.name}
             onClick={() => toggleSelect(lang)}
-            className="flex items-center gap-5 rounded-xl p-4 hover:bg-[#1a1a1a]"
+            className="hover:bg-surface-active flex items-center gap-5 rounded-xl p-4 transition-colors"
           >
             <span
               className="rounded-md px-3 py-1 font-bold"
@@ -87,7 +87,7 @@ export const LanguageList = ({ languages, onDelete, owner, userId }: Props) => {
               {lang.proficiency}
             </span>
 
-            <span className="--color-text-primary">{lang.name}</span>
+            <span className="text-text-primary">{lang.name}</span>
           </div>
         ))}
       </div>
