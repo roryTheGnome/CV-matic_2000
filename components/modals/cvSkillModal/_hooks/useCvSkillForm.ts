@@ -20,20 +20,21 @@ import toast from 'react-hot-toast'
 
 export const useCvSkillForm = (skill: SkillMastery | undefined) => {
   const { data: modalData, type, closeModal } = useModalStore()
-
   const t = useTranslations('CvToast')
+
+  const isEdit = type === 'CV_SKILL_EDIT'
 
   const { data: allSkillsData } = useQuery<GetSkillsData>(GET_SKILLS, {
     fetchPolicy: 'cache-and-network',
   })
-  const {
-    data: cvData,
-    loading,
-    error,
-  } = useQuery<GetCvByIdData, GetCvByIdVariables>(GET_CV_BY_ID, {
-    variables: { cvId: modalData?.id ? modalData?.id : '' },
-    fetchPolicy: 'cache-and-network',
-  })
+
+  const { data: cvData } = useQuery<GetCvByIdData, GetCvByIdVariables>(
+    GET_CV_BY_ID,
+    {
+      variables: { cvId: modalData?.id ?? '' },
+      fetchPolicy: 'cache-and-network',
+    },
+  )
 
   const [addCvSkill, { loading: addSaving }] = useMutation<
     Cvs,
@@ -46,6 +47,7 @@ export const useCvSkillForm = (skill: SkillMastery | undefined) => {
       },
     ],
   })
+
   const [updateCvSkill, { loading: updateSaving }] = useMutation<
     Cvs,
     UpdateCvSkillInput
@@ -59,36 +61,44 @@ export const useCvSkillForm = (skill: SkillMastery | undefined) => {
   })
 
   const [selectedSkill, setSelectedSkill] = useState<Partial<SkillItem> | null>(
-    type === 'CV_SKILL_EDIT' ? { name: skill?.name } : null,
+    skill ? { name: skill.name } : null,
   )
-  const [mastery, setMastery] = useState<Mastery>(
-    skill?.mastery ? skill?.mastery : 'Novice',
-  )
+
+  const [mastery, setMastery] = useState<Mastery>(skill?.mastery ?? 'Novice')
+
+  const isDirty =
+    selectedSkill == undefined
+      ? false
+      : !isEdit ||
+        mastery !== skill?.mastery ||
+        selectedSkill?.name !== skill?.name
 
   const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    if (!selectedSkill) return
+    if (!selectedSkill?.name) return
 
     try {
-      if (type === 'CV_SKILL_ADD' && 'category' in selectedSkill) {
-        await addCvSkill({
+      if (isEdit) {
+        await updateCvSkill({
           variables: {
             skill: {
-              cvId: modalData?.id ? modalData?.id : '',
-              name: selectedSkill.name ? selectedSkill.name : '',
-              categoryId: selectedSkill.category?.id,
+              cvId: modalData?.id ?? '',
+              name: selectedSkill.name,
+              categoryId: skill?.categoryId,
               mastery,
             },
           },
         })
-      } else if (modalData?.skill?.mastery) {
-        await updateCvSkill({
+      } else {
+        if (!selectedSkill.category?.id) return
+
+        await addCvSkill({
           variables: {
             skill: {
-              cvId: modalData?.id ? modalData?.id : '',
-              name: selectedSkill.name ? selectedSkill.name : '',
-              categoryId: modalData?.skill?.categoryId,
+              cvId: modalData?.id ?? '',
+              name: selectedSkill.name,
+              categoryId: selectedSkill.category.id,
               mastery,
             },
           },
@@ -97,31 +107,26 @@ export const useCvSkillForm = (skill: SkillMastery | undefined) => {
 
       closeModal()
     } catch (err) {
-      toast.error(t('errorOccurred') + err)
+      toast.error(t('errorOccurred'))
     }
   }
 
   const availableSkills =
     allSkillsData?.skills.filter(
-      (skillLocal) =>
+      (s) =>
         !cvData?.cv.skills.some(
-          (u) => u.name === skillLocal.name && u.name !== skill?.name,
+          (u) => u.name === s.name && u.name !== skill?.name,
         ),
-    ) || []
-
-  const saving = addSaving || updateSaving
+    ) ?? []
 
   return {
-    loading,
-    error,
     selectedSkill,
     availableSkills,
     mastery,
-    saving,
-    type,
+    saving: addSaving || updateSaving,
     handleSubmit,
     setMastery,
-    closeModal,
     setSelectedSkill,
+    isDirty,
   }
 }
