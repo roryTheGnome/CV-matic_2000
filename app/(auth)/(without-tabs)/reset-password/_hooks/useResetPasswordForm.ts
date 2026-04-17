@@ -1,13 +1,17 @@
 import { RESET_PASSWORD_MUTATION } from '@/api/graphql/mutations/auth'
+import { PUBLIC_ROUTES } from '@/config/routes'
 import { ResetPasswordData, ResetPasswordVariables } from '@/types/auth'
 import { useMutation } from '@apollo/client/react'
 import { useTranslations } from 'next-intl'
+import { useRouter } from 'next/navigation'
 
 import { SubmitEvent } from 'react'
 import toast from 'react-hot-toast'
 
 export const useResetPasswordForm = () => {
   const t = useTranslations('Notifications')
+  const router = useRouter()
+
   const [resetPassword, { loading, error }] = useMutation<
     ResetPasswordData,
     ResetPasswordVariables
@@ -40,6 +44,9 @@ export const useResetPasswordForm = () => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
+        },
+        onCompleted: () => {
+          router.push(PUBLIC_ROUTES.LOGIN)
         },
       }),
       {
